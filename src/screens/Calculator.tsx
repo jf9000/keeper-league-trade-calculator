@@ -128,6 +128,12 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
     })
   }) as [string[], string[]]
 
+  const generated = players.file ? new Date(players.file.generatedAt) : null
+  const refreshed =
+    generated && !Number.isNaN(generated.getTime())
+      ? generated.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
+      : ''
+
   const used = useMemo(() => new Set(assets.flat().flatMap((a) => (a.t === 'p' ? [a.id] : []))), [assets])
 
   const optionsFor = (i: 0 | 1): TeamOption[] => {
@@ -236,6 +242,7 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
 
       <p className="mt-3 mb-[90px] text-xs text-mut">
         {players.file ? `ADP is from the ${players.file.season} season (${players.file.source}). ` : ''}
+        {refreshed ? `Data refreshed ${refreshed}. ` : ''}
         {describeSfSource(players.file?.sfSource, players.file?.season ?? years[0] - 1)}
       </p>
 

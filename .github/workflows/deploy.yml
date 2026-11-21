@@ -1,0 +1,70 @@
+name: Test and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Weekly ADP refresh (Mondays, 09:17 UTC).
+    - cron: '17 9 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # lets the weekly refresh commit the new players.json
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Scheduled and manual runs pull fresh ADP data. If a source is down, or the data fails
+      # validation, the script leaves the committed players.json alone and the deploy carries on.
+      - name: Refresh ADP data
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        continue-on-error: true
+        run: npm run build-players
+
+      - run: npm test
+      - run: npm run build
+
+      - name: Commit refreshed data
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: |
+          if ! git diff --quiet -- public/players.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add public/players.json
+            git commit -m "Refresh ADP data"
+            git push
+          fi
+
+      - name: Upload site
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
