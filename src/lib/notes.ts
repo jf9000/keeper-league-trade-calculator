@@ -1,6 +1,6 @@
 import type { Asset, Player, Pos, Settings } from '../types'
 import { POS_LIST, bestLineup, lineupByPos, slotLabel, type Slot } from './lineup'
-import { keeperStates, lineupStrength, type EvalItem, type KeeperCosts, type PickCounts, type TeamTrade } from './valuation'
+import { keeperStates, lineupStrength, type EvalItem, type KeeperCosts, type PickCounts, type Stance, type TeamTrade } from './valuation'
 
 /** A swing in keeper value or lineup strength smaller than this is treated as no change. */
 export const NOTE_EDGE = 5
@@ -19,6 +19,8 @@ export interface NoteArgs {
   costs?: KeeperCosts
   /** This team's picks in the upcoming draft (before the trade); omit when pick ownership is unknown. */
   picks?: PickCounts
+  /** Whether this team is contending or rebuilding, which changes what it should make of a trade. */
+  stance?: Stance
 }
 
 interface Shift {
@@ -105,11 +107,23 @@ export function teamNotes(a: NoteArgs): string[] {
   const notes: string[] = []
   if (laterLoss && nowGain) {
     notes.push(
-      `A losing trade long-term, since you give up keeper value, but it strengthens your lineup this season: ${boost(gain)}. If you’re trying to win now, it may be worth considering.`,
+      `A losing trade long-term, since you give up keeper value, but it strengthens your lineup this season: ${boost(gain)}. ${
+        a.stance === 'contending'
+          ? 'Since you’re contending, it may be worth it.'
+          : a.stance === 'rebuilding'
+            ? 'Since you’re rebuilding, it’s probably not worth it.'
+            : 'If you’re trying to win now, it may be worth considering.'
+      }`,
     )
   } else if (laterGain && nowLoss) {
     notes.push(
-      `Good for your keepers, but it hurts you this season: ${hit(loss)}. If you’re contending now, think twice.`,
+      `Good for your keepers, but it hurts you this season: ${hit(loss)}. ${
+        a.stance === 'contending'
+          ? 'Since you’re contending, think twice.'
+          : a.stance === 'rebuilding'
+            ? 'That fits a rebuild.'
+            : 'If you’re contending now, think twice.'
+      }`,
     )
   } else if (laterLoss && nowLoss) {
     notes.push(`This hurts you now and later: you give up keeper value and ${hit(loss)}.`)

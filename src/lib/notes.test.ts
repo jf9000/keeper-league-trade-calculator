@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { Asset, Player, Pos, Settings } from '../types'
 import type { Slot } from './lineup'
 import { teamNotes, type NoteArgs } from './notes'
-import { DEFAULT_SETTINGS, evalTeam } from './valuation'
+import { DEFAULT_SETTINGS, evalTeam, type Stance } from './valuation'
 
 const s: Settings = { ...DEFAULT_SETTINGS, teams: 12, keepers: 2, rounds: 17, scoring: 'ppr', superflex: false, oneQb: true }
 const mk = (id: string, pos: Player['pos'], adp: number): Player => ({
@@ -24,12 +24,13 @@ function notesFor(opts: {
   others: Record<Pos, number>[]
   costs?: Map<string, number>
   picks?: Map<number, number>
+  stance?: Stance
 }) {
   const players = byId(...opts.roster, ...(opts.extra ?? []))
   const trade = evalTeam(opts.sent, opts.incoming, opts.roster, players, s, 2027, opts.costs, opts.slots, opts.picks)
   const args: NoteArgs = {
     trade, sent: opts.sent, incoming: opts.incoming, roster: opts.roster, others: opts.others,
-    players, s, slots: opts.slots, firstPickYear: 2027, costs: opts.costs, picks: opts.picks,
+    players, s, slots: opts.slots, firstPickYear: 2027, costs: opts.costs, picks: opts.picks, stance: opts.stance,
   }
   return teamNotes(args)
 }
@@ -48,6 +49,13 @@ describe('teamNotes: the same trade reads differently for different rosters', ()
     expect(notes[0]).toMatch(/losing trade long-term/)
     expect(notes[0]).toMatch(/RB group moves from 12th to 1st of 12, patching a weak spot/)
     expect(notes[0]).toMatch(/win now/)
+  })
+
+  it('a contending team is told the trade is worth it, a rebuilding team that it probably is not', () => {
+    const args = { roster: [...core, bench], extra: [incomingRb], sent, incoming, slots, others: eleven }
+    expect(notesFor({ ...args, stance: 'contending' })[0]).toMatch(/Since you’re contending, it may be worth it\./)
+    expect(notesFor({ ...args, stance: 'rebuilding' })[0]).toMatch(/Since you’re rebuilding, it’s probably not worth it\./)
+    expect(notesFor({ ...args, stance: 'rebuilding' })[0]).not.toMatch(/win now/)
   })
 
   it('a team already set at RB gets a different note for the same trade', () => {

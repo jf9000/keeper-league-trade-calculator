@@ -14,8 +14,9 @@
  */
 import { copyFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
-import { seasonFor } from '../src/lib/valuation'
-import type { Player, PlayersFile, Pos } from '../src/types'
+import { MIN_GAMES } from '../src/lib/current'
+import { UNDRAFTED_ADP, seasonFor } from '../src/lib/valuation'
+import type { Player, PlayerStats, PlayersFile, Pos } from '../src/types'
 import {
   MIN_PLAYERS,
   POSITIONS,
@@ -33,6 +34,7 @@ import {
   type AdpRow,
 } from './adp'
 import { fetchJson } from './http'
+import { MIN_WEEK_PLAYERS, parseWeek, sumWeeks } from './stats'
 
 interface SleeperPlayer {
   player_id: string
@@ -125,6 +127,33 @@ async function pickSuperflex(season: number, qbs: readonly { key: string; adp: n
   return { map: new Map<string, number>(), source: 'none' }
 }
 
+// ---- Current-season production ------------------------------------------------------------------
+
+/** Regular seasons are 18 weeks; stop at the first week that isn't fully played yet. */
+const MAX_WEEKS = 18
+/** Production below this (PPR points per game) isn't worth adding an undrafted player for. */
+const MIN_BREAKOUT_PPG = 6
+
+/**
+ * Season-to-date fantasy points from Sleeper's weekly stats (an unofficial but public endpoint), one request
+ * per completed week. Returns null if nothing is available (offseason, or the endpoint changed), in which
+ * case the build simply carries on with ADP alone.
+ */
+async function fetchSeasonStats(season: number) {
+  const weeks: Map<string, PlayerStats>[] = []
+  for (let w = 1; w <= MAX_WEEKS; w++) {
+    try {
+      const week = parseWeek(await fetchJson(`https://api.sleeper.app/v1/stats/nfl/regular/${season}/${w}`))
+      if (week.size < MIN_WEEK_PLAYERS) break
+      weeks.push(week)
+    } catch (e) {
+      console.warn(`  ! Sleeper stats for week ${w} failed: ${(e as Error).message}`)
+      break
+    }
+  }
+  return weeks.length ? { totals: sumWeeks(weeks), through: weeks.length } : null
+}
+
 // ---- Sleeper IDs ------------------------------------------------------------------------------
 
 /** Sleeper asks clients to fetch its ~10 MB player dump at most once a day, so it's cached on disk. */
@@ -154,15 +183,23 @@ async function loadSleeperPlayers(refresh: boolean): Promise<Record<string, Slee
 function indexSleeper(all: Record<string, SleeperPlayer>) {
   const byNamePos = new Map<string, SleeperPlayer[]>()
   const byName = new Map<string, SleeperPlayer[]>()
+  const bySurname = new Map<string, SleeperPlayer[]>()
   const push = (m: Map<string, SleeperPlayer[]>, k: string, p: SleeperPlayer) => m.set(k, [...(m.get(k) ?? []), p])
   for (const p of Object.values(all)) {
     if (!p.position) continue
     const name = normalizeName(p.full_name ?? `${p.first_name ?? ''} ${p.last_name ?? ''}`)
     if (POSITIONS.has(p.position)) push(byNamePos, `${name}|${p.position}`, p)
     if (p.active) push(byName, name, p)
+    // Nicknames differ between sources (Kenneth/Kenny, Matthew/Matt), so also index by surname + team + position.
+    if (p.active && p.team && p.last_name) push(bySurname, `${normalizeName(p.last_name)}|${normTeam(p.team)}|${p.position}`, p)
   }
-  return { byNamePos, byName }
+  return { byNamePos, byName, bySurname }
 }
+
+/** The surname key used by `bySurname`: the last word of a normalized name. */
+const surnameKey = (name: string, team: string, pos: string) => `${normalizeName(name).split(' ').pop()}|${team}|${pos}`
+
+const uniqueOnly = (cands: SleeperPlayer[] | undefined) => (cands?.length === 1 ? cands[0] : undefined)
 
 /** Among same-name candidates prefer matching team, then active, then Sleeper's own ranking. */
 function pickSleeper(cands: SleeperPlayer[] | undefined, team: string): SleeperPlayer | undefined {
@@ -196,7 +233,9 @@ async function main() {
     const match =
       pickSleeper(sleeper.byNamePos.get(rowKey(r)), team) ??
       // Position mismatch: accept a name-only match only when it's on the same team.
-      pickSleeper(sleeper.byName.get(normalizeName(r.name))?.filter((p) => normTeam(p.team) === team), team)
+      pickSleeper(sleeper.byName.get(normalizeName(r.name))?.filter((p) => normTeam(p.team) === team), team) ??
+      // Nickname mismatch: accept a surname match only when exactly one player has it on that team at that position.
+      uniqueOnly(sleeper.bySurname.get(surnameKey(r.name, team, r.position)))
     if (!match) unmatched.push(`${r.name} (${r.position}, ${team})`)
     const sfAdp = sf.map.get(rowKey(r))
     return {
@@ -209,7 +248,34 @@ async function main() {
       sfAdp: sfAdp == null ? null : round1(sfAdp),
     }
   })
-  players.sort((a, b) => a.adp - b.adp)
+  // Current-season production, attached by Sleeper ID (defenses are keyed by team abbreviation).
+  const season_stats = await fetchSeasonStats(season)
+  let breakouts = 0
+  if (season_stats) {
+    const have = new Set(players.map((p) => p.id))
+    for (const p of players) {
+      const st = season_stats.totals.get(p.id)
+      if (st) p.stats = st
+    }
+    // Players nobody drafted who are producing anyway (waiver pickups) still need a place in the list.
+    for (const [id, st] of season_stats.totals) {
+      const sp = sleeperAll[id]
+      if (have.has(id) || !sp || !POSITIONS.has(sp.position ?? '') || sp.position === 'K' || sp.position === 'DEF') continue
+      if (st.gp < MIN_GAMES || st.ppr / st.gp < MIN_BREAKOUT_PPG) continue
+      players.push({
+        id,
+        sleeperId: id,
+        name: sp.full_name ?? `${sp.first_name ?? ''} ${sp.last_name ?? ''}`.trim(),
+        pos: sp.position as Pos,
+        team: normTeam(sp.team) || 'FA',
+        adp: UNDRAFTED_ADP,
+        sfAdp: null,
+        stats: st,
+      })
+      breakouts++
+    }
+  }
+  players.sort((a, b) => a.adp - b.adp || (b.stats?.ppr ?? 0) - (a.stats?.ppr ?? 0) || a.name.localeCompare(b.name))
 
   const problems = validatePlayers(players)
   if (problems.length) {
@@ -221,6 +287,7 @@ async function main() {
     season,
     source: `${SOURCE_LABEL[source]} ADP; Sleeper player IDs`,
     sfSource: sf.source,
+    ...(season_stats ? { statsThrough: season_stats.through } : {}),
     players,
   }
   await mkdir(dirname(out), { recursive: true })
@@ -241,6 +308,11 @@ async function main() {
   console.log(`Wrote ${players.length} players to ${out}`)
   console.log(`  Sleeper IDs matched: ${players.length - unmatched.length}/${players.length}`)
   console.log(`  Superflex ADP:       ${players.filter((p) => p.sfAdp != null).length}/${players.length} (${sf.source})`)
+  console.log(
+    season_stats
+      ? `  Season stats:        through week ${season_stats.through} for ${players.filter((p) => p.stats).length} players (${breakouts} undrafted producers added)`
+      : '  Season stats:        none available (values use ADP alone)',
+  )
   if (unmatched.length) console.warn(`  Unmatched (kept with slug IDs): ${unmatched.join(', ')}`)
 }
 

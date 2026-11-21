@@ -15,14 +15,22 @@ import {
   gradeFor,
   judgeTrade,
   sumValues,
-  WIN_NOW_WEIGHT,
+  itemValue,
+  keeperWorth,
+  redraftShare,
+  settingsFor,
+  STANCE_SHIFT,
+  weightFor,
+  type Stance,
+  redraftWorth,
+  sumItemValues,
   KD_ADP_OFFSET,
   KD_STRENGTH_SCALE,
   lineupStrength,
 } from './valuation'
 import type { Slot } from './lineup'
 
-const S: Settings = { ...DEFAULT_SETTINGS, teams: 12, keepers: 2, rounds: 17, scoring: 'ppr', superflex: false, oneQb: true }
+const S: Settings = { ...DEFAULT_SETTINGS, teams: 12, keepers: 2, rounds: 17, scoring: 'ppr', superflex: false, oneQb: true, redraftWeight: 0 }
 
 const mk = (id: string, pos: Player['pos'], adp: number, sfAdp: number | null = null): Player => ({
   id,
@@ -337,7 +345,8 @@ describe('evalTeam / evalTrade (roster-aware)', () => {
       const withSf = evalTeam([], incoming, [qb1], all, s, 2027, costs, sf)
       expect(withSf.later!.gets).toBe(0) // not a keeper
       expect(withSf.now!.gets).toBeGreaterThan(0) // but he starts this season
-      expect(withSf.gets).toBeCloseTo(WIN_NOW_WEIGHT * withSf.now!.gets)
+      const half = evalTeam([], incoming, [qb1], all, { ...s, redraftWeight: 50 }, 2027, costs, sf)
+      expect(half.gets).toBeCloseTo(0.5 * half.now!.gets) // not a keeper, so only the redraft half counts
     })
 
     it('gives that same second QB no value when he would sit behind the starter', () => {
@@ -351,9 +360,10 @@ describe('evalTeam / evalTrade (roster-aware)', () => {
       const rbIn = mk('rbin', 'RB', 20)
       const pool = players(rb1, rbIn)
       const slots: Slot[] = [['RB']]
+      const blended = { ...s, redraftWeight: 50 } // totals only reflect lineup needs once redraft value counts
       const incomingRb = [keep('rbin', 6)]
-      const hole = evalTeam([], incomingRb, [mk('wr', 'WR', 9)], players(rb1, rbIn, mk('wr', 'WR', 9)), s, 2027, undefined, slots)
-      const stacked = evalTeam([], incomingRb, [rb1], pool, s, 2027, undefined, slots)
+      const hole = evalTeam([], incomingRb, [mk('wr', 'WR', 9)], players(rb1, rbIn, mk('wr', 'WR', 9)), blended, 2027, undefined, slots)
+      const stacked = evalTeam([], incomingRb, [rb1], pool, blended, 2027, undefined, slots)
       expect(hole.now!.gets).toBeGreaterThan(stacked.now!.gets)
       expect(hole.gets).toBeGreaterThan(stacked.gets)
     })
@@ -367,19 +377,21 @@ describe('evalTeam / evalTrade (roster-aware)', () => {
 
     it('values a kicker to a team that has none but little to one that already has a good one', () => {
       const kSlots: Slot[] = [['K']]
+      const blendedK = { ...s, redraftWeight: 50 }
       const newK = mk('newk', 'K', 100)
       const oldK = mk('oldk', 'K', 98)
       const pool = players(newK, oldK)
-      const noK = evalTeam([], [keep('newk', 17)], [mk('rb', 'RB', 20)], players(newK, mk('rb', 'RB', 20)), s, 2027, undefined, kSlots)
-      const hasK = evalTeam([], [keep('newk', 17)], [oldK], pool, s, 2027, undefined, kSlots)
+      const noK = evalTeam([], [keep('newk', 17)], [mk('rb', 'RB', 20)], players(newK, mk('rb', 'RB', 20)), blendedK, 2027, undefined, kSlots)
+      const hasK = evalTeam([], [keep('newk', 17)], [oldK], pool, blendedK, 2027, undefined, kSlots)
       expect(noK.now!.gets).toBeGreaterThan(0)
       expect(hasK.now!.gets).toBe(0) // he'd sit behind the better kicker
       expect(noK.gets).toBeGreaterThan(hasK.gets)
     })
 
-    it('adds no lineup value without slots or without a roster', () => {
-      expect(evalTeam([], incoming, [qb1], all, s, 2027, costs).now).toBeUndefined()
-      expect(evalTeam([], incoming, [], all, s, 2027, costs, sf).now).toBeUndefined()
+    it('values each player on his own redraft worth without slots or without a roster', () => {
+      const alone = redraftWorth(qb2, s)
+      expect(evalTeam([], incoming, [qb1], all, s, 2027, costs).now!.gets).toBeCloseTo(alone)
+      expect(evalTeam([], incoming, [], all, s, 2027, costs, sf).now!.gets).toBeCloseTo(alone)
     })
   })
 
@@ -519,5 +531,142 @@ describe('keepers need a pick in their round', () => {
       // better takes round 5; x is pushed out, so the team gains less than better's standalone surplus.
       expect(t.gets).toBeCloseTo(surplusAt(4, 5) - lostSurplus)
     })
+  })
+})
+
+describe('redraft value and keeper value', () => {
+  const rb = (id: string, adp: number) => mk(id, 'RB', adp)
+  const withWeight = (redraftWeight: number): Settings => ({ ...S, redraftWeight })
+
+  describe('itemValue', () => {
+    // ADP 20 costs round 2 to keep: the cost is more than he's worth, so his keeper value is 0.
+    const costly = () => evalSide([keep('a', 2)], roster(rb('a', 20)), S, 2027)[0]!
+
+    it('is zero for a costly player when only keeper value counts', () => {
+      expect(costly().value).toBe(0)
+      expect(itemValue(costly(), withWeight(0))).toBe(0)
+    })
+    it('is not zero for him once redraft value counts', () => {
+      expect(itemValue(costly(), withWeight(50))).toBeCloseTo(0.5 * pickValue(20))
+    })
+    it('is only redraft value at 100%', () => {
+      const cheap = evalSide([keep('a', 10)], roster(rb('a', 20)), S, 2027)[0]!
+      expect(itemValue(cheap, withWeight(100))).toBeCloseTo(pickValue(20))
+    })
+    it('blends the two in proportion', () => {
+      const cheap = evalSide([keep('a', 10)], roster(rb('a', 20)), S, 2027)[0]!
+      expect(itemValue(cheap, withWeight(25))).toBeCloseTo(0.25 * cheap.redraft! + 0.75 * cheap.value)
+    })
+    it('gives draft picks only the keeper (future) share', () => {
+      const [pickItem] = evalSide([pick(2027, 4)], roster(), S, 2027)
+      expect(itemValue(pickItem!, withWeight(50))).toBeCloseTo(0.5 * pickValue(roundSlot(4, S)))
+      expect(itemValue(pickItem!, withWeight(100))).toBe(0)
+    })
+    it('sums a list', () => {
+      const items = evalSide([keep('a', 2), pick(2027, 4)], roster(rb('a', 20)), S, 2027)
+      const w = withWeight(50)
+      expect(sumItemValues(items, w)).toBeCloseTo(itemValue(items[0]!, w) + itemValue(items[1]!, w))
+    })
+  })
+
+  describe('worth from current-season production', () => {
+    const base = { ...rb('a', 100), stats: { gp: 8, ppr: 160, half: 150, std: 140 } }
+    it('is just preseason ADP without a current rank', () => {
+      expect(keeperWorth(base, S)).toBeCloseTo(pickValue(100))
+      expect(redraftWorth(base, S)).toBeCloseTo(pickValue(100))
+    })
+    it('leans mostly on production for redraft, and less for keepers', () => {
+      const hot = { ...base, curAdp: 10 }
+      expect(redraftWorth(hot, S)).toBeCloseTo(0.3 * pickValue(100) + 0.7 * pickValue(10))
+      expect(keeperWorth(hot, S)).toBeCloseTo(0.6 * pickValue(100) + 0.4 * pickValue(10))
+      expect(redraftWorth(hot, S)).toBeGreaterThan(keeperWorth(hot, S))
+    })
+    it('trusts production less with fewer games', () => {
+      const few = { ...base, curAdp: 10, stats: { ...base.stats, gp: 4 } }
+      expect(redraftWorth(few, S)).toBeCloseTo(0.65 * pickValue(100) + 0.35 * pickValue(10))
+    })
+    it('marks down a player whose production has fallen off', () => {
+      const cold = { ...rb('b', 10), curAdp: 100, stats: base.stats }
+      expect(redraftWorth(cold, S)).toBeLessThan(pickValue(10))
+    })
+  })
+
+  describe('evalTeam blends the two', () => {
+    const costly = rb('costly', 20)
+    const all = roster(costly)
+    const sent = [keep('costly', 2)] // costs more than he's worth to keep
+
+    it('a player who is worthless as a keeper still costs the team something to give up', () => {
+      expect(evalTeam(sent, [], [], all, withWeight(0), 2027).gives).toBe(0)
+      expect(evalTeam(sent, [], [], all, withWeight(50), 2027).gives).toBeCloseTo(0.5 * pickValue(20))
+    })
+    it('total is the weighted blend of the keeper and redraft sides', () => {
+      const t = evalTeam(sent, [keep('costly', 10)], [], all, withWeight(30), 2027)
+      expect(t.gets).toBeCloseTo(0.7 * t.later!.gets + 0.3 * t.now!.gets)
+      expect(t.gives).toBeCloseTo(0.7 * t.later!.gives + 0.3 * t.now!.gives)
+    })
+    it('a higher redraft weight favors receiving the better player this season', () => {
+      // star: great this season but costs a lot to keep. bargain: weaker, but a cheap keeper.
+      const star = rb('star', 5)
+      const bargain = rb('bargain', 40)
+      const pool = roster(star, bargain)
+      const net = (w: number) => {
+        const t = evalTeam([keep('bargain', 14)], [keep('star', 1)], [], pool, withWeight(w), 2027)
+        return t.gets - t.gives
+      }
+      expect(net(100)).toBeGreaterThan(net(0))
+    })
+    it('redraftShare clamps to 0-1', () => {
+      expect(redraftShare({ redraftWeight: 150 })).toBe(1)
+      expect(redraftShare({ redraftWeight: -5 })).toBe(0)
+      expect(redraftShare({ redraftWeight: 40 })).toBeCloseTo(0.4)
+    })
+  })
+})
+
+describe('contending and rebuilding', () => {
+  const rb = (id: string, adp: number) => mk(id, 'RB', adp)
+  const s50: Settings = { ...S, redraftWeight: 50 }
+
+  it('shifts a team’s redraft weight by its stance, within 0-100', () => {
+    expect(weightFor(s50, null)).toBe(50)
+    expect(weightFor(s50, 'contending')).toBe(50 + STANCE_SHIFT)
+    expect(weightFor(s50, 'rebuilding')).toBe(50 - STANCE_SHIFT)
+    expect(weightFor({ redraftWeight: 90 }, 'contending')).toBe(100)
+    expect(weightFor({ redraftWeight: 10 }, 'rebuilding')).toBe(0)
+  })
+
+  it('only changes the redraft weight in a team’s settings', () => {
+    expect(settingsFor(s50, 'contending')).toEqual({ ...s50, redraftWeight: 50 + STANCE_SHIFT })
+    expect(settingsFor(s50, null)).toEqual(s50)
+  })
+
+  // star: far better this season, but costly to keep. bargain: weaker, but a cheap keeper.
+  const star = rb('star', 5)
+  const bargain = rb('bargain', 40)
+  const pool = new Map([star, bargain].map((p) => [p.id, p]))
+  const swap = (stances: readonly [Stance, Stance]) =>
+    evalTrade([keep('bargain', 14)], [keep('star', 1)], [], [], pool, s50, 2027, undefined, undefined, undefined, stances)
+  const net = (t: { gets: number; gives: number }) => t.gets - t.gives
+
+  it('a contending team likes receiving the better player this season more than a rebuilding one does', () => {
+    expect(net(swap(['contending', null])[0])).toBeGreaterThan(net(swap([null, null])[0]))
+    expect(net(swap([null, null])[0])).toBeGreaterThan(net(swap(['rebuilding', null])[0]))
+  })
+
+  it('one team’s stance doesn’t change how the other team sees the trade', () => {
+    expect(swap(['contending', null])[1]).toEqual(swap(['rebuilding', null])[1])
+    expect(swap([null, 'rebuilding'])[0]).toEqual(swap([null, null])[0])
+  })
+
+  it('lets a contender and a rebuilder each come out ahead on the same trade', () => {
+    const [contender, rebuilder] = swap(['contending', 'rebuilding'])
+    expect(net(contender)).toBeGreaterThan(0) // gets the star
+    expect(net(rebuilder)).toBeGreaterThan(-net(contender)) // the rebuilder's loss is smaller than the contender's gain
+  })
+
+  it('treats a missing stance list as no stance', () => {
+    const none = evalTrade([keep('bargain', 14)], [keep('star', 1)], [], [], pool, s50, 2027)
+    expect(none).toEqual(swap([null, null]))
   })
 })

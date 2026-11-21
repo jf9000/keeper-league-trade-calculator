@@ -225,6 +225,9 @@ export async function getLeagueDraft(leagueId: string, signal?: AbortSignal): Pr
   }
 }
 
+/** Sleeper marks keeper leagues with type 1 (0 is redraft, 2 is dynasty). Only those use this calculator's keeper costs. */
+export const isKeeperLeague = (l: SleeperLeague): boolean => l.settings?.type === 1
+
 export const leagueTypeLabel = (l: SleeperLeague): string =>
   l.settings.type === 2 ? 'Dynasty' : l.settings.type === 1 ? 'Keeper' : 'Redraft'
 

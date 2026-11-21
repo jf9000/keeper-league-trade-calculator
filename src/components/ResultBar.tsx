@@ -33,8 +33,8 @@ function TeamCell({ name, trade, grade, align }: { name: string; trade: TeamTrad
     <div className={`flex min-w-0 items-center gap-2 ${align === 'right' ? 'flex-row-reverse text-right' : ''}`}>
       <GradeBadge team={name} grade={grade} />
       <div className="min-w-0">
-        <div className="truncate text-sm font-semibold text-tx">{name}</div>
-        <div className="text-[13px] text-mut">
+        <div className="truncate text-base font-semibold text-tx">{name}</div>
+        <div className="text-[15px] text-mut">
           gets {trade.gets.toFixed(1)} · gives {trade.gives.toFixed(1)}
         </div>
       </div>
@@ -54,9 +54,9 @@ export function ResultBar({ names, trades, verdict, notes }: Props) {
         <TeamCell name={names[0]} trade={trades[0]} grade={verdict.grade1} align="left" />
         <TeamCell name={names[1]} trade={trades[1]} grade={verdict.grade2} align="right" />
       </div>
-      <div className="text-center text-base font-bold">{verdict.message}</div>
+      <div className="text-center text-lg font-bold">{verdict.message}</div>
       {noted.length > 0 && (
-        <ul className="m-0 mt-2 grid max-h-[26vh] list-none gap-x-4 gap-y-1.5 overflow-y-auto p-0 text-xs text-mut min-[760px]:grid-cols-2">
+        <ul className="m-0 mt-2 grid max-h-[26vh] list-none gap-x-4 gap-y-1.5 overflow-y-auto p-0 text-sm text-mut min-[760px]:grid-cols-2">
           {noted.flatMap((i) =>
             notes[i].map((text, k) => (
               <li key={`${i}-${k}`}>

@@ -9,6 +9,7 @@ export const DEFAULT_SETTINGS: Settings = {
   superflex: true,
   oneQb: true,
   flex: 2,
+  redraftWeight: 65,
 }
 
 /** Allowed ranges for numeric settings. */
@@ -17,17 +18,15 @@ export const LIMITS = {
   keepers: { min: 1, max: 15 },
   rounds: { min: 5, max: 30 },
   flex: { min: 0, max: 6 },
+  redraftWeight: { min: 0, max: 100 },
 } as const
 
 /** Value multiplier applied to picks beyond the first upcoming draft year. */
 export const FUTURE_PICK_DISCOUNT = 0.85
 /** Value multiplier applied to keepers beyond the league's keeper limit. */
 export const OVER_LIMIT_DISCOUNT = 0.25
-/**
- * How much of a starting-lineup change (this season) counts toward a trade's value, next to
- * long-term keeper value. Below 1 because keeper value is what lasts.
- */
-export const WIN_NOW_WEIGHT = 0.5
+/** Placeholder ADP for players nobody drafted (later than any real ADP), so a breakout can still be valued by his production. */
+export const UNDRAFTED_ADP = 400
 /** Trades closer than this (as a fraction of the larger side) count as fair. */
 export const FAIR_THRESHOLD = 0.1
 
@@ -72,6 +71,66 @@ export const pickValue = (n: number) => 100 * Math.exp(-0.035 * (n - 1))
 export const roundSlot = (round: number, s: Pick<Settings, 'teams'>) =>
   (round - 1) * s.teams + s.teams / 2
 
+/**
+ * Kickers and D/ST go in the last rounds, so their raw ADP would make them look worthless even though
+ * an empty slot scores nothing. Their redraft strength is measured from where those rounds start and
+ * scaled down, since a replacement is always on the waiver wire.
+ */
+export const KD_ADP_OFFSET = 90
+export const KD_STRENGTH_SCALE = 0.15
+
+/** The most weight current-season production gets when valuing a player for this season (redraft). */
+export const CURRENT_WEIGHT_REDRAFT = 0.7
+/** ...and for next season's keeper value, where preseason ADP still matters more. */
+export const CURRENT_WEIGHT_KEEPER = 0.4
+/** Production counts fully once a player has this many games; fewer games count proportionally less. */
+export const GAMES_FOR_FULL_WEIGHT = 8
+
+const currentShare = (p: Player, max: number) =>
+  p.curAdp == null ? 0 : max * Math.min(1, (p.stats?.gp ?? 0) / GAMES_FOR_FULL_WEIGHT)
+
+/**
+ * What a player is worth to keep for next season: his draft-slot value from ADP, leaning partly on how
+ * he's produced this season (`curAdp`, his production rank mapped onto ADP slots).
+ */
+export function keeperWorth(p: Player, s: Settings): number {
+  const w = currentShare(p, CURRENT_WEIGHT_KEEPER)
+  const preseason = pickValue(adpOf(p, s))
+  return w === 0 ? preseason : (1 - w) * preseason + w * pickValue(Math.max(1, p.curAdp!))
+}
+
+/**
+ * What a player is worth for this season (redraft), independent of what he costs to keep. It leans mostly
+ * on current production, and is also his strength when he starts in a lineup.
+ */
+export function redraftWorth(p: Player, s: Settings): number {
+  const at = (adp: number) =>
+    p.pos === 'K' || p.pos === 'DEF'
+      ? KD_STRENGTH_SCALE * pickValue(Math.max(1, adp - KD_ADP_OFFSET))
+      : pickValue(adp)
+  const w = currentShare(p, CURRENT_WEIGHT_REDRAFT)
+  const preseason = at(adpOf(p, s))
+  return w === 0 ? preseason : (1 - w) * preseason + w * at(p.curAdp!)
+}
+
+/** Share (0–1) of a trade's value that comes from this season rather than keepers. */
+export const redraftShare = (s: Pick<Settings, 'redraftWeight'>) => clamp(s.redraftWeight, 0, 100) / 100
+
+/** Whether a team is going for this season, building for next year, or neither (use the setting as is). */
+export type Stance = 'contending' | 'rebuilding' | null
+
+/** How many points a team's stance moves its redraft weight (contending up, rebuilding down). */
+export const STANCE_SHIFT = 25
+
+/** A team's redraft weight (0–100): the setting, shifted by its stance. */
+export function weightFor(s: Pick<Settings, 'redraftWeight'>, stance: Stance): number {
+  const shift = stance === 'contending' ? STANCE_SHIFT : stance === 'rebuilding' ? -STANCE_SHIFT : 0
+  return clamp(s.redraftWeight + shift, 0, 100)
+}
+
+/** The settings as one team sees them, with its stance applied to the redraft weight. */
+export const settingsFor = (s: Settings, stance: Stance): Settings => ({ ...s, redraftWeight: weightFor(s, stance) })
+
 /** How many picks a team owns in each round of the upcoming draft (round → count). */
 export type PickCounts = ReadonlyMap<number, number>
 
@@ -82,6 +141,9 @@ export interface EvalItem {
   surplus?: number
   /** The round it costs to keep a player. */
   round?: number
+  /** A player's worth this season, regardless of what he costs to keep. */
+  redraft?: number
+  /** Keeper value: surplus after QB, keeper-limit and pick rules. Blend with `redraft` via `itemValue`. */
   value: number
   note: string
   /** Why a player wouldn't be kept at full value, if so. */
@@ -162,11 +224,12 @@ export function evalSide(
     }
     const player = players.get(asset.id)
     if (!player) continue // stale asset (player no longer in data)
-    const surplus = Math.max(0, pickValue(adpOf(player, s)) - pickValue(roundSlot(asset.keeperRound, s)))
+    const surplus = Math.max(0, keeperWorth(player, s) - pickValue(roundSlot(asset.keeperRound, s)))
     items.push({
       asset,
       player,
       surplus,
+      redraft: redraftWorth(player, s),
       round: asset.keeperRound,
       value: surplus,
       note: surplus === 0 ? 'No surplus: costs more than he’s worth' : '',
@@ -208,6 +271,19 @@ export function evalSide(
 
 export const sumValues = (items: readonly EvalItem[]) => items.reduce((t, i) => t + i.value, 0)
 
+/**
+ * One asset's overall value: this season's worth (redraft) blended with its keeper value, in the
+ * proportion set by `redraftWeight`. A player is therefore worth something even when he costs more than he's
+ * worth to keep. Draft picks only carry future value, so they take the keeper share.
+ */
+export function itemValue(i: EvalItem, s: Pick<Settings, 'redraftWeight'>): number {
+  const r = redraftShare(s)
+  return (i.player ? r * (i.redraft ?? 0) : 0) + (1 - r) * i.value
+}
+
+export const sumItemValues = (items: readonly EvalItem[], s: Pick<Settings, 'redraftWeight'>) =>
+  items.reduce((t, i) => t + itemValue(i, s), 0)
+
 /** Re-clamp assets after the league's round count changes. */
 export function clampAssets(assets: Asset[], rounds: number): Asset[] {
   return assets.map((a) =>
@@ -223,30 +299,17 @@ export interface Flow {
 }
 
 /**
- * What one team receives and gives up, in value that accounts for its own roster.
- * With a roster and lineup, `gets`/`gives` blend long-term keeper value (`later`) with this season's
- * lineup strength (`now`, weighted by WIN_NOW_WEIGHT); otherwise they are just keeper value.
+ * What one team receives and gives up. `gets`/`gives` blend the two kinds of value by the `redraftWeight`
+ * setting: keeper value for seasons to come (`later`) and this season's redraft value (`now`). They are
+ * kept separately too, unweighted, for explaining a grade.
  */
 export interface TeamTrade extends Flow {
   later?: Flow
   now?: Flow
 }
 
-/**
- * Kickers and D/ST go in the last rounds, so their raw ADP would make them look worthless even though
- * an empty slot scores nothing. Their lineup strength is measured from where those rounds start and
- * scaled down, since a replacement is always on the waiver wire.
- */
-export const KD_ADP_OFFSET = 90
-export const KD_STRENGTH_SCALE = 0.15
-
-/** Strength a player adds to a starting lineup: the value of his draft slot. */
-export const lineupStrength = (s: Settings) => (p: Player) => {
-  const adp = adpOf(p, s)
-  return p.pos === 'K' || p.pos === 'DEF'
-    ? KD_STRENGTH_SCALE * pickValue(Math.max(1, adp - KD_ADP_OFFSET))
-    : pickValue(adp)
-}
+/** Strength a player adds to a starting lineup: his redraft worth. */
+export const lineupStrength = (s: Settings) => (p: Player) => redraftWorth(p, s)
 
 /** A team's picks in the upcoming draft after giving up `removed` and receiving `added` picks. */
 export function adjustPicks(counts: PickCounts, firstPickYear: number, removed: Asset[], added: Asset[]): Map<number, number> {
@@ -331,22 +394,30 @@ export function evalTeam(
     gets: sumValues(k.after) - sumValues(k.afterSend) + pickValueOf(incoming),
     gives: sumValues(k.before) - sumValues(k.afterSend) + pickValueOf(sent),
   }
-  // Without a lineup or a real roster there is nothing to measure needs against.
-  if (!slots?.length || !roster.length) return later
-
-  const sentIds = new Set(sent.flatMap((a) => (a.t === 'p' ? [a.id] : [])))
   const strength = lineupStrength(s)
-  const lineup = (ps: readonly Player[]) => lineupTotal(bestLineup(ps, slots, strength))
-  const staying = roster.filter((p) => !sentIds.has(p.id))
-  const arriving = incoming.flatMap((a) => (a.t === 'p' ? (players.get(a.id) ?? []) : []))
-  const nowBefore = lineup(roster)
-  const nowAfterSend = lineup(staying)
-  const nowAfterReceive = lineup([...staying, ...arriving])
-  const now: Flow = { gets: nowAfterReceive - nowAfterSend, gives: nowBefore - nowAfterSend }
+  const playersOf = (assets: Asset[]) => assets.flatMap((a) => (a.t === 'p' ? (players.get(a.id) ?? []) : []))
+  const arriving = playersOf(incoming)
 
+  let now: Flow
+  if (slots?.length && roster.length) {
+    // A real roster: this season's value is what the trade does to the best lineup the team can field.
+    const sentIds = new Set(sent.flatMap((a) => (a.t === 'p' ? [a.id] : [])))
+    const lineup = (ps: readonly Player[]) => lineupTotal(bestLineup(ps, slots, strength))
+    const staying = roster.filter((p) => !sentIds.has(p.id))
+    const nowBefore = lineup(roster)
+    const nowAfterSend = lineup(staying)
+    const nowAfterReceive = lineup([...staying, ...arriving])
+    now = { gets: nowAfterReceive - nowAfterSend, gives: nowBefore - nowAfterSend }
+  } else {
+    // No roster to measure needs against: each player is worth his redraft value on his own.
+    const total = (ps: readonly Player[]) => ps.reduce((t, p) => t + strength(p), 0)
+    now = { gets: total(arriving), gives: total(playersOf(sent)) }
+  }
+
+  const r = redraftShare(s)
   return {
-    gets: later.gets + WIN_NOW_WEIGHT * now.gets,
-    gives: later.gives + WIN_NOW_WEIGHT * now.gives,
+    gets: (1 - r) * later.gets + r * now.gets,
+    gives: (1 - r) * later.gives + r * now.gives,
     later,
     now,
   }
@@ -364,10 +435,12 @@ export function evalTrade(
   slots?: readonly Slot[],
   /** Each team's picks in the upcoming draft; omit for a team whose picks aren't known. */
   picks?: readonly [PickCounts | undefined, PickCounts | undefined],
+  /** Whether each team is contending or rebuilding, which shifts how much it values this season vs. keepers. */
+  stances?: readonly [Stance, Stance],
 ): [TeamTrade, TeamTrade] {
   return [
-    evalTeam(sent1, sent2, roster1, players, s, firstPickYear, costs, slots, picks?.[0]),
-    evalTeam(sent2, sent1, roster2, players, s, firstPickYear, costs, slots, picks?.[1]),
+    evalTeam(sent1, sent2, roster1, players, settingsFor(s, stances?.[0] ?? null), firstPickYear, costs, slots, picks?.[0]),
+    evalTeam(sent2, sent1, roster2, players, settingsFor(s, stances?.[1] ?? null), firstPickYear, costs, slots, picks?.[1]),
   ]
 }
 

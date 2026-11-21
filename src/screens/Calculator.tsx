@@ -3,6 +3,7 @@ import { InfoButton } from '../components/InfoButton'
 import { ResultBar } from '../components/ResultBar'
 import { SettingsCard } from '../components/SettingsCard'
 import { TeamColumn, type TeamOption } from '../components/TeamColumn'
+import { rankByCurrentSeason } from '../lib/current'
 import { buildSlots } from '../lib/lineup'
 import { positionStrength, teamNotes } from '../lib/notes'
 import { describeSfSource } from '../lib/sfSource'
@@ -18,7 +19,9 @@ import {
   judgeTrade,
   pickYears,
   seasonFor,
+  settingsFor,
   type PickCounts,
+  type Stance,
 } from '../lib/valuation'
 import type { Asset, Player, Settings } from '../types'
 
@@ -42,6 +45,8 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
   const [assets, setAssets] = useState<[Asset[], Asset[]]>([[], []])
   // null = use the default (Team 1: your roster if known; Team 2: generic).
   const [choice, setChoice] = useState<[string | null, string | null]>([null, null])
+  // Each side can be marked contending (this season matters more) or rebuilding (next year's keepers matter more).
+  const [stance, setStance] = useState<[Stance, Stance]>([null, null])
   const years = useMemo(() => pickYears(seasonFor()), [])
 
   const leagueList = leagueTeams?.teams ?? []
@@ -62,16 +67,23 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
   useEffect(() => setAssets((a) => [[], a[1]]), [keys[0]])
   useEffect(() => setAssets((a) => [a[0], []]), [keys[1]])
 
+  // Players with their current-season production ranked onto ADP slots, for the league's scoring and format.
+  const ranked = useMemo(
+    () => rankByCurrentSeason(players.file?.players ?? [], s),
+    [players.file, s.scoring, s.superflex],
+  )
+  const byId = useMemo(() => new Map(ranked.map((p) => [p.id, p])), [ranked])
+
   const rosterPlayers = useMemo(() => {
     const lookup = (t: LeagueTeam | undefined): Player[] =>
-      t ? t.playerIds.flatMap((id) => players.byId.get(id) ?? []) : []
+      t ? t.playerIds.flatMap((id) => byId.get(id) ?? []) : []
     return [lookup(team1), lookup(team2)] as const
-  }, [team1, team2, players.byId])
+  }, [team1, team2, byId])
 
-  const allPlayers = players.file?.players ?? []
+  const allPlayers = ranked
   const searchable = [team1 ? rosterPlayers[0] : allPlayers, team2 ? rosterPlayers[1] : allPlayers] as const
 
-  const sides = [evalSide(assets[0], players.byId, s, years[0]), evalSide(assets[1], players.byId, s, years[0])] as const
+  const sides = [evalSide(assets[0], byId, s, years[0]), evalSide(assets[1], byId, s, years[0])] as const
   // The league's starting lineup decides which players actually help a team this season.
   const slots = useMemo(
     () => buildSlots(leagueTeams?.rosterPositions, s),
@@ -95,10 +107,19 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
     }
   }
 
-  const trades = evalTrade(assets[0], assets[1], rosterPlayers[0], rosterPlayers[1], players.byId, s, years[0], costs, slots, [
-    picksOf(team1),
-    picksOf(team2),
-  ])
+  const trades = evalTrade(
+    assets[0],
+    assets[1],
+    rosterPlayers[0],
+    rosterPlayers[1],
+    byId,
+    s,
+    years[0],
+    costs,
+    slots,
+    [picksOf(team1), picksOf(team2)],
+    stance,
+  )
   const verdict = judgeTrade(trades[0], trades[1], names)
 
   // How strong each team's starters are at each position, so a team's groups can be ranked in the league.
@@ -106,9 +127,9 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
     () =>
       (leagueTeams?.teams ?? []).map((t) => ({
         rosterId: t.rosterId,
-        by: positionStrength(t.playerIds.flatMap((id) => players.byId.get(id) ?? []), slots, s),
+        by: positionStrength(t.playerIds.flatMap((id) => byId.get(id) ?? []), slots, s),
       })),
-    [leagueTeams?.teams, players.byId, slots, s],
+    [leagueTeams?.teams, byId, slots, s],
   )
   const notes = ([0, 1] as const).map((i) => {
     const t = teamsSel[i]
@@ -119,12 +140,13 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
       incoming: i === 0 ? assets[1] : assets[0],
       roster: rosterPlayers[i],
       others: leagueStrength.filter((x) => x.rosterId !== t.rosterId).map((x) => x.by),
-      players: players.byId,
+      players: byId,
       s,
       slots,
       firstPickYear: years[0],
       costs,
       picks: picksOf(t),
+      stance: stance[i],
     })
   }) as [string[], string[]]
 
@@ -226,7 +248,9 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
             items={sides[i]}
             players={searchable[i]}
             used={used}
-            settings={s}
+            settings={settingsFor(s, stance[i])}
+            stance={stance[i]}
+            onStance={(next) => setStance((c) => (i === 0 ? [next, c[1]] : [c[0], next]))}
             years={years}
             pickAvailable={pickAvailable(i)}
             adp={(p) => adpOf(p, s)}
@@ -242,6 +266,9 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
 
       <p className="mt-3 mb-[90px] text-xs text-mut">
         {players.file ? `ADP is from the ${players.file.season} season (${players.file.source}). ` : ''}
+        {players.file?.statsThrough
+          ? `Current-season production is through week ${players.file.statsThrough}. `
+          : 'No current-season production data yet, so values use preseason ADP. '}
         {refreshed ? `Data refreshed ${refreshed}. ` : ''}
         {describeSfSource(players.file?.sfSource, players.file?.season ?? years[0] - 1)}
       </p>

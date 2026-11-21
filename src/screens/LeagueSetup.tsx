@@ -3,6 +3,7 @@ import {
   SleeperError,
   getUser,
   getUserLeagues,
+  isKeeperLeague,
   leagueToSettings,
   leagueTypeLabel,
   type SleeperLeague,
@@ -24,7 +25,7 @@ type Status =
   | { kind: 'idle' }
   | { kind: 'loading' }
   | { kind: 'error'; message: string }
-  | { kind: 'leagues'; userName: string; userId: string; leagues: SleeperLeague[] }
+  | { kind: 'leagues'; userName: string; userId: string; leagues: SleeperLeague[]; hidden: number }
 
 export function LeagueSetup({ onLeague, onManual }: Props) {
   const [username, setUsername] = useState(() => loadString(USERNAME_KEY))
@@ -44,9 +45,17 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
     try {
       const user = await getUser(name, ctrl.signal)
       if (!user) return setStatus({ kind: 'error', message: `No Sleeper user named “${name}”.` })
-      const leagues = await getUserLeagues(user.user_id, season, ctrl.signal)
+      const all = await getUserLeagues(user.user_id, season, ctrl.signal)
+      // Only keeper leagues are listed: redraft and dynasty leagues don't have keeper costs to work with.
+      const leagues = all.filter(isKeeperLeague)
       saveString(USERNAME_KEY, name)
-      setStatus({ kind: 'leagues', userName: user.display_name || user.username, userId: user.user_id, leagues })
+      setStatus({
+        kind: 'leagues',
+        userName: user.display_name || user.username,
+        userId: user.user_id,
+        leagues,
+        hidden: all.length - leagues.length,
+      })
     } catch (err) {
       if (err instanceof DOMException && err.name === 'AbortError') return
       setStatus({
@@ -95,11 +104,13 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
           <div className="mt-3">
             {status.leagues.length === 0 ? (
               <p className="m-0 text-[13px] text-mut">
-                {status.userName} has no {season} NFL leagues on Sleeper. You can skip and enter settings manually.
+                {status.userName} has no {season} keeper leagues on Sleeper
+                {status.hidden > 0 ? ` (${status.hidden} other ${status.hidden === 1 ? 'league is' : 'leagues are'} not keeper leagues, so ${status.hidden === 1 ? 'it’s' : 'they’re'} hidden)` : ''}
+                . You can skip and enter settings manually.
               </p>
             ) : (
               <>
-                <div className="mb-1.5 text-xs text-mut">{status.userName}’s leagues</div>
+                <div className="mb-1.5 text-xs text-mut">{status.userName}’s keeper leagues</div>
                 <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
                   {status.leagues.map((l) => (
                     <li key={l.league_id}>
@@ -116,6 +127,12 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
                     </li>
                   ))}
                 </ul>
+                {status.hidden > 0 && (
+                  <p className="mt-2 mb-0 text-xs text-mut">
+                    {status.hidden} other {status.hidden === 1 ? 'league' : 'leagues'} hidden because
+                    {status.hidden === 1 ? ' it isn’t' : ' they aren’t'} keeper leagues.
+                  </p>
+                )}
               </>
             )}
           </div>

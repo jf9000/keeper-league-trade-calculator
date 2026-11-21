@@ -1,8 +1,9 @@
 {
-  "generatedAt": "2026-11-21T15:00:48.134Z",
+  "generatedAt": "2026-11-21T16:11:01.052Z",
   "season": 2026,
   "source": "MyFantasyLeague ADP; Sleeper player IDs",
   "sfSource": "ffc-2qb:2026 (+21 QBs estimated)",
+  "statsThrough": 10,
   "players": [
     {
       "id": "9221",
@@ -11,7 +12,13 @@
       "pos": "RB",
       "team": "DET",
       "adp": 2.1,
-      "sfAdp": 1.9
+      "sfAdp": 1.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 253.4,
+        "half": 232.9,
+        "std": 212.4
+      }
     },
     {
       "id": "9509",
@@ -20,7 +27,13 @@
       "pos": "RB",
       "team": "ATL",
       "adp": 2.7,
-      "sfAdp": 3
+      "sfAdp": 3,
+      "stats": {
+        "gp": 10,
+        "ppr": 197.7,
+        "half": 180.2,
+        "std": 162.7
+      }
     },
     {
       "id": "4984",
@@ -29,7 +42,13 @@
       "pos": "QB",
       "team": "BUF",
       "adp": 4,
-      "sfAdp": 1.9
+      "sfAdp": 1.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 230,
+        "half": 229.5,
+        "std": 229
+      }
     },
     {
       "id": "7564",
@@ -38,7 +57,13 @@
       "pos": "WR",
       "team": "CIN",
       "adp": 4.2,
-      "sfAdp": 6.7
+      "sfAdp": 6.7,
+      "stats": {
+        "gp": 9,
+        "ppr": 193.8,
+        "half": 161.8,
+        "std": 129.8
+      }
     },
     {
       "id": "9493",
@@ -47,7 +72,13 @@
       "pos": "WR",
       "team": "LAR",
       "adp": 7.5,
-      "sfAdp": 6.7
+      "sfAdp": 6.7,
+      "stats": {
+        "gp": 7,
+        "ppr": 173.6,
+        "half": 138.6,
+        "std": 103.6
+      }
     },
     {
       "id": "9488",
@@ -56,7 +87,13 @@
       "pos": "WR",
       "team": "SEA",
       "adp": 8.1,
-      "sfAdp": 15
+      "sfAdp": 15,
+      "stats": {
+        "gp": 10,
+        "ppr": 263.2,
+        "half": 223.7,
+        "std": 184.2
+      }
     },
     {
       "id": "6813",
@@ -65,7 +102,13 @@
       "pos": "RB",
       "team": "IND",
       "adp": 9.1,
-      "sfAdp": 6.4
+      "sfAdp": 6.4,
+      "stats": {
+        "gp": 10,
+        "ppr": 165.9,
+        "half": 151.9,
+        "std": 137.9
+      }
     },
     {
       "id": "7547",
@@ -74,7 +117,13 @@
       "pos": "WR",
       "team": "DET",
       "adp": 10.3,
-      "sfAdp": 21.1
+      "sfAdp": 21.1,
+      "stats": {
+        "gp": 9,
+        "ppr": 183.4,
+        "half": 150.9,
+        "std": 118.4
+      }
     },
     {
       "id": "4034",
@@ -83,7 +132,13 @@
       "pos": "RB",
       "team": "SF",
       "adp": 10.7,
-      "sfAdp": 11.9
+      "sfAdp": 11.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 213,
+        "half": 193,
+        "std": 173
+      }
     },
     {
       "id": "8138",
@@ -92,7 +147,13 @@
       "pos": "RB",
       "team": "BUF",
       "adp": 12.1,
-      "sfAdp": 17.1
+      "sfAdp": 17.1,
+      "stats": {
+        "gp": 9,
+        "ppr": 170.1,
+        "half": 164.1,
+        "std": 158.1
+      }
     },
     {
       "id": "6786",
@@ -101,7 +162,13 @@
       "pos": "WR",
       "team": "DAL",
       "adp": 15.7,
-      "sfAdp": 26.7
+      "sfAdp": 26.7,
+      "stats": {
+        "gp": 10,
+        "ppr": 222,
+        "half": 183.5,
+        "std": 145
+      }
     },
     {
       "id": "6794",
@@ -110,7 +177,13 @@
       "pos": "WR",
       "team": "MIN",
       "adp": 16.5,
-      "sfAdp": 27.7
+      "sfAdp": 27.7,
+      "stats": {
+        "gp": 8,
+        "ppr": 111.6,
+        "half": 91.6,
+        "std": 71.6
+      }
     },
     {
       "id": "9226",
@@ -119,7 +192,13 @@
       "pos": "RB",
       "team": "MIA",
       "adp": 17.3,
-      "sfAdp": 25.6
+      "sfAdp": 25.6,
+      "stats": {
+        "gp": 3,
+        "ppr": 24.6,
+        "half": 21.1,
+        "std": 17.6
+      }
     },
     {
       "id": "9224",
@@ -128,7 +207,13 @@
       "pos": "RB",
       "team": "CIN",
       "adp": 19,
-      "sfAdp": 35.2
+      "sfAdp": 35.2,
+      "stats": {
+        "gp": 9,
+        "ppr": 129.7,
+        "half": 106.2,
+        "std": 82.7
+      }
     },
     {
       "id": "4866",
@@ -137,7 +222,13 @@
       "pos": "RB",
       "team": "PHI",
       "adp": 19.4,
-      "sfAdp": 26.5
+      "sfAdp": 26.5,
+      "stats": {
+        "gp": 7,
+        "ppr": 58.7,
+        "half": 55.2,
+        "std": 51.7
+      }
     },
     {
       "id": "12527",
@@ -146,7 +237,13 @@
       "pos": "RB",
       "team": "LV",
       "adp": 20.7,
-      "sfAdp": 46.1
+      "sfAdp": 46.1,
+      "stats": {
+        "gp": 10,
+        "ppr": 149.7,
+        "half": 126.7,
+        "std": 103.7
+      }
     },
     {
       "id": "12507",
@@ -155,7 +252,13 @@
       "pos": "RB",
       "team": "LAC",
       "adp": 21,
-      "sfAdp": 41.2
+      "sfAdp": 41.2,
+      "stats": {
+        "gp": 9,
+        "ppr": 85.7,
+        "half": 79.7,
+        "std": 73.7
+      }
     },
     {
       "id": "4881",
@@ -164,7 +267,13 @@
       "pos": "QB",
       "team": "BAL",
       "adp": 23.3,
-      "sfAdp": 5
+      "sfAdp": 5,
+      "stats": {
+        "gp": 4,
+        "ppr": 80.1,
+        "half": 80.1,
+        "std": 80.1
+      }
     },
     {
       "id": "11604",
@@ -173,7 +282,13 @@
       "pos": "TE",
       "team": "LV",
       "adp": 23.5,
-      "sfAdp": 64.6
+      "sfAdp": 64.6,
+      "stats": {
+        "gp": 8,
+        "ppr": 149.8,
+        "half": 124.8,
+        "std": 99.8
+      }
     },
     {
       "id": "3198",
@@ -182,7 +297,13 @@
       "pos": "RB",
       "team": "BAL",
       "adp": 23.9,
-      "sfAdp": 15.6
+      "sfAdp": 15.6,
+      "stats": {
+        "gp": 10,
+        "ppr": 161.3,
+        "half": 152.8,
+        "std": 144.3
+      }
     },
     {
       "id": "8151",
@@ -191,7 +312,13 @@
       "pos": "RB",
       "team": "KC",
       "adp": 24.1,
-      "sfAdp": 31.8
+      "sfAdp": 31.8,
+      "stats": {
+        "gp": 8,
+        "ppr": 196.4,
+        "half": 183.4,
+        "std": 170.4
+      }
     },
     {
       "id": "8112",
@@ -200,7 +327,13 @@
       "pos": "WR",
       "team": "ATL",
       "adp": 25.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 138.5,
+        "half": 113.5,
+        "std": 88.5
+      }
     },
     {
       "id": "5859",
@@ -209,7 +342,13 @@
       "pos": "WR",
       "team": "NE",
       "adp": 26,
-      "sfAdp": 41.5
+      "sfAdp": 41.5,
+      "stats": {
+        "gp": 4,
+        "ppr": 23.8,
+        "half": 18.3,
+        "std": 12.8
+      }
     },
     {
       "id": "8130",
@@ -218,7 +357,13 @@
       "pos": "TE",
       "team": "ARI",
       "adp": 26.2,
-      "sfAdp": 63.2
+      "sfAdp": 63.2,
+      "stats": {
+        "gp": 10,
+        "ppr": 171.5,
+        "half": 132.5,
+        "std": 93.5
+      }
     },
     {
       "id": "11564",
@@ -227,7 +372,13 @@
       "pos": "QB",
       "team": "NE",
       "adp": 28.6,
-      "sfAdp": 4.1
+      "sfAdp": 4.1,
+      "stats": {
+        "gp": 10,
+        "ppr": 193.2,
+        "half": 193.2,
+        "std": 193.2
+      }
     },
     {
       "id": "7569",
@@ -236,7 +387,13 @@
       "pos": "WR",
       "team": "HOU",
       "adp": 29.1,
-      "sfAdp": 41.2
+      "sfAdp": 41.2,
+      "stats": {
+        "gp": 7,
+        "ppr": 116,
+        "half": 97.5,
+        "std": 79
+      }
     },
     {
       "id": "8137",
@@ -245,7 +402,13 @@
       "pos": "WR",
       "team": "DAL",
       "adp": 29.5,
-      "sfAdp": 39.9
+      "sfAdp": 39.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 147.8,
+        "half": 122.8,
+        "std": 97.8
+      }
     },
     {
       "id": "6770",
@@ -254,7 +417,13 @@
       "pos": "QB",
       "team": "CIN",
       "adp": 29.9,
-      "sfAdp": 5.4
+      "sfAdp": 5.4,
+      "stats": {
+        "gp": 9,
+        "ppr": 238.3,
+        "half": 238.3,
+        "std": 238.3
+      }
     },
     {
       "id": "8150",
@@ -263,7 +432,13 @@
       "pos": "RB",
       "team": "LAR",
       "adp": 31.5,
-      "sfAdp": 46.2
+      "sfAdp": 46.2,
+      "stats": {
+        "gp": 10,
+        "ppr": 164.3,
+        "half": 145.3,
+        "std": 126.3
+      }
     },
     {
       "id": "13287",
@@ -272,7 +447,13 @@
       "pos": "RB",
       "team": "ARI",
       "adp": 32.3,
-      "sfAdp": 53.6
+      "sfAdp": 53.6,
+      "stats": {
+        "gp": 6,
+        "ppr": 53.4,
+        "half": 47.9,
+        "std": 42.4
+      }
     },
     {
       "id": "11632",
@@ -281,7 +462,13 @@
       "pos": "WR",
       "team": "NYG",
       "adp": 33.1,
-      "sfAdp": 53.1
+      "sfAdp": 53.1,
+      "stats": {
+        "gp": 9,
+        "ppr": 137.2,
+        "half": 108.2,
+        "std": 79.2
+      }
     },
     {
       "id": "10229",
@@ -290,7 +477,13 @@
       "pos": "WR",
       "team": "KC",
       "adp": 36.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 79.4,
+        "half": 64.4,
+        "std": 49.4
+      }
     },
     {
       "id": "8144",
@@ -299,7 +492,13 @@
       "pos": "WR",
       "team": "NO",
       "adp": 37.1,
-      "sfAdp": 42.7
+      "sfAdp": 42.7,
+      "stats": {
+        "gp": 9,
+        "ppr": 147.4,
+        "half": 117.9,
+        "std": 88.4
+      }
     },
     {
       "id": "7588",
@@ -308,7 +507,13 @@
       "pos": "RB",
       "team": "DAL",
       "adp": 38.9,
-      "sfAdp": 42.8
+      "sfAdp": 42.8,
+      "stats": {
+        "gp": 10,
+        "ppr": 167.3,
+        "half": 154.8,
+        "std": 142.3
+      }
     },
     {
       "id": "7525",
@@ -317,7 +522,13 @@
       "pos": "WR",
       "team": "PHI",
       "adp": 40.8,
-      "sfAdp": 53.3
+      "sfAdp": 53.3,
+      "stats": {
+        "gp": 4,
+        "ppr": 69,
+        "half": 56,
+        "std": 43
+      }
     },
     {
       "id": "8155",
@@ -326,7 +537,13 @@
       "pos": "RB",
       "team": "NYJ",
       "adp": 42.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 69,
+        "half": 60.5,
+        "std": 52
+      }
     },
     {
       "id": "7543",
@@ -335,7 +552,13 @@
       "pos": "RB",
       "team": "NO",
       "adp": 44.2,
-      "sfAdp": 55.1
+      "sfAdp": 55.1,
+      "stats": {
+        "gp": 4,
+        "ppr": 37.3,
+        "half": 30.3,
+        "std": 23.3
+      }
     },
     {
       "id": "12517",
@@ -344,7 +567,13 @@
       "pos": "TE",
       "team": "CHI",
       "adp": 44.6,
-      "sfAdp": 87.1
+      "sfAdp": 87.1,
+      "stats": {
+        "gp": 8,
+        "ppr": 83.3,
+        "half": 64.8,
+        "std": 46.3
+      }
     },
     {
       "id": "11560",
@@ -353,7 +582,13 @@
       "pos": "QB",
       "team": "CHI",
       "adp": 44.8,
-      "sfAdp": 15.8
+      "sfAdp": 15.8,
+      "stats": {
+        "gp": 6,
+        "ppr": 115.3,
+        "half": 115.3,
+        "std": 115.3
+      }
     },
     {
       "id": "6904",
@@ -362,7 +597,13 @@
       "pos": "QB",
       "team": "PHI",
       "adp": 45,
-      "sfAdp": 13.1
+      "sfAdp": 13.1,
+      "stats": {
+        "gp": 5,
+        "ppr": 83,
+        "half": 83,
+        "std": 83
+      }
     },
     {
       "id": "9997",
@@ -371,7 +612,13 @@
       "pos": "WR",
       "team": "BAL",
       "adp": 45.2,
-      "sfAdp": 41.2
+      "sfAdp": 41.2,
+      "stats": {
+        "gp": 8,
+        "ppr": 138.9,
+        "half": 114.4,
+        "std": 89.9
+      }
     },
     {
       "id": "11566",
@@ -380,7 +627,13 @@
       "pos": "QB",
       "team": "WAS",
       "adp": 46.1,
-      "sfAdp": 18.1
+      "sfAdp": 18.1,
+      "stats": {
+        "gp": 7,
+        "ppr": 138,
+        "half": 138,
+        "std": 138
+      }
     },
     {
       "id": "12514",
@@ -389,7 +642,13 @@
       "pos": "WR",
       "team": "TB",
       "adp": 46.6,
-      "sfAdp": 53.7
+      "sfAdp": 53.7,
+      "stats": {
+        "gp": 7,
+        "ppr": 78,
+        "half": 62.5,
+        "std": 47
+      }
     },
     {
       "id": "11635",
@@ -398,7 +657,13 @@
       "pos": "WR",
       "team": "LAC",
       "adp": 46.9,
-      "sfAdp": 66.1
+      "sfAdp": 66.1,
+      "stats": {
+        "gp": 5,
+        "ppr": 51.6,
+        "half": 43.1,
+        "std": 34.6
+      }
     },
     {
       "id": "12481",
@@ -407,7 +672,13 @@
       "pos": "RB",
       "team": "NYG",
       "adp": 47.4,
-      "sfAdp": 56.8
+      "sfAdp": 56.8,
+      "stats": {
+        "gp": 7,
+        "ppr": 97.6,
+        "half": 90.6,
+        "std": 83.6
+      }
     },
     {
       "id": "12526",
@@ -416,7 +687,13 @@
       "pos": "WR",
       "team": "CAR",
       "adp": 48.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 131,
+        "half": 106.5,
+        "std": 82
+      }
     },
     {
       "id": "8146",
@@ -425,7 +702,13 @@
       "pos": "WR",
       "team": "NYJ",
       "adp": 48.3,
-      "sfAdp": 56.9
+      "sfAdp": 56.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 129.3,
+        "half": 104.3,
+        "std": 79.3
+      }
     },
     {
       "id": "6801",
@@ -434,7 +717,13 @@
       "pos": "WR",
       "team": "CIN",
       "adp": 48.7,
-      "sfAdp": 49
+      "sfAdp": 49,
+      "stats": {
+        "gp": 9,
+        "ppr": 171.4,
+        "half": 144.9,
+        "std": 118.4
+      }
     },
     {
       "id": "3294",
@@ -443,7 +732,13 @@
       "pos": "QB",
       "team": "DAL",
       "adp": 52.6,
-      "sfAdp": 10.3
+      "sfAdp": 10.3,
+      "stats": {
+        "gp": 10,
+        "ppr": 207.9,
+        "half": 207.9,
+        "std": 207.9
+      }
     },
     {
       "id": "6790",
@@ -452,7 +747,13 @@
       "pos": "RB",
       "team": "CHI",
       "adp": 53.2,
-      "sfAdp": 57.8
+      "sfAdp": 57.8,
+      "stats": {
+        "gp": 9,
+        "ppr": 153.8,
+        "half": 141.8,
+        "std": 129.8
+      }
     },
     {
       "id": "11584",
@@ -461,7 +762,13 @@
       "pos": "RB",
       "team": "TB",
       "adp": 53.5,
-      "sfAdp": 71
+      "sfAdp": 71,
+      "stats": {
+        "gp": 9,
+        "ppr": 159.1,
+        "half": 148.1,
+        "std": 137.1
+      }
     },
     {
       "id": "7526",
@@ -470,7 +777,13 @@
       "pos": "WR",
       "team": "DEN",
       "adp": 55.7,
-      "sfAdp": 69
+      "sfAdp": 69,
+      "stats": {
+        "gp": 9,
+        "ppr": 82,
+        "half": 67,
+        "std": 52
+      }
     },
     {
       "id": "6797",
@@ -479,7 +792,13 @@
       "pos": "QB",
       "team": "LAC",
       "adp": 56.4,
-      "sfAdp": 22.8
+      "sfAdp": 22.8,
+      "stats": {
+        "gp": 9,
+        "ppr": 107.9,
+        "half": 107.9,
+        "std": 107.9
+      }
     },
     {
       "id": "421",
@@ -488,7 +807,13 @@
       "pos": "QB",
       "team": "LAR",
       "adp": 57.7,
-      "sfAdp": 13
+      "sfAdp": 13,
+      "stats": {
+        "gp": 10,
+        "ppr": 172.6,
+        "half": 172.6,
+        "std": 172.6
+      }
     },
     {
       "id": "12512",
@@ -497,7 +822,13 @@
       "pos": "RB",
       "team": "CLE",
       "adp": 58.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 108.2,
+        "half": 95.7,
+        "std": 83.2
+      }
     },
     {
       "id": "12518",
@@ -506,7 +837,13 @@
       "pos": "TE",
       "team": "IND",
       "adp": 58.3,
-      "sfAdp": 95.5
+      "sfAdp": 95.5,
+      "stats": {
+        "gp": 8,
+        "ppr": 86.5,
+        "half": 66.5,
+        "std": 46.5
+      }
     },
     {
       "id": "2133",
@@ -515,7 +852,13 @@
       "pos": "WR",
       "team": "LAR",
       "adp": 58.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 102,
+        "half": 87,
+        "std": 72
+      }
     },
     {
       "id": "13286",
@@ -524,7 +867,13 @@
       "pos": "RB",
       "team": "SEA",
       "adp": 59.2,
-      "sfAdp": 72.5
+      "sfAdp": 72.5,
+      "stats": {
+        "gp": 6,
+        "ppr": 42.9,
+        "half": 37.4,
+        "std": 31.9
+      }
     },
     {
       "id": "7523",
@@ -533,7 +882,13 @@
       "pos": "QB",
       "team": "JAX",
       "adp": 61.3,
-      "sfAdp": 22.1
+      "sfAdp": 22.1,
+      "stats": {
+        "gp": 9,
+        "ppr": 179,
+        "half": 179,
+        "std": 179
+      }
     },
     {
       "id": "8148",
@@ -542,7 +897,13 @@
       "pos": "WR",
       "team": "DET",
       "adp": 61.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 114.7,
+        "half": 98.7,
+        "std": 82.7
+      }
     },
     {
       "id": "4983",
@@ -551,7 +912,13 @@
       "pos": "WR",
       "team": "BUF",
       "adp": 62.3,
-      "sfAdp": 70.9
+      "sfAdp": 70.9,
+      "stats": {
+        "gp": 7,
+        "ppr": 78.9,
+        "half": 67.4,
+        "std": 55.9
+      }
     },
     {
       "id": "5892",
@@ -560,7 +927,13 @@
       "pos": "RB",
       "team": "HOU",
       "adp": 63.5,
-      "sfAdp": 64.7
+      "sfAdp": 64.7,
+      "stats": {
+        "gp": 5,
+        "ppr": 45.5,
+        "half": 42,
+        "std": 38.5
+      }
     },
     {
       "id": "5927",
@@ -569,7 +942,13 @@
       "pos": "WR",
       "team": "WAS",
       "adp": 64.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 46,
+        "half": 38.5,
+        "std": 31
+      }
     },
     {
       "id": "12490",
@@ -578,7 +957,13 @@
       "pos": "RB",
       "team": "JAX",
       "adp": 65.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 147.5,
+        "half": 138.5,
+        "std": 129.5
+      }
     },
     {
       "id": "11563",
@@ -587,7 +972,13 @@
       "pos": "QB",
       "team": "DEN",
       "adp": 68.5,
-      "sfAdp": 23.9
+      "sfAdp": 23.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 134.8,
+        "half": 134.8,
+        "std": 134.8
+      }
     },
     {
       "id": "12519",
@@ -596,7 +987,13 @@
       "pos": "WR",
       "team": "CHI",
       "adp": 69.6,
-      "sfAdp": 77.4
+      "sfAdp": 77.4,
+      "stats": {
+        "gp": 9,
+        "ppr": 136.3,
+        "half": 111.8,
+        "std": 87.3
+      }
     },
     {
       "id": "4046",
@@ -605,7 +1002,13 @@
       "pos": "QB",
       "team": "KC",
       "adp": 70.3,
-      "sfAdp": 23.9
+      "sfAdp": 23.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 181.4,
+        "half": 181.4,
+        "std": 181.4
+      }
     },
     {
       "id": "11620",
@@ -614,7 +1017,13 @@
       "pos": "WR",
       "team": "CHI",
       "adp": 71.3,
-      "sfAdp": 63.8
+      "sfAdp": 63.8,
+      "stats": {
+        "gp": 9,
+        "ppr": 88.8,
+        "half": 72.8,
+        "std": 56.8
+      }
     },
     {
       "id": "12529",
@@ -623,7 +1032,13 @@
       "pos": "RB",
       "team": "NE",
       "adp": 71.3,
-      "sfAdp": 87
+      "sfAdp": 87,
+      "stats": {
+        "gp": 6,
+        "ppr": 33.8,
+        "half": 31.3,
+        "std": 28.8
+      }
     },
     {
       "id": "8167",
@@ -632,7 +1047,13 @@
       "pos": "WR",
       "team": "GB",
       "adp": 71.8,
-      "sfAdp": 62.7
+      "sfAdp": 62.7,
+      "stats": {
+        "gp": 10,
+        "ppr": 183.6,
+        "half": 157.6,
+        "std": 131.6
+      }
     },
     {
       "id": "7553",
@@ -641,7 +1062,13 @@
       "pos": "TE",
       "team": "ATL",
       "adp": 74,
-      "sfAdp": 131.2
+      "sfAdp": 131.2,
+      "stats": {
+        "gp": 9,
+        "ppr": 78,
+        "half": 63.5,
+        "std": 49
+      }
     },
     {
       "id": "9487",
@@ -650,7 +1077,13 @@
       "pos": "WR",
       "team": "JAX",
       "adp": 74.7,
-      "sfAdp": 79.6
+      "sfAdp": 79.6,
+      "stats": {
+        "gp": 9,
+        "ppr": 137.8,
+        "half": 119.8,
+        "std": 101.8
+      }
     },
     {
       "id": "7611",
@@ -659,7 +1092,13 @@
       "pos": "RB",
       "team": "NE",
       "adp": 75.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 115.2,
+        "half": 101.7,
+        "std": 88.2
+      }
     },
     {
       "id": "3163",
@@ -668,7 +1107,13 @@
       "pos": "QB",
       "team": "DET",
       "adp": 76.4,
-      "sfAdp": 22
+      "sfAdp": 22,
+      "stats": {
+        "gp": 9,
+        "ppr": 171.8,
+        "half": 171.8,
+        "std": 171.8
+      }
     },
     {
       "id": "5850",
@@ -677,7 +1122,13 @@
       "pos": "RB",
       "team": "GB",
       "adp": 76.7,
-      "sfAdp": 100.2
+      "sfAdp": 100.2,
+      "stats": {
+        "gp": 3,
+        "ppr": 43.8,
+        "half": 38.3,
+        "std": 32.8
+      }
     },
     {
       "id": "12508",
@@ -686,7 +1137,13 @@
       "pos": "QB",
       "team": "NYG",
       "adp": 77.9,
-      "sfAdp": 29.4
+      "sfAdp": 29.4,
+      "stats": {
+        "gp": 2,
+        "ppr": 27.4,
+        "half": 27.4,
+        "std": 27.4
+      }
     },
     {
       "id": "8183",
@@ -695,7 +1152,13 @@
       "pos": "QB",
       "team": "SF",
       "adp": 78.2,
-      "sfAdp": 30.8
+      "sfAdp": 30.8,
+      "stats": {
+        "gp": 9,
+        "ppr": 208,
+        "half": 208,
+        "std": 208
+      }
     },
     {
       "id": "9484",
@@ -704,7 +1167,13 @@
       "pos": "TE",
       "team": "GB",
       "adp": 78.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 93.3,
+        "half": 74.8,
+        "std": 56.3
+      }
     },
     {
       "id": "13279",
@@ -713,7 +1182,13 @@
       "pos": "WR",
       "team": "TEN",
       "adp": 80.8,
-      "sfAdp": 94.7
+      "sfAdp": 94.7,
+      "stats": {
+        "gp": 7,
+        "ppr": 77.3,
+        "half": 60.3,
+        "std": 43.3
+      }
     },
     {
       "id": "8228",
@@ -722,7 +1197,13 @@
       "pos": "RB",
       "team": "PIT",
       "adp": 81.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 149.9,
+        "half": 134.9,
+        "std": 119.9
+      }
     },
     {
       "id": "2216",
@@ -731,7 +1212,13 @@
       "pos": "WR",
       "team": "SF",
       "adp": 82.5,
-      "sfAdp": 75.4
+      "sfAdp": 75.4,
+      "stats": {
+        "gp": 6,
+        "ppr": 89,
+        "half": 75.5,
+        "std": 62
+      }
     },
     {
       "id": "11628",
@@ -740,7 +1227,13 @@
       "pos": "WR",
       "team": "HOU",
       "adp": 83.4,
-      "sfAdp": 86.6
+      "sfAdp": 86.6,
+      "stats": {
+        "gp": 6,
+        "ppr": 37.5,
+        "half": 32,
+        "std": 26.5
+      }
     },
     {
       "id": "5045",
@@ -749,7 +1242,13 @@
       "pos": "WR",
       "team": "DEN",
       "adp": 84.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 63.6,
+        "half": 51.1,
+        "std": 38.6
+      }
     },
     {
       "id": "10859",
@@ -758,7 +1257,13 @@
       "pos": "TE",
       "team": "DET",
       "adp": 85.9,
-      "sfAdp": 103.7
+      "sfAdp": 103.7,
+      "stats": {
+        "gp": 9,
+        "ppr": 95.7,
+        "half": 77.7,
+        "std": 59.7
+      }
     },
     {
       "id": "4217",
@@ -767,7 +1272,13 @@
       "pos": "TE",
       "team": "SF",
       "adp": 86,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 127.7,
+        "half": 105.7,
+        "std": 83.7
+      }
     },
     {
       "id": "12506",
@@ -776,7 +1287,13 @@
       "pos": "TE",
       "team": "CLE",
       "adp": 86.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 118.4,
+        "half": 96.4,
+        "std": 74.4
+      }
     },
     {
       "id": "11631",
@@ -785,7 +1302,13 @@
       "pos": "WR",
       "team": "JAX",
       "adp": 86.7,
-      "sfAdp": 90.8
+      "sfAdp": 90.8,
+      "stats": {
+        "gp": 6,
+        "ppr": 39.6,
+        "half": 33.1,
+        "std": 26.6
+      }
     },
     {
       "id": "5967",
@@ -794,16 +1317,13 @@
       "pos": "RB",
       "team": "TEN",
       "adp": 90.7,
-      "sfAdp": 91.2
-    },
-    {
-      "id": "8142",
-      "sleeperId": "8142",
-      "name": "Alec Pierce",
-      "pos": "WR",
-      "team": "IND",
-      "adp": 91.6,
-      "sfAdp": null
+      "sfAdp": 91.2,
+      "stats": {
+        "gp": 9,
+        "ppr": 140.4,
+        "half": 129.4,
+        "std": 118.4
+      }
     },
     {
       "id": "5846",
@@ -812,7 +1332,28 @@
       "pos": "WR",
       "team": "PIT",
       "adp": 91.6,
-      "sfAdp": 80.5
+      "sfAdp": 80.5,
+      "stats": {
+        "gp": 9,
+        "ppr": 93.3,
+        "half": 75.8,
+        "std": 58.3
+      }
+    },
+    {
+      "id": "8142",
+      "sleeperId": "8142",
+      "name": "Alec Pierce",
+      "pos": "WR",
+      "team": "IND",
+      "adp": 91.6,
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 12.2,
+        "half": 9.7,
+        "std": 7.2
+      }
     },
     {
       "id": "10232",
@@ -821,7 +1362,13 @@
       "pos": "WR",
       "team": "ARI",
       "adp": 91.7,
-      "sfAdp": 99.2
+      "sfAdp": 99.2,
+      "stats": {
+        "gp": 9,
+        "ppr": 120.7,
+        "half": 95.2,
+        "std": 69.7
+      }
     },
     {
       "id": "4037",
@@ -830,7 +1377,13 @@
       "pos": "WR",
       "team": "TB",
       "adp": 91.9,
-      "sfAdp": 103.2
+      "sfAdp": 103.2,
+      "stats": {
+        "gp": 8,
+        "ppr": 57.9,
+        "half": 43.4,
+        "std": 28.9
+      }
     },
     {
       "id": "5849",
@@ -839,7 +1392,13 @@
       "pos": "QB",
       "team": "MIN",
       "adp": 94.8,
-      "sfAdp": 35.1
+      "sfAdp": 35.1,
+      "stats": {
+        "gp": 6,
+        "ppr": 76.6,
+        "half": 76.6,
+        "std": 76.6
+      }
     },
     {
       "id": "4892",
@@ -848,7 +1407,13 @@
       "pos": "QB",
       "team": "TB",
       "adp": 94.8,
-      "sfAdp": 35.9
+      "sfAdp": 35.9,
+      "stats": {
+        "gp": 6,
+        "ppr": 54.9,
+        "half": 54.9,
+        "std": 54.9
+      }
     },
     {
       "id": "12489",
@@ -857,7 +1422,13 @@
       "pos": "RB",
       "team": "DEN",
       "adp": 96.9,
-      "sfAdp": 134.3
+      "sfAdp": 134.3,
+      "stats": {
+        "gp": 6,
+        "ppr": 67.4,
+        "half": 54.9,
+        "std": 42.4
+      }
     },
     {
       "id": "7594",
@@ -866,7 +1437,13 @@
       "pos": "RB",
       "team": "CAR",
       "adp": 97.1,
-      "sfAdp": 86.4
+      "sfAdp": 86.4,
+      "stats": {
+        "gp": 9,
+        "ppr": 180.8,
+        "half": 165.3,
+        "std": 149.8
+      }
     },
     {
       "id": "6804",
@@ -875,7 +1452,13 @@
       "pos": "QB",
       "team": "GB",
       "adp": 97.7,
-      "sfAdp": 37.4
+      "sfAdp": 37.4,
+      "stats": {
+        "gp": 10,
+        "ppr": 202.8,
+        "half": 202.8,
+        "std": 202.8
+      }
     },
     {
       "id": "11583",
@@ -884,7 +1467,13 @@
       "pos": "RB",
       "team": "CAR",
       "adp": 98.2,
-      "sfAdp": 113.8
+      "sfAdp": 113.8,
+      "stats": {
+        "gp": 2,
+        "ppr": 9.3,
+        "half": 8.3,
+        "std": 7.3
+      }
     },
     {
       "id": "5022",
@@ -893,7 +1482,13 @@
       "pos": "TE",
       "team": "PHI",
       "adp": 99.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 74,
+        "half": 58.5,
+        "std": 43
+      }
     },
     {
       "id": "11533",
@@ -902,7 +1497,13 @@
       "pos": "K",
       "team": "DAL",
       "adp": 100.1,
-      "sfAdp": 128.4
+      "sfAdp": 128.4,
+      "stats": {
+        "gp": 10,
+        "ppr": 89,
+        "half": 89,
+        "std": 89
+      }
     },
     {
       "id": "1466",
@@ -911,7 +1512,13 @@
       "pos": "TE",
       "team": "KC",
       "adp": 100.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 104.3,
+        "half": 86.8,
+        "std": 69.3
+      }
     },
     {
       "id": "7021",
@@ -920,7 +1527,13 @@
       "pos": "RB",
       "team": "PIT",
       "adp": 101.1,
-      "sfAdp": 98.5
+      "sfAdp": 98.5,
+      "stats": {
+        "gp": 6,
+        "ppr": 50,
+        "half": 42.5,
+        "std": 35
+      }
     },
     {
       "id": "6806",
@@ -929,7 +1542,13 @@
       "pos": "RB",
       "team": "DEN",
       "adp": 102.2,
-      "sfAdp": 91.9
+      "sfAdp": 91.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 62.5,
+        "half": 58,
+        "std": 53.5
+      }
     },
     {
       "id": "12545",
@@ -938,7 +1557,13 @@
       "pos": "QB",
       "team": "NO",
       "adp": 104.7,
-      "sfAdp": 45.9
+      "sfAdp": 45.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 162.6,
+        "half": 162.6,
+        "std": 162.6
+      }
     },
     {
       "id": "HOU",
@@ -947,7 +1572,13 @@
       "pos": "DEF",
       "team": "HOU",
       "adp": 107.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 62,
+        "half": 62,
+        "std": 62
+      }
     },
     {
       "id": "9758",
@@ -956,7 +1587,13 @@
       "pos": "QB",
       "team": "HOU",
       "adp": 108.4,
-      "sfAdp": 62.9
+      "sfAdp": 62.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 187.5,
+        "half": 187.5,
+        "std": 187.5
+      }
     },
     {
       "id": "SEA",
@@ -965,7 +1602,13 @@
       "pos": "DEF",
       "team": "SEA",
       "adp": 109.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 83,
+        "half": 83,
+        "std": 83
+      }
     },
     {
       "id": "4943",
@@ -974,16 +1617,28 @@
       "pos": "QB",
       "team": "SEA",
       "adp": 110.9,
-      "sfAdp": 49.2
+      "sfAdp": 49.2,
+      "stats": {
+        "gp": 7,
+        "ppr": 101.3,
+        "half": 101.3,
+        "std": 101.3
+      }
     },
     {
-      "id": "kenneth-gainwell-rb",
-      "sleeperId": null,
+      "id": "7567",
+      "sleeperId": "7567",
       "name": "Kenneth Gainwell",
       "pos": "RB",
       "team": "TB",
       "adp": 111.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 63.6,
+        "half": 56.1,
+        "std": 48.6
+      }
     },
     {
       "id": "8131",
@@ -992,7 +1647,13 @@
       "pos": "TE",
       "team": "NYG",
       "adp": 112.5,
-      "sfAdp": 152
+      "sfAdp": 152,
+      "stats": {
+        "gp": 9,
+        "ppr": 156.5,
+        "half": 129,
+        "std": 101.5
+      }
     },
     {
       "id": "6819",
@@ -1001,7 +1662,13 @@
       "pos": "WR",
       "team": "PIT",
       "adp": 112.7,
-      "sfAdp": 109.5
+      "sfAdp": 109.5,
+      "stats": {
+        "gp": 3,
+        "ppr": 15.9,
+        "half": 12.4,
+        "std": 8.9
+      }
     },
     {
       "id": "12522",
@@ -1010,7 +1677,13 @@
       "pos": "QB",
       "team": "TEN",
       "adp": 113.2,
-      "sfAdp": 94.7
+      "sfAdp": 94.7,
+      "stats": {
+        "gp": 9,
+        "ppr": 125.7,
+        "half": 125.7,
+        "std": 125.7
+      }
     },
     {
       "id": "9754",
@@ -1019,16 +1692,13 @@
       "pos": "WR",
       "team": "LAC",
       "adp": 113.4,
-      "sfAdp": 92.3
-    },
-    {
-      "id": "LAR",
-      "sleeperId": "LAR",
-      "name": "Los Angeles Rams",
-      "pos": "DEF",
-      "team": "LAR",
-      "adp": 114.2,
-      "sfAdp": null
+      "sfAdp": 92.3,
+      "stats": {
+        "gp": 8,
+        "ppr": 47.4,
+        "half": 40.4,
+        "std": 33.4
+      }
     },
     {
       "id": "11586",
@@ -1037,7 +1707,28 @@
       "pos": "RB",
       "team": "LAR",
       "adp": 114.2,
-      "sfAdp": 111.7
+      "sfAdp": 111.7,
+      "stats": {
+        "gp": 10,
+        "ppr": 115.5,
+        "half": 109,
+        "std": 102.5
+      }
+    },
+    {
+      "id": "LAR",
+      "sleeperId": "LAR",
+      "name": "Los Angeles Rams",
+      "pos": "DEF",
+      "team": "LAR",
+      "adp": 114.2,
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 77,
+        "half": 77,
+        "std": 77
+      }
     },
     {
       "id": "8110",
@@ -1046,7 +1737,13 @@
       "pos": "TE",
       "team": "DAL",
       "adp": 114.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 54.6,
+        "half": 45.1,
+        "std": 35.6
+      }
     },
     {
       "id": "5870",
@@ -1055,7 +1752,13 @@
       "pos": "QB",
       "team": "IND",
       "adp": 115.3,
-      "sfAdp": 64.9
+      "sfAdp": 64.9,
+      "stats": {
+        "gp": 10,
+        "ppr": 98.7,
+        "half": 98.7,
+        "std": 98.7
+      }
     },
     {
       "id": "9500",
@@ -1064,7 +1767,13 @@
       "pos": "WR",
       "team": "KC",
       "adp": 116.1,
-      "sfAdp": 123.7
+      "sfAdp": 123.7,
+      "stats": {
+        "gp": 10,
+        "ppr": 90.4,
+        "half": 71.9,
+        "std": 53.4
+      }
     },
     {
       "id": "12533",
@@ -1073,7 +1782,13 @@
       "pos": "RB",
       "team": "WAS",
       "adp": 116.2,
-      "sfAdp": 103.3
+      "sfAdp": 103.3,
+      "stats": {
+        "gp": 5,
+        "ppr": 44.9,
+        "half": 42.4,
+        "std": 39.9
+      }
     },
     {
       "id": "12534",
@@ -1082,7 +1797,13 @@
       "pos": "RB",
       "team": "CHI",
       "adp": 117.2,
-      "sfAdp": 110.1
+      "sfAdp": 110.1,
+      "stats": {
+        "gp": 4,
+        "ppr": 59.3,
+        "half": 56.8,
+        "std": 54.3
+      }
     },
     {
       "id": "9756",
@@ -1091,7 +1812,13 @@
       "pos": "WR",
       "team": "MIN",
       "adp": 117.4,
-      "sfAdp": 99
+      "sfAdp": 99,
+      "stats": {
+        "gp": 6,
+        "ppr": 53.9,
+        "half": 44.9,
+        "std": 35.9
+      }
     },
     {
       "id": "8161",
@@ -1100,7 +1827,13 @@
       "pos": "QB",
       "team": "MIA",
       "adp": 117.5,
-      "sfAdp": 74.7
+      "sfAdp": 74.7,
+      "stats": {
+        "gp": 8,
+        "ppr": 111,
+        "half": 111,
+        "std": 111
+      }
     },
     {
       "id": "10236",
@@ -1109,7 +1842,13 @@
       "pos": "TE",
       "team": "BUF",
       "adp": 117.6,
-      "sfAdp": 150.4
+      "sfAdp": 150.4,
+      "stats": {
+        "gp": 9,
+        "ppr": 92.7,
+        "half": 76.7,
+        "std": 60.7
+      }
     },
     {
       "id": "DEN",
@@ -1118,7 +1857,13 @@
       "pos": "DEF",
       "team": "DEN",
       "adp": 118.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 72,
+        "half": 72,
+        "std": 72
+      }
     },
     {
       "id": "8408",
@@ -1127,7 +1872,13 @@
       "pos": "RB",
       "team": "MIN",
       "adp": 118.7,
-      "sfAdp": 115.2
+      "sfAdp": 115.2,
+      "stats": {
+        "gp": 5,
+        "ppr": 32.8,
+        "half": 31.8,
+        "std": 30.8
+      }
     },
     {
       "id": "9228",
@@ -1136,7 +1887,13 @@
       "pos": "QB",
       "team": "CAR",
       "adp": 119.3,
-      "sfAdp": 83.1
+      "sfAdp": 83.1,
+      "stats": {
+        "gp": 9,
+        "ppr": 160.7,
+        "half": 160.7,
+        "std": 160.7
+      }
     },
     {
       "id": "8126",
@@ -1145,7 +1902,13 @@
       "pos": "WR",
       "team": "TEN",
       "adp": 120,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 81.3,
+        "half": 62.3,
+        "std": 43.3
+      }
     },
     {
       "id": "4199",
@@ -1154,7 +1917,13 @@
       "pos": "RB",
       "team": "MIN",
       "adp": 121.4,
-      "sfAdp": 136.7
+      "sfAdp": 136.7,
+      "stats": {
+        "gp": 9,
+        "ppr": 95.4,
+        "half": 86.9,
+        "std": 78.4
+      }
     },
     {
       "id": "2449",
@@ -1163,7 +1932,13 @@
       "pos": "WR",
       "team": "WAS",
       "adp": 122.6,
-      "sfAdp": 118.5
+      "sfAdp": 118.5,
+      "stats": {
+        "gp": 8,
+        "ppr": 110.6,
+        "half": 92.6,
+        "std": 74.6
+      }
     },
     {
       "id": "5012",
@@ -1172,7 +1947,13 @@
       "pos": "TE",
       "team": "BAL",
       "adp": 123.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 74.9,
+        "half": 55.4,
+        "std": 35.9
+      }
     },
     {
       "id": "13294",
@@ -1181,7 +1962,13 @@
       "pos": "WR",
       "team": "PHI",
       "adp": 124.3,
-      "sfAdp": 131
+      "sfAdp": 131,
+      "stats": {
+        "gp": 9,
+        "ppr": 73.7,
+        "half": 55.2,
+        "std": 36.7
+      }
     },
     {
       "id": "11581",
@@ -1190,7 +1977,13 @@
       "pos": "RB",
       "team": "GB",
       "adp": 125,
-      "sfAdp": 123
+      "sfAdp": 123,
+      "stats": {
+        "gp": 9,
+        "ppr": 58.7,
+        "half": 50.7,
+        "std": 42.7
+      }
     },
     {
       "id": "12501",
@@ -1199,7 +1992,13 @@
       "pos": "WR",
       "team": "GB",
       "adp": 125.4,
-      "sfAdp": 112.4
+      "sfAdp": 112.4,
+      "stats": {
+        "gp": 10,
+        "ppr": 175.9,
+        "half": 146.9,
+        "std": 117.9
+      }
     },
     {
       "id": "13417",
@@ -1217,7 +2016,13 @@
       "pos": "WR",
       "team": "CLE",
       "adp": 129.3,
-      "sfAdp": 132.7
+      "sfAdp": 132.7,
+      "stats": {
+        "gp": 10,
+        "ppr": 100.1,
+        "half": 80.1,
+        "std": 60.1
+      }
     },
     {
       "id": "13269",
@@ -1226,7 +2031,13 @@
       "pos": "QB",
       "team": "LV",
       "adp": 129.6,
-      "sfAdp": 124.2
+      "sfAdp": 124.2,
+      "stats": {
+        "gp": 2,
+        "ppr": 16.1,
+        "half": 16.1,
+        "std": 16.1
+      }
     },
     {
       "id": "10222",
@@ -1235,7 +2046,13 @@
       "pos": "WR",
       "team": "GB",
       "adp": 130,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 6.4,
+        "half": 4.4,
+        "std": 2.4
+      }
     },
     {
       "id": "3257",
@@ -1244,7 +2061,13 @@
       "pos": "QB",
       "team": "BAL",
       "adp": 130.4,
-      "sfAdp": 99.5
+      "sfAdp": 99.5,
+      "stats": {
+        "gp": 9,
+        "ppr": 131,
+        "half": 130.5,
+        "std": 130
+      }
     },
     {
       "id": "9753",
@@ -1253,7 +2076,13 @@
       "pos": "RB",
       "team": "SEA",
       "adp": 132.6,
-      "sfAdp": 142.4
+      "sfAdp": 142.4,
+      "stats": {
+        "gp": 3,
+        "ppr": 24.9,
+        "half": 22.9,
+        "std": 20.9
+      }
     },
     {
       "id": "3451",
@@ -1262,7 +2091,13 @@
       "pos": "K",
       "team": "HOU",
       "adp": 134.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 99,
+        "half": 99,
+        "std": 99
+      }
     },
     {
       "id": "13281",
@@ -1271,7 +2106,13 @@
       "pos": "WR",
       "team": "NO",
       "adp": 134.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 24,
+        "half": 16.5,
+        "std": 9
+      }
     },
     {
       "id": "8136",
@@ -1280,7 +2121,13 @@
       "pos": "RB",
       "team": "WAS",
       "adp": 137.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 75.9,
+        "half": 66.4,
+        "std": 56.9
+      }
     },
     {
       "id": "7002",
@@ -1289,7 +2136,13 @@
       "pos": "TE",
       "team": "NO",
       "adp": 137.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 83.7,
+        "half": 68.7,
+        "std": 53.7
+      }
     },
     {
       "id": "11624",
@@ -1298,7 +2151,13 @@
       "pos": "WR",
       "team": "KC",
       "adp": 137.7,
-      "sfAdp": 111.9
+      "sfAdp": 111.9,
+      "stats": {
+        "gp": 8,
+        "ppr": 66.8,
+        "half": 50.3,
+        "std": 33.8
+      }
     },
     {
       "id": "NE",
@@ -1307,7 +2166,13 @@
       "pos": "DEF",
       "team": "NE",
       "adp": 137.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 60,
+        "half": 60,
+        "std": 60
+      }
     },
     {
       "id": "PHI",
@@ -1316,7 +2181,13 @@
       "pos": "DEF",
       "team": "PHI",
       "adp": 139.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 35,
+        "half": 35,
+        "std": 35
+      }
     },
     {
       "id": "8134",
@@ -1325,7 +2196,13 @@
       "pos": "WR",
       "team": "BUF",
       "adp": 139.3,
-      "sfAdp": 127
+      "sfAdp": 127,
+      "stats": {
+        "gp": 9,
+        "ppr": 83.7,
+        "half": 67.2,
+        "std": 50.7
+      }
     },
     {
       "id": "2747",
@@ -1334,7 +2211,13 @@
       "pos": "K",
       "team": "SEA",
       "adp": 139.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 75,
+        "half": 75,
+        "std": 75
+      }
     },
     {
       "id": "5947",
@@ -1343,7 +2226,13 @@
       "pos": "WR",
       "team": "JAX",
       "adp": 140.5,
-      "sfAdp": 112
+      "sfAdp": 112,
+      "stats": {
+        "gp": 9,
+        "ppr": 82,
+        "half": 67.5,
+        "std": 53
+      }
     },
     {
       "id": "8259",
@@ -1352,7 +2241,13 @@
       "pos": "K",
       "team": "LAC",
       "adp": 141.3,
-      "sfAdp": 135.6
+      "sfAdp": 135.6,
+      "stats": {
+        "gp": 9,
+        "ppr": 71,
+        "half": 71,
+        "std": 71
+      }
     },
     {
       "id": "12474",
@@ -1361,7 +2256,13 @@
       "pos": "RB",
       "team": "HOU",
       "adp": 141.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 78.4,
+        "half": 70.4,
+        "std": 62.4
+      }
     },
     {
       "id": "96",
@@ -1370,7 +2271,13 @@
       "pos": "QB",
       "team": "PIT",
       "adp": 142.1,
-      "sfAdp": 94.3
+      "sfAdp": 94.3,
+      "stats": {
+        "gp": 9,
+        "ppr": 138.8,
+        "half": 138.8,
+        "std": 138.8
+      }
     },
     {
       "id": "5872",
@@ -1379,7 +2286,13 @@
       "pos": "WR",
       "team": "SF",
       "adp": 142.2,
-      "sfAdp": 124.4
+      "sfAdp": 124.4,
+      "stats": {
+        "gp": 6,
+        "ppr": 86.3,
+        "half": 76.8,
+        "std": 67.3
+      }
     },
     {
       "id": "3214",
@@ -1388,7 +2301,28 @@
       "pos": "TE",
       "team": "NE",
       "adp": 143.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 84.3,
+        "half": 67.3,
+        "std": 50.3
+      }
+    },
+    {
+      "id": "8121",
+      "sleeperId": "8121",
+      "name": "Romeo Doubs",
+      "pos": "WR",
+      "team": "NE",
+      "adp": 143.5,
+      "sfAdp": 119.2,
+      "stats": {
+        "gp": 5,
+        "ppr": 58.1,
+        "half": 51.1,
+        "std": 44.1
+      }
     },
     {
       "id": "12484",
@@ -1400,22 +2334,19 @@
       "sfAdp": null
     },
     {
-      "id": "8121",
-      "sleeperId": "8121",
-      "name": "Romeo Doubs",
-      "pos": "WR",
-      "team": "NE",
-      "adp": 143.5,
-      "sfAdp": 119.2
-    },
-    {
       "id": "13330",
       "sleeperId": "13330",
       "name": "Kenyon Sadiq",
       "pos": "TE",
       "team": "NYJ",
       "adp": 143.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 56.1,
+        "half": 45.1,
+        "std": 34.1
+      }
     },
     {
       "id": "11610",
@@ -1424,7 +2355,13 @@
       "pos": "WR",
       "team": "MIA",
       "adp": 144.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 89.2,
+        "half": 71.2,
+        "std": 53.2
+      }
     },
     {
       "id": "MIN",
@@ -1433,7 +2370,13 @@
       "pos": "DEF",
       "team": "MIN",
       "adp": 145,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 109,
+        "half": 109,
+        "std": 109
+      }
     },
     {
       "id": "13345",
@@ -1442,7 +2385,13 @@
       "pos": "RB",
       "team": "DEN",
       "adp": 145.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 62.9,
+        "half": 56.4,
+        "std": 49.9
+      }
     },
     {
       "id": "PIT",
@@ -1451,7 +2400,13 @@
       "pos": "DEF",
       "team": "PIT",
       "adp": 146.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 82,
+        "half": 82,
+        "std": 82
+      }
     },
     {
       "id": "1373",
@@ -1460,7 +2415,13 @@
       "pos": "QB",
       "team": "NYJ",
       "adp": 147.1,
-      "sfAdp": 95.8
+      "sfAdp": 95.8,
+      "stats": {
+        "gp": 10,
+        "ppr": 139.4,
+        "half": 139.4,
+        "std": 139.4
+      }
     },
     {
       "id": "11638",
@@ -1478,7 +2439,13 @@
       "pos": "K",
       "team": "JAX",
       "adp": 147.6,
-      "sfAdp": 157.3
+      "sfAdp": 157.3,
+      "stats": {
+        "gp": 9,
+        "ppr": 96,
+        "half": 96,
+        "std": 96
+      }
     },
     {
       "id": "13305",
@@ -1487,7 +2454,13 @@
       "pos": "RB",
       "team": "LV",
       "adp": 147.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 41.3,
+        "half": 39.3,
+        "std": 37.3
+      }
     },
     {
       "id": "LAC",
@@ -1496,7 +2469,13 @@
       "pos": "DEF",
       "team": "LAC",
       "adp": 147.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 48,
+        "half": 48,
+        "std": 48
+      }
     },
     {
       "id": "BAL",
@@ -1505,7 +2484,13 @@
       "pos": "DEF",
       "team": "BAL",
       "adp": 149.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 45,
+        "half": 45,
+        "std": 45
+      }
     },
     {
       "id": "11646",
@@ -1514,7 +2499,13 @@
       "pos": "WR",
       "team": "CAR",
       "adp": 150.1,
-      "sfAdp": 136.6
+      "sfAdp": 136.6,
+      "stats": {
+        "gp": 8,
+        "ppr": 86.3,
+        "half": 70.8,
+        "std": 55.3
+      }
     },
     {
       "id": "9508",
@@ -1523,7 +2514,13 @@
       "pos": "RB",
       "team": "TEN",
       "adp": 150.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 30.9,
+        "half": 22.9,
+        "std": 14.9
+      }
     },
     {
       "id": "10219",
@@ -1532,7 +2529,13 @@
       "pos": "RB",
       "team": "JAX",
       "adp": 150.8,
-      "sfAdp": 156.5
+      "sfAdp": 156.5,
+      "stats": {
+        "gp": 9,
+        "ppr": 54.9,
+        "half": 52.9,
+        "std": 50.9
+      }
     },
     {
       "id": "5844",
@@ -1541,7 +2544,13 @@
       "pos": "TE",
       "team": "MIN",
       "adp": 151.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 85.8,
+        "half": 68.3,
+        "std": 50.8
+      }
     },
     {
       "id": "8132",
@@ -1550,7 +2559,13 @@
       "pos": "RB",
       "team": "ARI",
       "adp": 151.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 92.1,
+        "half": 80.6,
+        "std": 69.1
+      }
     },
     {
       "id": "12493",
@@ -1559,7 +2574,13 @@
       "pos": "TE",
       "team": "LAC",
       "adp": 152.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 44.1,
+        "half": 34.1,
+        "std": 24.1
+      }
     },
     {
       "id": "12015",
@@ -1568,7 +2589,13 @@
       "pos": "K",
       "team": "BAL",
       "adp": 152.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 28,
+        "half": 28,
+        "std": 28
+      }
     },
     {
       "id": "11539",
@@ -1577,7 +2604,13 @@
       "pos": "K",
       "team": "DET",
       "adp": 153.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 84,
+        "half": 84,
+        "std": 84
+      }
     },
     {
       "id": "13349",
@@ -1586,7 +2619,13 @@
       "pos": "TE",
       "team": "PHI",
       "adp": 153.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 8.3,
+        "half": 6.8,
+        "std": 5.3
+      }
     },
     {
       "id": "9480",
@@ -1595,7 +2634,13 @@
       "pos": "TE",
       "team": "JAX",
       "adp": 154.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 80.5,
+        "half": 64.5,
+        "std": 48.5
+      }
     },
     {
       "id": "6783",
@@ -1604,7 +2649,13 @@
       "pos": "WR",
       "team": "CLE",
       "adp": 155.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 48.2,
+        "half": 38.2,
+        "std": 28.2
+      }
     },
     {
       "id": "JAX",
@@ -1613,7 +2664,13 @@
       "pos": "DEF",
       "team": "JAX",
       "adp": 155.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 80,
+        "half": 80,
+        "std": 80
+      }
     },
     {
       "id": "13275",
@@ -1625,13 +2682,19 @@
       "sfAdp": 62.3
     },
     {
-      "id": "chigoziem-okonkwo-te",
-      "sleeperId": null,
+      "id": "8210",
+      "sleeperId": "8210",
       "name": "Chigoziem Okonkwo",
       "pos": "TE",
       "team": "WAS",
       "adp": 159,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 51.3,
+        "half": 37.8,
+        "std": 24.3
+      }
     },
     {
       "id": "4227",
@@ -1640,7 +2703,13 @@
       "pos": "K",
       "team": "KC",
       "adp": 159.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 63,
+        "half": 63,
+        "std": 63
+      }
     },
     {
       "id": "11655",
@@ -1649,7 +2718,13 @@
       "pos": "RB",
       "team": "NYG",
       "adp": 160.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 31.9,
+        "half": 29.4,
+        "std": 26.9
+      }
     },
     {
       "id": "8676",
@@ -1658,7 +2733,13 @@
       "pos": "WR",
       "team": "SEA",
       "adp": 161.6,
-      "sfAdp": 140
+      "sfAdp": 140,
+      "stats": {
+        "gp": 8,
+        "ppr": 44,
+        "half": 35.5,
+        "std": 27
+      }
     },
     {
       "id": "5001",
@@ -1667,7 +2748,13 @@
       "pos": "TE",
       "team": "HOU",
       "adp": 162.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 79.5,
+        "half": 61.5,
+        "std": 43.5
+      }
     },
     {
       "id": "11792",
@@ -1676,7 +2763,13 @@
       "pos": "K",
       "team": "MIN",
       "adp": 163.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 101,
+        "half": 101,
+        "std": 101
+      }
     },
     {
       "id": "10213",
@@ -1685,7 +2778,13 @@
       "pos": "WR",
       "team": "LV",
       "adp": 163.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 111.2,
+        "half": 94.2,
+        "std": 77.2
+      }
     },
     {
       "id": "BUF",
@@ -1694,7 +2793,13 @@
       "pos": "DEF",
       "team": "BUF",
       "adp": 163.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 69,
+        "half": 69,
+        "std": 69
+      }
     },
     {
       "id": "6865",
@@ -1703,7 +2808,13 @@
       "pos": "TE",
       "team": "LAR",
       "adp": 164.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 38.7,
+        "half": 28.7,
+        "std": 18.7
+      }
     },
     {
       "id": "13346",
@@ -1712,7 +2823,13 @@
       "pos": "WR",
       "team": "CLE",
       "adp": 164.7,
-      "sfAdp": 151.8
+      "sfAdp": 151.8,
+      "stats": {
+        "gp": 10,
+        "ppr": 105.3,
+        "half": 88.8,
+        "std": 72.3
+      }
     },
     {
       "id": "DET",
@@ -1721,7 +2838,13 @@
       "pos": "DEF",
       "team": "DET",
       "adp": 165.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 61,
+        "half": 61,
+        "std": 61
+      }
     },
     {
       "id": "12530",
@@ -1730,7 +2853,13 @@
       "pos": "WR",
       "team": "JAX",
       "adp": 166,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 23.2,
+        "half": 18.7,
+        "std": 14.2
+      }
     },
     {
       "id": "1945",
@@ -1739,7 +2868,13 @@
       "pos": "K",
       "team": "PIT",
       "adp": 166.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 82,
+        "half": 82,
+        "std": 82
+      }
     },
     {
       "id": "3678",
@@ -1748,7 +2883,13 @@
       "pos": "K",
       "team": "DEN",
       "adp": 166.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 71,
+        "half": 71,
+        "std": 71
+      }
     },
     {
       "id": "11559",
@@ -1757,7 +2898,13 @@
       "pos": "QB",
       "team": "ATL",
       "adp": 167.3,
-      "sfAdp": 105.6
+      "sfAdp": 105.6,
+      "stats": {
+        "gp": 8,
+        "ppr": 115.6,
+        "half": 115.6,
+        "std": 115.6
+      }
     },
     {
       "id": "9511",
@@ -1766,7 +2913,13 @@
       "pos": "RB",
       "team": "LAC",
       "adp": 167.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 50.5,
+        "half": 41.5,
+        "std": 32.5
+      }
     },
     {
       "id": "6768",
@@ -1775,7 +2928,13 @@
       "pos": "QB",
       "team": "ATL",
       "adp": 168.1,
-      "sfAdp": 139.4
+      "sfAdp": 139.4,
+      "stats": {
+        "gp": 1,
+        "ppr": 0.4,
+        "half": 0.4,
+        "std": 0.4
+      }
     },
     {
       "id": "13276",
@@ -1784,7 +2943,13 @@
       "pos": "WR",
       "team": "NYJ",
       "adp": 168.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 62.6,
+        "half": 52.6,
+        "std": 42.6
+      }
     },
     {
       "id": "7042",
@@ -1793,7 +2958,13 @@
       "pos": "K",
       "team": "BUF",
       "adp": 168.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 96,
+        "half": 96,
+        "std": 96
+      }
     },
     {
       "id": "5189",
@@ -1802,7 +2973,13 @@
       "pos": "K",
       "team": "SF",
       "adp": 169.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 53,
+        "half": 53,
+        "std": 53
+      }
     },
     {
       "id": "11603",
@@ -1811,7 +2988,13 @@
       "pos": "TE",
       "team": "SEA",
       "adp": 171.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 67.7,
+        "half": 54.7,
+        "std": 41.7
+      }
     },
     {
       "id": "9225",
@@ -1820,7 +3003,13 @@
       "pos": "RB",
       "team": "PHI",
       "adp": 171.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 17.1,
+        "half": 15.6,
+        "std": 14.1
+      }
     },
     {
       "id": "CLE",
@@ -1829,7 +3018,13 @@
       "pos": "DEF",
       "team": "CLE",
       "adp": 172.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 70,
+        "half": 70,
+        "std": 70
+      }
     },
     {
       "id": "11618",
@@ -1847,7 +3042,13 @@
       "pos": "K",
       "team": "BAL",
       "adp": 173.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 65,
+        "half": 65,
+        "std": 65
+      }
     },
     {
       "id": "CHI",
@@ -1856,16 +3057,13 @@
       "pos": "DEF",
       "team": "CHI",
       "adp": 173.4,
-      "sfAdp": null
-    },
-    {
-      "id": "12487",
-      "sleeperId": "12487",
-      "name": "Terrance Ferguson",
-      "pos": "TE",
-      "team": "LAR",
-      "adp": 173.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 74,
+        "half": 74,
+        "std": 74
+      }
     },
     {
       "id": "7839",
@@ -1874,16 +3072,28 @@
       "pos": "K",
       "team": "CIN",
       "adp": 173.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 84,
+        "half": 84,
+        "std": 84
+      }
     },
     {
-      "id": "13414",
-      "sleeperId": "13414",
-      "name": "Kaelon Black",
-      "pos": "RB",
-      "team": "SF",
-      "adp": 173.8,
-      "sfAdp": null
+      "id": "12487",
+      "sleeperId": "12487",
+      "name": "Terrance Ferguson",
+      "pos": "TE",
+      "team": "LAR",
+      "adp": 173.5,
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 19.3,
+        "half": 15.8,
+        "std": 12.3
+      }
     },
     {
       "id": "12185",
@@ -1892,16 +3102,28 @@
       "pos": "K",
       "team": "IND",
       "adp": 173.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 111,
+        "half": 111,
+        "std": 111
+      }
     },
     {
-      "id": "13288",
-      "sleeperId": "13288",
-      "name": "Nicholas Singleton",
+      "id": "13414",
+      "sleeperId": "13414",
+      "name": "Kaelon Black",
       "pos": "RB",
-      "team": "TEN",
-      "adp": 174.5,
-      "sfAdp": null
+      "team": "SF",
+      "adp": 173.8,
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 52.3,
+        "half": 49.8,
+        "std": 47.3
+      }
     },
     {
       "id": "KC",
@@ -1910,16 +3132,43 @@
       "pos": "DEF",
       "team": "KC",
       "adp": 174.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 71,
+        "half": 71,
+        "std": 71
+      }
     },
     {
-      "id": "andres-borregales-k",
-      "sleeperId": null,
+      "id": "13288",
+      "sleeperId": "13288",
+      "name": "Nicholas Singleton",
+      "pos": "RB",
+      "team": "TEN",
+      "adp": 174.5,
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 1.2,
+        "half": 1.2,
+        "std": 1.2
+      }
+    },
+    {
+      "id": "12713",
+      "sleeperId": "12713",
       "name": "Andres Borregales",
       "pos": "K",
       "team": "NE",
       "adp": 175.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 58,
+        "half": 58,
+        "std": 58
+      }
     },
     {
       "id": "13337",
@@ -1928,7 +3177,13 @@
       "pos": "RB",
       "team": "KC",
       "adp": 175.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 95.9,
+        "half": 85.9,
+        "std": 75.9
+      }
     },
     {
       "id": "6650",
@@ -1937,7 +3192,13 @@
       "pos": "K",
       "team": "TB",
       "adp": 176.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 99,
+        "half": 99,
+        "std": 99
+      }
     },
     {
       "id": "1479",
@@ -1946,7 +3207,13 @@
       "pos": "WR",
       "team": "SF",
       "adp": 176.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 92.2,
+        "half": 69.7,
+        "std": 47.2
+      }
     },
     {
       "id": "4035",
@@ -1955,7 +3222,13 @@
       "pos": "RB",
       "team": "NO",
       "adp": 177.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 90.1,
+        "half": 76.1,
+        "std": 62.1
+      }
     },
     {
       "id": "13545",
@@ -1964,7 +3237,13 @@
       "pos": "K",
       "team": "GB",
       "adp": 177.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 68,
+        "half": 68,
+        "std": 68
+      }
     },
     {
       "id": "13301",
@@ -1973,7 +3252,13 @@
       "pos": "WR",
       "team": "WAS",
       "adp": 177.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 72.6,
+        "half": 58.6,
+        "std": 44.6
+      }
     },
     {
       "id": "8205",
@@ -1991,7 +3276,13 @@
       "pos": "RB",
       "team": "CLE",
       "adp": 179.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 39.1,
+        "half": 31.1,
+        "std": 23.1
+      }
     },
     {
       "id": "1166",
@@ -2000,7 +3291,13 @@
       "pos": "QB",
       "team": "MIN",
       "adp": 179.2,
-      "sfAdp": 70.5
+      "sfAdp": 70.5,
+      "stats": {
+        "gp": 10,
+        "ppr": 196.7,
+        "half": 196.7,
+        "std": 196.7
+      }
     },
     {
       "id": "GB",
@@ -2009,7 +3306,13 @@
       "pos": "DEF",
       "team": "GB",
       "adp": 179.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 78,
+        "half": 78,
+        "std": 78
+      }
     },
     {
       "id": "2020",
@@ -2018,7 +3321,13 @@
       "pos": "K",
       "team": "CHI",
       "adp": 180.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 79,
+        "half": 79,
+        "std": 79
+      }
     },
     {
       "id": "13293",
@@ -2027,7 +3336,13 @@
       "pos": "WR",
       "team": "BAL",
       "adp": 181.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 27,
+        "half": 21,
+        "std": 15
+      }
     },
     {
       "id": "DAL",
@@ -2036,7 +3351,13 @@
       "pos": "DEF",
       "team": "DAL",
       "adp": 181.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 40,
+        "half": 40,
+        "std": 40
+      }
     },
     {
       "id": "SF",
@@ -2045,7 +3366,13 @@
       "pos": "DEF",
       "team": "SF",
       "adp": 182.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 73,
+        "half": 73,
+        "std": 73
+      }
     },
     {
       "id": "4017",
@@ -2054,7 +3381,13 @@
       "pos": "QB",
       "team": "CLE",
       "adp": 182.8,
-      "sfAdp": 71.9
+      "sfAdp": 71.9,
+      "stats": {
+        "gp": 9,
+        "ppr": 143.3,
+        "half": 143.3,
+        "std": 143.3
+      }
     },
     {
       "id": "12524",
@@ -2063,7 +3396,13 @@
       "pos": "QB",
       "team": "CLE",
       "adp": 183.1,
-      "sfAdp": 72.1
+      "sfAdp": 72.1,
+      "stats": {
+        "gp": 2,
+        "ppr": 22.8,
+        "half": 22.8,
+        "std": 22.8
+      }
     },
     {
       "id": "4039",
@@ -2072,7 +3411,13 @@
       "pos": "WR",
       "team": "SEA",
       "adp": 183.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 68.2,
+        "half": 56.7,
+        "std": 45.2
+      }
     },
     {
       "id": "13274",
@@ -2081,7 +3426,13 @@
       "pos": "WR",
       "team": "PIT",
       "adp": 183.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 67.8,
+        "half": 51.8,
+        "std": 35.8
+      }
     },
     {
       "id": "NO",
@@ -2090,7 +3441,13 @@
       "pos": "DEF",
       "team": "NO",
       "adp": 183.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 51,
+        "half": 51,
+        "std": 51
+      }
     },
     {
       "id": "4195",
@@ -2099,7 +3456,13 @@
       "pos": "K",
       "team": "PHI",
       "adp": 185.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 44,
+        "half": 44,
+        "std": 44
+      }
     },
     {
       "id": "11576",
@@ -2108,7 +3471,13 @@
       "pos": "RB",
       "team": "NYJ",
       "adp": 187.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 110.6,
+        "half": 100.6,
+        "std": 90.6
+      }
     },
     {
       "id": "8154",
@@ -2117,7 +3486,13 @@
       "pos": "RB",
       "team": "ATL",
       "adp": 187.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 53.1,
+        "half": 50.6,
+        "std": 48.1
+      }
     },
     {
       "id": "8172",
@@ -2126,7 +3501,13 @@
       "pos": "TE",
       "team": "MIA",
       "adp": 188.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 53,
+        "half": 41,
+        "std": 29
+      }
     },
     {
       "id": "9504",
@@ -2135,7 +3516,13 @@
       "pos": "WR",
       "team": "HOU",
       "adp": 189.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 62.9,
+        "half": 53.4,
+        "std": 43.9
+      }
     },
     {
       "id": "13311",
@@ -2144,7 +3531,13 @@
       "pos": "WR",
       "team": "MIA",
       "adp": 189.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 29.2,
+        "half": 23.2,
+        "std": 17.2
+      }
     },
     {
       "id": "11647",
@@ -2153,7 +3546,13 @@
       "pos": "RB",
       "team": "LAC",
       "adp": 190.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 47.2,
+        "half": 41.2,
+        "std": 35.2
+      }
     },
     {
       "id": "12502",
@@ -2162,7 +3561,13 @@
       "pos": "TE",
       "team": "TEN",
       "adp": 190.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 43.3,
+        "half": 32.8,
+        "std": 22.3
+      }
     },
     {
       "id": "ATL",
@@ -2171,7 +3576,13 @@
       "pos": "DEF",
       "team": "ATL",
       "adp": 190.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 53,
+        "half": 53,
+        "std": 53
+      }
     },
     {
       "id": "7600",
@@ -2180,7 +3591,13 @@
       "pos": "TE",
       "team": "PIT",
       "adp": 190.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 90.5,
+        "half": 77,
+        "std": 63.5
+      }
     },
     {
       "id": "13421",
@@ -2189,7 +3606,13 @@
       "pos": "TE",
       "team": "NE",
       "adp": 190.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 52.1,
+        "half": 43.6,
+        "std": 35.1
+      }
     },
     {
       "id": "12509",
@@ -2198,7 +3621,13 @@
       "pos": "WR",
       "team": "LAC",
       "adp": 190.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 60.8,
+        "half": 47.8,
+        "std": 34.8
+      }
     },
     {
       "id": "11575",
@@ -2207,7 +3636,13 @@
       "pos": "RB",
       "team": "BUF",
       "adp": 191.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 12.2,
+        "half": 10.7,
+        "std": 9.2
+      }
     },
     {
       "id": "7049",
@@ -2216,7 +3651,13 @@
       "pos": "WR",
       "team": "MIN",
       "adp": 191.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 11.4,
+        "half": 8.4,
+        "std": 5.4
+      }
     },
     {
       "id": "CIN",
@@ -2225,7 +3666,13 @@
       "pos": "DEF",
       "team": "CIN",
       "adp": 192.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 77,
+        "half": 77,
+        "std": 77
+      }
     },
     {
       "id": "LV",
@@ -2234,7 +3681,13 @@
       "pos": "DEF",
       "team": "LV",
       "adp": 192.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 71,
+        "half": 71,
+        "std": 71
+      }
     },
     {
       "id": "TB",
@@ -2243,7 +3696,13 @@
       "pos": "DEF",
       "team": "TB",
       "adp": 193.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 92,
+        "half": 92,
+        "std": 92
+      }
     },
     {
       "id": "CAR",
@@ -2252,7 +3711,13 @@
       "pos": "DEF",
       "team": "CAR",
       "adp": 194.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 51,
+        "half": 51,
+        "std": 51
+      }
     },
     {
       "id": "NYG",
@@ -2261,7 +3726,13 @@
       "pos": "DEF",
       "team": "NYG",
       "adp": 194.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 59,
+        "half": 59,
+        "std": 59
+      }
     },
     {
       "id": "5095",
@@ -2270,7 +3741,13 @@
       "pos": "K",
       "team": "MIA",
       "adp": 194.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 41,
+        "half": 41,
+        "std": 41
+      }
     },
     {
       "id": "TEN",
@@ -2279,7 +3756,13 @@
       "pos": "DEF",
       "team": "TEN",
       "adp": 195.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 55,
+        "half": 55,
+        "std": 55
+      }
     },
     {
       "id": "13285",
@@ -2288,25 +3771,13 @@
       "pos": "WR",
       "team": "NYG",
       "adp": 195.3,
-      "sfAdp": null
-    },
-    {
-      "id": "IND",
-      "sleeperId": "IND",
-      "name": "Indianapolis Colts",
-      "pos": "DEF",
-      "team": "IND",
-      "adp": 196.5,
-      "sfAdp": null
-    },
-    {
-      "id": "11058",
-      "sleeperId": "11058",
-      "name": "Blake Grupe",
-      "pos": "K",
-      "team": "LAR",
-      "adp": 196.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 63,
+        "half": 52,
+        "std": 41
+      }
     },
     {
       "id": "9486",
@@ -2315,7 +3786,43 @@
       "pos": "WR",
       "team": "PHI",
       "adp": 196.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 53.4,
+        "half": 43.9,
+        "std": 34.4
+      }
+    },
+    {
+      "id": "IND",
+      "sleeperId": "IND",
+      "name": "Indianapolis Colts",
+      "pos": "DEF",
+      "team": "IND",
+      "adp": 196.5,
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 48,
+        "half": 48,
+        "std": 48
+      }
+    },
+    {
+      "id": "11058",
+      "sleeperId": "11058",
+      "name": "Blake Grupe",
+      "pos": "K",
+      "team": "LAR",
+      "adp": 196.5,
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 4,
+        "half": 4,
+        "std": 4
+      }
     },
     {
       "id": "13272",
@@ -2324,7 +3831,13 @@
       "pos": "QB",
       "team": "ARI",
       "adp": 196.6,
-      "sfAdp": 77.4
+      "sfAdp": 77.4,
+      "stats": {
+        "gp": 1,
+        "ppr": 2.4,
+        "half": 2.4,
+        "std": 2.4
+      }
     },
     {
       "id": "8111",
@@ -2333,7 +3846,13 @@
       "pos": "TE",
       "team": "TB",
       "adp": 197.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 44.1,
+        "half": 32.6,
+        "std": 21.1
+      }
     },
     {
       "id": "7528",
@@ -2342,7 +3861,13 @@
       "pos": "RB",
       "team": "FA",
       "adp": 197.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 11.4,
+        "half": 10.9,
+        "std": 10.4
+      }
     },
     {
       "id": "8180",
@@ -2351,7 +3876,13 @@
       "pos": "WR",
       "team": "LV",
       "adp": 197.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 33.1,
+        "half": 25.6,
+        "std": 18.1
+      }
     },
     {
       "id": "13296",
@@ -2360,7 +3891,13 @@
       "pos": "WR",
       "team": "MIA",
       "adp": 198.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 70.7,
+        "half": 59.7,
+        "std": 48.7
+      }
     },
     {
       "id": "11625",
@@ -2369,7 +3906,13 @@
       "pos": "WR",
       "team": "NYJ",
       "adp": 198.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 57.4,
+        "half": 47.9,
+        "std": 38.4
+      }
     },
     {
       "id": "13413",
@@ -2378,7 +3921,13 @@
       "pos": "WR",
       "team": "KC",
       "adp": 199.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 23.9,
+        "half": 20.4,
+        "std": 16.9
+      }
     },
     {
       "id": "13405",
@@ -2387,7 +3936,13 @@
       "pos": "RB",
       "team": "MIA",
       "adp": 199.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 10.2,
+        "half": 9.2,
+        "std": 8.2
+      }
     },
     {
       "id": "11783",
@@ -2396,7 +3951,13 @@
       "pos": "WR",
       "team": "DAL",
       "adp": 200.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 102.9,
+        "half": 83.9,
+        "std": 64.9
+      }
     },
     {
       "id": "650",
@@ -2405,7 +3966,13 @@
       "pos": "K",
       "team": "FA",
       "adp": 200.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 56,
+        "half": 56,
+        "std": 56
+      }
     },
     {
       "id": "9502",
@@ -2414,7 +3981,13 @@
       "pos": "WR",
       "team": "HOU",
       "adp": 200.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 3,
+        "ppr": 31.1,
+        "half": 27.1,
+        "std": 23.1
+      }
     },
     {
       "id": "13320",
@@ -2423,7 +3996,13 @@
       "pos": "WR",
       "team": "ATL",
       "adp": 201.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 15.2,
+        "half": 10.2,
+        "std": 5.2
+      }
     },
     {
       "id": "12540",
@@ -2432,7 +4011,13 @@
       "pos": "WR",
       "team": "TEN",
       "adp": 202.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 29.5,
+        "half": 23,
+        "std": 16.5
+      }
     },
     {
       "id": "11627",
@@ -2441,7 +4026,13 @@
       "pos": "WR",
       "team": "DEN",
       "adp": 203.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 19.5,
+        "half": 15,
+        "std": 10.5
+      }
     },
     {
       "id": "4033",
@@ -2450,7 +4041,13 @@
       "pos": "TE",
       "team": "LAC",
       "adp": 204,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 12.7,
+        "half": 9.7,
+        "std": 6.7
+      }
     },
     {
       "id": "6528",
@@ -2459,7 +4056,13 @@
       "pos": "K",
       "team": "TEN",
       "adp": 204.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 71,
+        "half": 71,
+        "std": 71
+      }
     },
     {
       "id": "13347",
@@ -2468,7 +4071,13 @@
       "pos": "RB",
       "team": "MIN",
       "adp": 204.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 4.1,
+        "half": 3.1,
+        "std": 2.1
+      }
     },
     {
       "id": "13317",
@@ -2477,7 +4086,13 @@
       "pos": "WR",
       "team": "TB",
       "adp": 205.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 33.8,
+        "half": 28.3,
+        "std": 22.8
+      }
     },
     {
       "id": "NYJ",
@@ -2486,7 +4101,13 @@
       "pos": "DEF",
       "team": "NYJ",
       "adp": 205.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 57,
+        "half": 57,
+        "std": 57
+      }
     },
     {
       "id": "13278",
@@ -2504,7 +4125,13 @@
       "pos": "QB",
       "team": "NYG",
       "adp": 207.1,
-      "sfAdp": 81.5
+      "sfAdp": 81.5,
+      "stats": {
+        "gp": 5,
+        "ppr": 53.1,
+        "half": 53.1,
+        "std": 53.1
+      }
     },
     {
       "id": "13319",
@@ -2513,7 +4140,13 @@
       "pos": "TE",
       "team": "NO",
       "adp": 208.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 3,
+        "ppr": 7,
+        "half": 5,
+        "std": 3
+      }
     },
     {
       "id": "4137",
@@ -2531,7 +4164,13 @@
       "pos": "RB",
       "team": "BAL",
       "adp": 209.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 69.9,
+        "half": 57.4,
+        "std": 44.9
+      }
     },
     {
       "id": "12535",
@@ -2540,7 +4179,13 @@
       "pos": "WR",
       "team": "DET",
       "adp": 211.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 41.5,
+        "half": 35,
+        "std": 28.5
+      }
     },
     {
       "id": "10955",
@@ -2549,7 +4194,13 @@
       "pos": "K",
       "team": "ARI",
       "adp": 212.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 90,
+        "half": 90,
+        "std": 90
+      }
     },
     {
       "id": "13268",
@@ -2558,7 +4209,13 @@
       "pos": "WR",
       "team": "BAL",
       "adp": 213.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 2.3,
+        "half": 1.8,
+        "std": 1.3
+      }
     },
     {
       "id": "11237",
@@ -2567,7 +4224,13 @@
       "pos": "RB",
       "team": "DET",
       "adp": 213.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 0.9,
+        "half": 0.9,
+        "std": 0.9
+      }
     },
     {
       "id": "12504",
@@ -2576,7 +4239,13 @@
       "pos": "RB",
       "team": "GB",
       "adp": 215.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 27.4,
+        "half": 26.9,
+        "std": 26.4
+      }
     },
     {
       "id": "11637",
@@ -2585,7 +4254,13 @@
       "pos": "WR",
       "team": "BUF",
       "adp": 217.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 73.5,
+        "half": 61.5,
+        "std": 49.5
+      }
     },
     {
       "id": "10218",
@@ -2594,7 +4269,13 @@
       "pos": "WR",
       "team": "HOU",
       "adp": 217.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 82.1,
+        "half": 68.1,
+        "std": 54.1
+      }
     },
     {
       "id": "8800",
@@ -2612,7 +4293,13 @@
       "pos": "RB",
       "team": "PHI",
       "adp": 217.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 1.9,
+        "half": 1.4,
+        "std": 0.9
+      }
     },
     {
       "id": "6149",
@@ -2630,7 +4317,13 @@
       "pos": "RB",
       "team": "NYG",
       "adp": 218.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 39.7,
+        "half": 34.7,
+        "std": 29.7
+      }
     },
     {
       "id": "12467",
@@ -2639,7 +4332,13 @@
       "pos": "RB",
       "team": "SF",
       "adp": 219,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 3,
+        "ppr": 5.3,
+        "half": 4.8,
+        "std": 4.3
+      }
     },
     {
       "id": "7527",
@@ -2648,7 +4347,13 @@
       "pos": "QB",
       "team": "SF",
       "adp": 219.2,
-      "sfAdp": 86.3
+      "sfAdp": 86.3,
+      "stats": {
+        "gp": 2,
+        "ppr": -0.5,
+        "half": -0.5,
+        "std": -0.5
+      }
     },
     {
       "id": "8698",
@@ -2675,7 +4380,13 @@
       "pos": "WR",
       "team": "HOU",
       "adp": 221.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 66.7,
+        "half": 57.2,
+        "std": 47.7
+      }
     },
     {
       "id": "7571",
@@ -2684,7 +4395,13 @@
       "pos": "WR",
       "team": "BAL",
       "adp": 221.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 62.6,
+        "half": 51.1,
+        "std": 39.6
+      }
     },
     {
       "id": "12492",
@@ -2693,7 +4410,13 @@
       "pos": "WR",
       "team": "DEN",
       "adp": 222.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 47.5,
+        "half": 41,
+        "std": 34.5
+      }
     },
     {
       "id": "11834",
@@ -2702,7 +4425,13 @@
       "pos": "WR",
       "team": "NO",
       "adp": 222.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 92.9,
+        "half": 74.4,
+        "std": 55.9
+      }
     },
     {
       "id": "4066",
@@ -2711,7 +4440,13 @@
       "pos": "TE",
       "team": "DEN",
       "adp": 223.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 39.9,
+        "half": 31.4,
+        "std": 22.9
+      }
     },
     {
       "id": "13402",
@@ -2729,7 +4464,13 @@
       "pos": "WR",
       "team": "DAL",
       "adp": 224.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 15.8,
+        "half": 13.3,
+        "std": 10.8
+      }
     },
     {
       "id": "13302",
@@ -2747,7 +4488,13 @@
       "pos": "RB",
       "team": "MIA",
       "adp": 224.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 7.6,
+        "half": 6.6,
+        "std": 5.6
+      }
     },
     {
       "id": "12048",
@@ -2756,7 +4503,13 @@
       "pos": "RB",
       "team": "SEA",
       "adp": 225.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 36.5,
+        "half": 30.5,
+        "std": 24.5
+      }
     },
     {
       "id": "4981",
@@ -2765,7 +4518,13 @@
       "pos": "WR",
       "team": "TEN",
       "adp": 227.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 15.1,
+        "half": 12.1,
+        "std": 9.1
+      }
     },
     {
       "id": "13353",
@@ -2792,7 +4551,13 @@
       "pos": "RB",
       "team": "TB",
       "adp": 232.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 3,
+        "ppr": 20,
+        "half": 20,
+        "std": 20
+      }
     },
     {
       "id": "4993",
@@ -2801,7 +4566,13 @@
       "pos": "TE",
       "team": "CIN",
       "adp": 234,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 82.1,
+        "half": 72.1,
+        "std": 62.1
+      }
     },
     {
       "id": "4147",
@@ -2810,7 +4581,13 @@
       "pos": "RB",
       "team": "CIN",
       "adp": 234.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 58.8,
+        "half": 52.8,
+        "std": 46.8
+      }
     },
     {
       "id": "12498",
@@ -2819,7 +4596,13 @@
       "pos": "TE",
       "team": "NYJ",
       "adp": 237.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 52.7,
+        "half": 41.7,
+        "std": 30.7
+      }
     },
     {
       "id": "11370",
@@ -2828,7 +4611,13 @@
       "pos": "RB",
       "team": "GB",
       "adp": 238.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 13.7,
+        "half": 11.7,
+        "std": 9.7
+      }
     },
     {
       "id": "9482",
@@ -2837,7 +4626,13 @@
       "pos": "TE",
       "team": "LV",
       "adp": 238.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 85.6,
+        "half": 65.1,
+        "std": 44.6
+      }
     },
     {
       "id": "13420",
@@ -2846,7 +4641,13 @@
       "pos": "WR",
       "team": "NO",
       "adp": 239,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 22.8,
+        "half": 18.3,
+        "std": 13.8
+      }
     },
     {
       "id": "12521",
@@ -2855,7 +4656,13 @@
       "pos": "TE",
       "team": "SEA",
       "adp": 240.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 2.7,
+        "half": 2.2,
+        "std": 1.7
+      }
     },
     {
       "id": "12499",
@@ -2864,7 +4671,13 @@
       "pos": "WR",
       "team": "TEN",
       "adp": 240.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 53,
+        "half": 44,
+        "std": 35
+      }
     },
     {
       "id": "2505",
@@ -2873,7 +4686,13 @@
       "pos": "TE",
       "team": "CAR",
       "adp": 241.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 81.3,
+        "half": 68.8,
+        "std": 56.3
+      }
     },
     {
       "id": "9501",
@@ -2882,7 +4701,13 @@
       "pos": "WR",
       "team": "NE",
       "adp": 241.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 97.8,
+        "half": 81.8,
+        "std": 65.8
+      }
     },
     {
       "id": "13303",
@@ -2891,7 +4716,13 @@
       "pos": "QB",
       "team": "NYJ",
       "adp": 242,
-      "sfAdp": 95.3
+      "sfAdp": 95.3,
+      "stats": {
+        "gp": 1,
+        "ppr": 7.1,
+        "half": 7.1,
+        "std": 7.1
+      }
     },
     {
       "id": "12483",
@@ -2900,7 +4731,13 @@
       "pos": "WR",
       "team": "LV",
       "adp": 244.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 20.7,
+        "half": 16.7,
+        "std": 12.7
+      }
     },
     {
       "id": "11597",
@@ -2909,7 +4746,13 @@
       "pos": "TE",
       "team": "NYG",
       "adp": 247.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 17.3,
+        "half": 14.8,
+        "std": 12.3
+      }
     },
     {
       "id": "9494",
@@ -2918,7 +4761,13 @@
       "pos": "WR",
       "team": "DEN",
       "adp": 248.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 20.2,
+        "half": 15.7,
+        "std": 11.2
+      }
     },
     {
       "id": "13411",
@@ -2927,7 +4776,13 @@
       "pos": "WR",
       "team": "CHI",
       "adp": 248.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 13.5,
+        "half": 10,
+        "std": 6.5
+      }
     },
     {
       "id": "6826",
@@ -2936,7 +4791,13 @@
       "pos": "TE",
       "team": "CHI",
       "adp": 250.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 24.7,
+        "half": 19.7,
+        "std": 14.7
+      }
     },
     {
       "id": "13424",
@@ -2945,7 +4806,13 @@
       "pos": "RB",
       "team": "IND",
       "adp": 252.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 46.4,
+        "half": 43.9,
+        "std": 42.4
+      }
     },
     {
       "id": "12497",
@@ -2954,7 +4821,13 @@
       "pos": "WR",
       "team": "SEA",
       "adp": 253.5,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 29.5,
+        "half": 24.5,
+        "std": 19.5
+      }
     },
     {
       "id": "6039",
@@ -2963,7 +4836,13 @@
       "pos": "RB",
       "team": "BUF",
       "adp": 253.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 40.5,
+        "half": 31.5,
+        "std": 22.5
+      }
     },
     {
       "id": "13400",
@@ -2981,7 +4860,13 @@
       "pos": "WR",
       "team": "KC",
       "adp": 255.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 3,
+        "ppr": 44.9,
+        "half": 39.4,
+        "std": 33.9
+      }
     },
     {
       "id": "7591",
@@ -2990,7 +4875,13 @@
       "pos": "QB",
       "team": "KC",
       "adp": 255.4,
-      "sfAdp": 100.5
+      "sfAdp": 100.5,
+      "stats": {
+        "gp": 1,
+        "ppr": -2.1,
+        "half": -2.1,
+        "std": -2.1
+      }
     },
     {
       "id": "5906",
@@ -2999,7 +4890,13 @@
       "pos": "TE",
       "team": "BUF",
       "adp": 255.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 28.6,
+        "half": 21.6,
+        "std": 15.6
+      }
     },
     {
       "id": "13423",
@@ -3017,7 +4914,13 @@
       "pos": "WR",
       "team": "LAC",
       "adp": 256.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 2.3,
+        "half": 1.8,
+        "std": 1.3
+      }
     },
     {
       "id": "9479",
@@ -3026,7 +4929,13 @@
       "pos": "TE",
       "team": "PIT",
       "adp": 257.3,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 63.9,
+        "half": 53.9,
+        "std": 43.9
+      }
     },
     {
       "id": "12495",
@@ -3035,7 +4944,13 @@
       "pos": "RB",
       "team": "MIA",
       "adp": 258,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 95.1,
+        "half": 89.6,
+        "std": 84.1
+      }
     },
     {
       "id": "11589",
@@ -3053,7 +4968,13 @@
       "pos": "QB",
       "team": "IND",
       "adp": 258.3,
-      "sfAdp": 101.7
+      "sfAdp": 101.7,
+      "stats": {
+        "gp": 1,
+        "ppr": 0.7,
+        "half": 0.7,
+        "std": 0.7
+      }
     },
     {
       "id": "11435",
@@ -3062,7 +4983,13 @@
       "pos": "RB",
       "team": "SEA",
       "adp": 258.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 74.8,
+        "half": 71.8,
+        "std": 68.8
+      }
     },
     {
       "id": "2306",
@@ -3071,7 +4998,13 @@
       "pos": "QB",
       "team": "NYG",
       "adp": 260.8,
-      "sfAdp": 102.6
+      "sfAdp": 102.6,
+      "stats": {
+        "gp": 8,
+        "ppr": 78.3,
+        "half": 78.3,
+        "std": 78.3
+      }
     },
     {
       "id": "7090",
@@ -3080,7 +5013,13 @@
       "pos": "WR",
       "team": "NYG",
       "adp": 262.4,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 34.3,
+        "half": 27.3,
+        "std": 20.3
+      }
     },
     {
       "id": "3321",
@@ -3098,7 +5037,13 @@
       "pos": "WR",
       "team": "WAS",
       "adp": 265.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 1.6,
+        "half": 1.1,
+        "std": 0.6
+      }
     },
     {
       "id": "19",
@@ -3116,7 +5061,13 @@
       "pos": "WR",
       "team": "CAR",
       "adp": 268,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 8.4,
+        "half": 7.4,
+        "std": 6.4
+      }
     },
     {
       "id": "5848",
@@ -3125,7 +5076,13 @@
       "pos": "WR",
       "team": "FA",
       "adp": 269.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 12.5,
+        "half": 10,
+        "std": 7.5
+      }
     },
     {
       "id": "2307",
@@ -3134,7 +5091,13 @@
       "pos": "QB",
       "team": "WAS",
       "adp": 270.4,
-      "sfAdp": 106.5
+      "sfAdp": 106.5,
+      "stats": {
+        "gp": 3,
+        "ppr": 34.5,
+        "half": 34.5,
+        "std": 34.5
+      }
     },
     {
       "id": "2078",
@@ -3152,7 +5115,13 @@
       "pos": "TE",
       "team": "LAR",
       "adp": 274.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 69.4,
+        "half": 53.9,
+        "std": 38.4
+      }
     },
     {
       "id": "4177",
@@ -3161,7 +5130,13 @@
       "pos": "WR",
       "team": "NE",
       "adp": 276,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 58.3,
+        "half": 46.8,
+        "std": 35.3
+      }
     },
     {
       "id": "8117",
@@ -3170,7 +5145,13 @@
       "pos": "WR",
       "team": "MIA",
       "adp": 276.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 3,
+        "ppr": 17.9,
+        "half": 15.9,
+        "std": 13.9
+      }
     },
     {
       "id": "13329",
@@ -3179,7 +5160,13 @@
       "pos": "WR",
       "team": "LV",
       "adp": 276.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 2.4,
+        "half": 1.4,
+        "std": 0.4
+      }
     },
     {
       "id": "4950",
@@ -3197,7 +5184,13 @@
       "pos": "RB",
       "team": "JAX",
       "adp": 280.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 3,
+        "half": 2,
+        "std": 1
+      }
     },
     {
       "id": "13338",
@@ -3206,7 +5199,13 @@
       "pos": "WR",
       "team": "MIA",
       "adp": 280.7,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 31.4,
+        "half": 26.9,
+        "std": 22.4
+      }
     },
     {
       "id": "11600",
@@ -3224,7 +5223,13 @@
       "pos": "RB",
       "team": "HOU",
       "adp": 282.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 7.4,
+        "half": 6.4,
+        "std": 5.4
+      }
     },
     {
       "id": "11562",
@@ -3242,16 +5247,28 @@
       "pos": "RB",
       "team": "IND",
       "adp": 283.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 4.3,
+        "half": 4.3,
+        "std": 4.3
+      }
     },
     {
-      "id": "matthew-hibner-te",
-      "sleeperId": null,
+      "id": "13324",
+      "sleeperId": "13324",
       "name": "Matthew Hibner",
       "pos": "TE",
       "team": "BAL",
       "adp": 283.9,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 19.5,
+        "half": 16.5,
+        "std": 13.5
+      }
     },
     {
       "id": "12547",
@@ -3260,7 +5277,13 @@
       "pos": "WR",
       "team": "NE",
       "adp": 286,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 38,
+        "half": 34.5,
+        "std": 31
+      }
     },
     {
       "id": "13306",
@@ -3278,7 +5301,13 @@
       "pos": "WR",
       "team": "ATL",
       "adp": 289.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 72.6,
+        "half": 63.1,
+        "std": 53.6
+      }
     },
     {
       "id": "13307",
@@ -3287,7 +5316,13 @@
       "pos": "TE",
       "team": "HOU",
       "adp": 290,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 1,
+        "ppr": 2.6,
+        "half": 2.1,
+        "std": 1.6
+      }
     },
     {
       "id": "12510",
@@ -3305,7 +5340,13 @@
       "pos": "TE",
       "team": "KC",
       "adp": 291.8,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 41,
+        "half": 33,
+        "std": 25
+      }
     },
     {
       "id": "12485",
@@ -3314,7 +5355,13 @@
       "pos": "WR",
       "team": "TB",
       "adp": 293.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 44.4,
+        "half": 38.9,
+        "std": 33.4
+      }
     },
     {
       "id": "10226",
@@ -3323,7 +5370,13 @@
       "pos": "WR",
       "team": "CIN",
       "adp": 296.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 4.9,
+        "half": 3.4,
+        "std": 1.9
+      }
     },
     {
       "id": "11256",
@@ -3332,7 +5385,13 @@
       "pos": "QB",
       "team": "CHI",
       "adp": 299.3,
-      "sfAdp": 117.8
+      "sfAdp": 117.8,
+      "stats": {
+        "gp": 3,
+        "ppr": 15.2,
+        "half": 15.2,
+        "std": 15.2
+      }
     },
     {
       "id": "11557",
@@ -3341,7 +5400,13 @@
       "pos": "QB",
       "team": "PHI",
       "adp": 308.4,
-      "sfAdp": 121.4
+      "sfAdp": 121.4,
+      "stats": {
+        "gp": 1,
+        "ppr": 13.2,
+        "half": 13.2,
+        "std": 13.2
+      }
     },
     {
       "id": "9757",
@@ -3350,7 +5415,13 @@
       "pos": "RB",
       "team": "DAL",
       "adp": 309.2,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 38.6,
+        "half": 34.1,
+        "std": 29.6
+      }
     },
     {
       "id": "11571",
@@ -3359,7 +5430,13 @@
       "pos": "RB",
       "team": "NYJ",
       "adp": 311.1,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 16.2,
+        "half": 13.7,
+        "std": 11.2
+      }
     },
     {
       "id": "12543",
@@ -3368,7 +5445,373 @@
       "pos": "RB",
       "team": "CIN",
       "adp": 321.6,
-      "sfAdp": null
+      "sfAdp": null,
+      "stats": {
+        "gp": 2,
+        "ppr": 1.8,
+        "half": 1.8,
+        "std": 1.8
+      }
+    },
+    {
+      "id": "3634",
+      "sleeperId": "3634",
+      "name": "Kalif Raymond",
+      "pos": "WR",
+      "team": "CHI",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 70.7,
+        "half": 54.7,
+        "std": 38.7
+      }
+    },
+    {
+      "id": "7694",
+      "sleeperId": "7694",
+      "name": "Tommy Tremble",
+      "pos": "TE",
+      "team": "CAR",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 65.7,
+        "half": 53.2,
+        "std": 40.7
+      }
+    },
+    {
+      "id": "5854",
+      "sleeperId": "5854",
+      "name": "Drew Lock",
+      "pos": "QB",
+      "team": "SEA",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 62.4,
+        "half": 62.4,
+        "std": 62.4
+      }
+    },
+    {
+      "id": "13150",
+      "sleeperId": "13150",
+      "name": "Darius Cooper",
+      "pos": "WR",
+      "team": "PHI",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 57,
+        "half": 50.5,
+        "std": 44
+      }
+    },
+    {
+      "id": "7083",
+      "sleeperId": "7083",
+      "name": "Tyler Huntley",
+      "pos": "QB",
+      "team": "BAL",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 55.7,
+        "half": 55.7,
+        "std": 55.7
+      }
+    },
+    {
+      "id": "13264",
+      "sleeperId": "13264",
+      "name": "Dohnte Meyers",
+      "pos": "WR",
+      "team": "CIN",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 52.8,
+        "half": 42.8,
+        "std": 32.8
+      }
+    },
+    {
+      "id": "4454",
+      "sleeperId": "4454",
+      "name": "Kendrick Bourne",
+      "pos": "WR",
+      "team": "ARI",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 52.3,
+        "half": 39.3,
+        "std": 26.3
+      }
+    },
+    {
+      "id": "8135",
+      "sleeperId": "8135",
+      "name": "Treylon Burks",
+      "pos": "WR",
+      "team": "WAS",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 52,
+        "half": 45,
+        "std": 38
+      }
+    },
+    {
+      "id": "12542",
+      "sleeperId": "12542",
+      "name": "Efton Chism III",
+      "pos": "WR",
+      "team": "NE",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 50.8,
+        "half": 40.8,
+        "std": 30.8
+      }
+    },
+    {
+      "id": "13394",
+      "sleeperId": "13394",
+      "name": "Josh Cameron",
+      "pos": "WR",
+      "team": "JAX",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 49,
+        "half": 43,
+        "std": 37
+      }
+    },
+    {
+      "id": "3155",
+      "sleeperId": "3155",
+      "name": "Laquon Treadwell",
+      "pos": "WR",
+      "team": "IND",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 8,
+        "ppr": 48.9,
+        "half": 39.4,
+        "std": 29.9
+      }
+    },
+    {
+      "id": "12634",
+      "sleeperId": "12634",
+      "name": "Jordan Watkins",
+      "pos": "WR",
+      "team": "SF",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 45.3,
+        "half": 39.3,
+        "std": 33.3
+      }
+    },
+    {
+      "id": "11630",
+      "sleeperId": "11630",
+      "name": "Roman Wilson",
+      "pos": "WR",
+      "team": "PIT",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 44.8,
+        "half": 37.8,
+        "std": 30.8
+      }
+    },
+    {
+      "id": "12718",
+      "sleeperId": "12718",
+      "name": "Konata Mumpfield",
+      "pos": "WR",
+      "team": "LAR",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 44.3,
+        "half": 37.3,
+        "std": 30.3
+      }
+    },
+    {
+      "id": "7039",
+      "sleeperId": "7039",
+      "name": "Cody White",
+      "pos": "WR",
+      "team": "LV",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 42.4,
+        "half": 37.9,
+        "std": 33.4
+      }
+    },
+    {
+      "id": "10214",
+      "sleeperId": "10214",
+      "name": "Davis Allen",
+      "pos": "TE",
+      "team": "LAR",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 42,
+        "half": 35.5,
+        "std": 29
+      }
+    },
+    {
+      "id": "13425",
+      "sleeperId": "13425",
+      "name": "Jalon Daniels",
+      "pos": "QB",
+      "team": "TB",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 40,
+        "half": 39.5,
+        "std": 39
+      }
+    },
+    {
+      "id": "5857",
+      "sleeperId": "5857",
+      "name": "Noah Fant",
+      "pos": "TE",
+      "team": "NO",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 39.6,
+        "half": 33.6,
+        "std": 27.6
+      }
+    },
+    {
+      "id": "12482",
+      "sleeperId": "12482",
+      "name": "Savion Williams",
+      "pos": "WR",
+      "team": "GB",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 37,
+        "half": 30.5,
+        "std": 24
+      }
+    },
+    {
+      "id": "5985",
+      "sleeperId": "5985",
+      "name": "Foster Moreau",
+      "pos": "TE",
+      "team": "HOU",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 36.2,
+        "half": 30.7,
+        "std": 25.2
+      }
+    },
+    {
+      "id": "13273",
+      "sleeperId": "13273",
+      "name": "Josh Cuevas",
+      "pos": "TE",
+      "team": "BAL",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 6,
+        "ppr": 36.1,
+        "half": 29.6,
+        "std": 23.1
+      }
+    },
+    {
+      "id": "10235",
+      "sleeperId": "10235",
+      "name": "Roschon Johnson",
+      "pos": "RB",
+      "team": "CHI",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 31.9,
+        "half": 27.4,
+        "std": 22.9
+      }
+    },
+    {
+      "id": "7670",
+      "sleeperId": "7670",
+      "name": "Joshua Palmer",
+      "pos": "WR",
+      "team": "BUF",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 27.7,
+        "half": 25.7,
+        "std": 23.7
+      }
+    },
+    {
+      "id": "12700",
+      "sleeperId": "12700",
+      "name": "Gavin Bartholomew",
+      "pos": "TE",
+      "team": "MIN",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 4,
+        "ppr": 25,
+        "half": 20,
+        "std": 15
+      }
     }
   ]
 }

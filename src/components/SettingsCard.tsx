@@ -1,6 +1,8 @@
 import { LIMITS } from '../lib/valuation'
 import type { Scoring, Settings } from '../types'
+import { CheckboxField } from './CheckboxField'
 import { NumberField } from './NumberField'
+import { RedraftWeightInfo } from './RedraftWeightInfo'
 
 interface Props {
   settings: Settings
@@ -24,17 +26,22 @@ export function SettingsCard({ settings: s, onChange }: Props) {
             <option value="std">No PPR</option>
           </select>
         </label>
-        <div className="flex flex-col divide-y divide-bd self-start rounded-lg border border-bd">
-          <label className="flex items-center gap-2 px-2.5 py-2 text-sm text-tx">
-            <input type="checkbox" checked={s.superflex} onChange={(e) => onChange({ superflex: e.target.checked })} />
-            Superflex
-          </label>
-          <label className="flex items-center gap-2 px-2.5 py-2 text-sm text-tx">
-            <input type="checkbox" checked={s.oneQb} onChange={(e) => onChange({ oneQb: e.target.checked })} />
-            Keep only 1 QB
-          </label>
-        </div>
+        <CheckboxField label="Superflex" checked={s.superflex} onChange={(superflex) => onChange({ superflex })} />
       </div>
+
+      <details className="mt-3 rounded-lg border border-bd p-2.5">
+        <summary className="cursor-pointer text-sm font-semibold">Additional settings</summary>
+        <div className="mt-2.5 grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5">
+          <NumberField
+            label="Redraft weight (%)"
+            value={s.redraftWeight}
+            {...LIMITS.redraftWeight}
+            onChange={(redraftWeight) => onChange({ redraftWeight })}
+            hint={<RedraftWeightInfo />}
+          />
+          <CheckboxField label="Keep only 1 QB" checked={s.oneQb} onChange={(oneQb) => onChange({ oneQb })} />
+        </div>
+      </details>
     </details>
   )
 }

@@ -1,6 +1,14 @@
 export type Pos = 'QB' | 'RB' | 'WR' | 'TE' | 'K' | 'DEF'
 export type Scoring = 'ppr' | 'half' | 'std'
 
+/** A player's fantasy points so far this season, as season totals in each scoring format. */
+export interface PlayerStats {
+  gp: number
+  ppr: number
+  half: number
+  std: number
+}
+
 export interface Player {
   /** Sleeper ID when matched, otherwise a name slug. Stable key for trade assets. */
   id: string
@@ -8,10 +16,14 @@ export interface Player {
   name: string
   pos: Pos
   team: string
-  /** ADP in the standard 1QB format. */
+  /** ADP in the standard 1QB format. Players nobody drafted carry a late placeholder (UNDRAFTED_ADP). */
   adp: number
   /** ADP in a superflex / 2QB format, when known. */
   sfAdp: number | null
+  /** Current-season production, when the data build could fetch it. */
+  stats?: PlayerStats
+  /** Not in players.json: the ADP-equivalent of his current-season rank at his position, set at runtime. */
+  curAdp?: number
 }
 
 export interface PlayersFile {
@@ -23,6 +35,8 @@ export interface PlayersFile {
    * (QB ADP remapped from a past season's superflex drafts), or "none".
    */
   sfSource?: string
+  /** The last full week of current-season stats included in `stats`, if any. */
+  statsThrough?: number
   players: Player[]
 }
 
@@ -36,6 +50,8 @@ export interface Settings {
   oneQb: boolean
   /** Starting spots any of RB/WR/TE can fill. */
   flex: number
+  /** Percent (0–100) of a trade's value that comes from this season (redraft) rather than keeper value. */
+  redraftWeight: number
 }
 
 export type Asset =

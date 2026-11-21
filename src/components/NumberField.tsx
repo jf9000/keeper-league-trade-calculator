@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { clamp } from '../lib/valuation'
 
 interface Props {
@@ -7,6 +7,8 @@ interface Props {
   min: number
   max: number
   onChange: (n: number) => void
+  /** Extra content beside the label, such as an info icon. */
+  hint?: ReactNode
 }
 
 /**
@@ -17,7 +19,7 @@ interface Props {
  * `min`, overwrite what's being typed, and permanently shrink anything already set
  * relative to it. On blur the text is clamped and committed, or reverted if it isn't a number.
  */
-export function NumberField({ label, value, min, max, onChange }: Props) {
+export function NumberField({ label, value, min, max, onChange, hint }: Props) {
   const [text, setText] = useState(String(value))
   const focused = useRef(false)
 
@@ -26,10 +28,17 @@ export function NumberField({ label, value, min, max, onChange }: Props) {
     if (!focused.current) setText(String(value))
   }, [value])
 
+  const id = useId()
+
   return (
-    <label className="flex flex-col gap-[3px] text-xs text-mut">
-      {label}
+    <div className="flex flex-col gap-[3px] text-xs text-mut">
+      {/* `hint` (e.g. an info icon) sits beside the label, outside it, so clicking it never focuses the input. */}
+      <div className="flex items-center gap-1.5">
+        <label htmlFor={id}>{label}</label>
+        {hint}
+      </div>
       <input
+        id={id}
         type="number"
         inputMode="numeric"
         min={min}
@@ -50,6 +59,6 @@ export function NumberField({ label, value, min, max, onChange }: Props) {
           setText(String(next))
         }}
       />
-    </label>
+    </div>
   )
 }

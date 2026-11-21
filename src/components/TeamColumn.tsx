@@ -1,4 +1,5 @@
-import { roundSlot, sumValues, type EvalItem } from '../lib/valuation'
+import { pointsPerGame } from '../lib/current'
+import { STANCE_SHIFT, itemValue, roundSlot, sumItemValues, type EvalItem, type Stance } from '../lib/valuation'
 import type { Asset, Player, Settings } from '../types'
 import { PlayerSearch, type Hit } from './PlayerSearch'
 import { POS_COLOR, POS_LABEL } from './pos'
@@ -19,7 +20,10 @@ interface Props {
   /** Players this team can send: its roster when one is selected, otherwise everyone. */
   players: readonly Player[]
   used: ReadonlySet<string>
+  /** Settings as this team sees them (its stance already applied to the redraft weight). */
   settings: Settings
+  stance: Stance
+  onStance: (stance: Stance) => void
   years: readonly number[]
   /** Whether this team still has a pick to send in that year and round; omit to allow any. */
   pickAvailable?: (year: number, round: number) => boolean
@@ -42,6 +46,8 @@ export function TeamColumn({
   players,
   used,
   settings: s,
+  stance,
+  onStance,
   years,
   pickAvailable,
   adp,
@@ -50,6 +56,7 @@ export function TeamColumn({
   onRemove,
   onKeeperRound,
 }: Props) {
+  const ppg = (p: Player) => pointsPerGame(p, s)
   const handlePick = (h: Hit) =>
     onAdd(
       h.k === 'pick'
@@ -75,9 +82,28 @@ export function TeamColumn({
           </select>
           <span className="shrink-0">sends</span>
         </span>
-        <span className="shrink-0 text-[13px] font-normal text-mut">{items.length ? `Value ${sumValues(items).toFixed(1)}` : ''}</span>
+        <span className="shrink-0 text-base font-semibold text-tx">{items.length ? `Value ${sumItemValues(items, s).toFixed(1)}` : ''}</span>
       </h2>
-      {note && <div className="mb-2 text-xs text-mut">{note}</div>}
+      <div role="group" aria-label={`Team ${index + 1} outlook`} className="mb-2 flex flex-wrap items-center gap-2 text-sm text-mut">
+        <span>Outlook</span>
+        {(['contending', 'rebuilding'] as const).map((o) => (
+          <button
+            key={o}
+            type="button"
+            aria-pressed={stance === o}
+            title={
+              o === 'contending'
+                ? `Going for this season: raises the redraft weight by ${STANCE_SHIFT} points for this team`
+                : `Building for next year: lowers the redraft weight by ${STANCE_SHIFT} points for this team`
+            }
+            className={`!px-2.5 !py-1 text-sm capitalize ${stance === o ? 'primary' : ''}`}
+            onClick={() => onStance(stance === o ? null : o)}
+          >
+            {o}
+          </button>
+        ))}
+      </div>
+      {note && <div className="mb-2 text-sm text-mut">{note}</div>}
       <div className="mb-2">
         <PlayerSearch
           label={`Search players or draft picks for Team ${index + 1}`}
@@ -89,7 +115,7 @@ export function TeamColumn({
           onPick={handlePick}
         />
       </div>
-      {items.length === 0 && <div className="py-2.5 text-[13px] text-mut">Add a player or draft pick above.</div>}
+      {items.length === 0 && <div className="py-2.5 text-[15px] text-mut">Add a player or draft pick above.</div>}
       {items.map((it, k) => {
         const a = it.asset
         const remove = (label: string) => (
@@ -113,13 +139,22 @@ export function TeamColumn({
                   {it.player.name}
                   <span className={`${chip} text-mut`}>{it.player.team}</span>
                 </div>
-                <div className="col-start-2 row-start-1 text-right font-bold">{it.value.toFixed(1)}</div>
-                <div className="flex flex-wrap items-center gap-2.5 text-[13px] text-mut">
-                  <span>ADP {adp(it.player).toFixed(1)}</span>
-                  <label className="flex flex-row items-center gap-1 text-[13px]">
+                <div className="col-start-2 row-start-1 text-right text-lg font-bold">{itemValue(it, s).toFixed(1)}</div>
+                <div className="col-span-full text-[15px] text-tx">
+                  <span className="text-mut">Redraft</span> <b>{(it.redraft ?? 0).toFixed(1)}</b>
+                  <span className="text-mut"> · Keeper </span>
+                  <b>{it.value.toFixed(1)}</b>
+                </div>
+                <div className="col-span-full flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-mut">
+                  <span>
+                    ADP {adp(it.player).toFixed(1)}
+                    {ppg(it.player) !== null &&
+                      ` · ${ppg(it.player)!.toFixed(1)} ppg this season${it.player.curAdp != null ? ` (≈ ADP ${it.player.curAdp.toFixed(1)})` : ''}`}
+                  </span>
+                  <label className="flex flex-row items-center gap-1 text-[15px]">
                     Keeper rd
                     <select
-                      className="!p-1 text-[13px]"
+                      className="!p-1 text-[15px]"
                       value={a.keeperRound}
                       onChange={(e) => onKeeperRound(k, +e.target.value)}
                     >
@@ -132,7 +167,7 @@ export function TeamColumn({
                   </label>
                 </div>
                 {remove(`Remove ${it.player.name}`)}
-                {it.note && <div className="col-span-full text-xs text-bad">{it.note}</div>}
+                {it.note && <div className="col-span-full text-sm text-bad">{it.note}</div>}
               </>
             ) : a.t === 'k' ? (
               <>
@@ -140,8 +175,8 @@ export function TeamColumn({
                   <span className={`${chip} text-mut`}>PICK</span>
                   {a.year} Round {a.round}
                 </div>
-                <div className="col-start-2 row-start-1 text-right font-bold">{it.value.toFixed(1)}</div>
-                <div className="text-[13px] text-mut">
+                <div className="col-start-2 row-start-1 text-right text-lg font-bold">{itemValue(it, s).toFixed(1)}</div>
+                <div className="text-[15px] text-mut">
                   ≈ pick {Math.round(roundSlot(a.round, s))}
                   {a.year > years[0]! ? ' · future discount' : ''}
                 </div>

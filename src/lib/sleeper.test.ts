@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   buildTeams,
   draftRoundsFromPicks,
+  isKeeperLeague,
   leagueToSettings,
   ownedPicks,
   pickMainDraft,
@@ -163,5 +164,16 @@ describe('ownedPicks', () => {
     expect(owned.get(1)!.get(1)).toBe(1)
     expect(owned.get(2)!.get(1)).toBe(1)
     expect(owned.get(2)!.get(3)).toBe(1)
+  })
+})
+
+describe('isKeeperLeague', () => {
+  it('keeps keeper leagues and drops redraft and dynasty ones', () => {
+    expect(isKeeperLeague(league({ settings: { type: 1 } }))).toBe(true)
+    expect(isKeeperLeague(league({ settings: { type: 0 } }))).toBe(false)
+    expect(isKeeperLeague(league({ settings: { type: 2 } }))).toBe(false)
+  })
+  it('treats a league with no type as not a keeper league', () => {
+    expect(isKeeperLeague(league({ settings: {} }))).toBe(false)
   })
 })
