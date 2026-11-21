@@ -66,7 +66,8 @@ export function PlayerSearch({ label, players, used, settings: s, years, pickAva
       <input
         type="text"
         className="w-full"
-        placeholder="Search players, or type a year for picks…"
+        placeholder="Search players or picks…"
+        title="Search by player name, or type a year (like 2027) to find draft picks"
         autoComplete="off"
         aria-label={label}
         role="combobox"

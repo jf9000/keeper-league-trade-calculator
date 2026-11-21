@@ -4,8 +4,6 @@ interface Props {
   names: readonly [string, string]
   trades: readonly [TeamTrade, TeamTrade]
   verdict: Verdict
-  /** Caveats for each team's grade, drawn from its own roster. */
-  notes: readonly [string[], string[]]
 }
 
 const GRADE_COLOR: Record<string, string> = {
@@ -34,38 +32,31 @@ function TeamCell({ name, trade, grade, align }: { name: string; trade: TeamTrad
       <GradeBadge team={name} grade={grade} />
       <div className="min-w-0">
         <div className="truncate text-base font-semibold text-tx">{name}</div>
-        <div className="text-[15px] text-mut">
-          gets {trade.gets.toFixed(1)} · gives {trade.gives.toFixed(1)}
+        {/* Stacked on phones so the numbers never wrap mid-phrase; side by side once there's room. */}
+        <div className="flex flex-col text-[15px] leading-snug text-mut min-[480px]:flex-row min-[480px]:gap-1.5">
+          <span className="whitespace-nowrap">gets {trade.gets.toFixed(1)}</span>
+          <span aria-hidden="true" className="hidden min-[480px]:inline">
+            ·
+          </span>
+          <span className="whitespace-nowrap">gives {trade.gives.toFixed(1)}</span>
         </div>
       </div>
     </div>
   )
 }
 
-export function ResultBar({ names, trades, verdict, notes }: Props) {
-  const noted = ([0, 1] as const).filter((i) => notes[i].length > 0)
+export function ResultBar({ names, trades, verdict }: Props) {
   return (
-    <div className="sticky bottom-0 -mx-3.5 border-t border-bd bg-card px-3.5 pt-3 pb-[calc(12px+env(safe-area-inset-bottom,0px))]">
+    <div className="sticky bottom-0 -mx-4 border-t border-bd bg-card px-4 pt-3.5 pb-[calc(14px+env(safe-area-inset-bottom,0px))]">
       <div className="flex h-3 overflow-hidden rounded-md bg-chip" role="img" aria-label={verdict.message}>
         <i className="block bg-ac transition-[width] duration-200" style={{ width: `${verdict.share1}%` }} />
         <i className="block bg-ac2 transition-[width] duration-200" style={{ width: `${100 - verdict.share1}%` }} />
       </div>
-      <div className="mt-2 mb-1.5 grid grid-cols-2 gap-3">
+      <div className="mt-3 mb-2 grid grid-cols-2 gap-3">
         <TeamCell name={names[0]} trade={trades[0]} grade={verdict.grade1} align="left" />
         <TeamCell name={names[1]} trade={trades[1]} grade={verdict.grade2} align="right" />
       </div>
       <div className="text-center text-lg font-bold">{verdict.message}</div>
-      {noted.length > 0 && (
-        <ul className="m-0 mt-2 grid max-h-[26vh] list-none gap-x-4 gap-y-1.5 overflow-y-auto p-0 text-sm text-mut min-[760px]:grid-cols-2">
-          {noted.flatMap((i) =>
-            notes[i].map((text, k) => (
-              <li key={`${i}-${k}`}>
-                <b className="text-tx">{names[i]}:</b> {text}
-              </li>
-            )),
-          )}
-        </ul>
-      )}
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { InfoButton } from '../components/InfoButton'
 import { ResultBar } from '../components/ResultBar'
 import { SettingsCard } from '../components/SettingsCard'
 import { TeamColumn, type TeamOption } from '../components/TeamColumn'
+import { TradeNotes } from '../components/TradeNotes'
 import { rankByCurrentSeason } from '../lib/current'
 import { buildSlots } from '../lib/lineup'
 import { positionStrength, teamNotes } from '../lib/notes'
@@ -192,22 +193,22 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
   return (
     <>
     {!leagueTeams && (
-      <div role="status" className="border-b border-[#fde047] bg-[#fef9c3] px-3.5 py-2 text-center text-[13px] font-medium text-[#713f12]">
+      <div role="status" className="border-b border-[#fde047] bg-[#fef9c3] px-4 py-2.5 text-center text-[13px] font-medium text-[#713f12]">
         Select a league for a more accurate trade assessment.
       </div>
     )}
-    <div className="mx-auto max-w-[980px] px-3.5 pt-4">
-      <header className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="m-0 text-xl font-bold">Keeper League Trade Calculator</h1>
-            <InfoButton />
-          </div>
-          <div className="text-[13px] text-mut">{subtitle}</div>
+    <div className="mx-auto max-w-[980px] px-4 pt-5">
+      <header className="mb-4">
+        <div className="flex items-center gap-2">
+          <h1 className="m-0 text-xl leading-tight font-bold">Keeper League Trade Calculator</h1>
+          <InfoButton />
         </div>
-        <button onClick={onChangeLeague} className="text-[13px]">
-          {leagueTeams ? 'Change league' : 'Select league'}
-        </button>
+        <div className="mt-2 flex items-center justify-between gap-3">
+          <span className="min-w-0 truncate text-[15px] text-mut">{subtitle}</span>
+          <button onClick={onChangeLeague} className="shrink-0 text-sm">
+            {leagueTeams ? 'Change league' : 'Select league'}
+          </button>
+        </div>
       </header>
 
       <SettingsCard settings={s} onChange={changeSettings} />
@@ -230,13 +231,13 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
         </p>
       )}
 
-      <div className="mt-3 flex justify-end">
+      <div className="mt-4 flex justify-end">
         <button type="button" disabled={assets[0].length + assets[1].length === 0} onClick={() => setAssets([[], []])}>
           Clear trade
         </button>
       </div>
 
-      <div className="mt-2 mb-3 grid grid-cols-1 gap-3 min-[760px]:grid-cols-2">
+      <div className="mt-3 mb-4 grid grid-cols-1 gap-4 min-[760px]:grid-cols-2">
         {([0, 1] as const).map((i) => (
           <TeamColumn
             key={i}
@@ -264,7 +265,9 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
         ))}
       </div>
 
-      <p className="mt-3 mb-[90px] text-xs text-mut">
+      <TradeNotes names={names} notes={notes} />
+
+      <p className="mt-5 mb-6 text-[13px] leading-relaxed text-mut">
         {players.file ? `ADP is from the ${players.file.season} season (${players.file.source}). ` : ''}
         {players.file?.statsThrough
           ? `Current-season production is through week ${players.file.statsThrough}. `
@@ -273,7 +276,7 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
         {describeSfSource(players.file?.sfSource, players.file?.season ?? years[0] - 1)}
       </p>
 
-      <ResultBar names={names} trades={trades} verdict={verdict} notes={notes} />
+      <ResultBar names={names} trades={trades} verdict={verdict} />
     </div>
     </>
   )

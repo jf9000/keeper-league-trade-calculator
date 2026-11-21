@@ -31,7 +31,7 @@ export function NumberField({ label, value, min, max, onChange, hint }: Props) {
   const id = useId()
 
   return (
-    <div className="flex flex-col gap-[3px] text-xs text-mut">
+    <div className="flex flex-col gap-1 text-[13px] text-mut">
       {/* `hint` (e.g. an info icon) sits beside the label, outside it, so clicking it never focuses the input. */}
       <div className="flex items-center gap-1.5">
         <label htmlFor={id}>{label}</label>

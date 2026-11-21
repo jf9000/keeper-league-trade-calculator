@@ -5,7 +5,6 @@ import {
   getUserLeagues,
   isKeeperLeague,
   leagueToSettings,
-  leagueTypeLabel,
   type SleeperLeague,
 } from '../lib/sleeper'
 import { loadString, saveString } from '../lib/storage'
@@ -68,14 +67,14 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
   const busy = status.kind === 'loading'
 
   return (
-    <div className="mx-auto max-w-[520px] px-3.5 py-10">
+    <div className="mx-auto max-w-[520px] px-4 py-10">
       <h1 className="m-0 mb-1 text-xl font-bold">Keeper League Trade Calculator</h1>
       <p className="mt-0 mb-5 text-mut">
         Import your league from Sleeper to fill in the settings, or enter them yourself.
       </p>
 
-      <form onSubmit={lookup} className="rounded-xl border border-bd bg-card p-3">
-        <label className="flex flex-col gap-1 text-xs text-mut">
+      <form onSubmit={lookup} className="rounded-xl border border-bd bg-card p-4">
+        <label className="flex flex-col gap-1.5 text-[13px] text-mut">
           Sleeper username
           <div className="flex gap-2">
             <input
@@ -111,18 +110,16 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
             ) : (
               <>
                 <div className="mb-1.5 text-xs text-mut">{status.userName}’s keeper leagues</div>
-                <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
+                <ul className="m-0 flex list-none flex-col gap-2 p-0">
                   {status.leagues.map((l) => (
                     <li key={l.league_id}>
                       <button
                         type="button"
-                        className="flex w-full items-center justify-between gap-2 text-left"
+                        className="flex w-full flex-col items-start gap-1 !px-3 !py-2.5 text-left min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between min-[480px]:gap-3"
                         onClick={() => onLeague(leagueToSettings(l), l, status.userId)}
                       >
                         <span className="font-semibold">{l.name}</span>
-                        <span className="text-xs text-mut">
-                          {l.total_rosters} teams · {leagueTypeLabel(l)}
-                        </span>
+                        <span className="text-[13px] whitespace-nowrap text-mut">{l.total_rosters} teams</span>
                       </button>
                     </li>
                   ))}

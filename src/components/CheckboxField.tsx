@@ -10,7 +10,7 @@ interface Props {
  */
 export function CheckboxField({ label, checked, onChange }: Props) {
   return (
-    <label className="flex flex-col gap-[3px] text-xs text-mut">
+    <label className="flex flex-col gap-1 text-[13px] text-mut">
       <span aria-hidden="true" className="invisible">
         &nbsp;
       </span>

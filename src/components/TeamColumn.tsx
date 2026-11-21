@@ -65,12 +65,13 @@ export function TeamColumn({
     )
 
   return (
-    <section className="rounded-xl border border-bd bg-card p-3">
-      <h2 className="mb-2 flex items-center justify-between gap-2 text-[15px] font-semibold">
-        <span className="flex min-w-0 items-center gap-2">
+    <section className="rounded-xl border border-bd bg-card p-4">
+      <h2 className="mb-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 text-[15px] font-semibold">
+        {/* On phones the team picker gets the whole first line, so a long team name isn't squeezed. */}
+        <span className="flex min-w-0 basis-full items-center gap-2 min-[480px]:basis-auto">
           <select
             aria-label={`Team ${index + 1}`}
-            className="min-w-0 max-w-full font-semibold"
+            className="min-w-0 flex-1 font-semibold min-[480px]:max-w-[16rem] min-[480px]:flex-none"
             value={selected}
             onChange={(e) => onSelect(e.target.value)}
           >
@@ -82,9 +83,11 @@ export function TeamColumn({
           </select>
           <span className="shrink-0">sends</span>
         </span>
-        <span className="shrink-0 text-base font-semibold text-tx">{items.length ? `Value ${sumItemValues(items, s).toFixed(1)}` : ''}</span>
+        {items.length > 0 && (
+          <span className="ml-auto shrink-0 text-base font-semibold text-tx">Value {sumItemValues(items, s).toFixed(1)}</span>
+        )}
       </h2>
-      <div role="group" aria-label={`Team ${index + 1} outlook`} className="mb-2 flex flex-wrap items-center gap-2 text-sm text-mut">
+      <div role="group" aria-label={`Team ${index + 1} outlook`} className="mb-3 flex flex-wrap items-center gap-2 text-sm text-mut">
         <span>Outlook</span>
         {(['contending', 'rebuilding'] as const).map((o) => (
           <button
@@ -96,15 +99,15 @@ export function TeamColumn({
                 ? `Going for this season: raises the redraft weight by ${STANCE_SHIFT} points for this team`
                 : `Building for next year: lowers the redraft weight by ${STANCE_SHIFT} points for this team`
             }
-            className={`!px-2.5 !py-1 text-sm capitalize ${stance === o ? 'primary' : ''}`}
+            className={`!px-3 !py-2 text-sm capitalize ${stance === o ? 'primary' : ''}`}
             onClick={() => onStance(stance === o ? null : o)}
           >
             {o}
           </button>
         ))}
       </div>
-      {note && <div className="mb-2 text-sm text-mut">{note}</div>}
-      <div className="mb-2">
+      {note && <div className="mb-3 text-sm text-mut">{note}</div>}
+      <div className="mb-1">
         <PlayerSearch
           label={`Search players or draft picks for Team ${index + 1}`}
           players={players}
@@ -115,46 +118,56 @@ export function TeamColumn({
           onPick={handlePick}
         />
       </div>
-      {items.length === 0 && <div className="py-2.5 text-[15px] text-mut">Add a player or draft pick above.</div>}
+      {items.length === 0 && <div className="py-3 text-[15px] text-mut">Add a player or draft pick above.</div>}
       {items.map((it, k) => {
         const a = it.asset
-        const remove = (label: string) => (
-          <button
-            className="col-start-2 row-start-2 justify-self-end !px-2 !py-0.5 text-mut"
-            aria-label={label}
-            onClick={() => onRemove(k)}
-          >
-            ✕
-          </button>
+        const removeLabel = a.t === 'p' && it.player ? `Remove ${it.player.name}` : 'Remove pick'
+        // The value and the remove button share the first row, so the button doesn't add a row of its own.
+        const valueAndRemove = (
+          <div className="flex shrink-0 items-center gap-1.5">
+            <span className="text-lg font-bold">{itemValue(it, s).toFixed(1)}</span>
+            <button
+              type="button"
+              aria-label={removeLabel}
+              className="!inline-flex !h-10 !w-10 items-center justify-center !p-0 text-mut"
+              onClick={() => onRemove(k)}
+            >
+              ✕
+            </button>
+          </div>
         )
         return (
           <div
             key={a.t === 'p' ? a.id : `${a.year}-${a.round}-${k}`}
-            className="grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-0.5 border-t border-bd py-[9px]"
+            className="flex flex-col gap-2 border-t border-bd py-3.5"
           >
             {a.t === 'p' && it.player ? (
               <>
-                <div className="flex flex-wrap items-center gap-1.5 font-semibold">
-                  <span className={`${chip} ${POS_COLOR[it.player.pos]}`}>{POS_LABEL[it.player.pos]}</span>
-                  {it.player.name}
-                  <span className={`${chip} text-mut`}>{it.player.team}</span>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex min-w-0 flex-wrap items-center gap-1.5 font-semibold">
+                    <span className={`${chip} ${POS_COLOR[it.player.pos]}`}>{POS_LABEL[it.player.pos]}</span>
+                    {it.player.name}
+                    <span className={`${chip} text-mut`}>{it.player.team}</span>
+                  </div>
+                  {valueAndRemove}
                 </div>
-                <div className="col-start-2 row-start-1 text-right text-lg font-bold">{itemValue(it, s).toFixed(1)}</div>
-                <div className="col-span-full text-[15px] text-tx">
+                <div className="text-[15px] text-tx">
                   <span className="text-mut">Redraft</span> <b>{(it.redraft ?? 0).toFixed(1)}</b>
                   <span className="text-mut"> · Keeper </span>
                   <b>{it.value.toFixed(1)}</b>
                 </div>
-                <div className="col-span-full flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-mut">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px] text-mut">
                   <span>
                     ADP {adp(it.player).toFixed(1)}
-                    {ppg(it.player) !== null &&
-                      ` · ${ppg(it.player)!.toFixed(1)} ppg this season${it.player.curAdp != null ? ` (≈ ADP ${it.player.curAdp.toFixed(1)})` : ''}`}
+                    {ppg(it.player) !== null && ` · ${ppg(it.player)!.toFixed(1)} ppg this season `}
+                    {ppg(it.player) !== null && it.player.curAdp != null && (
+                      <span className="whitespace-nowrap">(≈ ADP {it.player.curAdp.toFixed(1)})</span>
+                    )}
                   </span>
-                  <label className="flex flex-row items-center gap-1 text-[15px]">
+                  <label className="flex flex-row items-center gap-2 text-[15px]">
                     Keeper rd
                     <select
-                      className="!p-1 text-[15px]"
+                      className="!px-2 !py-1.5 text-[15px]"
                       value={a.keeperRound}
                       onChange={(e) => onKeeperRound(k, +e.target.value)}
                     >
@@ -166,21 +179,21 @@ export function TeamColumn({
                     </select>
                   </label>
                 </div>
-                {remove(`Remove ${it.player.name}`)}
-                {it.note && <div className="col-span-full text-sm text-bad">{it.note}</div>}
+                {it.note && <div className="text-sm text-bad">{it.note}</div>}
               </>
             ) : a.t === 'k' ? (
               <>
-                <div className="flex items-center gap-1.5 font-semibold">
-                  <span className={`${chip} text-mut`}>PICK</span>
-                  {a.year} Round {a.round}
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5 font-semibold">
+                    <span className={`${chip} text-mut`}>PICK</span>
+                    {a.year} Round {a.round}
+                  </div>
+                  {valueAndRemove}
                 </div>
-                <div className="col-start-2 row-start-1 text-right text-lg font-bold">{itemValue(it, s).toFixed(1)}</div>
                 <div className="text-[15px] text-mut">
                   ≈ pick {Math.round(roundSlot(a.round, s))}
                   {a.year > years[0]! ? ' · future discount' : ''}
                 </div>
-                {remove('Remove pick')}
               </>
             ) : null}
           </div>

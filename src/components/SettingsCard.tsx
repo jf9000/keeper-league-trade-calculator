@@ -11,9 +11,9 @@ interface Props {
 
 export function SettingsCard({ settings: s, onChange }: Props) {
   return (
-    <details className="rounded-xl border border-bd bg-card p-3" open>
-      <summary className="cursor-pointer font-semibold">League settings</summary>
-      <div className="mt-2.5 grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5">
+    <details className="rounded-xl border border-bd bg-card p-4" open>
+      <summary className="cursor-pointer py-1 font-semibold">League settings</summary>
+      <div className="mt-3 grid grid-cols-[repeat(auto-fit,minmax(min(100%,120px),1fr))] gap-3">
         <NumberField label="League size" value={s.teams} {...LIMITS.teams} onChange={(teams) => onChange({ teams })} />
         <NumberField label="Keepers" value={s.keepers} {...LIMITS.keepers} onChange={(keepers) => onChange({ keepers })} />
         <NumberField label="Draft rounds" value={s.rounds} {...LIMITS.rounds} onChange={(rounds) => onChange({ rounds })} />
@@ -29,9 +29,9 @@ export function SettingsCard({ settings: s, onChange }: Props) {
         <CheckboxField label="Superflex" checked={s.superflex} onChange={(superflex) => onChange({ superflex })} />
       </div>
 
-      <details className="mt-3 rounded-lg border border-bd p-2.5">
-        <summary className="cursor-pointer text-sm font-semibold">Additional settings</summary>
-        <div className="mt-2.5 grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-2.5">
+      <details className="mt-4 border-t border-bd pt-3">
+        <summary className="cursor-pointer py-1 text-[15px] font-semibold">Additional settings</summary>
+        <div className="mt-3 grid grid-cols-[repeat(auto-fit,minmax(min(100%,120px),1fr))] gap-3">
           <NumberField
             label="Redraft weight (%)"
             value={s.redraftWeight}
