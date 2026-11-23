@@ -7,6 +7,7 @@ import { TradeNotes } from '../components/TradeNotes'
 import { rankByCurrentSeason } from '../lib/current'
 import { buildSlots } from '../lib/lineup'
 import { positionStrength, teamNotes } from '../lib/notes'
+import { Attribution } from '../components/Attribution'
 import { describeSfSource } from '../lib/sfSource'
 import type { PlayersState } from '../lib/players'
 import { ownedPicks, type LeagueTeam } from '../lib/sleeper'
@@ -275,6 +276,8 @@ export function Calculator({ settings: s, onSettingsChange, players, subtitle, l
         {refreshed ? `Data refreshed ${refreshed}. ` : ''}
         {describeSfSource(players.file?.sfSource, players.file?.season ?? years[0] - 1)}
       </p>
+
+      <Attribution />
 
       <ResultBar names={names} trades={trades} verdict={verdict} />
     </div>

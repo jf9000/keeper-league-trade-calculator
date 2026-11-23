@@ -7,6 +7,7 @@ import {
   leagueToSettings,
   type SleeperLeague,
 } from '../lib/sleeper'
+import { Attribution } from '../components/Attribution'
 import { loadString, saveString } from '../lib/storage'
 import { seasonFor } from '../lib/valuation'
 import type { Settings } from '../types'
@@ -141,6 +142,8 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
           Skip: use manual mode
         </button>
       </div>
+
+      <Attribution />
     </div>
   )
 }
