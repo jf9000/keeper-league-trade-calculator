@@ -1,5 +1,7 @@
 export type Pos = 'QB' | 'RB' | 'WR' | 'TE' | 'K' | 'DEF'
 export type Scoring = 'ppr' | 'half' | 'std'
+/** A player's current injury designation (Sleeper's injury_status, simplified). Absent when healthy. */
+export type Injury = 'IR' | 'PUP' | 'Out' | 'Susp' | 'Doubtful' | 'Questionable'
 
 /** A player's fantasy points so far this season, as season totals in each scoring format. */
 export interface PlayerStats {
@@ -22,6 +24,10 @@ export interface Player {
   sfAdp: number | null
   /** Current-season production, when the data build could fetch it. */
   stats?: PlayerStats
+  /** Age in years as of the last data refresh, when known. Only keeper value uses it. */
+  age?: number
+  /** Injury designation as of the last data refresh; only recorded while the season is in progress. */
+  inj?: Injury
   /** Not in players.json: the ADP-equivalent of his current-season rank at his position, set at runtime. */
   curAdp?: number
 }
@@ -50,7 +56,10 @@ export interface Settings {
   oneQb: boolean
   /** Starting spots any of RB/WR/TE can fill. */
   flex: number
-  /** Percent (0–100) of a trade's value that comes from this season (redraft) rather than keeper value. */
+  /**
+   * The Rebuilding / Contending slider: percent (0–100) of a trade's value that comes from this season
+   * (redraft) rather than keeper value. Named for what it blends, and kept so saved settings and links keep working.
+   */
   redraftWeight: number
 }
 

@@ -1,4 +1,5 @@
 import type { Player, Pos, Settings } from '../types'
+import { availability, availabilityAdjusted } from './availability'
 import { UNDRAFTED_ADP, adpOf } from './valuation'
 
 /** A player needs at least this many games this season to be ranked on his production. */
@@ -18,9 +19,13 @@ export function pointsPerGame(p: Player, s: Pick<Settings, 'scoring'>): number |
  * the market values each position (superflex QBs, scoring format), so the two can be blended. Players with
  * too few games get no rank and keep their preseason ADP. Undrafted placeholders don't take up slots.
  *
+ * Production is ranked on points per game scaled down for missed games (see `availabilityAdjusted`), using
+ * `through`, the weeks of stats in the data, to know how many games were possible.
+ *
  * Returns copies with `curAdp` set; the input isn't changed.
  */
-export function rankByCurrentSeason(players: readonly Player[], s: Settings): Player[] {
+export function rankByCurrentSeason(players: readonly Player[], s: Settings, through?: number): Player[] {
+  const score = (p: Player) => availabilityAdjusted(pointsPerGame(p, s)!, availability(p, through))
   const byPos = new Map<Pos, Player[]>()
   for (const p of players) byPos.set(p.pos, [...(byPos.get(p.pos) ?? []), p])
 
@@ -32,7 +37,7 @@ export function rankByCurrentSeason(players: readonly Player[], s: Settings): Pl
       .sort((a, b) => a - b)
     group
       .filter((p) => (p.stats?.gp ?? 0) >= MIN_GAMES)
-      .sort((a, b) => pointsPerGame(b, s)! - pointsPerGame(a, s)!)
+      .sort((a, b) => score(b) - score(a))
       .forEach((p, i) => {
         const slot = slots[i]
         if (slot !== undefined) curAdp.set(p.id, slot)

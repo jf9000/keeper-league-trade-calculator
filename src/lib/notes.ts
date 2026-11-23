@@ -1,4 +1,6 @@
 import type { Asset, Player, Pos, Settings } from '../types'
+import { ageFactor } from './age'
+import { INJURY_FACTOR, INJURY_LABEL, LOW_AVAILABILITY, SERIOUS_INJURY, availability, gamesPossible } from './availability'
 import { POS_LIST, bestLineup, lineupByPos, slotLabel, type Slot } from './lineup'
 import { keeperStates, lineupStrength, type EvalItem, type KeeperCosts, type PickCounts, type Stance, type TeamTrade } from './valuation'
 
@@ -21,6 +23,8 @@ export interface NoteArgs {
   picks?: PickCounts
   /** Whether this team is contending or rebuilding, which changes what it should make of a trade. */
   stance?: Stance
+  /** Weeks of current-season stats in the data, to judge how many games a player has missed. */
+  through?: number
 }
 
 interface Shift {
@@ -53,9 +57,71 @@ export function positionStrength(roster: readonly Player[], slots: readonly Slot
  * roster: keeper value (long-term) against its starting lineup (this season), and where its groups
  * rank in the league. Returns nothing when there's no roster to judge against or no real change.
  */
+/**
+ * Warnings about the players in a trade who are hurt or have missed a lot of games: their value here already
+ * accounts for it, so these say why a name may be worth less (or more risky) than it looks.
+ */
+export function availabilityNotes(a: Pick<NoteArgs, 'sent' | 'incoming' | 'players' | 'through'>): string[] {
+  const playersOf = (assets: Asset[]) => assets.flatMap((x) => (x.t === 'p' ? (a.players.get(x.id) ?? []) : []))
+  const incoming = playersOf(a.incoming)
+  const sent = playersOf(a.sent)
+  const hurt = (p: Player) => !!p.inj && INJURY_FACTOR[p.inj] <= SERIOUS_INJURY
+  const missed = (p: Player) => !!a.through && a.through >= 4 && !!p.stats && availability(p, a.through) < LOW_AVAILABILITY
+  const names = (ps: Player[]) =>
+    ps.length < 3 ? ps.map((p) => p.name).join(' and ') : `${ps.slice(0, -1).map((p) => p.name).join(', ')} and ${ps[ps.length - 1]!.name}`
+  const status = (p: Player) => INJURY_LABEL[p.inj!]
+  const out: string[] = []
+
+  const hurtIn = incoming.filter(hurt)
+  if (hurtIn.length) {
+    out.push(
+      `${hurtIn.map((p) => `${p.name} is ${status(p)}`).join('; ')}, so ${hurtIn.length > 1 ? 'their' : 'his'} value this season is discounted. ` +
+        `${hurtIn.some((p) => p.inj === 'IR' || p.inj === 'PUP') ? 'He may not play again this year, but keeper value is unaffected.' : 'Check his status before you agree.'}`,
+    )
+  }
+  const hurtOut = sent.filter(hurt)
+  if (hurtOut.length) {
+    out.push(`You’d be sending ${names(hurtOut)}, who ${hurtOut.length > 1 ? 'are' : 'is'} hurt, so ${hurtOut.length > 1 ? 'they count' : 'he counts'} for less this season.`)
+  }
+  // Players already flagged as hurt are covered above; this is for healthy ones who have simply missed time.
+  const line = (p: Player) => `${p.name} (${Math.min(p.stats!.gp, gamesPossible(a.through!))} of ${gamesPossible(a.through!)} games)`
+  const missedIn = incoming.filter((p) => missed(p) && !hurt(p))
+  if (missedIn.length) {
+    const many = missedIn.length > 1
+    out.push(`${missedIn.map(line).join(', ')} ${many ? 'have' : 'has'} missed a lot of games, so ${many ? 'their' : 'his'} points per game are a small sample and are discounted.`)
+  }
+  const missedOut = sent.filter((p) => missed(p) && !hurt(p))
+  if (missedOut.length) {
+    const many = missedOut.length > 1
+    out.push(`${missedOut.map(line).join(', ')} ${many ? 'have' : 'has'} missed a lot of games, so ${many ? 'their' : 'his'} production counts for less on your side.`)
+  }
+  return out
+}
+
+/** A discount smaller than this isn't worth a note. */
+const AGE_NOTE_EDGE = 0.1
+
+/**
+ * Notes on players whose age cuts their keeper value. Age only lowers keeper value (what he's worth to keep
+ * for next season), so this reminds you why a name that looks strong on paper isn't worth as much to keep.
+ */
+export function ageNotes(a: Pick<NoteArgs, 'sent' | 'incoming' | 'players'>): string[] {
+  const playersOf = (assets: Asset[]) => assets.flatMap((x) => (x.t === 'p' ? (a.players.get(x.id) ?? []) : []))
+  const old = (p: Player) => 1 - ageFactor(p) >= AGE_NOTE_EDGE
+  const desc = (p: Player) => `${p.name} (${p.age}, ${Math.round((1 - ageFactor(p)) * 100)}% off)`
+  const list = (ps: Player[]) => ps.map(desc).join(', ')
+  const out: string[] = []
+  const inOld = playersOf(a.incoming).filter(old)
+  if (inOld.length) out.push(`${list(inOld)} ${inOld.length > 1 ? 'are' : 'is'} getting older, so ${inOld.length > 1 ? 'their' : 'his'} keeper value is discounted for age.`)
+  const outOld = playersOf(a.sent).filter(old)
+  if (outOld.length) out.push(`${list(outOld)} ${outOld.length > 1 ? 'are' : 'is'} getting older, so ${outOld.length > 1 ? 'their' : 'his'} keeper value is already discounted for age on your side.`)
+  return out
+}
+
 export function teamNotes(a: NoteArgs): string[] {
   const { later, now } = a.trade
-  if (!later || !now || !a.roster.length) return []
+  // Without a roster to judge against, injuries and missed games are still worth flagging.
+  if (!later || !now || !a.roster.length) return [...availabilityNotes(a), ...ageNotes(a)].slice(0, 3)
 
   const strength = lineupStrength(a.s)
   const sentIds = new Set(a.sent.flatMap((x) => (x.t === 'p' ? [x.id] : [])))
@@ -209,5 +275,5 @@ export function teamNotes(a: NoteArgs): string[] {
         : `${who}, and he wouldn’t start for you either, so he adds little.`,
     )
   }
-  return [...pickNotes, ...notes, ...rentalNotes].slice(0, 3)
+  return [...[...availabilityNotes(a), ...ageNotes(a)].slice(0, 3), ...[...pickNotes, ...notes, ...rentalNotes].slice(0, 3)]
 }

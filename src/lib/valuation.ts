@@ -1,4 +1,6 @@
 import type { Asset, Player, Settings } from '../types'
+import { ageFactor } from './age'
+import { injuryFactor } from './availability'
 import { bestLineup, lineupTotal, type Slot } from './lineup'
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -91,17 +93,19 @@ const currentShare = (p: Player, max: number) =>
 
 /**
  * What a player is worth to keep for next season: his draft-slot value from ADP, leaning partly on how
- * he's produced this season (`curAdp`, his production rank mapped onto ADP slots).
+ * he's produced this season (`curAdp`, his production rank mapped onto ADP slots), then scaled down for
+ * age (`ageFactor`): an older back or receiver is worth less to keep. This season's value ignores age.
  */
 export function keeperWorth(p: Player, s: Settings): number {
   const w = currentShare(p, CURRENT_WEIGHT_KEEPER)
   const preseason = pickValue(adpOf(p, s))
-  return w === 0 ? preseason : (1 - w) * preseason + w * pickValue(Math.max(1, p.curAdp!))
+  return ageFactor(p) * (w === 0 ? preseason : (1 - w) * preseason + w * pickValue(Math.max(1, p.curAdp!)))
 }
 
 /**
  * What a player is worth for this season (redraft), independent of what he costs to keep. It leans mostly
- * on current production, and is also his strength when he starts in a lineup.
+ * on current production, and is also his strength when he starts in a lineup. A player who is hurt right now
+ * keeps only part of it (`injuryFactor`); his keeper worth, which looks to next season, is unaffected.
  */
 export function redraftWorth(p: Player, s: Settings): number {
   const at = (adp: number) =>
@@ -110,7 +114,7 @@ export function redraftWorth(p: Player, s: Settings): number {
       : pickValue(adp)
   const w = currentShare(p, CURRENT_WEIGHT_REDRAFT)
   const preseason = at(adpOf(p, s))
-  return w === 0 ? preseason : (1 - w) * preseason + w * at(p.curAdp!)
+  return injuryFactor(p) * (w === 0 ? preseason : (1 - w) * preseason + w * at(p.curAdp!))
 }
 
 /** Share (0–1) of a trade's value that comes from this season rather than keepers. */
@@ -119,16 +123,16 @@ export const redraftShare = (s: Pick<Settings, 'redraftWeight'>) => clamp(s.redr
 /** Whether a team is going for this season, building for next year, or neither (use the setting as is). */
 export type Stance = 'contending' | 'rebuilding' | null
 
-/** How many points a team's stance moves its redraft weight (contending up, rebuilding down). */
+/** How many points a team's stance moves the win-now slider (contending up, rebuilding down). */
 export const STANCE_SHIFT = 25
 
-/** A team's redraft weight (0–100): the setting, shifted by its stance. */
+/** A team's win-now share (0–100): the slider, shifted by its stance. */
 export function weightFor(s: Pick<Settings, 'redraftWeight'>, stance: Stance): number {
   const shift = stance === 'contending' ? STANCE_SHIFT : stance === 'rebuilding' ? -STANCE_SHIFT : 0
   return clamp(s.redraftWeight + shift, 0, 100)
 }
 
-/** The settings as one team sees them, with its stance applied to the redraft weight. */
+/** The settings as one team sees them, with its stance applied to the win-now slider. */
 export const settingsFor = (s: Settings, stance: Stance): Settings => ({ ...s, redraftWeight: weightFor(s, stance) })
 
 /** How many picks a team owns in each round of the upcoming draft (round → count). */

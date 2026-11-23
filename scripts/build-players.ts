@@ -15,6 +15,9 @@
 import { copyFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { MIN_GAMES } from '../src/lib/current'
+import { parseAge } from '../src/lib/age'
+import { parseInjury } from '../src/lib/availability'
+import { appendSnapshot, makeSnapshot, parseHistory } from '../src/lib/history'
 import { UNDRAFTED_ADP, seasonFor } from '../src/lib/valuation'
 import type { Player, PlayerStats, PlayersFile, Pos } from '../src/types'
 import {
@@ -44,6 +47,10 @@ interface SleeperPlayer {
   position?: string | null
   team?: string | null
   active?: boolean
+  status?: string | null
+  age?: number | null
+  birth_date?: string | null
+  injury_status?: string | null
   search_rank?: number
 }
 
@@ -275,6 +282,28 @@ async function main() {
       breakouts++
     }
   }
+  // Age feeds keeper value (older backs and receivers are worth less to keep).
+  let aged = 0
+  for (const p of players) {
+    const sp = p.sleeperId ? sleeperAll[p.sleeperId] : undefined
+    const age = sp ? parseAge(sp.age, sp.birth_date) : undefined
+    if (age !== undefined && p.pos !== 'DEF') {
+      p.age = age
+      aged++
+    }
+  }
+  // Injury designations only mean something while games are being played, so they're skipped in the offseason.
+  let injured = 0
+  if (season_stats) {
+    for (const p of players) {
+      const sp = p.sleeperId ? sleeperAll[p.sleeperId] : undefined
+      const inj = sp ? parseInjury(sp.injury_status, sp.status) : undefined
+      if (inj) {
+        p.inj = inj
+        injured++
+      }
+    }
+  }
   players.sort((a, b) => a.adp - b.adp || (b.stats?.ppr ?? 0) - (a.stats?.ppr ?? 0) || a.name.localeCompare(b.name))
 
   const problems = validatePlayers(players)
@@ -305,8 +334,11 @@ async function main() {
     await rm(tmp)
   }
 
+  await writeHistory(file, dirname(out))
   console.log(`Wrote ${players.length} players to ${out}`)
   console.log(`  Sleeper IDs matched: ${players.length - unmatched.length}/${players.length}`)
+  console.log(`  Ages:                ${aged}/${players.length}`)
+  console.log(`  Injury designations: ${injured}`)
   console.log(`  Superflex ADP:       ${players.filter((p) => p.sfAdp != null).length}/${players.length} (${sf.source})`)
   console.log(
     season_stats
@@ -314,6 +346,27 @@ async function main() {
       : '  Season stats:        none available (values use ADP alone)',
   )
   if (unmatched.length) console.warn(`  Unmatched (kept with slug IDs): ${unmatched.join(', ')}`)
+}
+
+/** Adds this refresh to history.json (next to players.json) so the app can show who's rising and falling. */
+async function writeHistory(file: PlayersFile, dir: string) {
+  const path = resolve(dir, 'history.json')
+  let existing = null
+  try {
+    existing = parseHistory(JSON.parse(await readFile(path, 'utf8')))
+  } catch {
+    /* no history yet */
+  }
+  const next = appendSnapshot(existing, makeSnapshot(file))
+  const tmp = `${path}.tmp`
+  await writeFile(tmp, JSON.stringify(next) + '\n')
+  try {
+    await rename(tmp, path)
+  } catch {
+    await copyFile(tmp, path)
+    await rm(tmp)
+  }
+  console.log(`  History:             ${next.snapshots.length} snapshot(s) in ${path}`)
 }
 
 main().catch((e: unknown) => {

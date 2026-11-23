@@ -41,10 +41,10 @@ jobs:
       - name: Commit refreshed data
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         run: |
-          if ! git diff --quiet -- public/players.json; then
+          if ! git diff --quiet -- public/players.json public/history.json; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add public/players.json
+            git add public/players.json public/history.json
             git commit -m "Refresh ADP data"
             git push
           fi

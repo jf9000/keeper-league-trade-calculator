@@ -10,3 +10,6 @@
 
 /players.json
   Cache-Control: public, max-age=3600
+
+/history.json
+  Cache-Control: public, max-age=3600
