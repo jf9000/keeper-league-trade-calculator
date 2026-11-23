@@ -1,4 +1,4 @@
-name: Test and deploy
+name: Test and refresh data
 
 on:
   push:
@@ -48,23 +48,3 @@ jobs:
             git commit -m "Refresh ADP data"
             git push
           fi
-
-      - name: Upload site
-        if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist
-
-  deploy:
-    needs: build
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v5
