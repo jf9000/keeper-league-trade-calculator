@@ -3,28 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏈</text></svg>"
-    />
-    <title>Keeper League Trade Calculator - Fantasy Football</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Keeper League Trade Calculator - Fantasy Football Keeper Trade Values</title>
     <meta
       name="description"
       content="Free fantasy football trade calculator built for keeper leagues. Connect your Sleeper league to value players, draft picks and keeper costs in any trade."
     />
+    <meta
+      name="keywords"
+      content="keeper league trade calculator, fantasy football keeper trade calculator, keeper trade value, keeper league trade analyzer, fantasy football trade calculator, keeper draft pick values, Sleeper keeper trade calculator, keeper rankings"
+    />
     <link rel="canonical" href="https://keeperleaguetradecalculator.com/" />
     <meta name="theme-color" content="#0f172a" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Keeper League Trade Calculator" />
-    <meta property="og:title" content="Keeper League Trade Calculator - Fantasy Football" />
+    <meta property="og:title" content="Keeper League Trade Calculator - Fantasy Football Keeper Trade Values" />
     <meta
       property="og:description"
       content="Free fantasy football trade calculator built for keeper leagues. Value players, draft picks and keeper costs in any trade."
     />
     <meta property="og:url" content="https://keeperleaguetradecalculator.com/" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Keeper League Trade Calculator - Fantasy Football" />
+    <meta property="og:image" content="https://keeperleaguetradecalculator.com/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Keeper League Trade Calculator: trade grades, keeper board, trade finder and power rankings for fantasy football keeper leagues" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://keeperleaguetradecalculator.com/og-image.png" />
+    <meta name="twitter:title" content="Keeper League Trade Calculator - Fantasy Football Keeper Trade Values" />
     <meta
       name="twitter:description"
       content="Free fantasy football trade calculator built for keeper leagues. Value players, draft picks and keeper costs in any trade."
@@ -35,10 +43,23 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Keeper League Trade Calculator",
+        "alternateName": ["Fantasy Football Keeper Trade Calculator", "Keeper Trade Analyzer"],
+        "slogan": "Not redraft. Not dynasty. Keeper.",
+        "inLanguage": "en-US",
         "url": "https://keeperleaguetradecalculator.com/",
         "description": "A free trade calculator for fantasy football keeper leagues. Connect a Sleeper league to load rosters, draft picks and keeper costs, then compare the value of any trade.",
         "applicationCategory": "SportsApplication",
         "operatingSystem": "Any (web browser)",
+        "image": "https://keeperleaguetradecalculator.com/og-image.png",
+        "featureList": [
+          "Trade calculator with letter grades for keeper leagues",
+          "Shareable trade links and images",
+          "Keeper board with the best keepers for any roster",
+          "Trade finder for win-win trade ideas",
+          "League power rankings",
+          "Player watchlist with risers and fallers",
+          "Sleeper league import for rosters, traded picks and keeper costs"
+        ],
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
       }
     </script>
@@ -64,6 +85,16 @@
           },
           {
             "@type": "Question",
+            "name": "What is a keeper league?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A keeper league sits between redraft and dynasty: each season you keep a limited number of players from your roster, usually at the cost of a draft pick, and redraft the rest." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I value draft picks in a keeper league trade?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Early-round picks are worth more because they cost more to replace with a keeper. This calculator values each pick by round and year, and counts the picks a team still owns." }
+          },
+          {
+            "@type": "Question",
             "name": "Where does the player data come from?",
             "acceptedAnswer": { "@type": "Answer", "text": "ADP from MyFantasyLeague and Fantasy Football Calculator, plus player stats and league data from Sleeper. ADP is refreshed weekly." }
           }
@@ -73,21 +104,33 @@
   </head>
   <body>
     <div id="root">
-      <!-- Static content for crawlers and no-JS visitors; React replaces it on load. -->
-      <main style="max-width: 42rem; margin: 0 auto; padding: 1.5rem 1rem; font-family: system-ui, sans-serif">
+      <!-- Static content for crawlers and screen readers; React replaces it on load. It is visually hidden (not
+           display:none, which search engines may discount) so it never flashes on screen while the app loads. -->
+      <noscript><p style="padding: 1.5rem 1rem; font-family: system-ui, sans-serif">This calculator needs JavaScript enabled to run.</p></noscript>
+      <main
+        style="position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0"
+      >
         <h1>Keeper League Trade Calculator for Fantasy Football</h1>
+        <p><em>Not redraft. Not dynasty. Keeper.</em></p>
         <p>
           A free trade calculator built for fantasy football keeper leagues. Connect your Sleeper league to load
           rosters, draft picks and keeper costs, or enter them manually, then see which side of a trade comes out
           ahead.
         </p>
-        <noscript><p>This calculator needs JavaScript enabled to run.</p></noscript>
 
         <h2>How it works</h2>
         <p>
           Player values come from average draft position (ADP) and current-season production. Keeper costs and draft
           picks are factored in, so a cheap keeper is worth more than the same player at full price.
         </p>
+
+        <h2>What you can do</h2>
+        <ul>
+          <li>Grade any trade for both teams, and share it as a link or an image.</li>
+          <li>See which players to keep on any roster, given each keeper's draft-round cost and the picks you own.</li>
+          <li>Find trades that help both teams, and rank every team in your league.</li>
+          <li>Watch players, and see who is rising and falling in value each week.</li>
+        </ul>
 
         <h2>Frequently asked questions</h2>
         <h3>Is the keeper league trade calculator free?</h3>
@@ -101,6 +144,16 @@
         <p>
           A keeper is worth the player's value minus what it costs you to keep them, such as the draft round you give
           up. A player with a low keeper cost is worth more in a trade than the same player at a high cost.
+        </p>
+        <h3>What is a keeper league?</h3>
+        <p>
+          A keeper league sits between redraft and dynasty: each season you keep a limited number of players from your
+          roster, usually at the cost of a draft pick, and redraft the rest.
+        </p>
+        <h3>How do I value draft picks in a keeper league trade?</h3>
+        <p>
+          Early-round picks are worth more because they cost more to replace with a keeper. This calculator values each
+          pick by round and year, and counts the picks a team still owns.
         </p>
         <h3>Where does the player data come from?</h3>
         <p>

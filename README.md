@@ -4,6 +4,32 @@ A free trade calculator for fantasy football keeper leagues. Connect a Sleeper l
 rosters, draft picks and keeper costs, or enter them manually. Player values come from ADP
 (MyFantasyLeague, Fantasy Football Calculator) and current-season production (Sleeper stats).
 
+## Sections
+
+The app is split into tabs (hash routes: `#/calculator`, `#/keepers`, `#/finder`, `#/rankings`, `#/watchlist`).
+
+- **Trade calculator**: grade a trade for both teams. **Copy link** encodes the whole trade and the league settings in the
+  URL (`src/lib/share.ts`), and **Copy image** draws a 1200×675 card (`src/lib/shareCard.ts`) and copies it to the clipboard.
+- **Keeper board**: the best legal set of keepers for any roster (keeper limit, one-QB rule, picks owned), with editable keeper rounds.
+- **Trade finder**: searches 1-for-1, 2-for-1 and 1-for-2 swaps (`src/lib/finder.ts`) through the same `evalTrade` the calculator
+  uses, as either win-win offers (both teams gain a meaningful and similar amount) or the best deal for you (the other team still gets at least 80% of what it gives up), and opens any result in the calculator.
+- **Power rankings**: every team scored on its best lineup (this season) and its projected keepers (next season), blended by the
+  win-now slider, with position-group ranks.
+- **Watchlist**: star players, see who owns them, start a trade for one, and see weekly risers and fallers from `public/history.json`.
+
+**Injuries and availability** (`src/lib/availability.ts`): `players.json` records each player's Sleeper injury designation (IR, PUP,
+Out, Suspended, Doubtful, Questionable) while the season is in progress. It cuts his this-season value by a tunable factor
+(`INJURY_FACTOR`) and not his keeper value. Separately, production is ranked on points per game scaled down for games missed
+(`AVAIL_PENALTY`), so a hot four-game stretch doesn't outrank a full season. Badges appear next to players, and the notes under
+a trade's grade call out injured or often-missed players. Designations are as fresh as the weekly data refresh.
+
+**Age** (`src/lib/age.ts`): `players.json` records each player's age, and keeper value (not this-season value) is scaled down for it by
+position: RBs from 27 (8% a year), WRs and TEs from 30 (7%), QBs from 35 (6%), down to a floor (`AGE_DECLINE`). Trade notes call out
+older players on either side.
+
+Keeper board, finder and rankings need a Sleeper league; they show a prompt in manual mode. The theme toggle (light / dark)
+starts from the device setting and remembers an explicit choice.
+
 ## Data sources
 
 - **Sleeper**: your league, rosters, traded picks and draft results (live, read-only), plus the player list and
@@ -31,7 +57,9 @@ npm run build-players  # regenerate public/players.json
 | `src/lib/sleeper.ts` | Sleeper API client (user, leagues, rosters) and league → settings mapping |
 | `src/screens/LeagueSetup.tsx` | Sleeper username → league picker, with a **Skip: use manual mode** button |
 | `src/screens/Calculator.tsx` | Team dropdowns, trade columns, sticky result bar with grades |
-| `scripts/build-players.ts` | Builds `public/players.json` with ADP and Sleeper IDs |
+| `src/lib/history.ts` | Weekly value snapshots and trends (risers and fallers) |
+| `src/lib/rankings.ts`, `src/lib/finder.ts`, `src/lib/share.ts` | Power rankings, trade search, share-link encoding |
+| `scripts/build-players.ts` | Builds `public/players.json` with ADP and Sleeper IDs, and appends a snapshot to `public/history.json` |
 | `scripts/adp.ts`, `scripts/stats.ts`, `scripts/http.ts` | Tested parsing helpers (ADP, season stats) and the allowlisted HTTP client the script uses |
 
 ## Teams and grading
@@ -41,15 +69,15 @@ npm run build-players  # regenerate public/players.json
 - With a roster selected, that team can only send players on its roster, and values account for the whole
   roster: keeper limits and the one-QB rule apply to everything the team could keep, so a player is worth what he
   adds to (or takes from) that team's keepers.
-- **Redraft value vs. keeper value.** Every asset's value blends two things, in the proportion set by the **Redraft
-  weight (%)** setting (`redraftWeight`, 65 by default, under a collapsed **Additional settings** section, which also holds Keep only 1 QB, with its own
-  info modal): **redraft value** (what a player is worth this season, whatever he
+- **Redraft value vs. keeper value.** Every asset's value blends two things, in the proportion set by the **Rebuilding /
+  Contending** slider (stored as `redraftWeight`, 65 by default, in the league settings card shown on every
+  tab, with its own info modal; higher means keeper value counts for less): **redraft value** (what a player is worth this season, whatever he
   costs to keep) and **keeper value** (his surplus: keeper worth minus the cost of the slot he's kept in, subject to
   the keeper limit, one-QB rule and pick rules below). A player who costs more than he's worth to keep has no keeper
   value but still has redraft value, so he's never worth 0. Draft picks are for the future, so they only carry the
   keeper share (`itemValue`, `evalTeam`). Each player row shows both values.
 - **Contending / rebuilding.** Each side of the trade has a toggle (both off by default). Contending adds
-  `STANCE_SHIFT` (25) points to that team's redraft weight and rebuilding subtracts 25, clamped to 0-100
+  `STANCE_SHIFT` (25) points to that team's win-now slider and rebuilding subtracts 25, clamped to 0-100
   (`weightFor`, `settingsFor`, `evalTrade`). It applies only to that team's own valuation, so a contender and a
   rebuilder can both come out ahead on one trade, and the grade notes change with it (`stance` in `teamNotes`).
 - **League list** (`LeagueSetup`) shows only keeper leagues (`isKeeperLeague`: Sleeper `settings.type === 1`); redraft
