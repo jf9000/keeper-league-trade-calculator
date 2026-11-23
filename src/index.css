@@ -57,3 +57,4 @@ button:hover:not(:disabled) { border-color: var(--ac); }
 button:disabled { opacity: .55; cursor: default; }
 button.primary { background: var(--ac); border-color: var(--ac); color: #fff; font-weight: 600; }
 :focus-visible { outline: 2px solid var(--ac); outline-offset: 1px; }
+input[type="range"] { width: 100%; padding: 0; border: 0; background: transparent; accent-color: var(--ac); cursor: pointer; }

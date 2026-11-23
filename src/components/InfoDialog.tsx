@@ -1,16 +1,49 @@
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons/faCircleInfo'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useId, useRef, type ReactNode } from 'react'
+import { useId, useRef, useState, type ReactNode } from 'react'
 
 /** Shared style for body text inside an info dialog. */
 export const p = 'm-0 text-[13px] leading-relaxed text-mut'
 
-/** A titled block of text with a clear heading and generous spacing. */
+/** A titled block of text that starts collapsed and opens smoothly when its heading is clicked. */
 export function Section({ title, children }: { title: string; children: ReactNode }) {
+  const [open, setOpen] = useState(false)
+  const bodyId = useId()
   return (
-    <section className="mt-6">
-      <h3 className="m-0 mb-2 text-base font-bold text-tx">{title}</h3>
-      {children}
+    <section className="border-b border-bd last:border-b-0">
+      <h3 className="m-0">
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-controls={bodyId}
+          onClick={() => setOpen((o) => !o)}
+          className="!flex w-full items-center justify-between gap-3 !rounded-lg !border-0 !bg-transparent !px-2 !py-3.5 text-left text-base font-bold text-tx hover:!bg-chip"
+        >
+          {title}
+          <svg
+            viewBox="0 0 24 24"
+            className={`h-4 w-4 shrink-0 text-mut transition-transform duration-300 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </h3>
+      {/* Animating grid rows from 0fr to 1fr lets the height follow the content without measuring it. */}
+      <div
+        id={bodyId}
+        inert={!open}
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${
+          open ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="px-2 pb-4">{children}</div>
+        </div>
+      </div>
     </section>
   )
 }
@@ -37,11 +70,16 @@ export function InfoDialog({ label, title, small = false, children }: Props) {
         aria-label={label}
         title={label}
         className={`!inline-flex shrink-0 items-center justify-center !rounded-full !border-0 !bg-transparent !p-0 text-mut hover:text-ac ${
-          small ? '!h-4 !w-4' : '!h-6 !w-6'
+          small ? '!h-4 !w-4' : '!h-5 !w-5'
         }`}
         onClick={() => dialog.current?.showModal()}
       >
-        <FontAwesomeIcon icon={faCircleInfo} size={small ? 'sm' : 'lg'} aria-hidden="true" />
+        {/* Outlined circle with an outlined "i": nothing is filled, so it takes the text color and stays light. */}
+        <svg viewBox="0 0 24 24" className="h-full w-full" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 11v6" />
+          <path d="M12 7.2v.01" strokeWidth="2.6" />
+        </svg>
       </button>
 
       <dialog
@@ -56,11 +94,19 @@ export function InfoDialog({ label, title, small = false, children }: Props) {
           <h2 id={titleId} className="m-0 text-lg font-bold">
             {title}
           </h2>
-          <button type="button" aria-label="Close" className="shrink-0 !min-h-9 !min-w-9 !px-2 !py-0.5" onClick={() => dialog.current?.close()}>
-            ✕
+          <button
+            type="button"
+            aria-label="Close"
+            title="Close"
+            className="!inline-flex shrink-0 items-center justify-center !h-9 !w-9 !rounded-full !border-0 !bg-chip !p-0 text-mut transition-colors hover:!bg-ac hover:!text-white focus-visible:!bg-ac focus-visible:!text-white active:scale-95"
+            onClick={() => dialog.current?.close()}
+          >
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
           </button>
         </div>
-        <div className="px-5 pb-4">{children}</div>
+        <div className="px-3 py-2">{children}</div>
       </dialog>
     </>
   )

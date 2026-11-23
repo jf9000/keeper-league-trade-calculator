@@ -1,6 +1,8 @@
 import { pointsPerGame } from '../lib/current'
 import { STANCE_SHIFT, itemValue, roundSlot, sumItemValues, type EvalItem, type Stance } from '../lib/valuation'
 import type { Asset, Player, Settings } from '../types'
+import { gamesNote } from '../lib/availability'
+import { InjuryBadge } from './InjuryBadge'
 import { PlayerSearch, type Hit } from './PlayerSearch'
 import { POS_COLOR, POS_LABEL } from './pos'
 
@@ -20,11 +22,15 @@ interface Props {
   /** Players this team can send: its roster when one is selected, otherwise everyone. */
   players: readonly Player[]
   used: ReadonlySet<string>
-  /** Settings as this team sees them (its stance already applied to the redraft weight). */
+  /** Settings as this team sees them (its stance already applied to the win-now slider). */
   settings: Settings
   stance: Stance
+  /** Hide the Contending / Rebuilding toggle (for your own team, which just follows the league slider). */
+  hideOutlook?: boolean
   onStance: (stance: Stance) => void
   years: readonly number[]
+  /** Weeks of current-season stats in the data, to flag players who have missed games. */
+  through?: number
   /** Whether this team still has a pick to send in that year and round; omit to allow any. */
   pickAvailable?: (year: number, round: number) => boolean
   adp: (p: Player) => number
@@ -47,8 +53,10 @@ export function TeamColumn({
   used,
   settings: s,
   stance,
+  hideOutlook = false,
   onStance,
   years,
+  through,
   pickAvailable,
   adp,
   defaultRound,
@@ -87,25 +95,36 @@ export function TeamColumn({
           <span className="ml-auto shrink-0 text-base font-semibold text-tx">Value {sumItemValues(items, s).toFixed(1)}</span>
         )}
       </h2>
-      <div role="group" aria-label={`Team ${index + 1} outlook`} className="mb-3 flex flex-wrap items-center gap-2 text-sm text-mut">
-        <span>Outlook</span>
-        {(['contending', 'rebuilding'] as const).map((o) => (
-          <button
-            key={o}
-            type="button"
-            aria-pressed={stance === o}
-            title={
-              o === 'contending'
-                ? `Going for this season: raises the redraft weight by ${STANCE_SHIFT} points for this team`
-                : `Building for next year: lowers the redraft weight by ${STANCE_SHIFT} points for this team`
-            }
-            className={`!px-3 !py-2 text-sm capitalize ${stance === o ? 'primary' : ''}`}
-            onClick={() => onStance(stance === o ? null : o)}
-          >
-            {o}
+      {hideOutlook && (
+        // An invisible toggle button gives this row exactly the height of the toggle row on the other side.
+        <div className="mb-3 flex flex-wrap items-center gap-2 text-sm text-mut">
+          <span>Outlook determined by slider value above</span>
+          <button type="button" tabIndex={-1} aria-hidden="true" className="invisible !px-0 !py-2 text-sm">
+            &nbsp;
           </button>
-        ))}
-      </div>
+        </div>
+      )}
+      {!hideOutlook && (
+        <div role="group" aria-label={`Team ${index + 1} outlook`} className="mb-3 flex flex-wrap items-center gap-2 text-sm text-mut">
+          <span>Outlook</span>
+          {(['contending', 'rebuilding'] as const).map((o) => (
+            <button
+              key={o}
+              type="button"
+              aria-pressed={stance === o}
+              title={
+                o === 'contending'
+                  ? `Going for this season: pushes this team ${STANCE_SHIFT} points toward winning now`
+                  : `Building for next year: pushes this team ${STANCE_SHIFT} points toward the future`
+              }
+              className={`!px-3 !py-2 text-sm capitalize ${stance === o ? 'primary' : ''}`}
+              onClick={() => onStance(stance === o ? null : o)}
+            >
+              {o}
+            </button>
+          ))}
+        </div>
+      )}
       {note && <div className="mb-3 text-sm text-mut">{note}</div>}
       <div className="mb-1">
         <PlayerSearch
@@ -148,6 +167,7 @@ export function TeamColumn({
                     <span className={`${chip} ${POS_COLOR[it.player.pos]}`}>{POS_LABEL[it.player.pos]}</span>
                     {it.player.name}
                     <span className={`${chip} text-mut`}>{it.player.team}</span>
+                    <InjuryBadge player={it.player} />
                   </div>
                   {valueAndRemove}
                 </div>
@@ -158,7 +178,7 @@ export function TeamColumn({
                 </div>
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-[15px] text-mut">
                   <span>
-                    ADP {adp(it.player).toFixed(1)}
+                    {it.player.age != null && `Age ${it.player.age} · `}ADP {adp(it.player).toFixed(1)}
                     {ppg(it.player) !== null && ` · ${ppg(it.player)!.toFixed(1)} ppg this season `}
                     {ppg(it.player) !== null && it.player.curAdp != null && (
                       <span className="whitespace-nowrap">(≈ ADP {it.player.curAdp.toFixed(1)})</span>
@@ -179,6 +199,7 @@ export function TeamColumn({
                     </select>
                   </label>
                 </div>
+                {gamesNote(it.player, through) && <div className="text-sm text-te">{gamesNote(it.player, through)}: production is discounted</div>}
                 {it.note && <div className="text-sm text-bad">{it.note}</div>}
               </>
             ) : a.t === 'k' ? (

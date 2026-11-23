@@ -14,9 +14,9 @@ export function InfoButton() {
           keep. <b className="text-tx">Keeper value</b> is his surplus: what he’s worth minus the draft slot he costs
           you, so a first-round talent kept in round 10 is a big win, while one kept in the round he’s worth adds
           nothing here. A player who costs more than he’s worth to keep has no keeper value but still has redraft
-          value, so he’s never worth 0. Each player shows both values under his name, and how much each one counts is
-          adjustable (see Additional settings for more information). Each team can also be marked contending or
-          rebuilding.
+          value, so he’s never worth 0. Each player shows both values under his name. How much each one counts is set
+          by the Rebuilding / Contending slider in the league settings: the closer to Contending it is, the more this
+          season counts and the less keeper value does. Each team can also be marked contending or rebuilding.
         </p>
 
       </Section>
@@ -28,6 +28,32 @@ export function InfoButton() {
           included. The footer shows how many weeks of production the data covers.
         </p>
 
+      </Section>
+      <Section title="Injuries and availability">
+        <p className={p}>
+          <b className="text-tx">Games missed.</b> Points per game only mean so much from a few games, so a player’s
+          rate is scaled down for the games he has missed, measured against the weeks played so far (allowing for a
+          bye). A player who has played 4 of 10 games is ranked as if he scored about 70% of his per-game rate, so a hot
+          short stretch doesn’t outrank a full season. When someone in the trade has missed a lot of time, the notes
+          under the grade say so.
+        </p>
+        <p className={`${p} mt-2`}>
+          <b className="text-tx">Current injuries.</b> A player listed on injured reserve, PUP, out, suspended,
+          doubtful or questionable keeps only part of his value for this season: about a quarter on IR, 60% when out,
+          and 95% when questionable. That lowers his redraft value and his place in the lineup. His keeper value looks
+          to next season, so it isn’t changed. Injury designations come from Sleeper with the weekly data refresh, so
+          they can be out of date on game day. Always check a player’s current status before agreeing to a trade.
+        </p>
+      </Section>
+      <Section title="Age">
+        <p className={p}>
+          Keeper value looks ahead, so age matters: an older player is worth less to keep. Running backs start losing
+          value at 27 (8% per year), wide receivers and tight ends at 30 (7% per year), and quarterbacks at 35 (6% per
+          year), each down to a floor of about a third to 40% of their value. A 31-year-old back keeps about 60% of
+          his keeper value; a 31-year-old receiver about 86%. Age doesn’t change what a player is worth this season,
+          only what he’s worth to keep. Ages come from Sleeper with the weekly data refresh, and when a trade involves
+          an older player the notes under the grade say so.
+        </p>
       </Section>
       <Section title="What a keeper costs">
         <p className={p}>
@@ -106,8 +132,8 @@ export function InfoButton() {
       </Section>
       <Section title="Limits">
         <p className={p}>
-          This is a rough guide. It doesn’t know your team’s positional needs, injuries, or league-specific keeper
-          rules such as round penalties. Use the keeper-round selector to adjust for those.
+          This is a rough guide. Injury designations are only as fresh as the last weekly refresh, and it doesn’t
+          know league-specific keeper rules such as round penalties. Use the keeper-round selector to adjust for those.
         </p>
       </Section>
     </InfoDialog>

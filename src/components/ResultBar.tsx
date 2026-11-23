@@ -47,7 +47,7 @@ function TeamCell({ name, trade, grade, align }: { name: string; trade: TeamTrad
 
 export function ResultBar({ names, trades, verdict }: Props) {
   return (
-    <div className="sticky bottom-0 -mx-4 border-t border-bd bg-card px-4 pt-3.5 pb-[calc(14px+env(safe-area-inset-bottom,0px))]">
+    <div className="sticky bottom-0 w-full rounded-t-xl border border-b-0 border-bd bg-card px-4 pt-3.5 pb-[calc(14px+env(safe-area-inset-bottom,0px))]">
       <div className="flex h-3 overflow-hidden rounded-md bg-chip" role="img" aria-label={verdict.message}>
         <i className="block bg-ac transition-[width] duration-200" style={{ width: `${verdict.share1}%` }} />
         <i className="block bg-ac2 transition-[width] duration-200" style={{ width: `${100 - verdict.share1}%` }} />
