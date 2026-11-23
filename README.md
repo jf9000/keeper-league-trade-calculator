@@ -1,5 +1,19 @@
 # Keeper League Trade Calculator
 
+A free trade calculator for fantasy football keeper leagues. Connect a Sleeper league to load its settings,
+rosters, draft picks and keeper costs, or enter them manually. Player values come from ADP
+(MyFantasyLeague, Fantasy Football Calculator) and current-season production (Sleeper stats).
+
+## Data sources
+
+- **Sleeper**: your league, rosters, traded picks and draft results (live, read-only), plus the player list and
+  weekly stats used to build `players.json`.
+- **MyFantasyLeague** and **Fantasy Football Calculator**: ADP, fetched offline at build time.
+
+No API keys or accounts are needed. Not affiliated with or endorsed by any of them.
+
+## Development
+
 ```bash
 npm install
 npm run dev            # start the app (http://localhost:5173)
