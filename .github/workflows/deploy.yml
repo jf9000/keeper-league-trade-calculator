@@ -5,8 +5,8 @@ on:
     branches: [main]
   pull_request:
   schedule:
-    # Weekly ADP refresh (Mondays, 09:17 UTC).
-    - cron: '17 9 * * 1'
+    # Weekly refresh (Tuesdays, 09:17 UTC), after Monday Night Football so the full week's stats are in.
+    - cron: '17 9 * * 2'
   workflow_dispatch:
 
 concurrency:
