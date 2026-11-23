@@ -7,10 +7,108 @@
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏈</text></svg>"
     />
-    <title>Keeper League Trade Calculator</title>
+    <title>Keeper League Trade Calculator - Fantasy Football</title>
+    <meta
+      name="description"
+      content="Free fantasy football trade calculator built for keeper leagues. Connect your Sleeper league to value players, draft picks and keeper costs in any trade."
+    />
+    <link rel="canonical" href="https://keeperleaguetradecalculator.com/" />
+    <meta name="theme-color" content="#0f172a" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Keeper League Trade Calculator" />
+    <meta property="og:title" content="Keeper League Trade Calculator - Fantasy Football" />
+    <meta
+      property="og:description"
+      content="Free fantasy football trade calculator built for keeper leagues. Value players, draft picks and keeper costs in any trade."
+    />
+    <meta property="og:url" content="https://keeperleaguetradecalculator.com/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Keeper League Trade Calculator - Fantasy Football" />
+    <meta
+      name="twitter:description"
+      content="Free fantasy football trade calculator built for keeper leagues. Value players, draft picks and keeper costs in any trade."
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Keeper League Trade Calculator",
+        "url": "https://keeperleaguetradecalculator.com/",
+        "description": "A free trade calculator for fantasy football keeper leagues. Connect a Sleeper league to load rosters, draft picks and keeper costs, then compare the value of any trade.",
+        "applicationCategory": "SportsApplication",
+        "operatingSystem": "Any (web browser)",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is the keeper league trade calculator free?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. No account or API key is needed." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a Sleeper account?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Connecting a Sleeper league loads your settings, rosters, traded picks and keeper costs automatically, but you can also enter everything by hand." }
+          },
+          {
+            "@type": "Question",
+            "name": "How is a keeper valued differently from a normal player?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A keeper is worth the player's value minus what it costs you to keep them, such as the draft round you give up. A player with a low keeper cost is worth more in a trade than the same player at a high cost." }
+          },
+          {
+            "@type": "Question",
+            "name": "Where does the player data come from?",
+            "acceptedAnswer": { "@type": "Answer", "text": "ADP from MyFantasyLeague and Fantasy Football Calculator, plus player stats and league data from Sleeper. ADP is refreshed weekly." }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Static content for crawlers and no-JS visitors; React replaces it on load. -->
+      <main style="max-width: 42rem; margin: 0 auto; padding: 1.5rem 1rem; font-family: system-ui, sans-serif">
+        <h1>Keeper League Trade Calculator for Fantasy Football</h1>
+        <p>
+          A free trade calculator built for fantasy football keeper leagues. Connect your Sleeper league to load
+          rosters, draft picks and keeper costs, or enter them manually, then see which side of a trade comes out
+          ahead.
+        </p>
+        <noscript><p>This calculator needs JavaScript enabled to run.</p></noscript>
+
+        <h2>How it works</h2>
+        <p>
+          Player values come from average draft position (ADP) and current-season production. Keeper costs and draft
+          picks are factored in, so a cheap keeper is worth more than the same player at full price.
+        </p>
+
+        <h2>Frequently asked questions</h2>
+        <h3>Is the keeper league trade calculator free?</h3>
+        <p>Yes. No account or API key is needed.</p>
+        <h3>Do I need a Sleeper account?</h3>
+        <p>
+          No. Connecting a Sleeper league loads your settings, rosters, traded picks and keeper costs automatically,
+          but you can also enter everything by hand.
+        </p>
+        <h3>How is a keeper valued differently from a normal player?</h3>
+        <p>
+          A keeper is worth the player's value minus what it costs you to keep them, such as the draft round you give
+          up. A player with a low keeper cost is worth more in a trade than the same player at a high cost.
+        </p>
+        <h3>Where does the player data come from?</h3>
+        <p>
+          ADP from MyFantasyLeague and Fantasy Football Calculator, plus player stats and league data from Sleeper.
+          ADP is refreshed weekly.
+        </p>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
