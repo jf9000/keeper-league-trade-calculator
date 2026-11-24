@@ -96,7 +96,7 @@ export function PlayerSearch({ label, players, used, settings: s, years, pickAva
       {open && q.trim() !== '' && (
         <ul
           role="listbox"
-          className="absolute inset-x-0 top-full z-10 mt-0.5 max-h-[300px] list-none overflow-auto rounded-lg border border-bd bg-card p-1 shadow-xl"
+          className="fade-in absolute inset-x-0 top-full z-10 mt-0.5 max-h-[300px] list-none overflow-auto rounded-lg border border-bd bg-card p-1 shadow-xl"
         >
           {hits.length === 0 && <li className="p-2 text-mut">No matches</li>}
           {hits.map((h, i) => (

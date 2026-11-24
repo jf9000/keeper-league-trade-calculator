@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Keeper League Trade Calculator - Fantasy Football Keeper Trade Values</title>
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+    <title>Keeper League Trade Calculator - Free Fantasy Football Tool</title>
     <meta
       name="description"
       content="Free fantasy football trade calculator built for keeper leagues. Connect your Sleeper league to value players, draft picks and keeper costs in any trade."
@@ -14,6 +15,8 @@
       content="keeper league trade calculator, fantasy football keeper trade calculator, keeper trade value, keeper league trade analyzer, fantasy football trade calculator, keeper draft pick values, Sleeper keeper trade calculator, keeper rankings"
     />
     <link rel="canonical" href="https://keeperleaguetradecalculator.com/" />
+    <!-- Start downloading the player data now instead of waiting for the app bundle to boot. -->
+    <link rel="preload" href="./players.json" as="fetch" type="application/json" crossorigin="anonymous" />
     <meta name="theme-color" content="#0f172a" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
@@ -38,6 +41,15 @@
       content="Free fantasy football trade calculator built for keeper leagues. Value players, draft picks and keeper costs in any trade."
     />
 
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Keeper League Trade Calculator",
+        "alternateName": "KeeperLeagueTradeCalculator.com",
+        "url": "https://keeperleaguetradecalculator.com/"
+      }
+    </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

@@ -132,7 +132,7 @@ export default function App() {
   // Everything sits in a centered column except the calculator's sticky trade meter, which spans the whole page.
   const column = 'mx-auto max-w-[980px] px-4'
   return (
-    <div className="pt-5">
+    <div className="fade-in pt-5">
       <div className={column}>
         <AppHeader
           tab={tab}

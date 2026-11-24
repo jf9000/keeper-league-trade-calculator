@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Collapsible } from '../components/Collapsible'
 import { InjuryBadge } from '../components/InjuryBadge'
 import { LeagueGate } from '../components/LeagueGate'
 import { POS_COLOR, POS_LABEL } from '../components/pos'
@@ -89,9 +90,10 @@ function Table({ ctx }: { ctx: LeagueCtx }) {
                       </td>
                     ))}
                   </tr>
-                  {isOpen && (
-                    <tr className="border-b border-bd">
-                      <td colSpan={5 + SHOWN.length} className="px-3 py-3">
+                    <tr>
+                      <td colSpan={5 + SHOWN.length} className="p-0">
+                        <Collapsible open={isOpen}>
+                        <div className="border-b border-bd px-3 py-3">
                         <div className="grid grid-cols-1 gap-4 min-[640px]:grid-cols-2">
                           <div>
                             <div className="mb-1 text-xs text-mut">Best lineup</div>
@@ -124,9 +126,10 @@ function Table({ ctx }: { ctx: LeagueCtx }) {
                             )}
                           </div>
                         </div>
+                        </div>
+                        </Collapsible>
                       </td>
                     </tr>
-                  )}
                 </RowGroup>
               )
             })}

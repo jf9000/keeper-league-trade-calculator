@@ -15,12 +15,12 @@ export function Section({ title, children }: { title: string; children: ReactNod
           aria-expanded={open}
           aria-controls={bodyId}
           onClick={() => setOpen((o) => !o)}
-          className="!flex w-full items-center justify-between gap-3 !rounded-lg !border-0 !bg-transparent !px-2 !py-3.5 text-left text-base font-bold text-tx hover:!bg-chip"
+          className="group !flex w-full items-center justify-between gap-3 !rounded-lg !border-0 !bg-transparent !px-2 !py-3.5 text-left text-base font-bold text-tx hover:!bg-chip"
         >
           {title}
           <svg
             viewBox="0 0 24 24"
-            className={`h-4 w-4 shrink-0 text-mut transition-transform duration-300 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
+            className={`h-4 w-4 shrink-0 text-mut transition-[transform,color] duration-300 group-hover:text-ac group-focus-visible:text-ac motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
             fill="none"
             stroke="currentColor"
             strokeWidth="2.5"

@@ -9,7 +9,7 @@ export const DEFAULT_SETTINGS: Settings = {
   rounds: 17,
   scoring: 'ppr',
   superflex: true,
-  oneQb: true,
+  oneQb: false,
   flex: 2,
   redraftWeight: 65,
 }

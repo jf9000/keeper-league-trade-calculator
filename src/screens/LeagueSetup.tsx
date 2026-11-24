@@ -8,6 +8,7 @@ import {
   type SleeperLeague,
 } from '../lib/sleeper'
 import { Attribution } from '../components/Attribution'
+import { FootballLock } from '../components/FootballLock'
 import { loadString, saveString } from '../lib/storage'
 import { seasonFor } from '../lib/valuation'
 import type { Settings } from '../types'
@@ -68,9 +69,13 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
   const busy = status.kind === 'loading'
 
   return (
-    <div className="mx-auto max-w-[520px] px-4 py-10">
-      <h1 className="m-0 mb-1 text-xl font-bold">Keeper League Trade Calculator</h1>
-      <p className="mt-0 mb-5 text-mut">
+    <div className="fade-in mx-auto max-w-[520px] px-4 pt-5 pb-10">
+      <div className="flex items-center gap-2">
+        <FootballLock className="h-8 w-8 shrink-0 min-[480px]:h-9 min-[480px]:w-9" />
+        <h1 className="m-0 text-base leading-tight font-bold min-[480px]:text-xl">Keeper League Trade Calculator</h1>
+      </div>
+      <p className="m-0 mt-1 text-[15px] text-mut italic">Not redraft. Not dynasty. Keeper.</p>
+      <p className="mt-4 mb-5 text-mut">
         Import your league from Sleeper to fill in the settings, or enter them yourself.
       </p>
 
@@ -88,7 +93,7 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
               placeholder="e.g. your_username"
             />
             <button type="submit" className="primary" disabled={busy || !username.trim()}>
-              {busy ? 'Looking up…' : 'Find leagues'}
+              {busy ? 'Looking up…' : 'Find keeper leagues'}
             </button>
           </div>
         </label>
