@@ -76,10 +76,11 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
       </div>
       <p className="m-0 mt-1 text-[15px] text-mut italic">Not redraft. Not dynasty. Keeper.</p>
       <p className="mt-4 mb-5 text-mut">
-        Import your league from Sleeper to fill in the settings, or enter them yourself.
+        Free fantasy football trade calculator built for keeper leagues. Connect your Sleeper league to value players, draft picks and keeper costs in any trade.
       </p>
 
-      <form onSubmit={lookup} className="rounded-xl border border-bd bg-card p-4">
+      {/* data-nosnippet keeps the form's labels and buttons out of Google's result snippet, so it uses the text above. */}
+      <form data-nosnippet onSubmit={lookup} className="rounded-xl border border-bd bg-card p-4">
         <label className="flex flex-col gap-1.5 text-[13px] text-mut">
           Sleeper username
           <div className="flex gap-2">
@@ -142,13 +143,15 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
         )}
       </form>
 
-      <div className="mt-4 text-center">
+      <div data-nosnippet className="mt-4 text-center">
         <button type="button" onClick={onManual}>
           Skip: use manual mode
         </button>
       </div>
 
-      <Attribution />
+      <div data-nosnippet>
+        <Attribution />
+      </div>
     </div>
   )
 }

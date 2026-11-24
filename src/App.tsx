@@ -78,7 +78,7 @@ export default function App() {
 
   useEffect(() => {
     const label = TABS.find((t) => t.id === tab)?.label ?? ''
-    document.title = tab === 'calculator' ? 'Keeper League Trade Calculator - Fantasy Football' : `${label} | Keeper League Trade Calculator`
+    document.title = tab === 'calculator' ? 'Keeper League Trade Calculator - Free Fantasy Football Tool' : `${label} | Keeper League Trade Calculator`
   }, [tab])
 
   const patchSettings = (patch: Partial<Settings>) =>
