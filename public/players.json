@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-23T19:25:53.505Z",
+  "generatedAt": "2026-11-24T20:08:28.182Z",
   "season": 2026,
   "source": "MyFantasyLeague ADP; Sleeper player IDs",
-  "sfSource": "ffc-2qb:2026 (+21 QBs estimated)",
+  "sfSource": "ffc-2qb:2026 (+17 QBs estimated)",
   "statsThrough": 11,
   "players": [
     {
@@ -12,7 +12,7 @@
       "pos": "RB",
       "team": "DET",
       "adp": 2.1,
-      "sfAdp": 1.9,
+      "sfAdp": 1.8,
       "stats": {
         "gp": 10,
         "ppr": 281.2,
@@ -28,7 +28,7 @@
       "pos": "RB",
       "team": "ATL",
       "adp": 2.7,
-      "sfAdp": 3,
+      "sfAdp": 2.9,
       "stats": {
         "gp": 10,
         "ppr": 197.7,
@@ -60,12 +60,12 @@
       "pos": "WR",
       "team": "CIN",
       "adp": 4.2,
-      "sfAdp": 6.7,
+      "sfAdp": 7.4,
       "stats": {
-        "gp": 9,
-        "ppr": 193.8,
-        "half": 161.8,
-        "std": 129.8
+        "gp": 10,
+        "ppr": 201.9,
+        "half": 167.4,
+        "std": 132.9
       },
       "age": 26
     },
@@ -76,7 +76,7 @@
       "pos": "WR",
       "team": "LAR",
       "adp": 7.5,
-      "sfAdp": 6.7,
+      "sfAdp": 6.5,
       "stats": {
         "gp": 7,
         "ppr": 173.6,
@@ -93,7 +93,7 @@
       "pos": "WR",
       "team": "SEA",
       "adp": 8.1,
-      "sfAdp": 15,
+      "sfAdp": 14,
       "stats": {
         "gp": 10,
         "ppr": 263.2,
@@ -109,7 +109,7 @@
       "pos": "RB",
       "team": "IND",
       "adp": 9.1,
-      "sfAdp": 6.4,
+      "sfAdp": 5.7,
       "stats": {
         "gp": 11,
         "ppr": 172.6,
@@ -125,7 +125,7 @@
       "pos": "WR",
       "team": "DET",
       "adp": 10.3,
-      "sfAdp": 21.1,
+      "sfAdp": 19.5,
       "stats": {
         "gp": 10,
         "ppr": 198.1,
@@ -141,7 +141,7 @@
       "pos": "RB",
       "team": "SF",
       "adp": 10.7,
-      "sfAdp": 11.9,
+      "sfAdp": 9.5,
       "stats": {
         "gp": 10,
         "ppr": 227.2,
@@ -157,7 +157,7 @@
       "pos": "RB",
       "team": "BUF",
       "adp": 12.1,
-      "sfAdp": 17.1,
+      "sfAdp": 15.6,
       "stats": {
         "gp": 10,
         "ppr": 187.3,
@@ -173,7 +173,7 @@
       "pos": "WR",
       "team": "DAL",
       "adp": 15.7,
-      "sfAdp": 26.7,
+      "sfAdp": 28.4,
       "stats": {
         "gp": 11,
         "ppr": 252.2,
@@ -189,7 +189,7 @@
       "pos": "WR",
       "team": "MIN",
       "adp": 16.5,
-      "sfAdp": 27.7,
+      "sfAdp": 27,
       "stats": {
         "gp": 9,
         "ppr": 125.3,
@@ -205,7 +205,7 @@
       "pos": "RB",
       "team": "MIA",
       "adp": 17.3,
-      "sfAdp": 25.6,
+      "sfAdp": 23.8,
       "stats": {
         "gp": 3,
         "ppr": 24.6,
@@ -222,12 +222,12 @@
       "pos": "RB",
       "team": "CIN",
       "adp": 19,
-      "sfAdp": 35.2,
+      "sfAdp": 31.3,
       "stats": {
-        "gp": 9,
-        "ppr": 129.7,
-        "half": 106.2,
-        "std": 82.7
+        "gp": 10,
+        "ppr": 138.3,
+        "half": 112.3,
+        "std": 86.3
       },
       "age": 26
     },
@@ -238,7 +238,7 @@
       "pos": "RB",
       "team": "PHI",
       "adp": 19.4,
-      "sfAdp": 26.5,
+      "sfAdp": 24.3,
       "stats": {
         "gp": 8,
         "ppr": 72.2,
@@ -255,7 +255,7 @@
       "pos": "RB",
       "team": "LV",
       "adp": 20.7,
-      "sfAdp": 46.1,
+      "sfAdp": 44.5,
       "stats": {
         "gp": 11,
         "ppr": 177.6,
@@ -271,7 +271,7 @@
       "pos": "RB",
       "team": "LAC",
       "adp": 21,
-      "sfAdp": 41.2,
+      "sfAdp": 41.3,
       "stats": {
         "gp": 10,
         "ppr": 96,
@@ -287,7 +287,7 @@
       "pos": "QB",
       "team": "BAL",
       "adp": 23.3,
-      "sfAdp": 5,
+      "sfAdp": 6,
       "stats": {
         "gp": 4,
         "ppr": 80.1,
@@ -304,7 +304,7 @@
       "pos": "TE",
       "team": "LV",
       "adp": 23.5,
-      "sfAdp": 64.6,
+      "sfAdp": 65.8,
       "stats": {
         "gp": 8,
         "ppr": 149.8,
@@ -321,7 +321,7 @@
       "pos": "RB",
       "team": "BAL",
       "adp": 23.9,
-      "sfAdp": 15.6,
+      "sfAdp": 11.6,
       "stats": {
         "gp": 11,
         "ppr": 180.4,
@@ -338,7 +338,7 @@
       "pos": "RB",
       "team": "KC",
       "adp": 24.1,
-      "sfAdp": 31.8,
+      "sfAdp": 32.9,
       "stats": {
         "gp": 8,
         "ppr": 196.4,
@@ -355,7 +355,7 @@
       "pos": "WR",
       "team": "ATL",
       "adp": 25.5,
-      "sfAdp": null,
+      "sfAdp": 30.7,
       "stats": {
         "gp": 10,
         "ppr": 138.5,
@@ -372,7 +372,7 @@
       "pos": "WR",
       "team": "NE",
       "adp": 26,
-      "sfAdp": 41.5,
+      "sfAdp": 36.2,
       "stats": {
         "gp": 4,
         "ppr": 23.8,
@@ -389,7 +389,7 @@
       "pos": "TE",
       "team": "ARI",
       "adp": 26.2,
-      "sfAdp": 63.2,
+      "sfAdp": 68.9,
       "stats": {
         "gp": 11,
         "ppr": 186.3,
@@ -405,7 +405,7 @@
       "pos": "QB",
       "team": "NE",
       "adp": 28.6,
-      "sfAdp": 4.1,
+      "sfAdp": 5.1,
       "stats": {
         "gp": 10,
         "ppr": 193.2,
@@ -422,7 +422,7 @@
       "pos": "WR",
       "team": "HOU",
       "adp": 29.1,
-      "sfAdp": 41.2,
+      "sfAdp": 39.1,
       "stats": {
         "gp": 8,
         "ppr": 130.8,
@@ -438,7 +438,7 @@
       "pos": "WR",
       "team": "DAL",
       "adp": 29.5,
-      "sfAdp": 39.9,
+      "sfAdp": 38.4,
       "stats": {
         "gp": 10,
         "ppr": 171.6,
@@ -454,12 +454,12 @@
       "pos": "QB",
       "team": "CIN",
       "adp": 29.9,
-      "sfAdp": 5.4,
+      "sfAdp": 6.1,
       "stats": {
-        "gp": 9,
-        "ppr": 238.3,
-        "half": 238.3,
-        "std": 238.3
+        "gp": 10,
+        "ppr": 258.2,
+        "half": 258.2,
+        "std": 258.2
       },
       "age": 29
     },
@@ -470,7 +470,7 @@
       "pos": "RB",
       "team": "LAR",
       "adp": 31.5,
-      "sfAdp": 46.2,
+      "sfAdp": 41.5,
       "stats": {
         "gp": 10,
         "ppr": 164.3,
@@ -487,7 +487,7 @@
       "pos": "RB",
       "team": "ARI",
       "adp": 32.3,
-      "sfAdp": 53.6,
+      "sfAdp": 53.1,
       "stats": {
         "gp": 6,
         "ppr": 53.4,
@@ -504,7 +504,7 @@
       "pos": "WR",
       "team": "NYG",
       "adp": 33.1,
-      "sfAdp": 53.1,
+      "sfAdp": 50.4,
       "stats": {
         "gp": 10,
         "ppr": 155.7,
@@ -520,7 +520,7 @@
       "pos": "WR",
       "team": "KC",
       "adp": 36.7,
-      "sfAdp": null,
+      "sfAdp": 40.3,
       "stats": {
         "gp": 7,
         "ppr": 90.7,
@@ -536,7 +536,7 @@
       "pos": "WR",
       "team": "NO",
       "adp": 37.1,
-      "sfAdp": 42.7,
+      "sfAdp": 41.9,
       "stats": {
         "gp": 10,
         "ppr": 166.6,
@@ -552,7 +552,7 @@
       "pos": "RB",
       "team": "DAL",
       "adp": 38.9,
-      "sfAdp": 42.8,
+      "sfAdp": 43.4,
       "stats": {
         "gp": 11,
         "ppr": 191.4,
@@ -568,7 +568,7 @@
       "pos": "WR",
       "team": "PHI",
       "adp": 40.8,
-      "sfAdp": 53.3,
+      "sfAdp": 53.8,
       "stats": {
         "gp": 5,
         "ppr": 78.1,
@@ -584,7 +584,7 @@
       "pos": "RB",
       "team": "NYJ",
       "adp": 42.2,
-      "sfAdp": null,
+      "sfAdp": 48.2,
       "stats": {
         "gp": 6,
         "ppr": 88,
@@ -600,7 +600,7 @@
       "pos": "RB",
       "team": "NO",
       "adp": 44.2,
-      "sfAdp": 55.1,
+      "sfAdp": 55.7,
       "stats": {
         "gp": 5,
         "ppr": 44.9,
@@ -616,7 +616,7 @@
       "pos": "TE",
       "team": "CHI",
       "adp": 44.6,
-      "sfAdp": 87.1,
+      "sfAdp": 82.1,
       "stats": {
         "gp": 9,
         "ppr": 95.2,
@@ -632,7 +632,7 @@
       "pos": "QB",
       "team": "CHI",
       "adp": 44.8,
-      "sfAdp": 15.8,
+      "sfAdp": 17.2,
       "stats": {
         "gp": 7,
         "ppr": 130.7,
@@ -648,7 +648,7 @@
       "pos": "QB",
       "team": "PHI",
       "adp": 45,
-      "sfAdp": 13.1,
+      "sfAdp": 15.5,
       "stats": {
         "gp": 5,
         "ppr": 83,
@@ -665,7 +665,7 @@
       "pos": "WR",
       "team": "BAL",
       "adp": 45.2,
-      "sfAdp": 41.2,
+      "sfAdp": 40.2,
       "stats": {
         "gp": 9,
         "ppr": 155.3,
@@ -681,12 +681,12 @@
       "pos": "QB",
       "team": "WAS",
       "adp": 46.1,
-      "sfAdp": 18.1,
+      "sfAdp": 14.2,
       "stats": {
-        "gp": 7,
-        "ppr": 138,
-        "half": 138,
-        "std": 138
+        "gp": 8,
+        "ppr": 155,
+        "half": 155,
+        "std": 155
       },
       "age": 25
     },
@@ -697,7 +697,7 @@
       "pos": "WR",
       "team": "TB",
       "adp": 46.6,
-      "sfAdp": 53.7,
+      "sfAdp": 53.5,
       "stats": {
         "gp": 8,
         "ppr": 81.8,
@@ -713,7 +713,7 @@
       "pos": "WR",
       "team": "LAC",
       "adp": 46.9,
-      "sfAdp": 66.1,
+      "sfAdp": 65.2,
       "stats": {
         "gp": 6,
         "ppr": 72.3,
@@ -729,7 +729,7 @@
       "pos": "RB",
       "team": "NYG",
       "adp": 47.4,
-      "sfAdp": 56.8,
+      "sfAdp": 57.1,
       "stats": {
         "gp": 8,
         "ppr": 103.4,
@@ -745,7 +745,7 @@
       "pos": "WR",
       "team": "CAR",
       "adp": 48.1,
-      "sfAdp": null,
+      "sfAdp": 52.7,
       "stats": {
         "gp": 10,
         "ppr": 150.1,
@@ -761,7 +761,7 @@
       "pos": "WR",
       "team": "NYJ",
       "adp": 48.3,
-      "sfAdp": 56.9,
+      "sfAdp": 57.2,
       "stats": {
         "gp": 10,
         "ppr": 136.2,
@@ -777,12 +777,12 @@
       "pos": "WR",
       "team": "CIN",
       "adp": 48.7,
-      "sfAdp": 49,
+      "sfAdp": 48.5,
       "stats": {
-        "gp": 9,
-        "ppr": 171.4,
-        "half": 144.9,
-        "std": 118.4
+        "gp": 10,
+        "ppr": 183.7,
+        "half": 156.2,
+        "std": 128.7
       },
       "age": 27
     },
@@ -793,7 +793,7 @@
       "pos": "QB",
       "team": "DAL",
       "adp": 52.6,
-      "sfAdp": 10.3,
+      "sfAdp": 11.3,
       "stats": {
         "gp": 11,
         "ppr": 243.8,
@@ -809,7 +809,7 @@
       "pos": "RB",
       "team": "CHI",
       "adp": 53.2,
-      "sfAdp": 57.8,
+      "sfAdp": 57.1,
       "stats": {
         "gp": 10,
         "ppr": 165.7,
@@ -825,7 +825,7 @@
       "pos": "RB",
       "team": "TB",
       "adp": 53.5,
-      "sfAdp": 71,
+      "sfAdp": 67.7,
       "stats": {
         "gp": 10,
         "ppr": 178.1,
@@ -841,7 +841,7 @@
       "pos": "WR",
       "team": "DEN",
       "adp": 55.7,
-      "sfAdp": 69,
+      "sfAdp": 67.4,
       "stats": {
         "gp": 10,
         "ppr": 91.1,
@@ -857,7 +857,7 @@
       "pos": "QB",
       "team": "LAC",
       "adp": 56.4,
-      "sfAdp": 22.8,
+      "sfAdp": 24.2,
       "stats": {
         "gp": 10,
         "ppr": 130.3,
@@ -874,7 +874,7 @@
       "pos": "QB",
       "team": "LAR",
       "adp": 57.7,
-      "sfAdp": 13,
+      "sfAdp": 13.7,
       "stats": {
         "gp": 10,
         "ppr": 172.6,
@@ -890,7 +890,7 @@
       "pos": "RB",
       "team": "CLE",
       "adp": 58.1,
-      "sfAdp": null,
+      "sfAdp": 65.5,
       "stats": {
         "gp": 9,
         "ppr": 108.2,
@@ -906,7 +906,7 @@
       "pos": "TE",
       "team": "IND",
       "adp": 58.3,
-      "sfAdp": 95.5,
+      "sfAdp": 92.6,
       "stats": {
         "gp": 9,
         "ppr": 89.7,
@@ -922,7 +922,7 @@
       "pos": "WR",
       "team": "LAR",
       "adp": 58.4,
-      "sfAdp": null,
+      "sfAdp": 53.8,
       "stats": {
         "gp": 6,
         "ppr": 102,
@@ -939,7 +939,7 @@
       "pos": "RB",
       "team": "SEA",
       "adp": 59.2,
-      "sfAdp": 72.5,
+      "sfAdp": 71.6,
       "stats": {
         "gp": 6,
         "ppr": 42.9,
@@ -955,7 +955,7 @@
       "pos": "QB",
       "team": "JAX",
       "adp": 61.3,
-      "sfAdp": 22.1,
+      "sfAdp": 20.6,
       "stats": {
         "gp": 10,
         "ppr": 193.7,
@@ -971,7 +971,7 @@
       "pos": "WR",
       "team": "DET",
       "adp": 61.9,
-      "sfAdp": null,
+      "sfAdp": 51.2,
       "stats": {
         "gp": 10,
         "ppr": 134,
@@ -987,7 +987,7 @@
       "pos": "WR",
       "team": "BUF",
       "adp": 62.3,
-      "sfAdp": 70.9,
+      "sfAdp": 70.5,
       "stats": {
         "gp": 8,
         "ppr": 102,
@@ -1004,7 +1004,7 @@
       "pos": "RB",
       "team": "HOU",
       "adp": 63.5,
-      "sfAdp": 64.7,
+      "sfAdp": 65.8,
       "stats": {
         "gp": 6,
         "ppr": 60.9,
@@ -1020,7 +1020,7 @@
       "pos": "WR",
       "team": "WAS",
       "adp": 64.2,
-      "sfAdp": null,
+      "sfAdp": 70.5,
       "stats": {
         "gp": 5,
         "ppr": 46,
@@ -1037,7 +1037,7 @@
       "pos": "RB",
       "team": "JAX",
       "adp": 65.6,
-      "sfAdp": null,
+      "sfAdp": 68.2,
       "stats": {
         "gp": 10,
         "ppr": 155.8,
@@ -1054,7 +1054,7 @@
       "pos": "QB",
       "team": "DEN",
       "adp": 68.5,
-      "sfAdp": 23.9,
+      "sfAdp": 27.5,
       "stats": {
         "gp": 10,
         "ppr": 147.3,
@@ -1070,7 +1070,7 @@
       "pos": "WR",
       "team": "CHI",
       "adp": 69.6,
-      "sfAdp": 77.4,
+      "sfAdp": 75,
       "stats": {
         "gp": 10,
         "ppr": 139.6,
@@ -1086,7 +1086,7 @@
       "pos": "QB",
       "team": "KC",
       "adp": 70.3,
-      "sfAdp": 23.9,
+      "sfAdp": 25.1,
       "stats": {
         "gp": 10,
         "ppr": 206.4,
@@ -1102,7 +1102,7 @@
       "pos": "WR",
       "team": "CHI",
       "adp": 71.3,
-      "sfAdp": 63.8,
+      "sfAdp": 67.2,
       "stats": {
         "gp": 10,
         "ppr": 97.3,
@@ -1118,7 +1118,7 @@
       "pos": "RB",
       "team": "NE",
       "adp": 71.3,
-      "sfAdp": 87,
+      "sfAdp": 83.7,
       "stats": {
         "gp": 6,
         "ppr": 33.8,
@@ -1135,7 +1135,7 @@
       "pos": "WR",
       "team": "GB",
       "adp": 71.8,
-      "sfAdp": 62.7,
+      "sfAdp": 64.6,
       "stats": {
         "gp": 10,
         "ppr": 183.6,
@@ -1151,7 +1151,7 @@
       "pos": "TE",
       "team": "ATL",
       "adp": 74,
-      "sfAdp": 131.2,
+      "sfAdp": 136.7,
       "stats": {
         "gp": 9,
         "ppr": 78,
@@ -1167,7 +1167,7 @@
       "pos": "WR",
       "team": "JAX",
       "adp": 74.7,
-      "sfAdp": 79.6,
+      "sfAdp": 85.2,
       "stats": {
         "gp": 10,
         "ppr": 156.1,
@@ -1183,7 +1183,7 @@
       "pos": "RB",
       "team": "NE",
       "adp": 75.9,
-      "sfAdp": null,
+      "sfAdp": 79.2,
       "stats": {
         "gp": 10,
         "ppr": 115.2,
@@ -1199,7 +1199,7 @@
       "pos": "QB",
       "team": "DET",
       "adp": 76.4,
-      "sfAdp": 22,
+      "sfAdp": 23.1,
       "stats": {
         "gp": 10,
         "ppr": 192.1,
@@ -1215,7 +1215,7 @@
       "pos": "RB",
       "team": "GB",
       "adp": 76.7,
-      "sfAdp": 100.2,
+      "sfAdp": 104.1,
       "stats": {
         "gp": 3,
         "ppr": 43.8,
@@ -1232,7 +1232,7 @@
       "pos": "QB",
       "team": "NYG",
       "adp": 77.9,
-      "sfAdp": 29.4,
+      "sfAdp": 29.6,
       "stats": {
         "gp": 2,
         "ppr": 27.4,
@@ -1249,7 +1249,7 @@
       "pos": "QB",
       "team": "SF",
       "adp": 78.2,
-      "sfAdp": 30.8,
+      "sfAdp": 18.1,
       "stats": {
         "gp": 10,
         "ppr": 230.2,
@@ -1265,7 +1265,7 @@
       "pos": "TE",
       "team": "GB",
       "adp": 78.7,
-      "sfAdp": null,
+      "sfAdp": 95.7,
       "stats": {
         "gp": 10,
         "ppr": 93.3,
@@ -1281,7 +1281,7 @@
       "pos": "WR",
       "team": "TEN",
       "adp": 80.8,
-      "sfAdp": 94.7,
+      "sfAdp": 92.2,
       "stats": {
         "gp": 8,
         "ppr": 91.1,
@@ -1313,7 +1313,7 @@
       "pos": "WR",
       "team": "SF",
       "adp": 82.5,
-      "sfAdp": 75.4,
+      "sfAdp": 76.8,
       "stats": {
         "gp": 7,
         "ppr": 111.9,
@@ -1329,7 +1329,7 @@
       "pos": "WR",
       "team": "HOU",
       "adp": 83.4,
-      "sfAdp": 86.6,
+      "sfAdp": 85.1,
       "stats": {
         "gp": 6,
         "ppr": 37.5,
@@ -1346,7 +1346,7 @@
       "pos": "WR",
       "team": "DEN",
       "adp": 84.9,
-      "sfAdp": null,
+      "sfAdp": 87.2,
       "stats": {
         "gp": 9,
         "ppr": 63.6,
@@ -1362,14 +1362,15 @@
       "pos": "TE",
       "team": "DET",
       "adp": 85.9,
-      "sfAdp": 103.7,
+      "sfAdp": 106.1,
       "stats": {
         "gp": 10,
         "ppr": 104.9,
         "half": 85.4,
         "std": 65.9
       },
-      "age": 25
+      "age": 25,
+      "inj": "Questionable"
     },
     {
       "id": "4217",
@@ -1378,7 +1379,7 @@
       "pos": "TE",
       "team": "SF",
       "adp": 86,
-      "sfAdp": null,
+      "sfAdp": 105.7,
       "stats": {
         "gp": 10,
         "ppr": 146.1,
@@ -1410,7 +1411,7 @@
       "pos": "WR",
       "team": "JAX",
       "adp": 86.7,
-      "sfAdp": 90.8,
+      "sfAdp": 91.1,
       "stats": {
         "gp": 7,
         "ppr": 48.4,
@@ -1426,7 +1427,7 @@
       "pos": "RB",
       "team": "TEN",
       "adp": 90.7,
-      "sfAdp": 91.2,
+      "sfAdp": 88.1,
       "stats": {
         "gp": 10,
         "ppr": 151.4,
@@ -1442,7 +1443,7 @@
       "pos": "WR",
       "team": "PIT",
       "adp": 91.6,
-      "sfAdp": 80.5,
+      "sfAdp": 85.1,
       "stats": {
         "gp": 10,
         "ppr": 94.5,
@@ -1458,7 +1459,7 @@
       "pos": "WR",
       "team": "IND",
       "adp": 91.6,
-      "sfAdp": null,
+      "sfAdp": 78.2,
       "stats": {
         "gp": 2,
         "ppr": 12.2,
@@ -1475,7 +1476,7 @@
       "pos": "WR",
       "team": "ARI",
       "adp": 91.7,
-      "sfAdp": 99.2,
+      "sfAdp": 98.6,
       "stats": {
         "gp": 9,
         "ppr": 120.7,
@@ -1492,7 +1493,7 @@
       "pos": "WR",
       "team": "TB",
       "adp": 91.9,
-      "sfAdp": 103.2,
+      "sfAdp": 100.7,
       "stats": {
         "gp": 9,
         "ppr": 62.2,
@@ -1508,7 +1509,7 @@
       "pos": "QB",
       "team": "MIN",
       "adp": 94.8,
-      "sfAdp": 35.1,
+      "sfAdp": 35.6,
       "stats": {
         "gp": 6,
         "ppr": 76.6,
@@ -1525,7 +1526,7 @@
       "pos": "QB",
       "team": "TB",
       "adp": 94.8,
-      "sfAdp": 35.9,
+      "sfAdp": 36.5,
       "stats": {
         "gp": 7,
         "ppr": 74,
@@ -1541,7 +1542,7 @@
       "pos": "RB",
       "team": "DEN",
       "adp": 96.9,
-      "sfAdp": 134.3,
+      "sfAdp": 127.6,
       "stats": {
         "gp": 6,
         "ppr": 67.4,
@@ -1558,7 +1559,7 @@
       "pos": "RB",
       "team": "CAR",
       "adp": 97.1,
-      "sfAdp": 86.4,
+      "sfAdp": 95.3,
       "stats": {
         "gp": 10,
         "ppr": 206.8,
@@ -1574,7 +1575,7 @@
       "pos": "QB",
       "team": "GB",
       "adp": 97.7,
-      "sfAdp": 37.4,
+      "sfAdp": 42.5,
       "stats": {
         "gp": 10,
         "ppr": 202.8,
@@ -1590,7 +1591,7 @@
       "pos": "RB",
       "team": "CAR",
       "adp": 98.2,
-      "sfAdp": 113.8,
+      "sfAdp": 104.7,
       "stats": {
         "gp": 2,
         "ppr": 9.3,
@@ -1607,14 +1608,15 @@
       "pos": "TE",
       "team": "PHI",
       "adp": 99.7,
-      "sfAdp": null,
+      "sfAdp": 116.3,
       "stats": {
         "gp": 8,
         "ppr": 78.8,
         "half": 62.8,
         "std": 46.8
       },
-      "age": 31
+      "age": 31,
+      "inj": "Questionable"
     },
     {
       "id": "11533",
@@ -1623,7 +1625,7 @@
       "pos": "K",
       "team": "DAL",
       "adp": 100.1,
-      "sfAdp": 128.4,
+      "sfAdp": 129.6,
       "stats": {
         "gp": 11,
         "ppr": 99,
@@ -1639,7 +1641,7 @@
       "pos": "TE",
       "team": "KC",
       "adp": 100.2,
-      "sfAdp": null,
+      "sfAdp": 157.2,
       "stats": {
         "gp": 10,
         "ppr": 129.7,
@@ -1655,7 +1657,7 @@
       "pos": "RB",
       "team": "PIT",
       "adp": 101.1,
-      "sfAdp": 98.5,
+      "sfAdp": 96.6,
       "stats": {
         "gp": 7,
         "ppr": 57.4,
@@ -1671,7 +1673,7 @@
       "pos": "RB",
       "team": "DEN",
       "adp": 102.2,
-      "sfAdp": 91.9,
+      "sfAdp": 93.2,
       "stats": {
         "gp": 9,
         "ppr": 62.5,
@@ -1687,7 +1689,7 @@
       "pos": "QB",
       "team": "NO",
       "adp": 104.7,
-      "sfAdp": 45.9,
+      "sfAdp": 46.3,
       "stats": {
         "gp": 10,
         "ppr": 177.9,
@@ -1718,7 +1720,7 @@
       "pos": "QB",
       "team": "HOU",
       "adp": 108.4,
-      "sfAdp": 62.9,
+      "sfAdp": 64.2,
       "stats": {
         "gp": 10,
         "ppr": 208.9,
@@ -1749,7 +1751,7 @@
       "pos": "QB",
       "team": "SEA",
       "adp": 110.9,
-      "sfAdp": 49.2,
+      "sfAdp": 52.2,
       "stats": {
         "gp": 7,
         "ppr": 101.3,
@@ -1782,7 +1784,7 @@
       "pos": "TE",
       "team": "NYG",
       "adp": 112.5,
-      "sfAdp": 152,
+      "sfAdp": 148.2,
       "stats": {
         "gp": 10,
         "ppr": 161,
@@ -1798,7 +1800,7 @@
       "pos": "WR",
       "team": "PIT",
       "adp": 112.7,
-      "sfAdp": 109.5,
+      "sfAdp": 110,
       "stats": {
         "gp": 3,
         "ppr": 15.9,
@@ -1815,7 +1817,7 @@
       "pos": "QB",
       "team": "TEN",
       "adp": 113.2,
-      "sfAdp": 94.7,
+      "sfAdp": 102.8,
       "stats": {
         "gp": 10,
         "ppr": 147.9,
@@ -1831,7 +1833,7 @@
       "pos": "WR",
       "team": "LAC",
       "adp": 113.4,
-      "sfAdp": 92.3,
+      "sfAdp": 93.7,
       "stats": {
         "gp": 9,
         "ppr": 49.4,
@@ -1847,7 +1849,7 @@
       "pos": "RB",
       "team": "LAR",
       "adp": 114.2,
-      "sfAdp": 111.7,
+      "sfAdp": 110.8,
       "stats": {
         "gp": 10,
         "ppr": 115.5,
@@ -1895,7 +1897,7 @@
       "pos": "QB",
       "team": "IND",
       "adp": 115.3,
-      "sfAdp": 64.9,
+      "sfAdp": 67.9,
       "stats": {
         "gp": 11,
         "ppr": 103.8,
@@ -1911,7 +1913,7 @@
       "pos": "WR",
       "team": "KC",
       "adp": 116.1,
-      "sfAdp": 123.7,
+      "sfAdp": 122.6,
       "stats": {
         "gp": 11,
         "ppr": 100.3,
@@ -1927,15 +1929,14 @@
       "pos": "RB",
       "team": "WAS",
       "adp": 116.2,
-      "sfAdp": 103.3,
+      "sfAdp": 103.9,
       "stats": {
-        "gp": 5,
-        "ppr": 44.9,
-        "half": 42.4,
-        "std": 39.9
+        "gp": 6,
+        "ppr": 60.6,
+        "half": 57.1,
+        "std": 53.6
       },
-      "age": 25,
-      "inj": "IR"
+      "age": 25
     },
     {
       "id": "12534",
@@ -1944,7 +1945,7 @@
       "pos": "RB",
       "team": "CHI",
       "adp": 117.2,
-      "sfAdp": 110.1,
+      "sfAdp": 114.2,
       "stats": {
         "gp": 5,
         "ppr": 61.1,
@@ -1960,7 +1961,7 @@
       "pos": "WR",
       "team": "MIN",
       "adp": 117.4,
-      "sfAdp": 99,
+      "sfAdp": 102.1,
       "stats": {
         "gp": 6,
         "ppr": 53.9,
@@ -1977,7 +1978,7 @@
       "pos": "QB",
       "team": "MIA",
       "adp": 117.5,
-      "sfAdp": 74.7,
+      "sfAdp": 75.4,
       "stats": {
         "gp": 8,
         "ppr": 111,
@@ -1994,7 +1995,7 @@
       "pos": "TE",
       "team": "BUF",
       "adp": 117.6,
-      "sfAdp": 150.4,
+      "sfAdp": 149.3,
       "stats": {
         "gp": 9,
         "ppr": 92.7,
@@ -2026,7 +2027,7 @@
       "pos": "RB",
       "team": "MIN",
       "adp": 118.7,
-      "sfAdp": 115.2,
+      "sfAdp": 110.9,
       "stats": {
         "gp": 6,
         "ppr": 37.5,
@@ -2042,7 +2043,7 @@
       "pos": "QB",
       "team": "CAR",
       "adp": 119.3,
-      "sfAdp": 83.1,
+      "sfAdp": 87.2,
       "stats": {
         "gp": 10,
         "ppr": 177.6,
@@ -2058,7 +2059,7 @@
       "pos": "WR",
       "team": "TEN",
       "adp": 120,
-      "sfAdp": null,
+      "sfAdp": 130.1,
       "stats": {
         "gp": 9,
         "ppr": 81.3,
@@ -2075,7 +2076,7 @@
       "pos": "RB",
       "team": "MIN",
       "adp": 121.4,
-      "sfAdp": 136.7,
+      "sfAdp": 133.4,
       "stats": {
         "gp": 10,
         "ppr": 106.7,
@@ -2091,12 +2092,12 @@
       "pos": "WR",
       "team": "WAS",
       "adp": 122.6,
-      "sfAdp": 118.5,
+      "sfAdp": 123.6,
       "stats": {
-        "gp": 8,
-        "ppr": 110.6,
-        "half": 92.6,
-        "std": 74.6
+        "gp": 9,
+        "ppr": 119.1,
+        "half": 99.1,
+        "std": 79.1
       },
       "age": 32
     },
@@ -2123,7 +2124,7 @@
       "pos": "WR",
       "team": "PHI",
       "adp": 124.3,
-      "sfAdp": 131,
+      "sfAdp": 135,
       "stats": {
         "gp": 10,
         "ppr": 75,
@@ -2139,7 +2140,7 @@
       "pos": "RB",
       "team": "GB",
       "adp": 125,
-      "sfAdp": 123,
+      "sfAdp": 127.2,
       "stats": {
         "gp": 9,
         "ppr": 58.7,
@@ -2155,7 +2156,7 @@
       "pos": "WR",
       "team": "GB",
       "adp": 125.4,
-      "sfAdp": 112.4,
+      "sfAdp": 111,
       "stats": {
         "gp": 10,
         "ppr": 175.9,
@@ -2171,7 +2172,7 @@
       "pos": "WR",
       "team": "SF",
       "adp": 128.7,
-      "sfAdp": 131.7,
+      "sfAdp": 127.4,
       "age": 23,
       "inj": "IR"
     },
@@ -2182,7 +2183,7 @@
       "pos": "WR",
       "team": "CLE",
       "adp": 129.3,
-      "sfAdp": 132.7,
+      "sfAdp": 133.3,
       "stats": {
         "gp": 10,
         "ppr": 100.1,
@@ -2198,7 +2199,7 @@
       "pos": "QB",
       "team": "LV",
       "adp": 129.6,
-      "sfAdp": 124.2,
+      "sfAdp": 130.5,
       "stats": {
         "gp": 3,
         "ppr": 40,
@@ -2214,7 +2215,7 @@
       "pos": "WR",
       "team": "GB",
       "adp": 130,
-      "sfAdp": null,
+      "sfAdp": 104.6,
       "stats": {
         "gp": 2,
         "ppr": 6.4,
@@ -2231,7 +2232,7 @@
       "pos": "QB",
       "team": "BAL",
       "adp": 130.4,
-      "sfAdp": 99.5,
+      "sfAdp": 99.1,
       "stats": {
         "gp": 10,
         "ppr": 145.7,
@@ -2247,7 +2248,7 @@
       "pos": "RB",
       "team": "SEA",
       "adp": 132.6,
-      "sfAdp": 142.4,
+      "sfAdp": 150.9,
       "stats": {
         "gp": 3,
         "ppr": 24.9,
@@ -2263,7 +2264,7 @@
       "pos": "K",
       "team": "HOU",
       "adp": 134.2,
-      "sfAdp": null,
+      "sfAdp": 146.1,
       "stats": {
         "gp": 10,
         "ppr": 105,
@@ -2302,8 +2303,7 @@
         "half": 66.4,
         "std": 56.9
       },
-      "age": 27,
-      "inj": "Questionable"
+      "age": 27
     },
     {
       "id": "7002",
@@ -2329,7 +2329,7 @@
       "pos": "WR",
       "team": "KC",
       "adp": 137.7,
-      "sfAdp": 111.9,
+      "sfAdp": 110.2,
       "stats": {
         "gp": 9,
         "ppr": 78.6,
@@ -2375,7 +2375,7 @@
       "pos": "WR",
       "team": "BUF",
       "adp": 139.3,
-      "sfAdp": 127,
+      "sfAdp": 129.1,
       "stats": {
         "gp": 10,
         "ppr": 99,
@@ -2391,7 +2391,7 @@
       "pos": "K",
       "team": "SEA",
       "adp": 139.8,
-      "sfAdp": null,
+      "sfAdp": 137.6,
       "stats": {
         "gp": 10,
         "ppr": 75,
@@ -2407,7 +2407,7 @@
       "pos": "WR",
       "team": "JAX",
       "adp": 140.5,
-      "sfAdp": 112,
+      "sfAdp": 118.3,
       "stats": {
         "gp": 10,
         "ppr": 94.5,
@@ -2423,7 +2423,7 @@
       "pos": "K",
       "team": "LAC",
       "adp": 141.3,
-      "sfAdp": 135.6,
+      "sfAdp": 139.7,
       "stats": {
         "gp": 10,
         "ppr": 79,
@@ -2456,7 +2456,7 @@
       "pos": "QB",
       "team": "PIT",
       "adp": 142.1,
-      "sfAdp": 94.3,
+      "sfAdp": 111.8,
       "stats": {
         "gp": 10,
         "ppr": 154.7,
@@ -2472,7 +2472,7 @@
       "pos": "WR",
       "team": "SF",
       "adp": 142.2,
-      "sfAdp": 124.4,
+      "sfAdp": 125.1,
       "stats": {
         "gp": 7,
         "ppr": 94,
@@ -2504,7 +2504,7 @@
       "pos": "WR",
       "team": "NE",
       "adp": 143.5,
-      "sfAdp": 119.2,
+      "sfAdp": 121.9,
       "stats": {
         "gp": 5,
         "ppr": 58.1,
@@ -2548,7 +2548,7 @@
       "pos": "WR",
       "team": "MIA",
       "adp": 144.3,
-      "sfAdp": null,
+      "sfAdp": 155.6,
       "stats": {
         "gp": 10,
         "ppr": 96.3,
@@ -2610,7 +2610,7 @@
       "pos": "QB",
       "team": "NYJ",
       "adp": 147.1,
-      "sfAdp": 95.8,
+      "sfAdp": 104.3,
       "stats": {
         "gp": 11,
         "ppr": 158.9,
@@ -2637,7 +2637,7 @@
       "pos": "K",
       "team": "JAX",
       "adp": 147.6,
-      "sfAdp": 157.3,
+      "sfAdp": 161.7,
       "stats": {
         "gp": 10,
         "ppr": 109,
@@ -2700,7 +2700,7 @@
       "pos": "WR",
       "team": "CAR",
       "adp": 150.1,
-      "sfAdp": 136.6,
+      "sfAdp": 138.3,
       "stats": {
         "gp": 9,
         "ppr": 95,
@@ -2734,7 +2734,7 @@
       "pos": "RB",
       "team": "JAX",
       "adp": 150.8,
-      "sfAdp": 156.5,
+      "sfAdp": 154.6,
       "stats": {
         "gp": 10,
         "ppr": 60,
@@ -2766,7 +2766,7 @@
       "pos": "RB",
       "team": "ARI",
       "adp": 151.9,
-      "sfAdp": null,
+      "sfAdp": 155.4,
       "stats": {
         "gp": 11,
         "ppr": 94.4,
@@ -2798,7 +2798,7 @@
       "pos": "K",
       "team": "BAL",
       "adp": 152.8,
-      "sfAdp": null,
+      "sfAdp": 144.2,
       "stats": {
         "gp": 5,
         "ppr": 28,
@@ -2814,7 +2814,7 @@
       "pos": "K",
       "team": "DET",
       "adp": 153.1,
-      "sfAdp": null,
+      "sfAdp": 150.6,
       "stats": {
         "gp": 10,
         "ppr": 92,
@@ -2862,7 +2862,7 @@
       "pos": "WR",
       "team": "CLE",
       "adp": 155.5,
-      "sfAdp": null,
+      "sfAdp": 136.7,
       "stats": {
         "gp": 7,
         "ppr": 48.2,
@@ -2893,7 +2893,7 @@
       "pos": "QB",
       "team": "LAR",
       "adp": 158.2,
-      "sfAdp": 62.3,
+      "sfAdp": 68.4,
       "age": 23,
       "inj": "Out"
     },
@@ -2906,10 +2906,10 @@
       "adp": 159,
       "sfAdp": null,
       "stats": {
-        "gp": 7,
-        "ppr": 51.3,
-        "half": 37.8,
-        "std": 24.3
+        "gp": 8,
+        "ppr": 61.9,
+        "half": 46.4,
+        "std": 30.9
       },
       "age": 27
     },
@@ -2953,7 +2953,7 @@
       "pos": "WR",
       "team": "SEA",
       "adp": 161.6,
-      "sfAdp": 140,
+      "sfAdp": 134.4,
       "stats": {
         "gp": 8,
         "ppr": 44,
@@ -3048,14 +3048,15 @@
       "pos": "WR",
       "team": "CLE",
       "adp": 164.7,
-      "sfAdp": 151.8,
+      "sfAdp": 143.3,
       "stats": {
         "gp": 10,
         "ppr": 105.3,
         "half": 88.8,
         "std": 72.3
       },
-      "age": 22
+      "age": 22,
+      "inj": "Questionable"
     },
     {
       "id": "DET",
@@ -3127,7 +3128,7 @@
       "pos": "QB",
       "team": "ATL",
       "adp": 167.3,
-      "sfAdp": 105.6,
+      "sfAdp": 119.3,
       "stats": {
         "gp": 8,
         "ppr": 115.6,
@@ -3160,7 +3161,7 @@
       "pos": "QB",
       "team": "ATL",
       "adp": 168.1,
-      "sfAdp": 139.4,
+      "sfAdp": 137.6,
       "stats": {
         "gp": 1,
         "ppr": 0.4,
@@ -3209,7 +3210,7 @@
       "pos": "K",
       "team": "SF",
       "adp": 169.9,
-      "sfAdp": null,
+      "sfAdp": 174.5,
       "stats": {
         "gp": 10,
         "ppr": 58,
@@ -3318,10 +3319,10 @@
       "adp": 173.5,
       "sfAdp": null,
       "stats": {
-        "gp": 9,
-        "ppr": 84,
-        "half": 84,
-        "std": 84
+        "gp": 10,
+        "ppr": 94,
+        "half": 94,
+        "std": 94
       },
       "age": 27
     },
@@ -3365,7 +3366,7 @@
       "pos": "RB",
       "team": "SF",
       "adp": 173.8,
-      "sfAdp": null,
+      "sfAdp": 176.8,
       "stats": {
         "gp": 10,
         "ppr": 54.8,
@@ -3445,7 +3446,7 @@
       "pos": "K",
       "team": "TB",
       "adp": 176.1,
-      "sfAdp": null,
+      "sfAdp": 160.8,
       "stats": {
         "gp": 10,
         "ppr": 102,
@@ -3511,10 +3512,10 @@
       "adp": 177.7,
       "sfAdp": null,
       "stats": {
-        "gp": 9,
-        "ppr": 72.6,
-        "half": 58.6,
-        "std": 44.6
+        "gp": 10,
+        "ppr": 93.8,
+        "half": 75.3,
+        "std": 56.8
       },
       "age": 22
     },
@@ -3552,7 +3553,7 @@
       "pos": "QB",
       "team": "MIN",
       "adp": 179.2,
-      "sfAdp": 70.5,
+      "sfAdp": 145.5,
       "stats": {
         "gp": 11,
         "ppr": 205.1,
@@ -3645,7 +3646,7 @@
       "pos": "QB",
       "team": "CLE",
       "adp": 182.8,
-      "sfAdp": 71.9,
+      "sfAdp": 138,
       "stats": {
         "gp": 9,
         "ppr": 143.3,
@@ -3661,7 +3662,7 @@
       "pos": "QB",
       "team": "CLE",
       "adp": 183.1,
-      "sfAdp": 72.1,
+      "sfAdp": 79.1,
       "stats": {
         "gp": 2,
         "ppr": 22.8,
@@ -3756,7 +3757,7 @@
       "pos": "RB",
       "team": "ATL",
       "adp": 187.2,
-      "sfAdp": null,
+      "sfAdp": 167.3,
       "stats": {
         "gp": 6,
         "ppr": 53.1,
@@ -3789,7 +3790,7 @@
       "pos": "WR",
       "team": "HOU",
       "adp": 189.1,
-      "sfAdp": null,
+      "sfAdp": 151.2,
       "stats": {
         "gp": 9,
         "ppr": 74.9,
@@ -3952,10 +3953,10 @@
       "adp": 192.1,
       "sfAdp": null,
       "stats": {
-        "gp": 9,
-        "ppr": 77,
-        "half": 77,
-        "std": 77
+        "gp": 10,
+        "ppr": 80,
+        "half": 80,
+        "std": 80
       }
     },
     {
@@ -4121,7 +4122,7 @@
       "pos": "QB",
       "team": "ARI",
       "adp": 196.6,
-      "sfAdp": 77.4,
+      "sfAdp": 85,
       "stats": {
         "gp": 1,
         "ppr": 2.4,
@@ -4438,7 +4439,7 @@
       "pos": "QB",
       "team": "NYG",
       "adp": 207.1,
-      "sfAdp": 81.5,
+      "sfAdp": 89.5,
       "stats": {
         "gp": 6,
         "ppr": 67.3,
@@ -4679,7 +4680,7 @@
       "pos": "QB",
       "team": "SF",
       "adp": 219.2,
-      "sfAdp": 86.3,
+      "sfAdp": 94.7,
       "stats": {
         "gp": 3,
         "ppr": -0.4,
@@ -4706,7 +4707,7 @@
       "pos": "QB",
       "team": "PIT",
       "adp": 220.6,
-      "sfAdp": 86.8,
+      "sfAdp": 95.3,
       "age": 22,
       "inj": "Out"
     },
@@ -4860,7 +4861,7 @@
         "std": 24.5
       },
       "age": 26,
-      "inj": "Out"
+      "inj": "IR"
     },
     {
       "id": "4981",
@@ -4869,7 +4870,7 @@
       "pos": "WR",
       "team": "TEN",
       "adp": 227.2,
-      "sfAdp": null,
+      "sfAdp": 148,
       "stats": {
         "gp": 5,
         "ppr": 32.9,
@@ -4924,10 +4925,10 @@
       "adp": 234,
       "sfAdp": null,
       "stats": {
-        "gp": 8,
-        "ppr": 82.1,
-        "half": 72.1,
-        "std": 62.1
+        "gp": 9,
+        "ppr": 94.8,
+        "half": 82.3,
+        "std": 69.8
       },
       "age": 31
     },
@@ -4940,10 +4941,10 @@
       "adp": 234.8,
       "sfAdp": null,
       "stats": {
-        "gp": 9,
-        "ppr": 58.8,
-        "half": 52.8,
-        "std": 46.8
+        "gp": 10,
+        "ppr": 72.5,
+        "half": 64.5,
+        "std": 56.5
       },
       "age": 31
     },
@@ -5083,7 +5084,7 @@
       "pos": "QB",
       "team": "NYJ",
       "adp": 242,
-      "sfAdp": 95.3,
+      "sfAdp": 104.6,
       "stats": {
         "gp": 1,
         "ppr": 7.1,
@@ -5257,7 +5258,7 @@
       "pos": "QB",
       "team": "KC",
       "adp": 255.4,
-      "sfAdp": 100.5,
+      "sfAdp": 110.4,
       "stats": {
         "gp": 2,
         "ppr": -2.3,
@@ -5360,7 +5361,7 @@
       "pos": "QB",
       "team": "IND",
       "adp": 258.3,
-      "sfAdp": 101.7,
+      "sfAdp": 111.6,
       "stats": {
         "gp": 2,
         "ppr": 0.9,
@@ -5393,7 +5394,7 @@
       "pos": "QB",
       "team": "NYG",
       "adp": 260.8,
-      "sfAdp": 102.6,
+      "sfAdp": 112.7,
       "stats": {
         "gp": 9,
         "ppr": 84.8,
@@ -5452,7 +5453,7 @@
       "pos": "QB",
       "team": "CIN",
       "adp": 267.7,
-      "sfAdp": 105.4,
+      "sfAdp": 115.7,
       "age": 41
     },
     {
@@ -5494,7 +5495,7 @@
       "pos": "QB",
       "team": "WAS",
       "adp": 270.4,
-      "sfAdp": 106.5,
+      "sfAdp": 116.9,
       "stats": {
         "gp": 3,
         "ppr": 34.5,
@@ -5655,7 +5656,7 @@
       "pos": "QB",
       "team": "NO",
       "adp": 282.6,
-      "sfAdp": 111.3,
+      "sfAdp": 122.1,
       "age": 26
     },
     {
@@ -5713,7 +5714,7 @@
       "pos": "QB",
       "team": "CLE",
       "adp": 287.5,
-      "sfAdp": 113.2,
+      "sfAdp": 124.2,
       "age": 24,
       "inj": "Out"
     },
@@ -5756,7 +5757,7 @@
       "pos": "QB",
       "team": "SEA",
       "adp": 291.4,
-      "sfAdp": 114.7,
+      "sfAdp": 125.9,
       "age": 23
     },
     {
@@ -5816,7 +5817,7 @@
       "pos": "QB",
       "team": "CHI",
       "adp": 299.3,
-      "sfAdp": 117.8,
+      "sfAdp": 129.3,
       "stats": {
         "gp": 3,
         "ppr": 15.2,
@@ -5832,7 +5833,7 @@
       "pos": "QB",
       "team": "PHI",
       "adp": 308.4,
-      "sfAdp": 121.4,
+      "sfAdp": 133.3,
       "stats": {
         "gp": 2,
         "ppr": 19.5,
@@ -5954,6 +5955,22 @@
       "age": 30
     },
     {
+      "id": "8135",
+      "sleeperId": "8135",
+      "name": "Treylon Burks",
+      "pos": "WR",
+      "team": "WAS",
+      "adp": 400,
+      "sfAdp": null,
+      "stats": {
+        "gp": 7,
+        "ppr": 57,
+        "half": 49,
+        "std": 41
+      },
+      "age": 26
+    },
+    {
       "id": "13394",
       "sleeperId": "13394",
       "name": "Josh Cameron",
@@ -5995,10 +6012,10 @@
       "adp": 400,
       "sfAdp": null,
       "stats": {
-        "gp": 7,
-        "ppr": 52.8,
-        "half": 42.8,
-        "std": 32.8
+        "gp": 8,
+        "ppr": 54,
+        "half": 43.5,
+        "std": 33
       },
       "age": 26
     },
@@ -6034,22 +6051,6 @@
         "std": 35.1
       },
       "age": 25
-    },
-    {
-      "id": "8135",
-      "sleeperId": "8135",
-      "name": "Treylon Burks",
-      "pos": "WR",
-      "team": "WAS",
-      "adp": 400,
-      "sfAdp": null,
-      "stats": {
-        "gp": 6,
-        "ppr": 52,
-        "half": 45,
-        "std": 38
-      },
-      "age": 26
     },
     {
       "id": "12542",
