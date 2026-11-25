@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { parseWeek, sumWeeks } from './stats'
+import { parseWeek, parseWeekLines, sumWeeks } from './stats'
 
 describe('parseWeek', () => {
   const week = {
@@ -39,5 +39,19 @@ describe('sumWeeks', () => {
   })
   it('handles no weeks', () => {
     expect(sumWeeks([]).size).toBe(0)
+  })
+})
+
+describe('parseWeekLines', () => {
+  it('keeps points and usage, defaults missing usage to 0, and skips team rows and non-players', () => {
+    const out = parseWeekLines({
+      '1': { gp: 1, pts_ppr: 19.8, pts_half_ppr: 16.3, pts_std: 12.8, off_snp: 40, tm_off_snp: 65, rec_tgt: 10, rec_rz_tgt: 1 },
+      '2': { gp: 1, pts_ppr: 5 },
+      '3': { gp: 0, pts_ppr: 9 },
+      TEAM_BUF: { gp: 1, pts_ppr: 80 },
+    })
+    expect([...out.keys()]).toEqual(['1', '2'])
+    expect(out.get('1')).toEqual([19.8, 16.3, 12.8, 40, 65, 10, 0, 1, 0])
+    expect(out.get('2')).toEqual([5, 5, 5, 0, 0, 0, 0, 0, 0])
   })
 })

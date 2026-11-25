@@ -43,6 +43,8 @@ export interface PlayersFile {
   sfSource?: string
   /** The last full week of current-season stats included in `stats`, if any. */
   statsThrough?: number
+  /** Each team's bye week this season, by team code, when the schedule was available. */
+  byes?: Record<string, number>
   players: Player[]
 }
 

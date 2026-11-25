@@ -38,3 +38,33 @@ export function sumWeeks(weeks: readonly ReadonlyMap<string, PlayerStats>[]): Ma
   }
   return new Map([...totals].map(([id, t]) => [id, { gp: t.gp, ppr: round1(t.ppr), half: round1(t.half), std: round1(t.std) }]))
 }
+
+/**
+ * One player's week with usage: [ppr, half, std, offensive snaps, team offensive snaps, targets, rush attempts,
+ * red-zone targets, red-zone rush attempts]. Missing usage fields are 0.
+ */
+export type WeekLine = [number, number, number, number, number, number, number, number, number]
+
+/** Like `parseWeek`, but keeps the usage fields the archive and the usage model need. */
+export function parseWeekLines(json: unknown): Map<string, WeekLine> {
+  const out = new Map<string, WeekLine>()
+  if (!isRec(json)) return out
+  for (const [id, row] of Object.entries(json)) {
+    if (id.startsWith('TEAM_') || !isRec(row)) continue
+    const ppr = num(row.pts_ppr)
+    const gp = num(row.gp)
+    if (ppr === undefined || !gp || gp <= 0) continue
+    out.set(id, [
+      round1(ppr),
+      round1(num(row.pts_half_ppr) ?? ppr),
+      round1(num(row.pts_std) ?? ppr),
+      num(row.off_snp) ?? 0,
+      num(row.tm_off_snp) ?? 0,
+      num(row.rec_tgt) ?? 0,
+      num(row.rush_att) ?? 0,
+      num(row.rec_rz_tgt) ?? 0,
+      num(row.rush_rz_att) ?? 0,
+    ])
+  }
+  return out
+}

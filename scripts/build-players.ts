@@ -12,7 +12,7 @@
  * This runs offline on your machine and ships static JSON. The app never calls MFL from the browser
  * (MFL's terms forbid that), and every request here goes through scripts/http.ts.
  */
-import { copyFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises'
+import { copyFile, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 import { MIN_GAMES } from '../src/lib/current'
 import { parseAge } from '../src/lib/age'
@@ -37,22 +37,9 @@ import {
   type AdpRow,
 } from './adp'
 import { fetchJson } from './http'
+import { parseByes } from './schedule'
+import { indexSleeper, loadSleeperPlayers, pickSleeper, surnameKey, uniqueOnly } from './sleeperIds'
 import { MIN_WEEK_PLAYERS, parseWeek, sumWeeks } from './stats'
-
-interface SleeperPlayer {
-  player_id: string
-  full_name?: string
-  first_name?: string
-  last_name?: string
-  position?: string | null
-  team?: string | null
-  active?: boolean
-  status?: string | null
-  age?: number | null
-  birth_date?: string | null
-  injury_status?: string | null
-  search_rank?: number
-}
 
 type Source = 'mfl' | 'ffc'
 const SOURCE_LABEL: Record<Source, string> = { mfl: 'MyFantasyLeague', ffc: 'Fantasy Football Calculator' }
@@ -150,7 +137,8 @@ async function fetchSeasonStats(season: number) {
   const weeks: Map<string, PlayerStats>[] = []
   for (let w = 1; w <= MAX_WEEKS; w++) {
     try {
-      const week = parseWeek(await fetchJson(`https://api.sleeper.app/v1/stats/nfl/regular/${season}/${w}`))
+      const json = await fetchJson(`https://api.sleeper.app/v1/stats/nfl/regular/${season}/${w}`)
+      const week = parseWeek(json)
       if (week.size < MIN_WEEK_PLAYERS) break
       weeks.push(week)
     } catch (e) {
@@ -161,59 +149,14 @@ async function fetchSeasonStats(season: number) {
   return weeks.length ? { totals: sumWeeks(weeks), through: weeks.length } : null
 }
 
-// ---- Sleeper IDs ------------------------------------------------------------------------------
-
-/** Sleeper asks clients to fetch its ~10 MB player dump at most once a day, so it's cached on disk. */
-async function loadSleeperPlayers(refresh: boolean): Promise<Record<string, SleeperPlayer>> {
-  const cache = resolve('.cache/sleeper-players.json')
-  if (!refresh) {
-    try {
-      const age = Date.now() - (await stat(cache)).mtimeMs
-      if (age < 24 * 60 * 60 * 1000) {
-        console.log('  Using cached Sleeper players (under 24h old; --refresh to refetch)')
-        return JSON.parse(await readFile(cache, 'utf8')) as Record<string, SleeperPlayer>
-      }
-    } catch {
-      /* no usable cache */
-    }
+/** Bye weeks from Sleeper's schedule; empty if it can't be fetched or isn't a full schedule (the app then ignores byes). */
+async function fetchByes(season: number): Promise<Record<string, number>> {
+  try {
+    return parseByes(await fetchJson(`https://api.sleeper.app/schedule/nfl/regular/${season}`))
+  } catch (e) {
+    console.warn(`  ! Sleeper schedule unavailable: ${(e as Error).message}`)
+    return {}
   }
-  const data = await fetchJson<Record<string, SleeperPlayer>>('https://api.sleeper.app/v1/players/nfl', { maxBytes: 60_000_000 })
-  await mkdir(dirname(cache), { recursive: true })
-  await writeFile(cache, JSON.stringify(data))
-  return data
-}
-
-/**
- * `byNamePos` is the strict lookup; `byName` covers players whose position differs between
- * sources (e.g. Travis Hunter is WR in ADP lists but CB in Sleeper).
- */
-function indexSleeper(all: Record<string, SleeperPlayer>) {
-  const byNamePos = new Map<string, SleeperPlayer[]>()
-  const byName = new Map<string, SleeperPlayer[]>()
-  const bySurname = new Map<string, SleeperPlayer[]>()
-  const push = (m: Map<string, SleeperPlayer[]>, k: string, p: SleeperPlayer) => m.set(k, [...(m.get(k) ?? []), p])
-  for (const p of Object.values(all)) {
-    if (!p.position) continue
-    const name = normalizeName(p.full_name ?? `${p.first_name ?? ''} ${p.last_name ?? ''}`)
-    if (POSITIONS.has(p.position)) push(byNamePos, `${name}|${p.position}`, p)
-    if (p.active) push(byName, name, p)
-    // Nicknames differ between sources (Kenneth/Kenny, Matthew/Matt), so also index by surname + team + position.
-    if (p.active && p.team && p.last_name) push(bySurname, `${normalizeName(p.last_name)}|${normTeam(p.team)}|${p.position}`, p)
-  }
-  return { byNamePos, byName, bySurname }
-}
-
-/** The surname key used by `bySurname`: the last word of a normalized name. */
-const surnameKey = (name: string, team: string, pos: string) => `${normalizeName(name).split(' ').pop()}|${team}|${pos}`
-
-const uniqueOnly = (cands: SleeperPlayer[] | undefined) => (cands?.length === 1 ? cands[0] : undefined)
-
-/** Among same-name candidates prefer matching team, then active, then Sleeper's own ranking. */
-function pickSleeper(cands: SleeperPlayer[] | undefined, team: string): SleeperPlayer | undefined {
-  if (!cands?.length) return undefined
-  const score = (p: SleeperPlayer) =>
-    (normTeam(p.team) === team ? 0 : 1_000_000) + (p.active ? 0 : 100_000) + (p.search_rank ?? 99_999)
-  return [...cands].sort((a, b) => score(a) - score(b))[0]
 }
 
 // ---- main -------------------------------------------------------------------------------------
@@ -257,6 +200,7 @@ async function main() {
   })
   // Current-season production, attached by Sleeper ID (defenses are keyed by team abbreviation).
   const season_stats = await fetchSeasonStats(season)
+  const byes = season_stats ? await fetchByes(season) : {}
   let breakouts = 0
   if (season_stats) {
     const have = new Set(players.map((p) => p.id))
@@ -317,6 +261,7 @@ async function main() {
     source: `${SOURCE_LABEL[source]} ADP; Sleeper player IDs`,
     sfSource: sf.source,
     ...(season_stats ? { statsThrough: season_stats.through } : {}),
+    ...(Object.keys(byes).length ? { byes } : {}),
     players,
   }
   await mkdir(dirname(out), { recursive: true })
@@ -339,6 +284,7 @@ async function main() {
   console.log(`  Sleeper IDs matched: ${players.length - unmatched.length}/${players.length}`)
   console.log(`  Ages:                ${aged}/${players.length}`)
   console.log(`  Injury designations: ${injured}`)
+  console.log(`  Bye weeks:           ${Object.keys(byes).length ? `${Object.keys(byes).length} teams` : 'none'}`)
   console.log(`  Superflex ADP:       ${players.filter((p) => p.sfAdp != null).length}/${players.length} (${sf.source})`)
   console.log(
     season_stats
