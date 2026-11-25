@@ -11,7 +11,12 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build-players": "tsx scripts/build-players.ts",
-    "build-archive": "tsx scripts/build-archive.ts"
+    "build-archive": "tsx scripts/build-archive.ts",
+    "backtest": "tsx scripts/backtest.ts",
+    "fit-age": "tsx scripts/fit-age.ts",
+    "fit-formats": "tsx scripts/fit-formats.ts",
+    "backtest-formats": "tsx scripts/backtest-formats.ts",
+    "backtest-breakouts": "tsx scripts/backtest-breakouts.ts"
   },
   "dependencies": {
     "react": "^19.3.1",

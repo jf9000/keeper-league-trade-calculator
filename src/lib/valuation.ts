@@ -1,5 +1,6 @@
 import type { Asset, Player, Settings } from '../types'
 import { ageFactor } from './age'
+import { FORMAT_ADP } from './formatAdp'
 import { injuryFactor } from './availability'
 import { bestLineup, lineupTotal, type Slot } from './lineup'
 
@@ -47,9 +48,9 @@ export function pickYears(season: number): [number, number, number] {
 /** Effective ADP for a player under the given settings. */
 export function adpOf(p: Player, s: Settings): number {
   let a = s.superflex && p.sfAdp ? p.sfAdp : p.adp
-  if (s.scoring === 'std') {
-    if (p.pos === 'RB') a *= 0.95
-    else if (p.pos === 'WR' || p.pos === 'TE') a *= 1.08
+  // ADP is PPR; the other formats shift each position by a fitted multiplier (see scripts/fit-formats.ts).
+  if (s.scoring !== 'ppr' && (p.pos === 'QB' || p.pos === 'RB' || p.pos === 'WR' || p.pos === 'TE')) {
+    a *= FORMAT_ADP[s.scoring === 'std' ? 'std' : 'half'][p.pos]
   }
   return Math.max(1, a)
 }
@@ -83,8 +84,11 @@ export const KD_STRENGTH_SCALE = 0.15
 
 /** The most weight current-season production gets when valuing a player for this season (redraft). */
 export const CURRENT_WEIGHT_REDRAFT = 0.7
-/** ...and for next season's keeper value, where preseason ADP still matters more. */
-export const CURRENT_WEIGHT_KEEPER = 0.4
+/**
+ * ...and for next season's keeper value. Backtested on 2021-2025 (scripts/backtest-breakouts.ts): 0.55 predicts next
+ * season best overall, and 0.4 undervalued players who broke out (drafted 60th or later, producing like a top-30 pick).
+ */
+export const CURRENT_WEIGHT_KEEPER = 0.55
 /** Production counts fully once a player has this many games; fewer games count proportionally less. */
 export const GAMES_FOR_FULL_WEIGHT = 8
 

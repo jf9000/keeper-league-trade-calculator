@@ -1,26 +1,20 @@
-import type { Player, Pos } from '../types'
-
-/**
- * How a player's keeper value ages. From `from` on, each year of age takes `perYear` off the share of his
- * value he keeps, down to a floor. Before `from`, age doesn't matter. Tunable guesses: running backs fall off
- * first, receivers and tight ends later, quarterbacks last. Kickers and defenses don't age here.
- */
-export const AGE_DECLINE: Partial<Record<Pos, { from: number; perYear: number; floor: number }>> = {
-  RB: { from: 27, perYear: 0.08, floor: 0.35 },
-  WR: { from: 30, perYear: 0.07, floor: 0.35 },
-  TE: { from: 30, perYear: 0.07, floor: 0.35 },
-  QB: { from: 35, perYear: 0.06, floor: 0.4 },
-}
+import type { Player } from '../types'
+import { AGE_CURVE, FIRST_AGE } from './ageCurves'
 
 /** Ages outside this range are treated as bad data. */
 export const MIN_AGE = 18
 export const MAX_AGE = 50
 
-/** The share (0–1) of his keeper value a player keeps at his age; 1 when his age is unknown or hasn't started to matter. */
+/**
+ * The share (0-1) of his keeper value a player keeps at his age; 1 when his age is unknown, before the decline
+ * starts, or for kickers and defenses. The curve per position is fitted from past seasons (see
+ * scripts/fit-age.ts and src/lib/ageCurves.ts): value kept at each age relative to players aged 24-26.
+ */
 export function ageFactor(p: Pick<Player, 'pos' | 'age'>): number {
-  const d = AGE_DECLINE[p.pos]
-  if (!d || p.age == null || p.age < d.from) return 1
-  return Math.max(d.floor, 1 - d.perYear * (p.age - d.from + 1))
+  const curve = p.pos === 'QB' || p.pos === 'RB' || p.pos === 'WR' || p.pos === 'TE' ? AGE_CURVE[p.pos] : undefined
+  if (!curve || p.age == null) return 1
+  const i = Math.min(curve.length - 1, Math.max(0, p.age - FIRST_AGE))
+  return curve[i] ?? 1
 }
 
 /** Reads Sleeper's `age`, or works it out from `birth_date`, as whole years on `now`; undefined if neither is usable. */

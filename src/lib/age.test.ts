@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Player, Pos, Settings } from '../types'
-import { AGE_DECLINE, ageFactor, parseAge } from './age'
+import { ageFactor, parseAge } from './age'
 import { ageNotes } from './notes'
 import { DEFAULT_SETTINGS, keeperWorth, redraftWorth } from './valuation'
 
@@ -17,29 +17,34 @@ const mk = (id: string, pos: Pos, adp: number, age?: number): Player => ({
 })
 
 describe('ageFactor', () => {
-  it('does nothing before the decline starts, or when age is unknown', () => {
-    expect(ageFactor(mk('a', 'RB', 10, 26))).toBe(1)
-    expect(ageFactor(mk('a', 'WR', 10, 29))).toBe(1)
-    expect(ageFactor(mk('a', 'QB', 10, 34))).toBe(1)
-    expect(ageFactor(mk('a', 'RB', 10))).toBe(1)
+  it('does nothing in the prime, or when age is unknown', () => {
+    for (const pos of ['QB', 'RB', 'WR', 'TE'] as const) {
+      expect(ageFactor(mk('a', pos, 10, 24))).toBe(1)
+      expect(ageFactor(mk('a', pos, 10, 22))).toBe(1)
+      expect(ageFactor(mk('a', pos, 10))).toBe(1)
+    }
+    expect(ageFactor(mk('a', 'RB', 10, 18))).toBe(1) // younger than the table starts
   })
 
-  it('starts at 27 for RBs, 30 for WRs and TEs, and 35 for QBs', () => {
-    expect(ageFactor(mk('a', 'RB', 10, 27))).toBeCloseTo(0.92)
-    expect(ageFactor(mk('a', 'WR', 10, 30))).toBeCloseTo(0.93)
-    expect(ageFactor(mk('a', 'TE', 10, 30))).toBeCloseTo(0.93)
-    expect(ageFactor(mk('a', 'QB', 10, 35))).toBeCloseTo(0.94)
+  it('never rises with age and stays within (0, 1]', () => {
+    for (const pos of ['QB', 'RB', 'WR', 'TE'] as const) {
+      let prev = 1
+      for (let age = 20; age <= 45; age++) {
+        const f = ageFactor(mk('a', pos, 10, age))
+        expect(f).toBeLessThanOrEqual(prev)
+        expect(f).toBeGreaterThan(0)
+        prev = f
+      }
+    }
   })
 
-  it('keeps falling each year, and runs backs down faster than receivers', () => {
-    expect(ageFactor(mk('a', 'RB', 10, 31))).toBeCloseTo(0.6)
-    expect(ageFactor(mk('a', 'WR', 10, 31))).toBeCloseTo(0.86)
-    expect(ageFactor(mk('a', 'RB', 10, 29))).toBeLessThan(ageFactor(mk('a', 'RB', 10, 28)))
+  it('runs backs down before receivers and receivers before quarterbacks', () => {
+    expect(ageFactor(mk('a', 'RB', 10, 30))).toBeLessThan(ageFactor(mk('a', 'WR', 10, 30)))
+    expect(ageFactor(mk('a', 'WR', 10, 33))).toBeLessThan(ageFactor(mk('a', 'QB', 10, 33)))
   })
 
-  it('never drops below the floor', () => {
-    expect(ageFactor(mk('a', 'RB', 10, 40))).toBe(AGE_DECLINE.RB!.floor)
-    expect(ageFactor(mk('a', 'QB', 10, 45))).toBe(AGE_DECLINE.QB!.floor)
+  it('holds the last value for ages past the end of the table', () => {
+    expect(ageFactor(mk('a', 'RB', 10, 50))).toBe(ageFactor(mk('a', 'RB', 10, 40)))
   })
 
   it('does not age kickers or defenses', () => {
@@ -69,7 +74,8 @@ describe('age in value', () => {
   it('lowers keeper worth for an older back but not this-season worth', () => {
     const young = mk('y', 'RB', 10, 24)
     const old = mk('o', 'RB', 10, 31)
-    expect(keeperWorth(old, s)).toBeCloseTo(keeperWorth(young, s) * 0.6)
+    expect(keeperWorth(old, s)).toBeCloseTo(keeperWorth(young, s) * ageFactor(old))
+    expect(ageFactor(old)).toBeLessThan(1)
     expect(redraftWorth(old, s)).toBe(redraftWorth(young, s))
   })
 })
@@ -82,7 +88,7 @@ describe('ageNotes', () => {
 
   it('mentions an older incoming player with his discount', () => {
     const [n] = ageNotes({ sent: [], incoming: [asset('old')], players })
-    expect(n).toContain('old (31, 40% off)')
+    expect(n).toContain('old (31, 36% off)')
     expect(n).toContain('discounted for age')
   })
 

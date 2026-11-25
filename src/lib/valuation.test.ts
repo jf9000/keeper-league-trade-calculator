@@ -27,7 +27,9 @@ import {
   KD_ADP_OFFSET,
   KD_STRENGTH_SCALE,
   lineupStrength,
+  CURRENT_WEIGHT_KEEPER,
 } from './valuation'
+import { FORMAT_ADP } from './formatAdp'
 import type { Slot } from './lineup'
 
 const S: Settings = { ...DEFAULT_SETTINGS, teams: 12, keepers: 2, rounds: 17, scoring: 'ppr', superflex: false, oneQb: true, redraftWeight: 0 }
@@ -84,10 +86,19 @@ describe('adpOf', () => {
   })
   it('adjusts by position under no-PPR scoring', () => {
     const std = { ...S, scoring: 'std' as const }
-    expect(adpOf(mk('rb', 'RB', 20), std)).toBeCloseTo(19)
-    expect(adpOf(mk('wr', 'WR', 20), std)).toBeCloseTo(21.6)
-    expect(adpOf(mk('te', 'TE', 20), std)).toBeCloseTo(21.6)
-    expect(adpOf(mk('qb', 'QB', 20), std)).toBe(20)
+    for (const pos of ['QB', 'RB', 'WR', 'TE'] as const) {
+      expect(adpOf(mk('x', pos, 20), std)).toBeCloseTo(20 * FORMAT_ADP.std[pos])
+    }
+    expect(adpOf(mk('rb', 'RB', 20), std)).toBeLessThan(20) // backs go earlier without PPR
+    expect(adpOf(mk('wr', 'WR', 20), std)).toBeGreaterThan(20) // receivers later
+    expect(adpOf(mk('k', 'K', 100), std)).toBe(100) // kickers and defenses are untouched
+  })
+  it('adjusts half-PPR by a smaller amount than standard, and leaves PPR alone', () => {
+    const half = { ...S, scoring: 'half' as const }
+    const std = { ...S, scoring: 'std' as const }
+    expect(adpOf(mk('rb', 'RB', 20), half)).toBeCloseTo(20 * FORMAT_ADP.half.RB)
+    expect(Math.abs(adpOf(mk('rb', 'RB', 20), half) - 20)).toBeLessThan(Math.abs(adpOf(mk('rb', 'RB', 20), std) - 20))
+    expect(adpOf(mk('rb', 'RB', 20), { ...S, scoring: 'ppr' as const })).toBe(20)
   })
   it('never goes below 1', () => {
     expect(adpOf(mk('rb', 'RB', 0.5), S)).toBe(1)
@@ -578,7 +589,7 @@ describe('redraft value and keeper value', () => {
     it('leans mostly on production for redraft, and less for keepers', () => {
       const hot = { ...base, curAdp: 10 }
       expect(redraftWorth(hot, S)).toBeCloseTo(0.3 * pickValue(100) + 0.7 * pickValue(10))
-      expect(keeperWorth(hot, S)).toBeCloseTo(0.6 * pickValue(100) + 0.4 * pickValue(10))
+      expect(keeperWorth(hot, S)).toBeCloseTo((1 - CURRENT_WEIGHT_KEEPER) * pickValue(100) + CURRENT_WEIGHT_KEEPER * pickValue(10))
       expect(redraftWorth(hot, S)).toBeGreaterThan(keeperWorth(hot, S))
     })
     it('trusts production less with fewer games', () => {

@@ -62,7 +62,7 @@ describe('availability', () => {
 })
 
 describe('ranking with missed games', () => {
-  const cur = (ps: Player[], through?: number) => new Map(rankByCurrentSeason(ps, s, through).map((p) => [p.id, p.curAdp]))
+  const cur = (ps: Player[], through?: number) => new Map(rankByCurrentSeason(ps, s, through, { shrinkGames: 0, softPpg: 0 }).map((p) => [p.id, p.curAdp]))
   const hot = mk('hot', 'QB', 40, 20, 4)
   const steady = mk('steady', 'QB', 20, 15, 10)
 
