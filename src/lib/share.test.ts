@@ -12,7 +12,7 @@ const trade: SharedTrade = {
   ],
   rosters: [4, null],
   stance: ['contending', null],
-  settings: { ...DEFAULT_SETTINGS, scoring: 'half', superflex: false, redraftWeight: 40 },
+  settings: { ...DEFAULT_SETTINGS, scoring: 'half', superflex: false },
   leagueId: '1234567890',
 }
 
@@ -57,5 +57,16 @@ describe('share links', () => {
     ['non-numeric round', encodeTrade(trade).replace('p:9221:3', 'p:9221:abc')],
   ])('rejects %s', (_name, q) => {
     expect(decodeTrade(q)).toBeNull()
+  })
+
+  it('round-trips every outlook, and keeps old links working', () => {
+    for (const stance of ['sell', 'rebuilding', null, 'contending', 'allin'] as const) {
+      const t: SharedTrade = { ...trade, stance: [stance, stance === null ? 'allin' : null] }
+      expect(decodeTrade(encodeTrade(t))?.stance).toEqual(t.stance)
+    }
+    // links made before the new outlooks used c, r and n
+    const old = encodeTrade(trade).replace(/o=[a-z]{2}/, 'o=rc')
+    expect(decodeTrade(old)?.stance).toEqual(['rebuilding', 'contending'])
+    expect(decodeTrade(encodeTrade(trade).replace(/o=[a-z]{2}/, 'o=zz'))?.stance).toEqual([null, null])
   })
 })

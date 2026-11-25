@@ -63,7 +63,7 @@ export function playersAt(current: readonly Player[], snap: Snapshot): Player[] 
     if (!row) continue
     const [adp, sfAdp, ppr, half, std, gp] = row
     // Injury status isn't snapshotted, so history compares players on market and production alone.
-    const { stats: _stats, curAdp: _cur, inj: _inj, ...base } = p
+    const { stats: _stats, curAdp: _cur, inj: _inj, weeksLeft: _weeks, ...base } = p
     out.push({ ...base, adp, sfAdp, ...(gp > 0 ? { stats: { gp, ppr, half, std } } : {}) })
   }
   return out
@@ -71,7 +71,7 @@ export function playersAt(current: readonly Player[], snap: Snapshot): Player[] 
 
 /**
  * What the market would pay for a player, with no keeper cost attached: this season's worth and his
- * keeper worth blended by the win-now slider (`redraftWeight`), on the draft-pick-value scale.
+ * keeper worth blended by the balanced win-now share (`redraftWeight`), on the draft-pick-value scale.
  */
 export function marketValue(p: Player, s: Settings): number {
   const r = redraftShare(s)

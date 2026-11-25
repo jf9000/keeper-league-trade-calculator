@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
+import { adpLabel } from '../lib/adpLabel'
 import { InjuryBadge } from '../components/InjuryBadge'
-import { POS_COLOR, POS_LABEL } from '../components/pos'
+import { PosTag } from '../components/PosTag'
 import { pointsPerGame } from '../lib/current'
 import type { LeagueCtx } from '../lib/context'
 import { buildTrends, movers, type Trend } from '../lib/history'
@@ -105,7 +106,7 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
       <li key={p.id} className="flex flex-col gap-1.5 border-t border-bd py-3 first:border-t-0">
         <div className="flex items-center justify-between gap-2">
           <div className="flex min-w-0 flex-wrap items-center gap-1.5 font-semibold">
-            <span className={`${chip} ${POS_COLOR[p.pos]}`}>{POS_LABEL[p.pos]}</span>
+            <PosTag pos={p.pos} />
             {p.name}
             <span className={`${chip} text-mut`}>{p.team}</span>
             <InjuryBadge player={p} />
@@ -114,7 +115,7 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
         </div>
         <div className="text-sm text-mut">
           {owner && <>{owner} · </>}
-          ADP {(s.superflex && p.sfAdp ? p.sfAdp : p.adp).toFixed(1)}
+          ADP {adpLabel(s.superflex && p.sfAdp ? p.sfAdp : p.adp)}
           {ppg !== null && ` · ${ppg.toFixed(1)} ppg`}
         </div>
         {trendLine(t)}
@@ -139,7 +140,7 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <section className="rounded-xl border border-bd bg-card p-4" aria-label="Watchlist">
+      <section className="card p-4" aria-label="Watchlist">
         <h2 className="m-0 mb-1 text-[15px] font-semibold">Your watchlist</h2>
         <p className="m-0 mb-3 text-sm text-mut">
           Star players you’d like to trade for. In a Sleeper league you’ll see who owns them and can start a trade in one tap.
@@ -167,7 +168,7 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
                       setQ('')
                     }}
                   >
-                    <span className={`${chip} ${POS_COLOR[p.pos]}`}>{POS_LABEL[p.pos]}</span>
+                    <PosTag pos={p.pos} />
                     {p.name}
                     <small className="ml-auto text-mut">{p.team}</small>
                   </button>
@@ -198,7 +199,7 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
         )}
       </section>
 
-      <section className="rounded-xl border border-bd bg-card p-4" aria-label="Risers and fallers">
+      <section className="card p-4" aria-label="Risers and fallers">
         <h2 className="m-0 mb-1 text-[15px] font-semibold">Risers and fallers</h2>
         {status === 'loading' && <p className="m-0 text-mut">Loading…</p>}
         {status === 'ready' && !hasMovement && (

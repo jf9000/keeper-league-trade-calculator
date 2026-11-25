@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
+import { adpLabel } from '../lib/adpLabel'
 import { adpOf, roundSlot } from '../lib/valuation'
 import type { Player, Settings } from '../types'
-import { POS_COLOR, POS_LABEL } from './pos'
+import { PosTag } from './PosTag'
 
 /** Extra words that find a position, so "kicker" or "defense" works as well as "K" or "DEF". */
 const POS_ALIASES: Record<Player['pos'], string> = { QB: '', RB: '', WR: '', TE: '', K: 'kicker', DEF: 'd/st dst defense' }
@@ -65,7 +66,7 @@ export function PlayerSearch({ label, players, used, settings: s, years, pickAva
     <div className="relative">
       <input
         type="text"
-        className="w-full"
+        className="w-full rounded-xl border-dashed border-mut/50 bg-soft px-3.5 py-2.5"
         placeholder="Search players or picks…"
         title="Search by player name, or type a year (like 2027) to find draft picks"
         autoComplete="off"
@@ -122,10 +123,10 @@ export function PlayerSearch({ label, players, used, settings: s, years, pickAva
                 </>
               ) : (
                 <>
-                  <span className={`rounded bg-chip px-1.5 text-[11px] font-bold ${POS_COLOR[h.player.pos]}`}>{POS_LABEL[h.player.pos]}</span>
+                  <PosTag pos={h.player.pos} />
                   {h.player.name}
                   <small className="ml-auto text-mut">
-                    {h.player.team} · ADP {adpOf(h.player, s).toFixed(1)}
+                    {h.player.team} · ADP {adpLabel(adpOf(h.player, s))}
                   </small>
                 </>
               )}

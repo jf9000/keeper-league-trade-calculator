@@ -1,8 +1,11 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import type { Asset, Player, Pos, Settings } from '../types'
 import type { Slot } from './lineup'
-import { teamNotes, type NoteArgs } from './notes'
+import { KEEPER_LOSS_PHRASES, keeperLossNotes, teamNotes, type NoteArgs } from './notes'
 import { DEFAULT_SETTINGS, evalTeam, type Stance } from './valuation'
+
+// Wording varies between visits, so these tests pin each note to its side's first phrasing.
+vi.mock('./phrase', () => ({ phrase: <T>(options: readonly T[], _seed: string, side = 0) => options[side]! }))
 
 const s: Settings = { ...DEFAULT_SETTINGS, teams: 12, keepers: 2, rounds: 17, scoring: 'ppr', superflex: false, oneQb: true }
 const mk = (id: string, pos: Player['pos'], adp: number): Player => ({
@@ -56,6 +59,8 @@ describe('teamNotes: the same trade reads differently for different rosters', ()
     expect(notesFor({ ...args, stance: 'contending' })[0]).toMatch(/Since you’re contending, it may be worth it\./)
     expect(notesFor({ ...args, stance: 'rebuilding' })[0]).toMatch(/Since you’re rebuilding, it’s probably not worth it\./)
     expect(notesFor({ ...args, stance: 'rebuilding' })[0]).not.toMatch(/win now/)
+    expect(notesFor({ ...args, stance: 'allin' })[0]).toMatch(/Since you’re all in, it may be worth it\./)
+    expect(notesFor({ ...args, stance: 'sell' })[0]).toMatch(/Since you’re selling, it’s probably not worth it\./)
   })
 
   it('a team already set at RB gets a different note for the same trade', () => {
@@ -88,8 +93,17 @@ describe('teamNotes: players who can’t be kept', () => {
 
   it('calls a second QB a this-season rental when he would start at superflex', () => {
     const notes = notesFor({ ...base, slots: [['QB'], ['RB'], ['QB', 'RB', 'WR', 'TE']] })
-    expect(notes.join(' ')).toMatch(/qb2 wouldn’t be a keeper for you \(you already have a better QB to keep\)/)
+    expect(notes.join(' ')).toMatch(/qb2 wouldn’t be a keeper for you \(you already have a better QB to keep: qb1\)/)
     expect(notes.join(' ')).toMatch(/this-season rental: he’d start at SUPERFLEX/)
+  })
+
+  it('names the keepers filling the spots when the limit blocks an incoming player', () => {
+    const roster = [mk('Yuri', 'RB', 20), mk('Xavier', 'WR', 12)]
+    const notes = notesFor({
+      roster, extra: [mk('Zed', 'RB', 40)], sent: [], incoming: [keep('Zed', 17)], slots: [['RB']], others,
+      costs: new Map([['Xavier', 17], ['Yuri', 17]]),
+    })
+    expect(notes.join(' ')).toMatch(/your keeper spots are filled by better players: Xavier and Yuri\)/)
   })
 
   it('says he adds little when he would not start', () => {
@@ -170,6 +184,39 @@ describe('teamNotes: keepers and the picks they need', () => {
   it('reports at most three notes', () => {
     const notes = notesFor({ ...base, sent: [pick(5)], incoming: [], picks: own(5) })
     expect(notes.length).toBeLessThanOrEqual(3)
+  })
+})
+
+describe('keeperLossNotes', () => {
+  const players = byId(mk('Lawrence', 'QB', 21), mk('Dart', 'QB', 30), mk('Scrub', 'RB', 150))
+  const run = (sent: Asset[], side: 0 | 1 = 0, picks?: Map<number, number>) =>
+    keeperLossNotes({ sent, players, s, firstPickYear: 2027, picks, side })
+
+  it('names every good keeper being given up in one note, best first', () => {
+    const notes = run([keep('Dart', 17), keep('Lawrence', 7)])
+    expect(notes).toHaveLength(1)
+    expect(notes[0]).toContain('Lawrence and Dart')
+  })
+
+  it('says nothing for a player who isn’t a good keeper', () => {
+    expect(run([keep('Scrub', 17)])).toEqual([])
+    expect(run([keep('Lawrence', 1)])).toEqual([]) // costs more than he's worth
+    expect(run([keep('Lawrence', 7)], 0, new Map([[5, 1]]))).toEqual([]) // no pick to keep him with
+  })
+
+  it('never words the two sides alike', () => {
+    const [even, odd] = ([0, 1] as const).map((side) =>
+      KEEPER_LOSS_PHRASES.filter((_, i) => i % 2 === side).map((f) => f('X', false)),
+    )
+    expect(new Set([...even!, ...odd!]).size).toBe(KEEPER_LOSS_PHRASES.length)
+    for (const side of [0, 1] as const) {
+      expect([even, odd][side]).toContain(run([keep('Dart', 17)], side)[0]!.replace('Dart', 'X'))
+    }
+  })
+
+  it('is included in a team’s notes even without a roster', () => {
+    const notes = notesFor({ roster: [], sent: [keep('x', 17)], incoming: [], extra: [mk('x', 'RB', 10)], slots: [['RB']], others: [] })
+    expect(notes.join(' ')).toContain('x')
   })
 })
 

@@ -30,6 +30,7 @@ const args = (over: Partial<FinderArgs> = {}): FinderArgs => ({
   firstPickYear: 2027,
   slots,
   want: [],
+  sell: [],
   mode: 'win-win',
   ...over,
 })
@@ -67,6 +68,14 @@ describe('findTrades', () => {
   it('honors the position filter', async () => {
     for (const o of await findTrades(args({ mode: 'best-for-me', want: ['TE'] }))) {
       expect(o.get.some((a) => a.t === 'p' && byId.get(a.id)!.pos === 'TE')).toBe(true)
+    }
+  })
+
+  it('only offers trades that send a position you want to sell', async () => {
+    const offers = await findTrades(args({ mode: 'best-for-me', sell: ['RB'] }))
+    expect(offers.length).toBeGreaterThan(0)
+    for (const o of offers) {
+      expect(o.give.some((a) => a.t === 'p' && byId.get(a.id)!.pos === 'RB')).toBe(true)
     }
   })
 

@@ -14,9 +14,9 @@ export function InfoButton() {
           keep. <b className="text-tx">Keeper value</b> is his surplus: what he’s worth minus the draft slot he costs
           you, so a first-round talent kept in round 10 is a big win, while one kept in the round he’s worth adds
           nothing here. A player who costs more than he’s worth to keep has no keeper value but still has redraft
-          value, so he’s never worth 0. Each player shows both values under his name. How much each one counts is set
-          by the Rebuilding / Contending slider in the league settings: the closer to Contending it is, the more this
-          season counts and the less keeper value does. Each team can also be marked contending or rebuilding.
+          value, so he’s never worth 0. Each player shows both values under his name. Each team starts
+          balanced. Pick a more aggressive outlook for a team, up to victory or death, and this season counts more and keeper
+          value less; pick a more cautious one, down to sell it all, and the reverse.
         </p>
 
       </Section>
@@ -33,26 +33,26 @@ export function InfoButton() {
         <p className={p}>
           <b className="text-tx">Games missed.</b> Points per game only mean so much from a few games, so a player’s
           rate is scaled down for the games he has missed, measured against the weeks played so far (allowing for a
-          bye). A player who has played 4 of 10 games is ranked as if he scored about 70% of his per-game rate, so a hot
+          bye). A player who has played only 4 of 10 games is ranked as if he scored noticeably less than his per-game rate, so a hot
           short stretch doesn’t outrank a full season. When someone in the trade has missed a lot of time, the notes
-          under the grade say so.
+          below the trade say so.
         </p>
         <p className={`${p} mt-2`}>
           <b className="text-tx">Current injuries.</b> A player listed on injured reserve, PUP, out, suspended,
-          doubtful or questionable keeps only part of his value for this season: about a quarter on IR, 60% when out,
-          and 95% when questionable. That lowers his redraft value and his place in the lineup. His keeper value looks
-          to next season, so it isn’t changed. Injury designations come from Sleeper with the weekly data refresh, so
-          they can be out of date on game day. Always check a player’s current status before agreeing to a trade.
+          doubtful or questionable counts for less in your lineup this season, and the longer he’s likely to be out
+          compared with what’s left of the year, the less he counts. It doesn’t change where he’d be drafted (his
+          redraft value) or his keeper value, which looks to next season, and his card shows how the injury affects
+          him. Injury designations come from Sleeper with the weekly data refresh, so they can be out of date on game
+          day. Always check a player’s current status before agreeing to a trade.
         </p>
       </Section>
       <Section title="Age">
         <p className={p}>
-          Keeper value looks ahead, so age matters: an older player is worth less to keep. Running backs start losing
-          value at 27 (8% per year), wide receivers and tight ends at 30 (7% per year), and quarterbacks at 35 (6% per
-          year), each down to a floor of about a third to 40% of their value. A 31-year-old back keeps about 60% of
-          his keeper value; a 31-year-old receiver about 86%. Age doesn’t change what a player is worth this season,
-          only what he’s worth to keep. Ages come from Sleeper with the weekly data refresh, and when a trade involves
-          an older player the notes under the grade say so.
+          Keeper value looks ahead, so age matters: an older player is worth less to keep. How much depends on
+          position. Running backs lose value earliest, receivers and tight ends later, and quarterbacks last. The
+          curves come from how players’ value held up from one season to the next in past seasons. Age doesn’t change
+          what a player is worth this season, only what he’s worth to keep. Ages come from Sleeper with the weekly
+          data refresh, and when a trade involves an older player the notes below the trade say so.
         </p>
       </Section>
       <Section title="What a keeper costs">
@@ -72,7 +72,7 @@ export function InfoButton() {
           the other counts for only a fraction of its value. That works both ways in a trade. A player you receive is
           only worth full keeper value if you have a pick in his round that a better keeper isn’t already using. And
           a draft pick is worth more than its slot if a keeper on your roster depends on it, or if it would let you
-          keep someone you can’t keep now. The notes under the grade call these out by name.
+          keep someone you can’t keep now. The notes below the trade call these out by name.
         </p>
 
       </Section>
@@ -96,9 +96,17 @@ export function InfoButton() {
         <p className={p}>
           Each trade is also measured against the best starting lineup each team can field, using your league’s own
           lineup slots (QB, RB, WR, TE, K, D/ST) plus the flex and superflex spots from the settings, with each
-          player’s redraft value as his strength. With a roster selected, a team’s redraft side of the trade is what
+          player’s worth to a lineup this season as his strength. With a roster selected, a team’s redraft side of the trade is what
           it does to that lineup, so a player who would start for you is worth more to you than the same player is to
           a team that’s already deep at his position. Without a roster, each player counts at his own redraft value.
+        </p>
+        <p className={`${p} mt-2`}>
+          <b className="text-tx">Emptying your superflex costs extra.</b> In a superflex league, if a trade leaves you
+          without enough startable QBs for your QB and superflex spots, your side takes a heavy penalty unless the trade
+          brings a QB back. Filling a spot you couldn’t before counts in your favor. A QB who is likely to miss most of
+          the rest of the season, or is worth very little, doesn’t count. Other positions aren’t penalized this way. This
+          needs a league roster, and like the rest of this season’s value it matters more the more aggressive your
+          outlook is.
         </p>
         <p className={`${p} mt-2`}>
           Kickers and D/ST can be traded too. They’re drafted so late that they’re worth almost nothing as keepers,
@@ -107,16 +115,26 @@ export function InfoButton() {
           waiver wire, their lineup weight is kept small.
         </p>
         <p className={`${p} mt-2`}>
-          Under the result bar, each team gets notes based on its own roster: where its positions rank in the league
+          Below the trade, each team gets notes based on its own roster: where its positions rank in the league
           (weak, strong, or in between) and how the trade changes them. A trade that’s a loser long-term can still
           be worth a look if you need to win now. One that’s great for your keepers can leave you thin at a position
           you can’t afford to be.
         </p>
 
       </Section>
+      <Section title="Uneven trades">
+        <p className={p}>
+          Giving up more players than you get back, as in a 2-for-1, counts against your side, because depth is worth
+          more than the individual values suggest. It weighs more when the players you send are early-round picks, and
+          less the closer the trade is to even numbers (a 3-for-2 costs less than a 2-for-1). It applies no matter how good
+          the player you get back is. Draft picks, kickers and D/ST don’t count as players here. The notes under the
+          result tell you when this applied.
+        </p>
+
+      </Section>
       <Section title="Draft picks">
         <p className={p}>
-          A pick is worth the value of the middle of its round. Picks more than one draft away are discounted 15%.
+          A pick is worth the value of the middle of its round. Picks more than one draft away are discounted a little.
           With a league selected you can only trade picks you own, including ones you acquired.
         </p>
 
@@ -124,7 +142,7 @@ export function InfoButton() {
       <Section title="Grades">
         <p className={p}>
           Each team is graded on what it receives versus what it gives up, counting both keeper value and (with a
-          league selected) lineup impact. Within 10% is a fair trade and gets a B.
+          league selected) lineup impact. A trade that’s close to even is fair and gets a B.
           Beyond that, the grade steps with how lopsided the ratio is: A-, A and A+ for the winner, B- down to F for
           the loser. A 4:1 trade is an A+ for one side and about a D- for the other.
         </p>

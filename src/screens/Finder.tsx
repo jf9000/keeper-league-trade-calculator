@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { InjuryBadge } from '../components/InjuryBadge'
 import { LeagueGate } from '../components/LeagueGate'
-import { POS_COLOR, POS_LABEL } from '../components/pos'
+import { PosTag } from '../components/PosTag'
 import { TeamSelect } from '../components/TeamSelect'
 import type { LeagueCtx } from '../lib/context'
 import { findTrades, type FinderMode, type Offer } from '../lib/finder'
 import { rosterKey, type TradeState } from '../lib/trade'
-import { STANCE_SHIFT, type Stance } from '../lib/valuation'
+import { type Stance } from '../lib/valuation'
+import { StanceSelect } from '../components/StanceSelect'
 import type { Asset, Pos } from '../types'
 
 interface Props {
@@ -17,7 +18,7 @@ interface Props {
 
 const signed = (n: number) => `${n >= 0 ? '+' : ''}${n.toFixed(1)}`
 
-const WANT: Pos[] = ['QB', 'RB', 'WR', 'TE']
+const POSITIONS: Pos[] = ['QB', 'RB', 'WR', 'TE']
 
 const MODES: { id: FinderMode; label: string; hint: string }[] = [
   { id: 'win-win', label: 'Win-win', hint: 'Both teams come out ahead by a meaningful and similar amount, and grade B or better.' },
@@ -37,6 +38,7 @@ function Search({ ctx, onOpenTrade }: { ctx: LeagueCtx; onOpenTrade: (t: TradeSt
   const [meId, setMeId] = useState<number | null>(null)
   const [partnerId, setPartnerId] = useState<number | null>(null)
   const [want, setWant] = useState<Pos[]>([])
+  const [sell, setSell] = useState<Pos[]>([])
   const [mode, setMode] = useState<FinderMode>('win-win')
   const [stance, setStance] = useState<[Stance, Stance]>([null, null])
   const [offers, setOffers] = useState<Offer[] | null>(null)
@@ -61,9 +63,7 @@ function Search({ ctx, onOpenTrade }: { ctx: LeagueCtx; onOpenTrade: (t: TradeSt
 
   const me = teams.find((t) => t.rosterId === (meId ?? mine?.rosterId ?? teams[0]?.rosterId))
   if (!me) return <p className="text-mut">This league has no rosters yet.</p>
-  // Your own team just follows the Rebuilding / Contending slider, so only the other side gets an outlook.
-  const meIsMine = me.rosterId === mine?.rosterId
-  const stances: [Stance, Stance] = [meIsMine ? null : stance[0], stance[1]]
+  const stances = stance
   const busy = progress !== null
 
   async function run() {
@@ -84,6 +84,7 @@ function Search({ ctx, onOpenTrade }: { ctx: LeagueCtx; onOpenTrade: (t: TradeSt
         costs: ctx.costs,
         slots: ctx.slots,
         want,
+        sell,
         mode,
         stances,
       },
@@ -101,7 +102,7 @@ function Search({ ctx, onOpenTrade }: { ctx: LeagueCtx; onOpenTrade: (t: TradeSt
       const p = a.t === 'p' ? byId.get(a.id) : undefined
       return (
         <li key={i} className="flex items-center gap-1.5">
-          {p && <span className={`rounded bg-chip px-1.5 text-[11px] font-bold ${POS_COLOR[p.pos]}`}>{POS_LABEL[p.pos]}</span>}
+          {p && <PosTag pos={p.pos} />}
           <span className="font-semibold">{label(a)}</span>
           {p && <InjuryBadge player={p} />}
         </li>
@@ -116,30 +117,36 @@ function Search({ ctx, onOpenTrade }: { ctx: LeagueCtx; onOpenTrade: (t: TradeSt
     })
 
   const stanceRow = (i: 0 | 1, who: string) => (
-    <div role="group" aria-label={`${who} outlook`} className="flex flex-wrap items-center gap-2 text-sm text-mut">
-      <span className="w-24 shrink-0">{who}</span>
-      {(['contending', 'rebuilding'] as const).map((o) => (
+    <StanceSelect
+      label={<span>{who}</span>}
+      ariaLabel={who}
+      value={stance[i]}
+      onChange={(next) => setStance((c) => (i === 0 ? [next, c[1]] : [c[0], next]))}
+    />
+  )
+
+  /** A row of position toggles; none picked means any position. */
+  const positionRow = (label: string, picked: Pos[], setPicked: (fn: (p: Pos[]) => Pos[]) => void) => (
+    <div role="group" aria-label={label} className="mt-3 flex flex-wrap items-center gap-2 text-sm text-mut">
+      <span className="w-24 shrink-0">{label}</span>
+      {POSITIONS.map((pos) => (
         <button
-          key={o}
+          key={pos}
           type="button"
-          aria-pressed={stance[i] === o}
-          title={
-            o === 'contending'
-              ? `Going for this season: pushes this team ${STANCE_SHIFT} points toward winning now`
-              : `Building for next year: pushes this team ${STANCE_SHIFT} points toward the future`
-          }
-          className={`!px-3 !py-1.5 text-sm capitalize ${stance[i] === o ? 'primary' : ''}`}
-          onClick={() => setStance((c) => (i === 0 ? [c[0] === o ? null : o, c[1]] : [c[0], c[1] === o ? null : o]))}
+          aria-pressed={picked.includes(pos)}
+          className={`!px-3 !py-1.5 text-sm ${picked.includes(pos) ? 'primary' : ''}`}
+          onClick={() => setPicked((w) => (w.includes(pos) ? w.filter((x) => x !== pos) : [...w, pos]))}
         >
-          {o}
+          {pos}
         </button>
       ))}
+      <span>{picked.length === 0 ? '(any position)' : ''}</span>
     </div>
   )
 
   return (
     <div className="flex flex-col gap-4">
-      <section className="rounded-xl border border-bd bg-card p-4">
+      <section className="card p-4">
         <p className="m-0 mb-3 text-sm text-mut">
           Searches 1-for-1, 2-for-1 and 1-for-2 player swaps between your team and the rest of the league, using the
           same grading as the calculator, and lists the ones that work.
@@ -154,25 +161,12 @@ function Search({ ctx, onOpenTrade }: { ctx: LeagueCtx; onOpenTrade: (t: TradeSt
             allLabel="Any team"
           />
         </div>
-        <div className="mt-3 flex flex-col gap-2">
-          {!meIsMine && stanceRow(0, 'Your outlook')}
+        <div className="mt-4 grid grid-cols-1 gap-x-8 gap-y-3 min-[640px]:grid-cols-2">
+          {stanceRow(0, 'Your outlook')}
           {stanceRow(1, 'Their outlook')}
         </div>
-        <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-mut">
-          <span>I want a</span>
-          {WANT.map((pos) => (
-            <button
-              key={pos}
-              type="button"
-              aria-pressed={want.includes(pos)}
-              className={`!px-3 !py-1.5 text-sm ${want.includes(pos) ? 'primary' : ''}`}
-              onClick={() => setWant((w) => (w.includes(pos) ? w.filter((x) => x !== pos) : [...w, pos]))}
-            >
-              {pos}
-            </button>
-          ))}
-          <span>{want.length === 0 ? '(any position)' : ''}</span>
-        </div>
+        {positionRow('I want to sell', sell, setSell)}
+        {positionRow('I want a', want, setWant)}
         <div role="group" aria-label="Search for" className="mt-3 flex flex-wrap items-center gap-2 text-sm text-mut">
           <span>Show</span>
           {MODES.map((m) => (
@@ -217,7 +211,7 @@ function Search({ ctx, onOpenTrade }: { ctx: LeagueCtx; onOpenTrade: (t: TradeSt
       {offers && offers.length > 0 && (
         <ol className="m-0 flex list-none flex-col gap-3 p-0" aria-label="Trade ideas">
           {offers.map((o, i) => (
-            <li key={i} className="rounded-xl border border-bd bg-card p-4">
+            <li key={i} className="card p-4">
               <div className="mb-3 flex items-center justify-between gap-3">
                 <span className="min-w-0 truncate font-semibold">with {o.partner.name}</span>
                 <span className="shrink-0 text-sm text-mut">

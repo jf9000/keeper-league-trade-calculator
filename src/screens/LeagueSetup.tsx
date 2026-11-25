@@ -72,15 +72,15 @@ export function LeagueSetup({ onLeague, onManual }: Props) {
     <div className="fade-in mx-auto max-w-[520px] px-4 pt-5 pb-10">
       <div className="flex items-center gap-2">
         <FootballLock className="h-8 w-8 shrink-0 min-[480px]:h-9 min-[480px]:w-9" />
-        <h1 className="m-0 text-base leading-tight font-bold min-[480px]:text-xl">Keeper League Trade Calculator</h1>
+        <h1 className="m-0 text-base leading-tight font-extrabold tracking-tight min-[480px]:text-xl">Keeper League Trade Calculator</h1>
       </div>
-      <p className="m-0 mt-1 text-[15px] text-mut italic">Not redraft. Not dynasty. Keeper.</p>
+      <p className="m-0 mt-1 text-[15px] text-mut">Not redraft. Not dynasty. Keeper.</p>
       <p className="mt-4 mb-5 text-mut">
         Free fantasy football trade calculator built for keeper leagues. Connect your Sleeper league to value players, draft picks and keeper costs in any trade.
       </p>
 
       {/* data-nosnippet keeps the form's labels and buttons out of Google's result snippet, so it uses the text above. */}
-      <form data-nosnippet onSubmit={lookup} className="rounded-xl border border-bd bg-card p-4">
+      <form data-nosnippet onSubmit={lookup} className="card p-4">
         <label className="flex flex-col gap-1.5 text-[13px] text-mut">
           Sleeper username
           <div className="flex gap-2">

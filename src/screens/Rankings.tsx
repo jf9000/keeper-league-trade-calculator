@@ -3,6 +3,7 @@ import { Collapsible } from '../components/Collapsible'
 import { InjuryBadge } from '../components/InjuryBadge'
 import { LeagueGate } from '../components/LeagueGate'
 import { POS_COLOR, POS_LABEL } from '../components/pos'
+import { PosTag } from '../components/PosTag'
 import type { LeagueCtx } from '../lib/context'
 import { POS_LIST, slotLabel } from '../lib/lineup'
 import { rankTeams } from '../lib/rankings'
@@ -35,10 +36,10 @@ function Table({ ctx }: { ctx: LeagueCtx }) {
   return (
     <div className="flex flex-col gap-3">
       <p className="m-0 text-sm text-mut">
-        Teams ranked by the lineup they could start this season and the keepers they could hold for next, blended by
-        your win-now slider ({s.redraftWeight}% this season). Position ranks compare starters at each position.
+        Teams ranked by the lineup they could start this season and the keepers they could hold for next, weighed the way a balanced team
+        would. Position ranks compare starters at each position.
       </p>
-      <div className="overflow-x-auto rounded-xl border border-bd bg-card">
+      <div className="card overflow-x-auto">
         <table className="w-full min-w-[560px] border-collapse text-[15px]">
           <thead>
             <tr className="border-b border-bd text-left text-xs text-mut">
@@ -69,7 +70,7 @@ function Table({ ctx }: { ctx: LeagueCtx }) {
                       <button
                         type="button"
                         aria-expanded={isOpen}
-                        className="!w-full !border-0 !bg-transparent !p-0 text-left font-semibold"
+                        className="block w-full border-0 bg-transparent p-0 text-left font-semibold"
                         onClick={(e) => {
                           e.stopPropagation()
                           setOpen(isOpen ? null : r.team.rosterId)
@@ -101,7 +102,7 @@ function Table({ ctx }: { ctx: LeagueCtx }) {
                               {r.starters.map((st) => (
                                 <li key={st.player.id} className="flex items-center gap-2">
                                   <span className="w-[4.5rem] shrink-0 text-xs text-mut">{slotLabel(slots[st.slot]!)}</span>
-                                  <span className={`text-[11px] font-bold ${POS_COLOR[st.player.pos]}`}>{POS_LABEL[st.player.pos]}</span>
+                                  <PosTag pos={st.player.pos} />
                                   {st.player.name}
                                   <InjuryBadge player={st.player} />
                                 </li>
@@ -116,7 +117,7 @@ function Table({ ctx }: { ctx: LeagueCtx }) {
                               <ul className="m-0 flex list-none flex-col gap-1 p-0 text-sm">
                                 {r.keepers.map((k) => (
                                   <li key={k.player!.id} className="flex items-center gap-2">
-                                    <span className={`text-[11px] font-bold ${POS_COLOR[k.player!.pos]}`}>{POS_LABEL[k.player!.pos]}</span>
+                                    <PosTag pos={k.player!.pos} />
                                     {k.player!.name}
                                     <InjuryBadge player={k.player!} />
                                     <span className="ml-auto text-mut">Rd {k.round} · +{k.value.toFixed(1)}</span>

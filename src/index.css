@@ -1,24 +1,47 @@
 @import "tailwindcss";
+/* Self-hosted: the site's Content-Security-Policy only allows its own stylesheets and fonts. */
+@import "@fontsource-variable/inter/wght.css";
 
-/* Palette carried over from the original single-file app (light, dark via system or data-theme). */
+/* Palette (light, dark via system or data-theme). Text colors are picked to stay readable on their backgrounds. */
 :root {
-  --bg: #f5f6f8; --card: #fff; --tx: #14181f; --mut: #667085; --bd: #e1e5ea;
-  --ac: #2563eb; --good: #16a34a; --bad: #dc2626; --chip: #eef1f5;
-  --ac2: #f59e0b;
+  --bg: #f4f6fa; --card: #fff; --tx: #101828; --mut: #5b6475; --bd: #e4e7ee;
+  --chip: #f0f2f7; --soft: #f7f8fb; --raised: #fff;
+  /* The unchosen stops on the outlook scale. */
+  --node: #fff; --node-bd: #e4e7ee;
+  --ac: #1d4ed8; --ac-fill: #1d4ed8; --ac2: #f79009;
+  --good: #067647; --bad: #b42318; --warn: #93370d;
+  --ac-bg: #dbeafe; --good-bg: #dcfae6; --bad-bg: #fee4e2; --warn-bg: #fef0c7;
+  --shadow: 0 1px 2px rgb(16 24 40 / .05), 0 6px 20px rgb(16 24 40 / .05);
+  --qb: #912018; --qb-bg: #fee4e2; --rb: #05603a; --rb-bg: #dcfae6; --wr: #1e40af; --wr-bg: #dbeafe;
+  --te: #7a2e0e; --te-bg: #fef0c7; --k: #6b21a8; --k-bg: #f3e8ff; --def: #075985; --def-bg: #e0f2fe;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #0f1318; --card: #181d25; --tx: #e8ebf0; --mut: #8b94a3; --bd: #2a313c;
-    --ac: #5b8cff; --good: #4ade80; --bad: #f87171; --chip: #232a35;
+    --bg: #0b0f17; --card: #151b26; --tx: #eef1f7; --mut: #9aa4b6; --bd: #28303f;
+    --chip: #212938; --soft: #1b2230; --raised: #333d52;
+    --node: #212938; --node-bd: #4a5568;
+    --ac: #7aa7ff; --ac-fill: #2563eb; --ac2: #f79009;
+    --good: #4ade80; --bad: #f87171; --warn: #fcd34d;
+    --ac-bg: #172f5c; --good-bg: #0f3a26; --bad-bg: #451a1d; --warn-bg: #43300c;
+    --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 6px 20px rgb(0 0 0 / .25);
+    --qb: #fca5a5; --qb-bg: #451a1d; --rb: #86efac; --rb-bg: #0f3a26; --wr: #a5c8ff; --wr-bg: #172f5c;
+    --te: #fcd34d; --te-bg: #43300c; --k: #d8b4fe; --k-bg: #351b4f; --def: #7dd3fc; --def-bg: #0c344b;
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0f1318; --card: #181d25; --tx: #e8ebf0; --mut: #8b94a3; --bd: #2a313c;
-  --ac: #5b8cff; --good: #4ade80; --bad: #f87171; --chip: #232a35;
+  --bg: #0b0f17; --card: #151b26; --tx: #eef1f7; --mut: #9aa4b6; --bd: #28303f;
+  --chip: #212938; --soft: #1b2230; --raised: #333d52;
+  --node: #212938; --node-bd: #4a5568;
+  --ac: #7aa7ff; --ac-fill: #2563eb; --ac2: #f79009;
+  --good: #4ade80; --bad: #f87171; --warn: #fcd34d;
+  --ac-bg: #172f5c; --good-bg: #0f3a26; --bad-bg: #451a1d; --warn-bg: #43300c;
+  --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 6px 20px rgb(0 0 0 / .25);
+  --qb: #fca5a5; --qb-bg: #451a1d; --rb: #86efac; --rb-bg: #0f3a26; --wr: #a5c8ff; --wr-bg: #172f5c;
+  --te: #fcd34d; --te-bg: #43300c; --k: #d8b4fe; --k-bg: #351b4f; --def: #7dd3fc; --def-bg: #0c344b;
 }
 
 @theme inline {
@@ -27,38 +50,64 @@
   --color-tx: var(--tx);
   --color-mut: var(--mut);
   --color-bd: var(--bd);
+  --color-chip: var(--chip);
+  --color-soft: var(--soft);
+  --color-raised: var(--raised);
+  --color-node: var(--node);
+  --color-node-bd: var(--node-bd);
   --color-ac: var(--ac);
+  --color-ac-fill: var(--ac-fill);
   --color-ac2: var(--ac2);
   --color-good: var(--good);
   --color-bad: var(--bad);
-  --color-chip: var(--chip);
-  --color-qb: #ef4444;
-  --color-rb: #16a34a;
-  --color-wr: #3b82f6;
-  --color-te: #f59e0b;
-  --color-k: #a855f7;
-  --color-def: #0ea5e9;
+  --color-warn: var(--warn);
+  --color-ac-bg: var(--ac-bg);
+  --color-good-bg: var(--good-bg);
+  --color-bad-bg: var(--bad-bg);
+  --color-warn-bg: var(--warn-bg);
+  --color-qb: var(--qb);
+  --color-qb-bg: var(--qb-bg);
+  --color-rb: var(--rb);
+  --color-rb-bg: var(--rb-bg);
+  --color-wr: var(--wr);
+  --color-wr-bg: var(--wr-bg);
+  --color-te: var(--te);
+  --color-te-bg: var(--te-bg);
+  --color-k: var(--k);
+  --color-k-bg: var(--k-bg);
+  --color-def: var(--def);
+  --color-def-bg: var(--def-bg);
 }
 
-html { scroll-padding-top: env(safe-area-inset-top, 0px); }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--tx);
-  font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+/* Element defaults live in the base layer, so a utility class on an element overrides them. */
+@layer base {
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--tx);
+    font: 15px/1.4 "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+  input, select, button {
+    font: inherit; color: var(--tx); background: var(--card);
+    border: 1px solid var(--bd); border-radius: 10px; padding: 7px 10px; min-width: 0;
+  }
+  input[type="checkbox"] { width: 18px; height: 18px; padding: 0; }
+  button { cursor: pointer; }
+  button:hover:not(:disabled) { border-color: var(--ac); }
+  button:disabled { opacity: .55; cursor: default; }
+  input[type="range"] { width: 100%; padding: 0; border: 0; background: transparent; accent-color: var(--ac); cursor: pointer; }
+  :focus-visible { outline: 2px solid var(--ac); outline-offset: 1px; }
 }
+
+@layer components {
+  /* The raised panel everything on a screen sits in. */
+  .card { background: var(--card); border: 1px solid var(--bd); border-radius: 16px; box-shadow: var(--shadow); }
+  button.primary { background: var(--ac-fill); border-color: var(--ac-fill); color: #fff; font-weight: 600; }
+}
+
 /* Screens and loading notes ease in rather than popping into place. */
 @keyframes ktc-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 .fade-in { animation: ktc-fade-in .25s ease-out both; }
 @media (prefers-reduced-motion: reduce) { .fade-in { animation: none; } }
-input, select, button {
-  font: inherit; color: var(--tx); background: var(--card);
-  border: 1px solid var(--bd); border-radius: 8px; padding: 7px 8px; min-width: 0;
-}
-input[type="checkbox"] { width: 18px; height: 18px; padding: 0; }
-button { cursor: pointer; }
-button:hover:not(:disabled) { border-color: var(--ac); }
-button:disabled { opacity: .55; cursor: default; }
-button.primary { background: var(--ac); border-color: var(--ac); color: #fff; font-weight: 600; }
-:focus-visible { outline: 2px solid var(--ac); outline-offset: 1px; }
-input[type="range"] { width: 100%; padding: 0; border: 0; background: transparent; accent-color: var(--ac); cursor: pointer; }

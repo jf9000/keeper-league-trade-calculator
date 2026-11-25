@@ -28,6 +28,8 @@ export interface Player {
   age?: number
   /** Injury designation as of the last data refresh; only recorded while the season is in progress. */
   inj?: Injury
+  /** Not in players.json: fantasy weeks left in the season, stamped on injured players at load (see `withWeeksLeft`). */
+  weeksLeft?: number
   /** Not in players.json: the ADP-equivalent of his current-season rank at his position, set at runtime. */
   curAdp?: number
 }
@@ -59,8 +61,8 @@ export interface Settings {
   /** Starting spots any of RB/WR/TE can fill. */
   flex: number
   /**
-   * The Rebuilding / Contending slider: percent (0–100) of a trade's value that comes from this season
-   * (redraft) rather than keeper value. Named for what it blends, and kept so saved settings and links keep working.
+   * Percent (0–100) of a trade's value that comes from this season (redraft) rather than keeper value,
+   * before a team's contending / rebuilding stance. Fixed at 65 (balanced); there's no control for it.
    */
   redraftWeight: number
 }

@@ -85,7 +85,7 @@ export function InfoDialog({ label, title, small = false, children }: Props) {
       <dialog
         ref={dialog}
         aria-labelledby={titleId}
-        className="m-auto max-h-[85vh] w-[min(640px,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-bd bg-card p-0 text-tx backdrop:bg-black/50"
+        className="m-auto max-h-[85vh] w-[min(640px,calc(100vw-2rem))] overflow-y-auto rounded-2xl border border-bd bg-card p-0 text-tx backdrop:bg-black/50"
         onClick={(e) => {
           if (e.target === e.currentTarget) e.currentTarget.close()
         }}
@@ -98,7 +98,7 @@ export function InfoDialog({ label, title, small = false, children }: Props) {
             type="button"
             aria-label="Close"
             title="Close"
-            className="!inline-flex shrink-0 items-center justify-center !h-9 !w-9 !rounded-full !border-0 !bg-chip !p-0 text-mut transition-colors hover:!bg-ac hover:!text-white focus-visible:!bg-ac focus-visible:!text-white active:scale-95"
+            className="!inline-flex shrink-0 items-center justify-center !h-9 !w-9 !rounded-full !border-0 !bg-chip !p-0 text-mut transition-colors hover:!bg-ac-fill hover:!text-white focus-visible:!bg-ac-fill focus-visible:!text-white active:scale-95"
             onClick={() => dialog.current?.close()}
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">

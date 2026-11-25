@@ -1,8 +1,11 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import type { Player, Pos, Settings } from '../types'
 import { ageFactor, parseAge } from './age'
 import { ageNotes } from './notes'
 import { DEFAULT_SETTINGS, keeperWorth, redraftWorth } from './valuation'
+
+// Wording varies between visits, so these tests pin each note to its side's first phrasing.
+vi.mock('./phrase', () => ({ phrase: <T>(options: readonly T[], _seed: string, side = 0) => options[side]! }))
 
 const s: Settings = { ...DEFAULT_SETTINGS, superflex: false }
 const mk = (id: string, pos: Pos, adp: number, age?: number): Player => ({
@@ -88,7 +91,7 @@ describe('ageNotes', () => {
 
   it('mentions an older incoming player with his discount', () => {
     const [n] = ageNotes({ sent: [], incoming: [asset('old')], players })
-    expect(n).toContain('old (31, 36% off)')
+    expect(n).toContain('old is getting older (31 y/o)')
     expect(n).toContain('discounted for age')
   })
 

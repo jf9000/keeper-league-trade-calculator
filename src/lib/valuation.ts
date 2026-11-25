@@ -2,7 +2,7 @@ import type { Asset, Player, Settings } from '../types'
 import { ageFactor } from './age'
 import { FORMAT_ADP } from './formatAdp'
 import { injuryFactor } from './availability'
-import { bestLineup, lineupTotal, type Slot } from './lineup'
+import { bestLineup, lineupTotal, openQbSpots, type Slot } from './lineup'
 
 export const DEFAULT_SETTINGS: Settings = {
   teams: 12,
@@ -70,6 +70,9 @@ export function defaultKeeperRound(p: Player, s: Settings, costs?: KeeperCosts):
 /** Value of the nth overall pick: exponential decay from 100. */
 export const pickValue = (n: number) => 100 * Math.exp(-0.035 * (n - 1))
 
+/** The overall pick worth `value` (inverse of `pickValue`); values of 100 or more count as the first pick. */
+export const pickSlotFor = (value: number) => 1 - Math.log(Math.max(1e-9, Math.min(value, 100)) / 100) / 0.035
+
 /** Middle-of-the-round overall pick number for a round. */
 export const roundSlot = (round: number, s: Pick<Settings, 'teams'>) =>
   (round - 1) * s.teams + s.teams / 2
@@ -107,9 +110,16 @@ export function keeperWorth(p: Player, s: Settings): number {
 }
 
 /**
- * What a player is worth for this season (redraft), independent of what he costs to keep. It leans mostly
- * on current production, and is also his strength when he starts in a lineup. A player who is hurt right now
- * keeps only part of it (`injuryFactor`); his keeper worth, which looks to next season, is unaffected.
+ * Where a player is projected to be drafted next year, as an overall pick: the draft slot his keeper worth is
+ * equivalent to. That is his preseason ADP blended with this season's production (production counts for part of it)
+ * and then discounted for age, so an older player projects later than his production alone suggests.
+ */
+export const projectedNextAdp = (p: Player, s: Settings): number => Math.min(UNDRAFTED_ADP, pickSlotFor(keeperWorth(p, s)))
+
+/**
+ * What a player is worth as a redraft pick this season, independent of what he costs to keep and of any injury:
+ * the draft-slot value of his preseason ADP, leaning mostly on how he has produced this season. An injury changes
+ * what he can do for a lineup now (see `currentWorth`), not where he would be taken.
  */
 export function redraftWorth(p: Player, s: Settings): number {
   const at = (adp: number) =>
@@ -118,25 +128,43 @@ export function redraftWorth(p: Player, s: Settings): number {
       : pickValue(adp)
   const w = currentShare(p, CURRENT_WEIGHT_REDRAFT)
   const preseason = at(adpOf(p, s))
-  return injuryFactor(p) * (w === 0 ? preseason : (1 - w) * preseason + w * at(p.curAdp!))
+  return w === 0 ? preseason : (1 - w) * preseason + w * at(p.curAdp!)
 }
+
+/**
+ * What a player is worth to a lineup this season: his redraft value, kept only in part while he's hurt
+ * (`injuryFactor`, which depends on how much of the season is left). His keeper worth, which looks to next season,
+ * is unaffected.
+ */
+export const currentWorth = (p: Player, s: Settings): number => injuryFactor(p) * redraftWorth(p, s)
 
 /** Share (0–1) of a trade's value that comes from this season rather than keepers. */
 export const redraftShare = (s: Pick<Settings, 'redraftWeight'>) => clamp(s.redraftWeight, 0, 100) / 100
 
-/** Whether a team is going for this season, building for next year, or neither (use the setting as is). */
-export type Stance = 'contending' | 'rebuilding' | null
+/**
+ * How hard a team is going for this season. `null` is balanced, which uses the settings' win-now share (65 by
+ * default); the others replace it outright.
+ */
+export type Stance = 'sell' | 'rebuilding' | 'contending' | 'allin' | null
 
-/** How many points a team's stance moves the win-now slider (contending up, rebuilding down). */
-export const STANCE_SHIFT = 25
+/** The win-now share (0-100) of each outlook other than balanced. */
+export const STANCE_WEIGHT: Record<NonNullable<Stance>, number> = { sell: 15, rebuilding: 45, contending: 80, allin: 95 }
 
-/** A team's win-now share (0–100): the slider, shifted by its stance. */
+/** The outlooks from fully selling to all in, as shown to people. `null` is balanced. */
+export const STANCE_OPTIONS: readonly { stance: Stance; label: string }[] = [
+  { stance: 'sell', label: 'Sell it all' },
+  { stance: 'rebuilding', label: 'Rebuilding' },
+  { stance: null, label: 'Balanced' },
+  { stance: 'contending', label: 'Contending' },
+  { stance: 'allin', label: 'Victory or death' },
+]
+
+/** A team's win-now share (0-100): its outlook's share, or the settings' share when balanced. */
 export function weightFor(s: Pick<Settings, 'redraftWeight'>, stance: Stance): number {
-  const shift = stance === 'contending' ? STANCE_SHIFT : stance === 'rebuilding' ? -STANCE_SHIFT : 0
-  return clamp(s.redraftWeight + shift, 0, 100)
+  return clamp(stance ? STANCE_WEIGHT[stance] : s.redraftWeight, 0, 100)
 }
 
-/** The settings as one team sees them, with its stance applied to the win-now slider. */
+/** The settings as one team sees them, with its stance applied to the win-now share. */
 export const settingsFor = (s: Settings, stance: Stance): Settings => ({ ...s, redraftWeight: weightFor(s, stance) })
 
 /** How many picks a team owns in each round of the upcoming draft (round → count). */
@@ -149,14 +177,22 @@ export interface EvalItem {
   surplus?: number
   /** The round it costs to keep a player. */
   round?: number
-  /** A player's worth this season, regardless of what he costs to keep. */
+  /** A player's worth as a redraft pick this season, regardless of what he costs to keep or any injury. */
   redraft?: number
+  /** His worth to a lineup this season: `redraft` kept only in part while he's injured. */
+  current?: number
   /** Keeper value: surplus after QB, keeper-limit and pick rules. Blend with `redraft` via `itemValue`. */
   value: number
   note: string
   /** Why a player wouldn't be kept at full value, if so. */
   blocked?: 'no-surplus' | 'extra-qb' | 'over-limit' | 'no-pick' | 'pick-taken'
+  /** Names of the players ahead of him for the keeper spot, QB spot or pick he's blocked from, best first. */
+  keptInstead?: string[]
 }
+
+/** "A", "A and B", "A, B and C". */
+export const nameList = (names: readonly string[]): string =>
+  names.length < 3 ? names.join(' and ') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`
 
 /** Search budget for the keeper optimizer; real rosters finish far below it. */
 const KEEPER_SEARCH_LIMIT = 200_000
@@ -238,6 +274,7 @@ export function evalSide(
       player,
       surplus,
       redraft: redraftWorth(player, s),
+      current: currentWorth(player, s),
       round: asset.keeperRound,
       value: surplus,
       note: surplus === 0 ? 'No surplus: costs more than he’s worth' : '',
@@ -251,26 +288,32 @@ export function evalSide(
   const qbs = candidates.filter((i) => i.player!.pos === 'QB').sort((a, b) => b.surplus! - a.surplus!)
   const theQb = qbs.find((i) => chosen.has(i)) ?? qbs[0]
 
+  const kept = [...chosen].sort((a, b) => b.surplus! - a.surplus!)
+  const names = (list: readonly EvalItem[]) => list.map((c) => c.player!.name)
+
   for (const i of candidates) {
     if (chosen.has(i)) continue
     if (s.oneQb && i.player!.pos === 'QB' && i !== theQb) {
       i.value = 0
-      i.note = 'Extra QB: only one can be kept'
+      i.keptInstead = names([theQb!])
+      i.note = `Extra QB: only one can be kept, behind ${nameList(i.keptInstead)}`
       i.blocked = 'extra-qb'
       continue
     }
     i.value = i.surplus! * OVER_LIMIT_DISCOUNT
     const round = i.round!
     const cap = picks ? (picks.get(round) ?? 0) : Infinity
-    const taken = [...chosen].filter((c) => c.round === round).length
+    const taken = kept.filter((c) => c.round === round)
     if (cap === 0) {
       i.note = `No round ${round} pick: can’t be kept this year`
       i.blocked = 'no-pick'
-    } else if (taken >= cap) {
-      i.note = `Round ${round} pick goes to a better keeper`
+    } else if (taken.length >= cap) {
+      i.keptInstead = names(taken)
+      i.note = `Round ${round} pick goes to ${nameList(i.keptInstead)}`
       i.blocked = 'pick-taken'
     } else {
-      i.note = 'Over keeper limit: heavily discounted'
+      i.keptInstead = names(kept)
+      i.note = `Over keeper limit, behind ${nameList(i.keptInstead)}: heavily discounted`
       i.blocked = 'over-limit'
     }
   }
@@ -280,13 +323,13 @@ export function evalSide(
 export const sumValues = (items: readonly EvalItem[]) => items.reduce((t, i) => t + i.value, 0)
 
 /**
- * One asset's overall value: this season's worth (redraft) blended with its keeper value, in the
+ * One asset's overall value: this season's worth to a lineup (`current`, which an injury cuts) blended with its keeper value, in the
  * proportion set by `redraftWeight`. A player is therefore worth something even when he costs more than he's
  * worth to keep. Draft picks only carry future value, so they take the keeper share.
  */
 export function itemValue(i: EvalItem, s: Pick<Settings, 'redraftWeight'>): number {
   const r = redraftShare(s)
-  return (i.player ? r * (i.redraft ?? 0) : 0) + (1 - r) * i.value
+  return (i.player ? r * (i.current ?? i.redraft ?? 0) : 0) + (1 - r) * i.value
 }
 
 export const sumItemValues = (items: readonly EvalItem[], s: Pick<Settings, 'redraftWeight'>) =>
@@ -314,10 +357,66 @@ export interface Flow {
 export interface TeamTrade extends Flow {
   later?: Flow
   now?: Flow
+  /** Extra added to `gives` for sending more players than come back (see `unevenCost`); absent when none. */
+  uneven?: number
 }
 
-/** Strength a player adds to a starting lineup: his redraft worth. */
-export const lineupStrength = (s: Settings) => (p: Player) => redraftWorth(p, s)
+/** Strength a player adds to a starting lineup: his worth now, which an injury cuts. */
+export const lineupStrength = (s: Settings) => (p: Player) => currentWorth(p, s)
+
+/**
+ * What each superflex-league QB spot left without a QB costs a team this season, on top of the drop in lineup
+ * strength: draft-slot values understate how far a lineup falls when a non-QB has to start there. A tunable guess.
+ */
+export const SUPERFLEX_QB_PENALTY = 35
+/** A QB needs at least this much redraft value (about a pick in the top 100) to count as filling a spot... */
+export const STARTER_FLOOR = 3
+/** ...and has to be expected to play at least this share of the rest of the season. */
+export const STARTER_AVAILABILITY = 0.5
+
+/** How many more QB spots a trade leaves a superflex team unable to fill (negative when it fills some). */
+export function qbSpotChange(before: readonly Player[], after: readonly Player[], slots: readonly Slot[], s: Settings): number {
+  const open = (ps: readonly Player[]) =>
+    openQbSpots(ps.filter((p) => injuryFactor(p) >= STARTER_AVAILABILITY && redraftWorth(p, s) >= STARTER_FLOOR), slots)
+  return open(after) - open(before)
+}
+
+/**
+ * The penalty for a 2-for-1, 3-for-2 and the like, as a share of what the sent players are worth: the share of them
+ * that nothing replaces one-for-one (half in a 2-for-1, a third in a 3-for-2) times a base, plus more the more of
+ * them go early in drafts. Tunable guesses.
+ */
+export const UNEVEN_BASE = 0.4
+export const UNEVEN_EARLY = 0.6
+/** Players drafted within this many rounds are the early ones. */
+export const EARLY_ROUNDS = 5
+
+/**
+ * Extra a team gives up by sending more players than it gets back. Depth is worth more than the values alone say:
+ * every player beyond the ones coming back leaves a spot to be filled by someone worse, however good they are.
+ * Only players count (not picks, kickers or D/ST), and a deal that brings back no player at all isn't judged this way.
+ */
+export function unevenCost(
+  sent: Asset[],
+  incoming: Asset[],
+  players: ReadonlyMap<string, Player>,
+  s: Settings,
+  firstPickYear: number,
+): number {
+  const counted = (assets: Asset[]) =>
+    assets.flatMap((asset) => {
+      const p = asset.t === 'p' ? players.get(asset.id) : undefined
+      return p && p.pos !== 'K' && p.pos !== 'DEF' ? [{ asset, p }] : []
+    })
+  const out = counted(sent)
+  const back = counted(incoming)
+  if (!back.length || out.length <= back.length) return 0
+
+  const extraShare = (out.length - back.length) / out.length
+  const earlyShare = out.filter((x) => adpOf(x.p, s) <= EARLY_ROUNDS * s.teams).length / out.length
+  const worth = sumItemValues(evalSide(out.map((x) => x.asset), players, s, firstPickYear), s)
+  return extraShare * (UNEVEN_BASE + UNEVEN_EARLY * earlyShare) * worth
+}
 
 /** A team's picks in the upcoming draft after giving up `removed` and receiving `added` picks. */
 export function adjustPicks(counts: PickCounts, firstPickYear: number, removed: Asset[], added: Asset[]): Map<number, number> {
@@ -416,6 +515,10 @@ export function evalTeam(
     const nowAfterSend = lineup(staying)
     const nowAfterReceive = lineup([...staying, ...arriving])
     now = { gets: nowAfterReceive - nowAfterSend, gives: nowBefore - nowAfterSend }
+    // Judged on the whole trade, so swapping one QB for another costs nothing.
+    const shortage = qbSpotChange(roster, [...staying, ...arriving], slots, s) * SUPERFLEX_QB_PENALTY
+    if (shortage > 0) now.gives += shortage
+    else now.gets -= shortage
   } else {
     // No roster to measure needs against: each player is worth his redraft value on his own.
     const total = (ps: readonly Player[]) => ps.reduce((t, p) => t + strength(p), 0)
@@ -423,11 +526,13 @@ export function evalTeam(
   }
 
   const r = redraftShare(s)
+  const uneven = unevenCost(sent, incoming, players, s, firstPickYear)
   return {
     gets: (1 - r) * later.gets + r * now.gets,
-    gives: (1 - r) * later.gives + r * now.gives,
+    gives: (1 - r) * later.gives + r * now.gives + uneven,
     later,
     now,
+    ...(uneven > 0 && { uneven }),
   }
 }
 

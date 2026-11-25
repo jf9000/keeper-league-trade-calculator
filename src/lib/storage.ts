@@ -24,7 +24,12 @@ function write(key: string, value: unknown) {
   }
 }
 
-export const loadSettings = (): Settings => ({ ...DEFAULT_SETTINGS, ...(read<Partial<Settings>>(SETTINGS_KEY) ?? {}) })
+export const loadSettings = (): Settings => ({
+  ...DEFAULT_SETTINGS,
+  ...(read<Partial<Settings>>(SETTINGS_KEY) ?? {}),
+  // The win-now slider is gone; a value saved by an older version is ignored.
+  redraftWeight: DEFAULT_SETTINGS.redraftWeight,
+})
 export const saveSettings = (s: Settings) => write(SETTINGS_KEY, s)
 export const loadMode = (): Mode | null => read<Mode>(MODE_KEY)
 export const saveMode = (m: Mode) => write(MODE_KEY, m)
@@ -54,6 +59,6 @@ export const loadWatchlist = (): string[] => {
 export const saveWatchlist = (ids: string[]) => write(WATCH_KEY, ids)
 
 const SETTINGS_OPEN_KEY = 'ktc-settings-open'
-/** Whether the league settings card is expanded; open until the user collapses it. */
-export const loadSettingsOpen = (): boolean => read<boolean>(SETTINGS_OPEN_KEY) !== false
+/** Whether the league settings are expanded; collapsed to their summary until the user opens them. */
+export const loadSettingsOpen = (): boolean => read<boolean>(SETTINGS_OPEN_KEY) === true
 export const saveSettingsOpen = (open: boolean) => write(SETTINGS_OPEN_KEY, open)

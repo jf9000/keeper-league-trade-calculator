@@ -7,18 +7,14 @@ import { ThemeToggle } from './ThemeToggle'
 
 interface Props {
   tab: Tab
-  /** League name or "Manual mode". */
-  subtitle: string
-  hasLeague: boolean
-  onChangeLeague: () => void
   theme: Theme
   onTheme: (t: Theme) => void
 }
 
-/** Title, league and theme controls, and the tab bar that splits the app into its sections. */
-export function AppHeader({ tab, subtitle, hasLeague, onChangeLeague, theme, onTheme }: Props) {
+/** The bar across the top: title, the tabs that split the app into its sections, and the theme switch. */
+export function AppHeader({ tab, theme, onTheme }: Props) {
   const listRef = useRef<HTMLUListElement>(null)
-  // Position of the sliding underline under the active tab; null until it has been measured.
+  // Position of the sliding highlight behind the active tab; null until it has been measured.
   const [bar, setBar] = useState<{ left: number; width: number } | null>(null)
   const [animate, setAnimate] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -51,85 +47,86 @@ export function AppHeader({ tab, subtitle, hasLeague, onChangeLeague, theme, onT
     const list = listRef.current
     if (!list) return
     const measure = () => {
-      const el = list.querySelector<HTMLElement>('[aria-current="page"]')
+      // The list item is what's positioned against the list, so measure it rather than the link inside.
+      const el = list.querySelector<HTMLElement>('[aria-current="page"]')?.parentElement
       setBar(el ? { left: el.offsetLeft, width: el.offsetWidth } : null)
     }
     measure()
-    // Slide only for changes after the first paint, so the bar doesn't swoop in from the left on load.
+    // Slide only for changes after the first paint, so the highlight doesn't swoop in from the left on load.
     const raf = requestAnimationFrame(() => setAnimate(true))
-    window.addEventListener('resize', measure)
+    // The tabs change size when the bar appears on a wider window, and when the web font arrives.
+    const observer = new ResizeObserver(measure)
+    observer.observe(list)
+    list.querySelectorAll('a').forEach((a) => observer.observe(a))
     return () => {
       cancelAnimationFrame(raf)
-      window.removeEventListener('resize', measure)
+      observer.disconnect()
     }
   }, [tab])
 
   return (
-    <header className="mb-4">
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-2">
+    <header className="mb-4 border-b border-bd bg-card">
+      <div className="mx-auto flex max-w-[980px] flex-wrap items-center gap-x-4 gap-y-3 px-4 py-3">
+        <div className="flex min-w-0 flex-1 items-center gap-2">
           {/* A plain link to the bare site URL (no hash), so it always loads the homepage fresh. */}
-          <a href={import.meta.env.BASE_URL} aria-label="Keeper League Trade Calculator home" className="flex min-w-0 items-center gap-2 text-inherit no-underline">
-            <FootballLock className="h-8 w-8 shrink-0 min-[480px]:h-9 min-[480px]:w-9" />
-            <h1 className="m-0 text-base leading-tight font-bold min-[480px]:text-xl">Keeper League Trade Calculator</h1>
+          <a href={import.meta.env.BASE_URL} aria-label="Keeper League Trade Calculator home" className="flex min-w-0 items-center gap-2.5 text-inherit no-underline">
+            <FootballLock className="h-9 w-9 shrink-0" />
+            <div className="min-w-0">
+              <h1 className="m-0 text-base leading-tight font-extrabold tracking-tight">Keeper League Trade Calculator</h1>
+              <p className="m-0 text-xs text-mut">Not redraft. Not dynasty. Keeper.</p>
+            </div>
           </a>
           <InfoButton />
         </div>
-        <ThemeToggle theme={theme} onChange={onTheme} />
-      </div>
-      <p className="m-0 mt-1 text-[15px] text-mut italic">Not redraft. Not dynasty. Keeper.</p>
-      <div className="mt-1 flex items-center justify-between gap-3">
-        <span className="min-w-0 truncate text-[15px] text-mut">{subtitle}</span>
-        <button onClick={onChangeLeague} className="!inline-flex w-36 shrink-0 items-center justify-center gap-1.5 text-sm">
-          <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M15 5l-7 7 7 7" />
-          </svg>
-          {hasLeague ? 'Change league' : 'Select league'}
-        </button>
-      </div>
-      <nav aria-label="Sections" className="-mx-4 mt-3 hidden border-b border-bd px-4 min-[560px]:block">
-        <ul ref={listRef} className="relative m-0 flex list-none gap-1 p-0">
-          {TABS.map((t) => (
-            <li key={t.id}>
-              <a
-                href={hrefFor(t.id)}
-                aria-current={tab === t.id ? 'page' : undefined}
-                className={`block px-3 py-2.5 text-[15px] font-semibold whitespace-nowrap no-underline transition-colors duration-200 ${
-                  tab === t.id ? 'text-ac' : 'text-mut hover:text-tx'
+        {/* On a wide screen the tabs sit between the title and the theme switch; narrower, they get their own line. */}
+        <div className="flex shrink-0 min-[900px]:order-last">
+          <ThemeToggle theme={theme} onChange={onTheme} />
+        </div>
+        <nav aria-label="Sections" className="hidden basis-full min-[560px]:block min-[900px]:basis-auto">
+          <ul ref={listRef} className="relative m-0 flex w-fit list-none gap-0.5 rounded-xl bg-chip p-1">
+            {bar && (
+              <li
+                aria-hidden="true"
+                className={`pointer-events-none absolute top-1 bottom-1 left-0 rounded-lg bg-raised shadow-sm motion-reduce:transition-none ${
+                  animate ? 'transition-[transform,width] duration-300 ease-out' : ''
                 }`}
-              >
-                {t.short}
-              </a>
-            </li>
-          ))}
-          {bar && (
-            <li
-              aria-hidden="true"
-              className={`pointer-events-none absolute bottom-0 left-0 h-0.5 bg-ac motion-reduce:transition-none ${
-                animate ? 'transition-[transform,width] duration-300 ease-out' : ''
-              }`}
-              style={{ width: bar.width, transform: `translateX(${bar.left}px)` }}
-            />
-          )}
-        </ul>
-      </nav>
+                style={{ width: bar.width, transform: `translateX(${bar.left}px)` }}
+              />
+            )}
+            {TABS.map((t) => (
+              <li key={t.id}>
+                <a
+                  href={hrefFor(t.id)}
+                  aria-current={tab === t.id ? 'page' : undefined}
+                  className={`relative block rounded-lg px-3 py-1.5 text-[13px] font-semibold whitespace-nowrap no-underline transition-colors duration-200 ${
+                    tab === t.id ? 'text-ac' : 'text-mut hover:text-tx'
+                  }`}
+                >
+                  {t.short}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      {/* Narrow screens: the tab bar is replaced by a button showing the current section, which opens a side menu. */}
-      <div className="-mx-4 mt-3 border-b border-bd px-4 min-[560px]:hidden">
-        <button
-          ref={menuButton}
-          type="button"
-          aria-haspopup="dialog"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(true)}
-          className="!inline-flex items-center gap-2 !rounded-none !border-0 !border-b-2 !border-ac !bg-transparent !px-3 !py-2.5 !text-[15px] !font-semibold !text-ac"
-        >
-          <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
-            <path d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          {current?.short}
-        </button>
+        {/* Narrow screens: the tab bar is replaced by a button showing the current section, which opens a side menu. */}
+        <div className="basis-full min-[560px]:hidden">
+          <button
+            ref={menuButton}
+            type="button"
+            aria-haspopup="dialog"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(true)}
+            className="inline-flex items-center gap-2 border-0 bg-chip px-3 py-2 text-sm font-semibold text-ac"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            {current?.short}
+          </button>
+        </div>
       </div>
+
       <div className="min-[560px]:hidden">
         <div
           aria-hidden="true"
@@ -157,7 +154,7 @@ export function AppHeader({ tab, subtitle, hasLeague, onChangeLeague, theme, onT
               type="button"
               aria-label="Close menu"
               onClick={() => setMenuOpen(false)}
-              className="!inline-flex !h-9 !w-9 shrink-0 items-center justify-center !rounded-full !border-0 !bg-chip !p-0 text-mut hover:!bg-ac hover:!text-white"
+              className="!inline-flex !h-9 !w-9 shrink-0 items-center justify-center !rounded-full !border-0 !bg-chip !p-0 text-mut hover:!bg-ac-fill hover:!text-white"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
                 <path d="M6 6l12 12M18 6L6 18" />

@@ -1,5 +1,5 @@
 import type { Asset, Scoring, Settings } from '../types'
-import { LIMITS, clamp, type Stance } from './valuation'
+import { DEFAULT_SETTINGS, LIMITS, clamp, type Stance } from './valuation'
 
 /** Everything needed to reproduce a trade's grade on someone else's screen. */
 export interface SharedTrade {
@@ -17,13 +17,13 @@ export const MAX_ASSETS_PER_SIDE = 40
 const MAX_QUERY_LENGTH = 4000
 
 const SCORINGS: readonly Scoring[] = ['ppr', 'half', 'std']
-const STANCE_CODE: Record<string, Stance> = { c: 'contending', r: 'rebuilding', n: null }
+const STANCE_CODE: Record<string, Stance> = { s: 'sell', r: 'rebuilding', n: null, c: 'contending', w: 'allin' }
 const enc = encodeURIComponent
 
 const encodeAssets = (list: Asset[]) =>
   list.map((a) => (a.t === 'p' ? `p:${enc(a.id)}:${a.keeperRound}` : `k:${a.year}:${a.round}`)).join(',')
 
-const stanceCode = (s: Stance) => (s === 'contending' ? 'c' : s === 'rebuilding' ? 'r' : 'n')
+const stanceCode = (s: Stance) => (s === 'sell' ? 's' : s === 'rebuilding' ? 'r' : s === 'contending' ? 'c' : s === 'allin' ? 'w' : 'n')
 
 /**
  * Serialises a trade as a compact query string (no leading "?"). Plain `key=value` pairs joined with `&`;
@@ -88,10 +88,9 @@ export function decodeTrade(query: string): SharedTrade | null {
   const keepers = int(sp[1], LIMITS.keepers.min, LIMITS.keepers.max)
   const rounds = int(sp[2], LIMITS.rounds.min, LIMITS.rounds.max)
   const flex = int(sp[6], LIMITS.flex.min, LIMITS.flex.max)
-  const redraftWeight = int(sp[7], LIMITS.redraftWeight.min, LIMITS.redraftWeight.max)
   const scoring = SCORINGS.find((x) => x === sp[3])
-  if (teams === null || keepers === null || rounds === null || flex === null || redraftWeight === null || !scoring) return null
-  const settings: Settings = { teams, keepers, rounds, scoring, superflex: sp[4] === '1', oneQb: sp[5] === '1', flex, redraftWeight }
+  if (teams === null || keepers === null || rounds === null || flex === null || !scoring) return null
+  const settings: Settings = { teams, keepers, rounds, scoring, superflex: sp[4] === '1', oneQb: sp[5] === '1', flex, redraftWeight: DEFAULT_SETTINGS.redraftWeight }
 
   const a = decodeAssets(kv.get('a'), rounds)
   const b = decodeAssets(kv.get('b'), rounds)

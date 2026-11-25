@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
-import { ResultBar } from '../components/ResultBar'
 import { TeamColumn, type TeamOption } from '../components/TeamColumn'
 import { TradeNotes } from '../components/TradeNotes'
+import { VerdictCard, VerdictStrip, useScrolledAway } from '../components/VerdictCard'
 import type { LeagueCtx } from '../lib/context'
 import { encodeTrade } from '../lib/share'
 import { cardBlob, type CardData } from '../lib/shareCard'
 import { GENERIC, rosterKey, type TradeState } from '../lib/trade'
-import { ageNotes, availabilityNotes, positionStrength, teamNotes } from '../lib/notes'
+import { ageNotes, availabilityNotes, keeperLossNotes, positionStrength, teamNotes, unevenNotes } from '../lib/notes'
 import {
   adpOf,
   defaultKeeperRound,
@@ -14,7 +14,6 @@ import {
   evalTrade,
   judgeTrade,
   settingsFor,
-  type Stance,
 } from '../lib/valuation'
 import type { Asset } from '../types'
 
@@ -34,6 +33,7 @@ export function Calculator({ ctx, trade, onTrade, subtitle, leagueId, hasLeague 
   const { assets, choice } = trade
   const setAssets = (fn: (a: [Asset[], Asset[]]) => [Asset[], Asset[]]) => onTrade((t) => ({ ...t, assets: fn(t.assets) }))
   const [shareMsg, setShareMsg] = useState('')
+  const [verdictRef, verdictAway] = useScrolledAway()
 
   const byKey = (k: string | null) => (k && k !== GENERIC ? leagueList.find((t) => rosterKey(t.rosterId) === k) : undefined)
 
@@ -45,9 +45,8 @@ export function Calculator({ ctx, trade, onTrade, subtitle, leagueId, hasLeague 
   const keys = [team1 ? rosterKey(team1.rosterId) : GENERIC, team2 ? rosterKey(team2.rosterId) : GENERIC] as const
   const names = [team1?.name ?? 'Team 1', team2?.name ?? 'Team 2'] as const
 
-  // Your own team just follows the Rebuilding / Contending slider; only the other side gets an outlook toggle.
-  const isMine = (t: typeof team1) => !!t && !!mine && t.rosterId === mine.rosterId
-  const stance: [Stance, Stance] = [isMine(team1) ? null : trade.stance[0], isMine(team2) ? null : trade.stance[1]]
+  // Every team starts balanced; its Contending / Rebuilding toggle moves it.
+  const stance = trade.stance
 
   const rosterPlayers = useMemo(() => [rosterOf(team1), rosterOf(team2)] as const, [team1, team2, byId])
 
@@ -91,8 +90,12 @@ export function Calculator({ ctx, trade, onTrade, subtitle, leagueId, hasLeague 
   const notes = ([0, 1] as const).map((i) => {
     const t = teamsSel[i]
     if (!t) {
-      const args = { sent: assets[i], incoming: i === 0 ? assets[1] : assets[0], players: byId, through: ctx.statsThrough }
-      return [...availabilityNotes(args), ...ageNotes(args)].slice(0, 3)
+      const args = { sent: assets[i], incoming: i === 0 ? assets[1] : assets[0], players: byId, through: ctx.statsThrough, side: i }
+      return [
+        ...unevenNotes(trades[i]),
+        ...[...availabilityNotes(args), ...ageNotes(args)].slice(0, 3),
+        ...keeperLossNotes({ ...args, s, firstPickYear: years[0] }),
+      ]
     }
     return teamNotes({
       trade: trades[i],
@@ -108,6 +111,7 @@ export function Calculator({ ctx, trade, onTrade, subtitle, leagueId, hasLeague 
       picks: picksOf(t),
       stance: stance[i],
       through: ctx.statsThrough,
+      side: i,
     })
   }) as [string[], string[]]
 
@@ -235,24 +239,26 @@ export function Calculator({ ctx, trade, onTrade, subtitle, leagueId, hasLeague 
         </p>
       )}
 
-      <div className="mt-4 flex flex-wrap items-center justify-end gap-2">
+      <div className="flex flex-wrap items-center justify-end gap-2">
         {shareMsg && (
           <span role="status" className="mr-auto text-sm text-good">
             {shareMsg}
           </span>
         )}
-        <button type="button" disabled={!hasTrade} onClick={copyLink}>
+        <button type="button" disabled={!hasTrade} onClick={() => setAssets(() => [[], []])} className="border-transparent bg-transparent text-sm text-mut">
+          Clear trade
+        </button>
+        <button type="button" disabled={!hasTrade} onClick={copyLink} className="text-sm">
           Copy link
         </button>
-        <button type="button" disabled={!hasTrade} onClick={copyImage}>
+        <button type="button" disabled={!hasTrade} onClick={copyImage} className="primary text-sm">
           Copy image
-        </button>
-        <button type="button" disabled={!hasTrade} onClick={() => setAssets(() => [[], []])}>
-          Clear trade
         </button>
       </div>
 
-      <div className="mt-3 mb-4 grid grid-cols-1 gap-4 min-[760px]:grid-cols-2">
+      <VerdictCard names={names} trades={trades} verdict={verdict} cardRef={verdictRef} />
+
+      <div className="mt-4 mb-4 grid grid-cols-1 items-start gap-4 min-[760px]:grid-cols-2">
         {([0, 1] as const).map((i) => (
           <TeamColumn
             key={i}
@@ -266,7 +272,6 @@ export function Calculator({ ctx, trade, onTrade, subtitle, leagueId, hasLeague 
             used={used}
             settings={settingsFor(s, stance[i])}
             stance={stance[i]}
-            hideOutlook={isMine(teamsSel[i])}
             onStance={(next) => onTrade((t) => ({ ...t, stance: i === 0 ? [next, t.stance[1]] : [t.stance[0], next] }))}
             years={years}
             through={ctx.statsThrough}
@@ -284,7 +289,7 @@ export function Calculator({ ctx, trade, onTrade, subtitle, leagueId, hasLeague 
 
       <TradeNotes names={names} notes={notes} />
 
-      <ResultBar names={names} trades={trades} verdict={verdict} />
+      {hasTrade && verdictAway && <VerdictStrip names={names} verdict={verdict} />}
       </div>
     </>
   )

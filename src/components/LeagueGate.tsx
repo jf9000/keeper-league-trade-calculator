@@ -19,7 +19,7 @@ export function LeagueGate({ ctx, what, onChangeLeague, children }: Props) {
     )
   if (ctx.leagueStatus === 'none' || ctx.leagueStatus === 'idle')
     return (
-      <section className="rounded-xl border border-bd bg-card p-5">
+      <section className="card p-5">
         <h2 className="m-0 mb-1 text-base font-semibold">Connect a Sleeper league</h2>
         <p className="m-0 mb-3 text-mut">{what} needs your league’s rosters, so it isn’t available in manual mode.</p>
         <button type="button" className="primary" onClick={onChangeLeague}>

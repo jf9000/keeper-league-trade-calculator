@@ -9,7 +9,7 @@ export function InjuryBadge({ player }: { player: Pick<Player, 'inj'> }) {
   return (
     <span
       title={`Listed as ${INJURY_LABEL[inj]}. Updated with the weekly data refresh.`}
-      className={`rounded bg-chip px-1.5 text-[11px] font-bold ${serious ? 'text-bad' : 'text-te'}`}
+      className={`rounded bg-chip px-1.5 text-[11px] font-bold ${serious ? 'text-bad' : 'text-warn'}`}
     >
       {INJURY_TAG[inj]}
     </span>

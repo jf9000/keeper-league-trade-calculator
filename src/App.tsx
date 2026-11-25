@@ -22,6 +22,7 @@ import { EMPTY_TRADE, GENERIC, rosterKey, type TradeState } from './lib/trade'
 import { useLeagueTeams } from './lib/useLeagueTeams'
 import { DEFAULT_SETTINGS, clampAssets } from './lib/valuation'
 import { DataFooter } from './components/DataFooter'
+import { LeagueButton } from './components/LeagueButton'
 import { Calculator } from './screens/Calculator'
 import { Finder } from './screens/Finder'
 import { Keepers } from './screens/Keepers'
@@ -129,20 +130,15 @@ export default function App() {
     goHome()
   }
 
-  // Everything sits in a centered column except the calculator's sticky trade meter, which spans the whole page.
+  const leagueName = inLeague ? league?.name || 'Sleeper league' : 'Manual mode'
+  // Everything below the header bar sits in a centered column.
   const column = 'mx-auto max-w-[980px] px-4'
   return (
-    <div className="fade-in pt-5">
+    <div className="fade-in">
+      <AppHeader tab={tab} theme={theme} onTheme={setTheme} />
       <div className={column}>
-        <AppHeader
-          tab={tab}
-          subtitle={inLeague ? league?.name || 'Sleeper league' : 'Manual mode'}
-          hasLeague={inLeague}
-          onChangeLeague={onChangeLeague}
-          theme={theme}
-          onTheme={setTheme}
-        />
         <SettingsCard
+          leading={<LeagueButton name={leagueName} hasLeague={inLeague} onClick={onChangeLeague} />}
           settings={settings}
           onChange={changeSettings}
           open={settingsOpen}
@@ -158,7 +154,7 @@ export default function App() {
             ctx={ctx}
             trade={trade}
             onTrade={(fn) => setTrade(fn)}
-            subtitle={inLeague ? league?.name || 'Sleeper league' : 'Manual mode'}
+            subtitle={leagueName}
             leagueId={inLeague ? (league?.leagueId ?? null) : null}
             hasLeague={inLeague}
           />

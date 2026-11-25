@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
+import { adpLabel } from '../lib/adpLabel'
 import { InjuryBadge } from '../components/InjuryBadge'
 import { LeagueGate } from '../components/LeagueGate'
-import { POS_COLOR, POS_LABEL } from '../components/pos'
+import { PosTag } from '../components/PosTag'
 import { TeamSelect } from '../components/TeamSelect'
 import { gamesNote } from '../lib/availability'
 import { pointsPerGame } from '../lib/current'
@@ -59,7 +60,7 @@ function Board({ ctx }: { ctx: LeagueCtx }) {
       <li key={p.id} className="flex flex-col gap-1.5 border-t border-bd py-3 first:border-t-0">
         <div className="flex items-center justify-between gap-2">
           <div className="flex min-w-0 flex-wrap items-center gap-1.5 font-semibold">
-            <span className={`${chip} ${POS_COLOR[p.pos]}`}>{POS_LABEL[p.pos]}</span>
+            <PosTag pos={p.pos} />
             {p.name}
             <span className={`${chip} text-mut`}>{p.team}</span>
             <InjuryBadge player={p} />
@@ -70,7 +71,7 @@ function Board({ ctx }: { ctx: LeagueCtx }) {
         </div>
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[15px] text-mut">
           <span>
-            {p.age != null && `Age ${p.age} · `}ADP {adpOf(p, s).toFixed(1)}
+            {p.age != null && `Age ${p.age} · `}ADP {adpLabel(adpOf(p, s))}
             {ppg !== null && ` · ${ppg.toFixed(1)} ppg`}
             {gamesNote(p, ctx.statsThrough) && ` · ${gamesNote(p, ctx.statsThrough)}`}
           </span>
@@ -110,7 +111,7 @@ function Board({ ctx }: { ctx: LeagueCtx }) {
         )}
       </div>
 
-      <section className="rounded-xl border border-bd bg-card p-4" aria-label="Recommended keepers">
+      <section className="card p-4" aria-label="Recommended keepers">
         <h2 className="m-0 mb-1 text-[15px] font-semibold">
           Recommended keepers ({kept.length} of {s.keepers})
         </h2>
@@ -132,7 +133,7 @@ function Board({ ctx }: { ctx: LeagueCtx }) {
         {missing > 0 && <p className="mt-2 mb-0 text-sm text-mut">{missing} rostered players have no ADP data and aren’t valued.</p>}
       </section>
 
-      <section className="rounded-xl border border-bd bg-card p-4" aria-label="Not kept">
+      <section className="card p-4" aria-label="Not kept">
         <h2 className="m-0 mb-1 text-[15px] font-semibold">Not kept</h2>
         <p className="m-0 mb-2 text-sm text-mut">
           The number in brackets is the surplus a player would add if he could be kept. Change a keeper round to see how

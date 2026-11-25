@@ -71,6 +71,16 @@ export function bestLineup(players: readonly Player[], slots: readonly Slot[], s
 
 export const lineupTotal = (lineup: readonly Starter[]) => lineup.reduce((t, s) => t + s.strength, 0)
 
+/**
+ * How many of a superflex league's QB spots (QB and superflex) a roster has no QB for. Anyone else in the
+ * superflex scores far less. Always 0 without a superflex spot. Pass only the players who could really start.
+ */
+export function openQbSpots(players: readonly Player[], slots: readonly Slot[]): number {
+  const spots = slots.filter((slot) => slot.includes('QB'))
+  if (!spots.some((slot) => slot.length > 1)) return 0
+  return Math.max(0, spots.length - players.filter((p) => p.pos === 'QB').length)
+}
+
 /** Starter strength summed by position (a flex starter counts toward his own position). */
 export function lineupByPos(lineup: readonly Starter[]): Record<Pos, number> {
   const out: Record<Pos, number> = { QB: 0, RB: 0, WR: 0, TE: 0, K: 0, DEF: 0 }

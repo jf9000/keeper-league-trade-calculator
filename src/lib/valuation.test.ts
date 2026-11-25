@@ -1,12 +1,17 @@
 import { describe, expect, it } from 'vitest'
+import { FORMAT_ADP } from './formatAdp'
 import type { Asset, Player, Settings } from '../types'
 import {
+  CURRENT_WEIGHT_KEEPER,
   DEFAULT_SETTINGS,
   adpOf,
   clampAssets,
   defaultKeeperRound,
   evalSide,
+  pickSlotFor,
   pickValue,
+  projectedNextAdp,
+  UNDRAFTED_ADP,
   pickYears,
   roundSlot,
   seasonFor,
@@ -19,7 +24,8 @@ import {
   keeperWorth,
   redraftShare,
   settingsFor,
-  STANCE_SHIFT,
+  STANCE_OPTIONS,
+  STANCE_WEIGHT,
   weightFor,
   type Stance,
   redraftWorth,
@@ -27,9 +33,12 @@ import {
   KD_ADP_OFFSET,
   KD_STRENGTH_SCALE,
   lineupStrength,
-  CURRENT_WEIGHT_KEEPER,
+  currentWorth,
+  SUPERFLEX_QB_PENALTY,
+  UNEVEN_BASE,
+  UNEVEN_EARLY,
+  unevenCost,
 } from './valuation'
-import { FORMAT_ADP } from './formatAdp'
 import type { Slot } from './lineup'
 
 const S: Settings = { ...DEFAULT_SETTINGS, teams: 12, keepers: 2, rounds: 17, scoring: 'ppr', superflex: false, oneQb: true, redraftWeight: 0 }
@@ -171,7 +180,7 @@ describe('evalSide: players', () => {
     const byId = Object.fromEntries(items.map((i) => [i.player!.id, i]))
     expect(byId.qb1!.value).toBeGreaterThan(0)
     expect(byId.qb2!.value).toBe(0)
-    expect(byId.qb2!.note).toMatch(/Extra QB/)
+    expect(byId.qb2!.note).toBe('Extra QB: only one can be kept, behind qb1')
   })
   it('allows several QBs when oneQb is off (up to the keeper limit)', () => {
     const a = mk('qb1', 'QB', 10)
@@ -397,6 +406,93 @@ describe('evalTeam / evalTrade (roster-aware)', () => {
       expect(noK.now!.gets).toBeGreaterThan(0)
       expect(hasK.now!.gets).toBe(0) // he'd sit behind the better kicker
       expect(noK.gets).toBeGreaterThan(hasK.gets)
+    })
+
+    describe('uneven trades', () => {
+      // 12 teams: the first 5 rounds are picks 1-60.
+      const star = mk('star', 'WR', 3)
+      const good = mk('good', 'RB', 20)
+      const early = mk('early', 'WR', 30)
+      const mid = mk('mid', 'RB', 40)
+      const late1 = mk('late1', 'RB', 90)
+      const late2 = mk('late2', 'WR', 100)
+      const late3 = mk('late3', 'TE', 110)
+      const kicker = mk('kicker', 'K', 150)
+      const pool = players(star, good, early, mid, late1, late2, late3, kicker)
+      const cost = (sent: string[], got: string[]) =>
+        unevenCost(sent.map((id) => keep(id, 9)), got.map((id) => keep(id, 9)), pool, s, 2027)
+      const worth = (ids: string[]) => sumItemValues(evalSide(ids.map((id) => keep(id, 9)), pool, s, 2027), s)
+
+      it('adds to what a side gives up when it sends more players than it gets', () => {
+        const t = evalTeam([keep('early', 9), keep('mid', 9)], [keep('good', 9)], [], pool, s, 2027)
+        const even = evalTeam([keep('early', 9)], [keep('good', 9)], [], pool, s, 2027)
+        expect(t.uneven).toBeGreaterThan(0)
+        expect(t.gives).toBeCloseTo((1 - redraftShare(s)) * t.later!.gives + redraftShare(s) * t.now!.gives + t.uneven!)
+        expect(even.uneven).toBeUndefined()
+        // The side getting two players isn't penalized.
+        expect(cost(['good'], ['early', 'mid'])).toBe(0)
+      })
+
+      it('costs more for early-round players', () => {
+        expect(cost(['early', 'mid'], ['late1']) / worth(['early', 'mid'])).toBeCloseTo(0.5 * (UNEVEN_BASE + UNEVEN_EARLY))
+        expect(cost(['late1', 'late2'], ['mid']) / worth(['late1', 'late2'])).toBeCloseTo(0.5 * UNEVEN_BASE)
+      })
+
+      it('costs less in a 3-for-2 than a 2-for-1', () => {
+        const rate = cost(['late1', 'late2', 'late3'], ['mid', 'early']) / worth(['late1', 'late2', 'late3'])
+        expect(rate).toBeCloseTo((1 / 3) * UNEVEN_BASE)
+      })
+
+      it('applies even when a big star comes back', () => {
+        expect(cost(['good', 'mid'], ['star']) / worth(['good', 'mid'])).toBeCloseTo(0.5 * (UNEVEN_BASE + UNEVEN_EARLY))
+      })
+
+      it('ignores picks, kickers and deals that bring back no player', () => {
+        expect(cost(['mid', 'kicker'], ['good'])).toBe(0)
+        expect(cost(['early', 'mid'], [])).toBe(0)
+        expect(unevenCost([keep('early', 9), pick(2027, 1)], [keep('good', 9)], pool, s, 2027)).toBe(0)
+      })
+    })
+
+    describe('superflex QB shortage', () => {
+      const slots: Slot[] = [['QB'], ['RB'], ['QB', 'RB', 'WR', 'TE']]
+      const q1 = mk('q1', 'QB', 10)
+      const q2 = mk('q2', 'QB', 30)
+      const q3 = mk('q3', 'QB', 40)
+      const r1 = mk('r1', 'RB', 15)
+      const w1 = mk('w1', 'WR', 20)
+      const scrub = mk('scrub', 'QB', 300)
+      const pool = players(q1, q2, q3, r1, w1, scrub)
+      const run = (sent: string[], got: string[], roster: ReturnType<typeof mk>[]) =>
+        evalTeam(sent.map((id) => keep(id, 9)), got.map((id) => keep(id, 9)), roster, pool, s, 2027, undefined, slots).now!
+      const drop = (id: string) => currentWorth(pool.get(id)!, s)
+
+      it('penalizes emptying the superflex of QBs when no QB comes back', () => {
+        const now = run(['q2'], ['w1'], [q1, q2, r1])
+        expect(now.gives).toBeCloseTo(drop('q2') + SUPERFLEX_QB_PENALTY)
+        expect(now.gets).toBeCloseTo(drop('w1'))
+      })
+
+      it('costs nothing when a QB comes back, or when another QB can step in', () => {
+        expect(run(['q2'], ['q3'], [q1, q2, r1]).gives).toBeCloseTo(drop('q2'))
+        expect(run(['q2'], [], [q1, q2, q3, r1]).gives).toBeCloseTo(drop('q2') - drop('q3'))
+      })
+
+      it('does not count a barely rosterable or long-term injured QB as a replacement', () => {
+        expect(run(['q2'], [], [q1, q2, r1, scrub]).gives).toBeGreaterThan(SUPERFLEX_QB_PENALTY)
+        const hurt = { ...q3, inj: 'IR' as const }
+        expect(run(['q2'], [], [q1, q2, r1, hurt]).gives).toBeGreaterThan(SUPERFLEX_QB_PENALTY)
+      })
+
+      it('rewards filling an open QB spot', () => {
+        expect(run([], ['q2'], [q1, r1]).gets).toBeCloseTo(drop('q2') + SUPERFLEX_QB_PENALTY)
+      })
+
+      it('leaves other positions, and leagues without a superflex, alone', () => {
+        expect(run(['r1'], [], [q1, q2, r1]).gives).toBeCloseTo(drop('r1'))
+        const oneQb = evalTeam([keep('q1', 9)], [], [q1, r1], pool, s, 2027, undefined, [['QB'], ['RB']])
+        expect(oneQb.now!.gives).toBeCloseTo(drop('q1'))
+      })
     })
 
     it('values each player on his own redraft worth without slots or without a roster', () => {
@@ -639,16 +735,33 @@ describe('contending and rebuilding', () => {
   const rb = (id: string, adp: number) => mk(id, 'RB', adp)
   const s50: Settings = { ...S, redraftWeight: 50 }
 
-  it('shifts a team’s redraft weight by its stance, within 0-100', () => {
+  it('gives each outlook its own win-now share, and balanced the settings’ share', () => {
     expect(weightFor(s50, null)).toBe(50)
-    expect(weightFor(s50, 'contending')).toBe(50 + STANCE_SHIFT)
-    expect(weightFor(s50, 'rebuilding')).toBe(50 - STANCE_SHIFT)
-    expect(weightFor({ redraftWeight: 90 }, 'contending')).toBe(100)
-    expect(weightFor({ redraftWeight: 10 }, 'rebuilding')).toBe(0)
+    expect(weightFor({ redraftWeight: 65 }, null)).toBe(65)
+    expect(weightFor(s50, 'sell')).toBe(15)
+    expect(weightFor(s50, 'rebuilding')).toBe(45)
+    expect(weightFor(s50, 'contending')).toBe(80)
+    expect(weightFor(s50, 'allin')).toBe(95)
+  })
+
+  it('does not let the settings’ share move an outlook, and stays within 0-100', () => {
+    for (const stance of ['sell', 'rebuilding', 'contending', 'allin'] as const) {
+      expect(weightFor({ redraftWeight: 5 }, stance)).toBe(STANCE_WEIGHT[stance])
+      expect(weightFor({ redraftWeight: 99 }, stance)).toBe(STANCE_WEIGHT[stance])
+    }
+    expect(weightFor({ redraftWeight: 150 }, null)).toBe(100)
+    expect(weightFor({ redraftWeight: -5 }, null)).toBe(0)
+  })
+
+  it('lists the outlooks from selling to all in, with balanced in the middle', () => {
+    expect(STANCE_OPTIONS.map((o) => o.label)).toEqual(['Sell it all', 'Rebuilding', 'Balanced', 'Contending', 'Victory or death'])
+    expect(STANCE_OPTIONS.map((o) => o.stance)).toEqual(['sell', 'rebuilding', null, 'contending', 'allin'])
+    const shares = STANCE_OPTIONS.map((o) => weightFor(DEFAULT_SETTINGS, o.stance))
+    expect(shares).toEqual([15, 45, 65, 80, 95]) // strictly more aggressive left to right
   })
 
   it('only changes the redraft weight in a team’s settings', () => {
-    expect(settingsFor(s50, 'contending')).toEqual({ ...s50, redraftWeight: 50 + STANCE_SHIFT })
+    expect(settingsFor(s50, 'contending')).toEqual({ ...s50, redraftWeight: 80 })
     expect(settingsFor(s50, null)).toEqual(s50)
   })
 
@@ -665,6 +778,13 @@ describe('contending and rebuilding', () => {
     expect(net(swap([null, null])[0])).toBeGreaterThan(net(swap(['rebuilding', null])[0]))
   })
 
+  it('values the better player this season more, the more aggressive the outlook', () => {
+    const order = (['sell', 'rebuilding', 'contending', 'allin'] as const).map((st) => net(swap([st, null])[0]))
+    expect([...order].sort((x, y) => x - y)).toEqual(order) // sell < rebuilding < contending < victory or death
+    expect(net(swap(['allin', null])[0])).toBeGreaterThan(net(swap(['contending', null])[0]))
+    expect(net(swap(['sell', null])[0])).toBeLessThan(net(swap(['rebuilding', null])[0]))
+  })
+
   it('one team’s stance doesn’t change how the other team sees the trade', () => {
     expect(swap(['contending', null])[1]).toEqual(swap(['rebuilding', null])[1])
     expect(swap([null, 'rebuilding'])[0]).toEqual(swap([null, null])[0])
@@ -679,5 +799,49 @@ describe('contending and rebuilding', () => {
   it('treats a missing stance list as no stance', () => {
     const none = evalTrade([keep('bargain', 14)], [keep('star', 1)], [], [], pool, s50, 2027)
     expect(none).toEqual(swap([null, null]))
+  })
+})
+
+describe('every team starts balanced', () => {
+  it('values this season at 65% by default, and each outlook replaces that share', () => {
+    expect(DEFAULT_SETTINGS.redraftWeight).toBe(65)
+    expect(settingsFor(DEFAULT_SETTINGS, null).redraftWeight).toBe(65)
+    expect(settingsFor(DEFAULT_SETTINGS, 'sell').redraftWeight).toBe(15)
+    expect(settingsFor(DEFAULT_SETTINGS, 'rebuilding').redraftWeight).toBe(45)
+    expect(settingsFor(DEFAULT_SETTINGS, 'contending').redraftWeight).toBe(80)
+    expect(settingsFor(DEFAULT_SETTINGS, 'allin').redraftWeight).toBe(95)
+  })
+})
+
+describe('pickSlotFor / projectedNextAdp', () => {
+  const st = { ...S, superflex: false }
+  const withStats = (p: Player, gp: number, ppr: number): Player => ({ ...p, stats: { gp, ppr, half: ppr, std: ppr } })
+
+  it('inverts pickValue', () => {
+    for (const n of [1, 5, 24, 100, 200]) expect(pickSlotFor(pickValue(n))).toBeCloseTo(n, 6)
+    expect(pickSlotFor(250)).toBeCloseTo(1, 6)
+  })
+
+  it('projects a young player with no production to his preseason ADP', () => {
+    expect(projectedNextAdp({ ...mk('a', 'WR', 40), age: 24 }, st)).toBeCloseTo(40, 6)
+  })
+
+  it('moves a breakout toward his production, but only part of the way', () => {
+    const breakout = { ...mk('b', 'WR', 111), age: 23, curAdp: 39 }
+    const next = projectedNextAdp(withStats(breakout, 10, 176), st)
+    expect(next).toBeLessThan(111)
+    expect(next).toBeGreaterThan(39)
+  })
+
+  it('projects an older player later than a young one with the same ADP', () => {
+    const young = { ...mk('y', 'RB', 20), age: 24 }
+    const old = { ...mk('o', 'RB', 20), age: 31 }
+    expect(projectedNextAdp(old, st)).toBeGreaterThan(projectedNextAdp(young, st))
+  })
+
+  it('is not changed by an injury, and never exceeds the undrafted placeholder', () => {
+    const healthy = { ...mk('h', 'RB', 15), age: 25 }
+    expect(projectedNextAdp({ ...healthy, inj: 'IR', weeksLeft: 6 }, st)).toBe(projectedNextAdp(healthy, st))
+    expect(projectedNextAdp({ ...mk('u', 'WR', 400), age: 40 }, st)).toBeLessThanOrEqual(UNDRAFTED_ADP)
   })
 })

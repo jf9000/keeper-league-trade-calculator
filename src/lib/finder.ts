@@ -41,6 +41,8 @@ export interface FinderArgs {
   slots: readonly Slot[]
   /** Only offers that bring back at least one player at one of these positions; empty = any. */
   want: readonly Pos[]
+  /** Only offers where you send at least one player at one of these positions; empty = any. */
+  sell: readonly Pos[]
   mode: FinderMode
   /** Whether your team and the partners are contending or rebuilding, which shifts how each values this season vs. keepers. */
   stances?: readonly [Stance, Stance]
@@ -94,18 +96,19 @@ export async function findTrades(
     return it ? itemValue(it, s) : 0
   }
   const asset = (p: Player): Asset => ({ t: 'p', id: p.id, keeperRound: defaultKeeperRound(p, s, a.costs) })
-  const pool = (t: LeagueTeam) =>
+  // `also` keeps players at those positions even when they aren't among the team's most valuable.
+  const pool = (t: LeagueTeam, also: readonly Pos[] = []) =>
     a.rosterOf(t)
       .filter((p) => p.pos !== 'K' && p.pos !== 'DEF')
       .map((p) => ({ p, asset: asset(p), v: 0 }))
       .map((x) => ({ ...x, v: rough(x.p, (x.asset as { keeperRound: number }).keeperRound) }))
       .filter((x) => x.v > 1)
       .sort((x, y) => y.v - x.v)
-      .slice(0, POOL)
+      .filter((x, i) => i < POOL || also.includes(x.p.pos))
 
   const mine = a.me
   const myRoster = a.rosterOf(mine)
-  const myPool = pool(mine)
+  const myPool = pool(mine, a.sell)
   const shapes: [1 | 2, 1 | 2][] = [[1, 1], [2, 1], [1, 2]]
   const needsFull = a.mode === 'win-win' ? gradeIdx('B') : gradeIdx('B-')
 
@@ -116,6 +119,7 @@ export async function findTrades(
     const theirPool = pool(partner)
     for (const [ng, nr] of shapes) {
       for (const give of combos(myPool, ng)) {
+        if (a.sell.length && !give.some((x) => a.sell.includes(x.p.pos))) continue
         const gv = give.reduce((t, x) => t + x.v, 0)
         for (const get of combos(theirPool, nr)) {
           if (a.want.length && !get.some((x) => a.want.includes(x.p.pos))) continue

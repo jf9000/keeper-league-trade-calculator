@@ -19,7 +19,7 @@ export interface TeamRank {
   now: number
   /** Total keeper surplus of the best legal set of keepers (next season). */
   later: number
-  /** `now` and `later` each as a share of the league's best, blended by the win-now slider (`redraftWeight`); 0–100. */
+  /** `now` and `later` each as a share of the league's best, blended by the balanced win-now share (`redraftWeight`); 0–100. */
   score: number
   rank: number
   starters: Starter[]
@@ -45,7 +45,7 @@ export function rosterAssets(
 
 /**
  * Ranks every team in the league by this season's lineup and next season's keepers. Each is scaled to the
- * league's best so the two (which sit on different scales) can be blended by the win-now slider.
+ * league's best so the two (which sit on different scales) can be blended.
  */
 export function rankTeams(
   teams: readonly LeagueTeam[],

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import type { Player, PlayersFile } from '../types'
+import { withWeeksLeft } from './availability'
 
 export interface PlayersState {
   status: 'loading' | 'ready' | 'error'
@@ -20,7 +21,7 @@ export function usePlayers(): PlayersState {
         return r.json() as Promise<PlayersFile>
       })
       .then((f) => {
-        setFile(f)
+        setFile(withWeeksLeft(f))
         setStatus('ready')
       })
       .catch((e: unknown) => {
