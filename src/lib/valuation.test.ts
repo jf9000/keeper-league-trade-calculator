@@ -37,6 +37,7 @@ import {
   SUPERFLEX_QB_PENALTY,
   UNEVEN_BASE,
   UNEVEN_EARLY,
+  UNEVEN_FLOOR,
   unevenCost,
 } from './valuation'
 import type { Slot } from './lineup'
@@ -416,9 +417,11 @@ describe('evalTeam / evalTrade (roster-aware)', () => {
       const mid = mk('mid', 'RB', 40)
       const late1 = mk('late1', 'RB', 90)
       const late2 = mk('late2', 'WR', 100)
-      const late3 = mk('late3', 'TE', 110)
+      const late3 = mk('late3', 'TE', 95)
       const kicker = mk('kicker', 'K', 150)
-      const pool = players(star, good, early, mid, late1, late2, late3, kicker)
+      // Drafted too late to be worth UNEVEN_FLOOR.
+      const scrub = mk('scrub', 'WR', 180)
+      const pool = players(star, good, early, mid, late1, late2, late3, kicker, scrub)
       const cost = (sent: string[], got: string[]) =>
         unevenCost(sent.map((id) => keep(id, 9)), got.map((id) => keep(id, 9)), pool, s, 2027)
       const worth = (ids: string[]) => sumItemValues(evalSide(ids.map((id) => keep(id, 9)), pool, s, 2027), s)
@@ -451,6 +454,16 @@ describe('evalTeam / evalTrade (roster-aware)', () => {
         expect(cost(['mid', 'kicker'], ['good'])).toBe(0)
         expect(cost(['early', 'mid'], [])).toBe(0)
         expect(unevenCost([keep('early', 9), pick(2027, 1)], [keep('good', 9)], pool, s, 2027)).toBe(0)
+      })
+
+      it('doesn’t let a throw-in worth less than the floor trigger the penalty or cancel it', () => {
+        expect(redraftWorth(scrub, s)).toBeLessThan(UNEVEN_FLOOR)
+        // Receiving one alongside a pick still brings back no player that counts.
+        expect(unevenCost([keep('early', 9), keep('mid', 9)], [pick(2027, 1), keep('scrub', 9)], pool, s, 2027)).toBe(0)
+        // Adding one to a 2-for-1 doesn't make it even.
+        expect(cost(['early', 'mid'], ['good', 'scrub'])).toBeCloseTo(cost(['early', 'mid'], ['good']))
+        // Sending one along doesn't make an even swap uneven.
+        expect(cost(['early', 'scrub'], ['good'])).toBe(0)
       })
     })
 

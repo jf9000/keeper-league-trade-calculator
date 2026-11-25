@@ -127,8 +127,9 @@ export function InfoButton() {
           Giving up more players than you get back, as in a 2-for-1, counts against your side, because depth is worth
           more than the individual values suggest. It weighs more when the players you send are early-round picks, and
           less the closer the trade is to even numbers (a 3-for-2 costs less than a 2-for-1). It applies no matter how good
-          the player you get back is. Draft picks, kickers and D/ST don’t count as players here. The notes under the
-          result tell you when this applied.
+          the player you get back is. Draft picks, kickers, D/ST and players with very little redraft value don’t count
+          as players here, so a deep-bench throw-in doesn’t change the count. The notes below the trade tell you when
+          this applied.
         </p>
 
       </Section>

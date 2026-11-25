@@ -390,11 +390,17 @@ export const UNEVEN_BASE = 0.4
 export const UNEVEN_EARLY = 0.6
 /** Players drafted within this many rounds are the early ones. */
 export const EARLY_ROUNDS = 5
+/**
+ * A player needs at least this much redraft value (about a pick in the top 100) to count toward either side of an
+ * uneven trade, so a deep-bench throw-in can neither trigger the penalty nor cancel it.
+ */
+export const UNEVEN_FLOOR = 3
 
 /**
  * Extra a team gives up by sending more players than it gets back. Depth is worth more than the values alone say:
  * every player beyond the ones coming back leaves a spot to be filled by someone worse, however good they are.
- * Only players count (not picks, kickers or D/ST), and a deal that brings back no player at all isn't judged this way.
+ * Only players worth at least `UNEVEN_FLOOR` count (not picks, kickers or D/ST), and a deal that brings back no
+ * such player isn't judged this way.
  */
 export function unevenCost(
   sent: Asset[],
@@ -406,7 +412,7 @@ export function unevenCost(
   const counted = (assets: Asset[]) =>
     assets.flatMap((asset) => {
       const p = asset.t === 'p' ? players.get(asset.id) : undefined
-      return p && p.pos !== 'K' && p.pos !== 'DEF' ? [{ asset, p }] : []
+      return p && p.pos !== 'K' && p.pos !== 'DEF' && redraftWorth(p, s) >= UNEVEN_FLOOR ? [{ asset, p }] : []
     })
   const out = counted(sent)
   const back = counted(incoming)
