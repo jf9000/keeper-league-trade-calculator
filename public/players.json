@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T22:31:19.527Z",
+  "generatedAt": "2026-11-25T15:12:23.872Z",
   "season": 2026,
   "source": "MyFantasyLeague ADP; Sleeper player IDs",
   "sfSource": "ffc-2qb:2026 (+17 QBs estimated)",
@@ -109,7 +109,7 @@
       "name": "Puka Nacua",
       "pos": "WR",
       "team": "LAR",
-      "adp": 7.5,
+      "adp": 7.6,
       "sfAdp": 6.5,
       "stats": {
         "gp": 7,
@@ -142,7 +142,7 @@
       "name": "Jonathan Taylor",
       "pos": "RB",
       "team": "IND",
-      "adp": 9.1,
+      "adp": 9.3,
       "sfAdp": 5.7,
       "stats": {
         "gp": 11,
@@ -238,7 +238,7 @@
       "name": "De'Von Achane",
       "pos": "RB",
       "team": "MIA",
-      "adp": 17.3,
+      "adp": 17.5,
       "sfAdp": 23.8,
       "stats": {
         "gp": 3,
@@ -255,7 +255,7 @@
       "name": "Chase Brown",
       "pos": "RB",
       "team": "CIN",
-      "adp": 19,
+      "adp": 19.1,
       "sfAdp": 31.3,
       "stats": {
         "gp": 10,
@@ -279,8 +279,7 @@
         "half": 68.7,
         "std": 65.2
       },
-      "age": 29,
-      "inj": "Questionable"
+      "age": 29
     },
     {
       "id": "12527",
@@ -288,7 +287,7 @@
       "name": "Ashton Jeanty",
       "pos": "RB",
       "team": "LV",
-      "adp": 20.7,
+      "adp": 20.9,
       "sfAdp": 44.5,
       "stats": {
         "gp": 11,
@@ -304,7 +303,7 @@
       "name": "Omarion Hampton",
       "pos": "RB",
       "team": "LAC",
-      "adp": 21,
+      "adp": 21.4,
       "sfAdp": 41.3,
       "stats": {
         "gp": 10,
@@ -313,23 +312,6 @@
         "std": 83
       },
       "age": 23
-    },
-    {
-      "id": "4881",
-      "sleeperId": "4881",
-      "name": "Lamar Jackson",
-      "pos": "QB",
-      "team": "BAL",
-      "adp": 23.3,
-      "sfAdp": 6,
-      "stats": {
-        "gp": 4,
-        "ppr": 80.1,
-        "half": 80.1,
-        "std": 80.1
-      },
-      "age": 29,
-      "inj": "IR"
     },
     {
       "id": "11604",
@@ -346,7 +328,24 @@
         "std": 99.8
       },
       "age": 23,
-      "inj": "Out"
+      "inj": "Questionable"
+    },
+    {
+      "id": "4881",
+      "sleeperId": "4881",
+      "name": "Lamar Jackson",
+      "pos": "QB",
+      "team": "BAL",
+      "adp": 23.5,
+      "sfAdp": 6,
+      "stats": {
+        "gp": 4,
+        "ppr": 80.1,
+        "half": 80.1,
+        "std": 80.1
+      },
+      "age": 29,
+      "inj": "IR"
     },
     {
       "id": "3198",
@@ -354,7 +353,7 @@
       "name": "Derrick Henry",
       "pos": "RB",
       "team": "BAL",
-      "adp": 23.9,
+      "adp": 24,
       "sfAdp": 11.6,
       "stats": {
         "gp": 11,
@@ -362,8 +361,7 @@
         "half": 169.9,
         "std": 159.4
       },
-      "age": 32,
-      "inj": "Questionable"
+      "age": 32
     },
     {
       "id": "8151",
@@ -380,7 +378,7 @@
         "std": 170.4
       },
       "age": 26,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "8112",
@@ -388,7 +386,7 @@
       "name": "Drake London",
       "pos": "WR",
       "team": "ATL",
-      "adp": 25.5,
+      "adp": 25.7,
       "sfAdp": 30.7,
       "stats": {
         "gp": 10,
@@ -396,8 +394,7 @@
         "half": 113.5,
         "std": 88.5
       },
-      "age": 25,
-      "inj": "Questionable"
+      "age": 25
     },
     {
       "id": "5859",
@@ -405,7 +402,7 @@
       "name": "A.J. Brown",
       "pos": "WR",
       "team": "NE",
-      "adp": 26,
+      "adp": 26.1,
       "sfAdp": 36.2,
       "stats": {
         "gp": 4,
@@ -414,7 +411,7 @@
         "std": 12.8
       },
       "age": 29,
-      "inj": "Out"
+      "inj": "Doubtful"
     },
     {
       "id": "8130",
@@ -438,7 +435,7 @@
       "name": "Drake Maye",
       "pos": "QB",
       "team": "NE",
-      "adp": 28.6,
+      "adp": 28.8,
       "sfAdp": 5.1,
       "stats": {
         "gp": 10,
@@ -455,7 +452,7 @@
       "name": "Nico Collins",
       "pos": "WR",
       "team": "HOU",
-      "adp": 29.1,
+      "adp": 29.2,
       "sfAdp": 39.1,
       "stats": {
         "gp": 8,
@@ -503,7 +500,7 @@
       "name": "Kyren Williams",
       "pos": "RB",
       "team": "LAR",
-      "adp": 31.5,
+      "adp": 31.6,
       "sfAdp": 41.5,
       "stats": {
         "gp": 10,
@@ -511,8 +508,7 @@
         "half": 145.3,
         "std": 126.3
       },
-      "age": 26,
-      "inj": "Questionable"
+      "age": 26
     },
     {
       "id": "13287",
@@ -537,7 +533,7 @@
       "name": "Malik Nabers",
       "pos": "WR",
       "team": "NYG",
-      "adp": 33.1,
+      "adp": 33.2,
       "sfAdp": 50.4,
       "stats": {
         "gp": 10,
@@ -553,7 +549,7 @@
       "name": "Rashee Rice",
       "pos": "WR",
       "team": "KC",
-      "adp": 36.7,
+      "adp": 36.8,
       "sfAdp": 40.3,
       "stats": {
         "gp": 7,
@@ -569,7 +565,7 @@
       "name": "Chris Olave",
       "pos": "WR",
       "team": "NO",
-      "adp": 37.1,
+      "adp": 37.2,
       "sfAdp": 41.9,
       "stats": {
         "gp": 10,
@@ -633,7 +629,7 @@
       "name": "Travis Etienne",
       "pos": "RB",
       "team": "NO",
-      "adp": 44.2,
+      "adp": 44.3,
       "sfAdp": 55.7,
       "stats": {
         "gp": 5,
@@ -698,7 +694,7 @@
       "name": "Zay Flowers",
       "pos": "WR",
       "team": "BAL",
-      "adp": 45.2,
+      "adp": 45.3,
       "sfAdp": 40.2,
       "stats": {
         "gp": 9,
@@ -714,7 +710,7 @@
       "name": "Jayden Daniels",
       "pos": "QB",
       "team": "WAS",
-      "adp": 46.1,
+      "adp": 46,
       "sfAdp": 14.2,
       "stats": {
         "gp": 8,
@@ -730,7 +726,7 @@
       "name": "Emeka Egbuka",
       "pos": "WR",
       "team": "TB",
-      "adp": 46.6,
+      "adp": 46.8,
       "sfAdp": 53.5,
       "stats": {
         "gp": 8,
@@ -746,7 +742,7 @@
       "name": "Ladd McConkey",
       "pos": "WR",
       "team": "LAC",
-      "adp": 46.9,
+      "adp": 47,
       "sfAdp": 65.2,
       "stats": {
         "gp": 6,
@@ -762,7 +758,7 @@
       "name": "Cam Skattebo",
       "pos": "RB",
       "team": "NYG",
-      "adp": 47.4,
+      "adp": 47.6,
       "sfAdp": 57.1,
       "stats": {
         "gp": 8,
@@ -778,7 +774,7 @@
       "name": "Tetairoa McMillan",
       "pos": "WR",
       "team": "CAR",
-      "adp": 48.1,
+      "adp": 48.2,
       "sfAdp": 52.7,
       "stats": {
         "gp": 10,
@@ -810,7 +806,7 @@
       "name": "Tee Higgins",
       "pos": "WR",
       "team": "CIN",
-      "adp": 48.7,
+      "adp": 48.6,
       "sfAdp": 48.5,
       "stats": {
         "gp": 10,
@@ -826,7 +822,7 @@
       "name": "Dak Prescott",
       "pos": "QB",
       "team": "DAL",
-      "adp": 52.6,
+      "adp": 52.5,
       "sfAdp": 11.3,
       "stats": {
         "gp": 11,
@@ -842,7 +838,7 @@
       "name": "D'Andre Swift",
       "pos": "RB",
       "team": "CHI",
-      "adp": 53.2,
+      "adp": 53.3,
       "sfAdp": 57.1,
       "stats": {
         "gp": 10,
@@ -874,7 +870,7 @@
       "name": "Jaylen Waddle",
       "pos": "WR",
       "team": "DEN",
-      "adp": 55.7,
+      "adp": 55.9,
       "sfAdp": 67.4,
       "stats": {
         "gp": 10,
@@ -882,7 +878,7 @@
         "half": 74.6,
         "std": 58.1
       },
-      "age": 27
+      "age": 28
     },
     {
       "id": "6797",
@@ -907,7 +903,7 @@
       "name": "Matthew Stafford",
       "pos": "QB",
       "team": "LAR",
-      "adp": 57.7,
+      "adp": 57.8,
       "sfAdp": 13.7,
       "stats": {
         "gp": 10,
@@ -916,22 +912,6 @@
         "std": 172.6
       },
       "age": 38
-    },
-    {
-      "id": "12512",
-      "sleeperId": "12512",
-      "name": "Quinshon Judkins",
-      "pos": "RB",
-      "team": "CLE",
-      "adp": 58.1,
-      "sfAdp": 65.5,
-      "stats": {
-        "gp": 9,
-        "ppr": 108.2,
-        "half": 95.7,
-        "std": 83.2
-      },
-      "age": 23
     },
     {
       "id": "12518",
@@ -948,6 +928,22 @@
         "std": 48.7
       },
       "age": 24
+    },
+    {
+      "id": "12512",
+      "sleeperId": "12512",
+      "name": "Quinshon Judkins",
+      "pos": "RB",
+      "team": "CLE",
+      "adp": 58.4,
+      "sfAdp": 65.5,
+      "stats": {
+        "gp": 9,
+        "ppr": 108.2,
+        "half": 95.7,
+        "std": 83.2
+      },
+      "age": 23
     },
     {
       "id": "2133",
@@ -988,7 +984,7 @@
       "name": "Trevor Lawrence",
       "pos": "QB",
       "team": "JAX",
-      "adp": 61.3,
+      "adp": 61.2,
       "sfAdp": 20.6,
       "stats": {
         "gp": 10,
@@ -1004,7 +1000,7 @@
       "name": "Jameson Williams",
       "pos": "WR",
       "team": "DET",
-      "adp": 61.9,
+      "adp": 62,
       "sfAdp": 51.2,
       "stats": {
         "gp": 10,
@@ -1028,8 +1024,7 @@
         "half": 86.5,
         "std": 71
       },
-      "age": 29,
-      "inj": "Questionable"
+      "age": 29
     },
     {
       "id": "5892",
@@ -1103,7 +1098,7 @@
       "name": "Luther Burden",
       "pos": "WR",
       "team": "CHI",
-      "adp": 69.6,
+      "adp": 69.7,
       "sfAdp": 75,
       "stats": {
         "gp": 10,
@@ -1216,7 +1211,7 @@
       "name": "Rhamondre Stevenson",
       "pos": "RB",
       "team": "NE",
-      "adp": 75.9,
+      "adp": 76,
       "sfAdp": 79.2,
       "stats": {
         "gp": 10,
@@ -1232,7 +1227,7 @@
       "name": "Jared Goff",
       "pos": "QB",
       "team": "DET",
-      "adp": 76.4,
+      "adp": 76.2,
       "sfAdp": 23.1,
       "stats": {
         "gp": 10,
@@ -1248,7 +1243,7 @@
       "name": "Josh Jacobs",
       "pos": "RB",
       "team": "GB",
-      "adp": 76.7,
+      "adp": 76.8,
       "sfAdp": 104.1,
       "stats": {
         "gp": 3,
@@ -1257,7 +1252,7 @@
         "std": 32.8
       },
       "age": 28,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "12508",
@@ -1282,7 +1277,7 @@
       "name": "Brock Purdy",
       "pos": "QB",
       "team": "SF",
-      "adp": 78.2,
+      "adp": 78.1,
       "sfAdp": 18.1,
       "stats": {
         "gp": 10,
@@ -1298,7 +1293,7 @@
       "name": "Tucker Kraft",
       "pos": "TE",
       "team": "GB",
-      "adp": 78.7,
+      "adp": 78.6,
       "sfAdp": 95.7,
       "stats": {
         "gp": 10,
@@ -1314,7 +1309,7 @@
       "name": "Carnell Tate",
       "pos": "WR",
       "team": "TEN",
-      "adp": 80.8,
+      "adp": 80.9,
       "sfAdp": 92.2,
       "stats": {
         "gp": 8,
@@ -1330,7 +1325,7 @@
       "name": "Jaylen Warren",
       "pos": "RB",
       "team": "PIT",
-      "adp": 81.4,
+      "adp": 81.3,
       "sfAdp": null,
       "stats": {
         "gp": 10,
@@ -1346,7 +1341,7 @@
       "name": "Mike Evans",
       "pos": "WR",
       "team": "SF",
-      "adp": 82.5,
+      "adp": 82.4,
       "sfAdp": 76.8,
       "stats": {
         "gp": 7,
@@ -1362,7 +1357,7 @@
       "name": "Marvin Harrison Jr.",
       "pos": "WR",
       "team": "HOU",
-      "adp": 83.4,
+      "adp": 83.5,
       "sfAdp": 85.1,
       "stats": {
         "gp": 6,
@@ -1371,7 +1366,7 @@
         "std": 26.5
       },
       "age": 24,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "5045",
@@ -1390,6 +1385,22 @@
       "age": 31
     },
     {
+      "id": "4217",
+      "sleeperId": "4217",
+      "name": "George Kittle",
+      "pos": "TE",
+      "team": "SF",
+      "adp": 85.9,
+      "sfAdp": 105.7,
+      "stats": {
+        "gp": 10,
+        "ppr": 146.1,
+        "half": 122.6,
+        "std": 99.1
+      },
+      "age": 33
+    },
+    {
       "id": "10859",
       "sleeperId": "10859",
       "name": "Sam LaPorta",
@@ -1403,24 +1414,7 @@
         "half": 85.4,
         "std": 65.9
       },
-      "age": 25,
-      "inj": "Questionable"
-    },
-    {
-      "id": "4217",
-      "sleeperId": "4217",
-      "name": "George Kittle",
-      "pos": "TE",
-      "team": "SF",
-      "adp": 86,
-      "sfAdp": 105.7,
-      "stats": {
-        "gp": 10,
-        "ppr": 146.1,
-        "half": 122.6,
-        "std": 99.1
-      },
-      "age": 33
+      "age": 25
     },
     {
       "id": "12506",
@@ -1428,7 +1422,7 @@
       "name": "Harold Fannin",
       "pos": "TE",
       "team": "CLE",
-      "adp": 86.6,
+      "adp": 86.5,
       "sfAdp": null,
       "stats": {
         "gp": 10,
@@ -1460,7 +1454,7 @@
       "name": "Tony Pollard",
       "pos": "RB",
       "team": "TEN",
-      "adp": 90.7,
+      "adp": 90.6,
       "sfAdp": 88.1,
       "stats": {
         "gp": 10,
@@ -1551,7 +1545,7 @@
         "std": 76.6
       },
       "age": 29,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "4892",
@@ -1559,7 +1553,7 @@
       "name": "Baker Mayfield",
       "pos": "QB",
       "team": "TB",
-      "adp": 94.8,
+      "adp": 95,
       "sfAdp": 36.5,
       "stats": {
         "gp": 7,
@@ -1592,7 +1586,7 @@
       "name": "Chuba Hubbard",
       "pos": "RB",
       "team": "CAR",
-      "adp": 97.1,
+      "adp": 97,
       "sfAdp": 95.3,
       "stats": {
         "gp": 10,
@@ -1608,7 +1602,7 @@
       "name": "Jordan Love",
       "pos": "QB",
       "team": "GB",
-      "adp": 97.7,
+      "adp": 97.5,
       "sfAdp": 42.5,
       "stats": {
         "gp": 10,
@@ -1649,8 +1643,7 @@
         "half": 62.8,
         "std": 46.8
       },
-      "age": 31,
-      "inj": "Questionable"
+      "age": 31
     },
     {
       "id": "11533",
@@ -1714,7 +1707,8 @@
         "half": 58,
         "std": 53.5
       },
-      "age": 27
+      "age": 27,
+      "inj": "Out"
     },
     {
       "id": "12545",
@@ -1722,7 +1716,7 @@
       "name": "Tyler Shough",
       "pos": "QB",
       "team": "NO",
-      "adp": 104.7,
+      "adp": 104.5,
       "sfAdp": 46.3,
       "stats": {
         "gp": 10,
@@ -1753,7 +1747,7 @@
       "name": "C.J. Stroud",
       "pos": "QB",
       "team": "HOU",
-      "adp": 108.4,
+      "adp": 108.3,
       "sfAdp": 64.2,
       "stats": {
         "gp": 10,
@@ -1793,7 +1787,7 @@
         "std": 101.3
       },
       "age": 29,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "7567",
@@ -1817,7 +1811,7 @@
       "name": "Isaiah Likely",
       "pos": "TE",
       "team": "NYG",
-      "adp": 112.5,
+      "adp": 112.3,
       "sfAdp": 148.2,
       "stats": {
         "gp": 10,
@@ -1850,7 +1844,7 @@
       "name": "Cam Ward",
       "pos": "QB",
       "team": "TEN",
-      "adp": 113.2,
+      "adp": 113.3,
       "sfAdp": 102.8,
       "stats": {
         "gp": 10,
@@ -1890,7 +1884,7 @@
         "half": 109,
         "std": 102.5
       },
-      "age": 25
+      "age": 26
     },
     {
       "id": "LAR",
@@ -1922,14 +1916,14 @@
         "std": 35.6
       },
       "age": 27,
-      "inj": "Out"
+      "inj": "Doubtful"
     },
     {
       "id": "5870",
       "sleeperId": "5870",
       "name": "Daniel Jones",
       "pos": "QB",
-      "team": "IND",
+      "team": "FA",
       "adp": 115.3,
       "sfAdp": 67.9,
       "stats": {
@@ -2003,7 +1997,7 @@
         "std": 35.9
       },
       "age": 24,
-      "inj": "Out"
+      "inj": "Doubtful"
     },
     {
       "id": "8161",
@@ -2037,7 +2031,7 @@
         "std": 60.7
       },
       "age": 27,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "DEN",
@@ -2060,7 +2054,7 @@
       "name": "Jordan Mason",
       "pos": "RB",
       "team": "MIN",
-      "adp": 118.7,
+      "adp": 118.8,
       "sfAdp": 110.9,
       "stats": {
         "gp": 6,
@@ -2076,7 +2070,7 @@
       "name": "Bryce Young",
       "pos": "QB",
       "team": "CAR",
-      "adp": 119.3,
+      "adp": 119.2,
       "sfAdp": 87.2,
       "stats": {
         "gp": 10,
@@ -2189,7 +2183,7 @@
       "name": "Matthew Golden",
       "pos": "WR",
       "team": "GB",
-      "adp": 125.4,
+      "adp": 125.3,
       "sfAdp": 111,
       "stats": {
         "gp": 10,
@@ -2345,7 +2339,7 @@
       "name": "Juwan Johnson",
       "pos": "TE",
       "team": "NO",
-      "adp": 137.4,
+      "adp": 137.5,
       "sfAdp": null,
       "stats": {
         "gp": 8,
@@ -2408,7 +2402,7 @@
       "name": "Khalil Shakir",
       "pos": "WR",
       "team": "BUF",
-      "adp": 139.3,
+      "adp": 139.4,
       "sfAdp": 129.1,
       "stats": {
         "gp": 10,
@@ -2472,7 +2466,7 @@
       "name": "Woody Marks",
       "pos": "RB",
       "team": "HOU",
-      "adp": 141.7,
+      "adp": 141.6,
       "sfAdp": null,
       "stats": {
         "gp": 9,
@@ -2481,7 +2475,7 @@
         "std": 62.4
       },
       "age": 25,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "96",
@@ -2489,7 +2483,7 @@
       "name": "Aaron Rodgers",
       "pos": "QB",
       "team": "PIT",
-      "adp": 142.1,
+      "adp": 141.8,
       "sfAdp": 111.8,
       "stats": {
         "gp": 10,
@@ -2505,7 +2499,7 @@
       "name": "Deebo Samuel",
       "pos": "WR",
       "team": "SF",
-      "adp": 142.2,
+      "adp": 142.1,
       "sfAdp": 125.1,
       "stats": {
         "gp": 7,
@@ -2592,6 +2586,22 @@
       "age": 25
     },
     {
+      "id": "13345",
+      "sleeperId": "13345",
+      "name": "Jonah Coleman",
+      "pos": "RB",
+      "team": "DEN",
+      "adp": 144.9,
+      "sfAdp": null,
+      "stats": {
+        "gp": 5,
+        "ppr": 97.8,
+        "half": 89.3,
+        "std": 80.8
+      },
+      "age": 23
+    },
+    {
       "id": "MIN",
       "sleeperId": "MIN",
       "name": "Minnesota Vikings",
@@ -2605,22 +2615,6 @@
         "half": 109,
         "std": 109
       }
-    },
-    {
-      "id": "13345",
-      "sleeperId": "13345",
-      "name": "Jonah Coleman",
-      "pos": "RB",
-      "team": "DEN",
-      "adp": 145.1,
-      "sfAdp": null,
-      "stats": {
-        "gp": 5,
-        "ppr": 97.8,
-        "half": 89.3,
-        "std": 80.8
-      },
-      "age": 23
     },
     {
       "id": "PIT",
@@ -2643,7 +2637,7 @@
       "name": "Geno Smith",
       "pos": "QB",
       "team": "NYJ",
-      "adp": 147.1,
+      "adp": 146.8,
       "sfAdp": 104.3,
       "stats": {
         "gp": 11,
@@ -2678,8 +2672,7 @@
         "half": 109,
         "std": 109
       },
-      "age": 23,
-      "inj": "Questionable"
+      "age": 23
     },
     {
       "id": "13305",
@@ -2733,7 +2726,7 @@
       "name": "Jalen Coker",
       "pos": "WR",
       "team": "CAR",
-      "adp": 150.1,
+      "adp": 150,
       "sfAdp": 138.3,
       "stats": {
         "gp": 9,
@@ -2741,8 +2734,7 @@
         "half": 77.5,
         "std": 60
       },
-      "age": 25,
-      "inj": "Questionable"
+      "age": 25
     },
     {
       "id": "9508",
@@ -2783,7 +2775,7 @@
       "name": "T.J. Hockenson",
       "pos": "TE",
       "team": "MIN",
-      "adp": 151.4,
+      "adp": 151.1,
       "sfAdp": null,
       "stats": {
         "gp": 9,
@@ -2815,7 +2807,7 @@
       "name": "Oronde Gadsden",
       "pos": "TE",
       "team": "LAC",
-      "adp": 152.2,
+      "adp": 152.1,
       "sfAdp": null,
       "stats": {
         "gp": 7,
@@ -2879,7 +2871,7 @@
       "name": "Brenton Strange",
       "pos": "TE",
       "team": "JAX",
-      "adp": 154.6,
+      "adp": 154.4,
       "sfAdp": null,
       "stats": {
         "gp": 10,
@@ -2928,8 +2920,7 @@
       "team": "LAR",
       "adp": 158.2,
       "sfAdp": 68.4,
-      "age": 23,
-      "inj": "Out"
+      "age": 23
     },
     {
       "id": "8210",
@@ -2937,7 +2928,7 @@
       "name": "Chigoziem Okonkwo",
       "pos": "TE",
       "team": "WAS",
-      "adp": 159,
+      "adp": 158.5,
       "sfAdp": null,
       "stats": {
         "gp": 8,
@@ -3002,7 +2993,7 @@
       "name": "Dalton Schultz",
       "pos": "TE",
       "team": "HOU",
-      "adp": 162.3,
+      "adp": 161.9,
       "sfAdp": null,
       "stats": {
         "gp": 10,
@@ -3161,7 +3152,7 @@
       "name": "Michael Penix Jr.",
       "pos": "QB",
       "team": "ATL",
-      "adp": 167.3,
+      "adp": 167.1,
       "sfAdp": 119.3,
       "stats": {
         "gp": 8,
@@ -3219,7 +3210,7 @@
         "std": 42.6
       },
       "age": 22,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "7042",
@@ -3438,8 +3429,7 @@
         "half": 1.2,
         "std": 1.2
       },
-      "age": 22,
-      "inj": "Out"
+      "age": 22
     },
     {
       "id": "12713",
@@ -3495,7 +3485,7 @@
       "name": "Keenan Allen",
       "pos": "WR",
       "team": "SF",
-      "adp": 176.6,
+      "adp": 176.3,
       "sfAdp": null,
       "stats": {
         "gp": 10,
@@ -3543,7 +3533,7 @@
       "name": "Antonio Williams",
       "pos": "WR",
       "team": "WAS",
-      "adp": 177.7,
+      "adp": 177.5,
       "sfAdp": null,
       "stats": {
         "gp": 10,
@@ -3565,6 +3555,22 @@
       "inj": "IR"
     },
     {
+      "id": "1166",
+      "sleeperId": "1166",
+      "name": "Kirk Cousins",
+      "pos": "QB",
+      "team": "MIN",
+      "adp": 178.8,
+      "sfAdp": 145.5,
+      "stats": {
+        "gp": 11,
+        "ppr": 205.1,
+        "half": 205.1,
+        "std": 205.1
+      },
+      "age": 38
+    },
+    {
       "id": "12469",
       "sleeperId": "12469",
       "name": "Dylan Sampson",
@@ -3579,22 +3585,6 @@
         "std": 23.1
       },
       "age": 22
-    },
-    {
-      "id": "1166",
-      "sleeperId": "1166",
-      "name": "Kirk Cousins",
-      "pos": "QB",
-      "team": "MIN",
-      "adp": 179.2,
-      "sfAdp": 145.5,
-      "stats": {
-        "gp": 11,
-        "ppr": 205.1,
-        "half": 205.1,
-        "std": 205.1
-      },
-      "age": 38
     },
     {
       "id": "GB",
@@ -3659,6 +3649,22 @@
       }
     },
     {
+      "id": "4017",
+      "sleeperId": "4017",
+      "name": "Deshaun Watson",
+      "pos": "QB",
+      "team": "CLE",
+      "adp": 182.2,
+      "sfAdp": 138,
+      "stats": {
+        "gp": 9,
+        "ppr": 143.3,
+        "half": 143.3,
+        "std": 143.3
+      },
+      "age": 31
+    },
+    {
       "id": "SF",
       "sleeperId": "SF",
       "name": "San Francisco 49ers",
@@ -3674,20 +3680,20 @@
       }
     },
     {
-      "id": "4017",
-      "sleeperId": "4017",
-      "name": "Deshaun Watson",
-      "pos": "QB",
-      "team": "CLE",
-      "adp": 182.8,
-      "sfAdp": 138,
+      "id": "13274",
+      "sleeperId": "13274",
+      "name": "Germie Bernard",
+      "pos": "WR",
+      "team": "PIT",
+      "adp": 183.1,
+      "sfAdp": null,
       "stats": {
         "gp": 9,
-        "ppr": 143.3,
-        "half": 143.3,
-        "std": 143.3
+        "ppr": 77.8,
+        "half": 58.8,
+        "std": 39.8
       },
-      "age": 31
+      "age": 22
     },
     {
       "id": "12524",
@@ -3696,7 +3702,7 @@
       "pos": "QB",
       "team": "CLE",
       "adp": 183.1,
-      "sfAdp": 79.1,
+      "sfAdp": 79.2,
       "stats": {
         "gp": 2,
         "ppr": 22.8,
@@ -3720,22 +3726,6 @@
         "std": 45.2
       },
       "age": 33
-    },
-    {
-      "id": "13274",
-      "sleeperId": "13274",
-      "name": "Germie Bernard",
-      "pos": "WR",
-      "team": "PIT",
-      "adp": 183.5,
-      "sfAdp": null,
-      "stats": {
-        "gp": 9,
-        "ppr": 77.8,
-        "half": 58.8,
-        "std": 39.8
-      },
-      "age": 22
     },
     {
       "id": "NO",
@@ -3774,7 +3764,7 @@
       "name": "Braelon Allen",
       "pos": "RB",
       "team": "NYJ",
-      "adp": 187.1,
+      "adp": 187,
       "sfAdp": null,
       "stats": {
         "gp": 11,
@@ -3848,8 +3838,23 @@
         "half": 24.5,
         "std": 18
       },
-      "age": 22,
-      "inj": "Questionable"
+      "age": 22
+    },
+    {
+      "id": "7600",
+      "sleeperId": "7600",
+      "name": "Pat Freiermuth",
+      "pos": "TE",
+      "team": "PIT",
+      "adp": 190.3,
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 99.5,
+        "half": 83.5,
+        "std": 67.5
+      },
+      "age": 28
     },
     {
       "id": "11647",
@@ -3897,22 +3902,6 @@
         "half": 53,
         "std": 53
       }
-    },
-    {
-      "id": "7600",
-      "sleeperId": "7600",
-      "name": "Pat Freiermuth",
-      "pos": "TE",
-      "team": "PIT",
-      "adp": 190.7,
-      "sfAdp": null,
-      "stats": {
-        "gp": 10,
-        "ppr": 99.5,
-        "half": 83.5,
-        "std": 67.5
-      },
-      "age": 28
     },
     {
       "id": "13421",
@@ -4070,6 +4059,22 @@
       "age": 31
     },
     {
+      "id": "13285",
+      "sleeperId": "13285",
+      "name": "Malachi Fields",
+      "pos": "WR",
+      "team": "NYG",
+      "adp": 195.1,
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 67.5,
+        "half": 55.5,
+        "std": 43.5
+      },
+      "age": 23
+    },
+    {
       "id": "TEN",
       "sleeperId": "TEN",
       "name": "Tennessee Titans",
@@ -4083,22 +4088,6 @@
         "half": 51,
         "std": 51
       }
-    },
-    {
-      "id": "13285",
-      "sleeperId": "13285",
-      "name": "Malachi Fields",
-      "pos": "WR",
-      "team": "NYG",
-      "adp": 195.3,
-      "sfAdp": null,
-      "stats": {
-        "gp": 10,
-        "ppr": 67.5,
-        "half": 55.5,
-        "std": 43.5
-      },
-      "age": 23
     },
     {
       "id": "9486",
@@ -4164,7 +4153,7 @@
         "std": 2.4
       },
       "age": 24,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "8111",
@@ -4172,7 +4161,7 @@
       "name": "Cade Otton",
       "pos": "TE",
       "team": "TB",
-      "adp": 197.2,
+      "adp": 197,
       "sfAdp": null,
       "stats": {
         "gp": 8,
@@ -4341,7 +4330,7 @@
         "std": 5.2
       },
       "age": 22,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "12540",
@@ -4389,8 +4378,7 @@
         "half": 12.8,
         "std": 8.8
       },
-      "age": 30,
-      "inj": "Questionable"
+      "age": 30
     },
     {
       "id": "6528",
@@ -4472,8 +4460,8 @@
       "name": "J.J. McCarthy",
       "pos": "QB",
       "team": "NYG",
-      "adp": 207.1,
-      "sfAdp": 89.5,
+      "adp": 206.3,
+      "sfAdp": 89.3,
       "stats": {
         "gp": 6,
         "ppr": 67.3,
@@ -4571,8 +4559,7 @@
         "half": 1.8,
         "std": 1.3
       },
-      "age": 23,
-      "inj": "Out"
+      "age": 23
     },
     {
       "id": "11237",
@@ -4607,6 +4594,22 @@
       "age": 23
     },
     {
+      "id": "10218",
+      "sleeperId": "10218",
+      "name": "Xavier Hutchinson",
+      "pos": "WR",
+      "team": "HOU",
+      "adp": 216.8,
+      "sfAdp": null,
+      "stats": {
+        "gp": 10,
+        "ppr": 85.4,
+        "half": 70.4,
+        "std": 55.4
+      },
+      "age": 26
+    },
+    {
       "id": "11637",
       "sleeperId": "11637",
       "name": "Keon Coleman",
@@ -4621,22 +4624,6 @@
         "std": 51.2
       },
       "age": 23
-    },
-    {
-      "id": "10218",
-      "sleeperId": "10218",
-      "name": "Xavier Hutchinson",
-      "pos": "WR",
-      "team": "HOU",
-      "adp": 217.5,
-      "sfAdp": null,
-      "stats": {
-        "gp": 10,
-        "ppr": 85.4,
-        "half": 70.4,
-        "std": 55.4
-      },
-      "age": 26
     },
     {
       "id": "8800",
@@ -4714,7 +4701,7 @@
       "pos": "QB",
       "team": "SF",
       "adp": 219.2,
-      "sfAdp": 94.7,
+      "sfAdp": 94.8,
       "stats": {
         "gp": 3,
         "ppr": -0.4,
@@ -4741,9 +4728,8 @@
       "pos": "QB",
       "team": "PIT",
       "adp": 220.6,
-      "sfAdp": 95.3,
-      "age": 22,
-      "inj": "Out"
+      "sfAdp": 95.4,
+      "age": 22
     },
     {
       "id": "12536",
@@ -4816,7 +4802,7 @@
       "name": "Evan Engram",
       "pos": "TE",
       "team": "DEN",
-      "adp": 223.6,
+      "adp": 223.1,
       "sfAdp": null,
       "stats": {
         "gp": 8,
@@ -4834,8 +4820,7 @@
       "team": "BUF",
       "adp": 224,
       "sfAdp": null,
-      "age": 24,
-      "inj": "Out"
+      "age": 24
     },
     {
       "id": "8917",
@@ -4861,8 +4846,7 @@
       "team": "BAL",
       "adp": 224.7,
       "sfAdp": null,
-      "age": 22,
-      "inj": "Out"
+      "age": 22
     },
     {
       "id": "11643",
@@ -4925,11 +4909,27 @@
       "inj": "IR"
     },
     {
+      "id": "4993",
+      "sleeperId": "4993",
+      "name": "Mike Gesicki",
+      "pos": "TE",
+      "team": "CIN",
+      "adp": 231.8,
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 94.8,
+        "half": 82.3,
+        "std": 69.8
+      },
+      "age": 31
+    },
+    {
       "id": "6803",
       "sleeperId": "6803",
       "name": "Brandon Aiyuk",
       "pos": "WR",
-      "team": "SF",
+      "team": "FA",
       "adp": 232,
       "sfAdp": null,
       "age": 28
@@ -4951,22 +4951,6 @@
       "age": 25
     },
     {
-      "id": "4993",
-      "sleeperId": "4993",
-      "name": "Mike Gesicki",
-      "pos": "TE",
-      "team": "CIN",
-      "adp": 234,
-      "sfAdp": null,
-      "stats": {
-        "gp": 9,
-        "ppr": 94.8,
-        "half": 82.3,
-        "std": 69.8
-      },
-      "age": 31
-    },
-    {
       "id": "4147",
       "sleeperId": "4147",
       "name": "Samaje Perine",
@@ -4981,6 +4965,22 @@
         "std": 56.5
       },
       "age": 31
+    },
+    {
+      "id": "9482",
+      "sleeperId": "9482",
+      "name": "Michael Mayer",
+      "pos": "TE",
+      "team": "LV",
+      "adp": 235.8,
+      "sfAdp": null,
+      "stats": {
+        "gp": 11,
+        "ppr": 87,
+        "half": 66,
+        "std": 45
+      },
+      "age": 25
     },
     {
       "id": "12498",
@@ -5013,22 +5013,6 @@
         "std": 9.7
       },
       "age": 26
-    },
-    {
-      "id": "9482",
-      "sleeperId": "9482",
-      "name": "Michael Mayer",
-      "pos": "TE",
-      "team": "LV",
-      "adp": 238.4,
-      "sfAdp": null,
-      "stats": {
-        "gp": 11,
-        "ppr": 87,
-        "half": 66,
-        "std": 45
-      },
-      "age": 25
     },
     {
       "id": "13420",
@@ -5118,7 +5102,7 @@
       "pos": "QB",
       "team": "NYJ",
       "adp": 242,
-      "sfAdp": 104.6,
+      "sfAdp": 104.7,
       "stats": {
         "gp": 1,
         "ppr": 7.1,
@@ -5265,8 +5249,7 @@
       "team": "MIA",
       "adp": 254,
       "sfAdp": null,
-      "age": 22,
-      "inj": "Out"
+      "age": 22
     },
     {
       "id": "8188",
@@ -5292,7 +5275,7 @@
       "pos": "QB",
       "team": "KC",
       "adp": 255.4,
-      "sfAdp": 110.4,
+      "sfAdp": 110.5,
       "stats": {
         "gp": 2,
         "ppr": -2.3,
@@ -5325,8 +5308,23 @@
       "team": "PIT",
       "adp": 256.1,
       "sfAdp": null,
-      "age": 23,
-      "inj": "Out"
+      "age": 23
+    },
+    {
+      "id": "12495",
+      "sleeperId": "12495",
+      "name": "Ollie Gordon II",
+      "pos": "RB",
+      "team": "MIA",
+      "adp": 256.5,
+      "sfAdp": null,
+      "stats": {
+        "gp": 9,
+        "ppr": 103.8,
+        "half": 97.3,
+        "std": 90.8
+      },
+      "age": 22
     },
     {
       "id": "13380",
@@ -5343,7 +5341,23 @@
         "std": 1.3
       },
       "age": 23,
-      "inj": "Out"
+      "inj": "Questionable"
+    },
+    {
+      "id": "9229",
+      "sleeperId": "9229",
+      "name": "Anthony Richardson",
+      "pos": "QB",
+      "team": "IND",
+      "adp": 256.9,
+      "sfAdp": 111.1,
+      "stats": {
+        "gp": 2,
+        "ppr": 0.9,
+        "half": 0.9,
+        "std": 0.9
+      },
+      "age": 24
     },
     {
       "id": "9479",
@@ -5362,22 +5376,6 @@
       "age": 25
     },
     {
-      "id": "12495",
-      "sleeperId": "12495",
-      "name": "Ollie Gordon II",
-      "pos": "RB",
-      "team": "MIA",
-      "adp": 258,
-      "sfAdp": null,
-      "stats": {
-        "gp": 9,
-        "ppr": 103.8,
-        "half": 97.3,
-        "std": 90.8
-      },
-      "age": 22
-    },
-    {
       "id": "11589",
       "sleeperId": "11589",
       "name": "Trey Benson",
@@ -5387,22 +5385,6 @@
       "sfAdp": null,
       "age": 24,
       "inj": "IR"
-    },
-    {
-      "id": "9229",
-      "sleeperId": "9229",
-      "name": "Anthony Richardson",
-      "pos": "QB",
-      "team": "IND",
-      "adp": 258.3,
-      "sfAdp": 111.6,
-      "stats": {
-        "gp": 2,
-        "ppr": 0.9,
-        "half": 0.9,
-        "std": 0.9
-      },
-      "age": 24
     },
     {
       "id": "11435",
@@ -5418,8 +5400,7 @@
         "half": 71.8,
         "std": 68.8
       },
-      "age": 27,
-      "inj": "Out"
+      "age": 27
     },
     {
       "id": "2306",
@@ -5427,8 +5408,8 @@
       "name": "Jameis Winston",
       "pos": "QB",
       "team": "NYG",
-      "adp": 260.8,
-      "sfAdp": 112.7,
+      "adp": 259.2,
+      "sfAdp": 112.1,
       "stats": {
         "gp": 9,
         "ppr": 84.8,
@@ -5487,7 +5468,7 @@
       "pos": "QB",
       "team": "CIN",
       "adp": 267.7,
-      "sfAdp": 115.7,
+      "sfAdp": 115.8,
       "age": 41
     },
     {
@@ -5529,7 +5510,7 @@
       "pos": "QB",
       "team": "WAS",
       "adp": 270.4,
-      "sfAdp": 116.9,
+      "sfAdp": 117,
       "stats": {
         "gp": 3,
         "ppr": 34.5,
@@ -5610,8 +5591,7 @@
         "half": 1.4,
         "std": 0.4
       },
-      "age": 24,
-      "inj": "Out"
+      "age": 24
     },
     {
       "id": "4950",
@@ -5664,8 +5644,7 @@
       "team": "CAR",
       "adp": 281.8,
       "sfAdp": null,
-      "age": 23,
-      "inj": "Out"
+      "age": 23
     },
     {
       "id": "11199",
@@ -5690,7 +5669,7 @@
       "pos": "QB",
       "team": "NO",
       "adp": 282.6,
-      "sfAdp": 122.1,
+      "sfAdp": 122.3,
       "age": 26
     },
     {
@@ -5748,9 +5727,8 @@
       "pos": "QB",
       "team": "CLE",
       "adp": 287.5,
-      "sfAdp": 124.2,
-      "age": 24,
-      "inj": "Out"
+      "sfAdp": 124.4,
+      "age": 24
     },
     {
       "id": "8119",
@@ -5791,7 +5769,7 @@
       "pos": "QB",
       "team": "SEA",
       "adp": 291.4,
-      "sfAdp": 125.9,
+      "sfAdp": 126.1,
       "age": 23
     },
     {
@@ -5808,8 +5786,7 @@
         "half": 36.6,
         "std": 27.1
       },
-      "age": 27,
-      "inj": "Questionable"
+      "age": 27
     },
     {
       "id": "12485",
@@ -5851,7 +5828,7 @@
       "pos": "QB",
       "team": "CHI",
       "adp": 299.3,
-      "sfAdp": 129.3,
+      "sfAdp": 129.5,
       "stats": {
         "gp": 3,
         "ppr": 15.2,
@@ -5867,7 +5844,7 @@
       "pos": "QB",
       "team": "PHI",
       "adp": 308.4,
-      "sfAdp": 133.3,
+      "sfAdp": 133.4,
       "stats": {
         "gp": 2,
         "ppr": 19.5,
@@ -6245,7 +6222,7 @@
         "std": 22.9
       },
       "age": 25,
-      "inj": "Out"
+      "inj": "Questionable"
     },
     {
       "id": "11433",
