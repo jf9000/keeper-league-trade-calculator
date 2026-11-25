@@ -50,14 +50,6 @@ export const saveLeague = (l: SavedLeague) => write(LEAGUE_KEY, l)
 export const loadString =(key: string): string => read<string>(key) ?? ''
 export const saveString = (key: string, v: string) => write(key, v)
 
-const WATCH_KEY = 'ktc-watchlist'
-/** Starred player IDs, in the order they were added. */
-export const loadWatchlist = (): string[] => {
-  const w = read<unknown>(WATCH_KEY)
-  return Array.isArray(w) ? w.filter((x): x is string => typeof x === 'string') : []
-}
-export const saveWatchlist = (ids: string[]) => write(WATCH_KEY, ids)
-
 const SETTINGS_OPEN_KEY = 'ktc-settings-open'
 /** Whether the league settings are expanded; collapsed to their summary until the user opens them. */
 export const loadSettingsOpen = (): boolean => read<boolean>(SETTINGS_OPEN_KEY) === true

@@ -1,11 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { adpLabel } from '../lib/adpLabel'
 import { InjuryBadge } from '../components/InjuryBadge'
 import { PosTag } from '../components/PosTag'
 import { pointsPerGame } from '../lib/current'
 import type { LeagueCtx } from '../lib/context'
 import { buildTrends, movers, type Trend } from '../lib/history'
-import { loadWatchlist, saveWatchlist } from '../lib/storage'
 import { defaultKeeperRound } from '../lib/valuation'
 import { rosterKey, type TradeState } from '../lib/trade'
 import { useHistory } from '../lib/useHistory'
@@ -44,9 +43,7 @@ function Delta({ v }: { v: number }) {
 }
 
 export function Watchlist({ ctx, onOpenTrade }: Props) {
-  const { s, byId, mine, ownerOf, costs } = ctx
-  const [ids, setIds] = useState<string[]>(loadWatchlist)
-  const [q, setQ] = useState('')
+  const { s, mine, ownerOf, costs } = ctx
   const { status, history } = useHistory()
 
   const file = ctx.players.file
@@ -56,29 +53,18 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
   )
   const hasMovement = !!trends && trends.dates.length > 1
 
-  const update = (next: string[]) => {
-    setIds(next)
-    saveWatchlist(next)
-  }
-  const toggle = (id: string) => update(ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id])
-
-  const hits = useMemo(() => {
-    const query = q.trim().toLowerCase()
-    if (!query) return []
-    return ctx.ranked.filter((p) => !ids.includes(p.id) && p.name.toLowerCase().includes(query)).slice(0, 8)
-  }, [q, ctx.ranked, ids])
-
-  const watched = ids.flatMap((id) => byId.get(id) ?? [])
-
-  const target = (p: Player) => {
+  /** The team a player could be traded from: another roster than yours. Undefined for free agents and in manual mode. */
+  const tradePartner = (p: Player) => {
     const owner = ownerOf.get(p.id)
-    if (!owner || !mine || owner.rosterId === mine.rosterId) return
+    return owner && mine && owner.rosterId !== mine.rosterId ? { mine, owner } : undefined
+  }
+
+  const tradeFor = (p: Player, { mine, owner }: NonNullable<ReturnType<typeof tradePartner>>) =>
     onOpenTrade({
       assets: [[], [{ t: 'p', id: p.id, keeperRound: defaultKeeperRound(p, s, costs) }]],
       choice: [rosterKey(mine.rosterId), rosterKey(owner.rosterId)],
       stance: [null, null],
     })
-  }
 
   const ownerLabel = (p: Player) => {
     if (ctx.teams.length === 0) return null
@@ -99,9 +85,10 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
       </div>
     ) : null
 
-  const playerRow = (p: Player, t: Trend | undefined, action: React.ReactNode) => {
+  const playerRow = (p: Player, t: Trend | undefined) => {
     const ppg = pointsPerGame(p, s)
     const owner = ownerLabel(p)
+    const partner = tradePartner(p)
     return (
       <li key={p.id} className="flex flex-col gap-1.5 border-t border-bd py-3 first:border-t-0">
         <div className="flex items-center justify-between gap-2">
@@ -111,7 +98,11 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
             <span className={`${chip} text-mut`}>{p.team}</span>
             <InjuryBadge player={p} />
           </div>
-          <div className="flex shrink-0 items-center gap-2">{action}</div>
+          {partner && (
+            <button type="button" className="shrink-0 px-3 py-1 text-sm" onClick={() => tradeFor(p, partner)}>
+              Trade for
+            </button>
+          )}
         </div>
         <div className="text-sm text-mut">
           {owner && <>{owner} · </>}
@@ -123,82 +114,10 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
     )
   }
 
-  const star = (p: Player, on: boolean) => (
-    <button
-      type="button"
-      aria-pressed={on}
-      aria-label={on ? `Remove ${p.name} from watchlist` : `Add ${p.name} to watchlist`}
-      title={on ? 'Remove from watchlist' : 'Add to watchlist'}
-      className="!px-2.5 !py-1 text-base leading-none"
-      onClick={() => toggle(p.id)}
-    >
-      <span className={on ? 'text-ac2' : 'text-mut'}>{on ? '★' : '☆'}</span>
-    </button>
-  )
-
   const mv = trends && file ? movers(trends, ctx.ranked, 6) : null
 
   return (
     <div className="flex flex-col gap-4">
-      <section className="card p-4" aria-label="Watchlist">
-        <h2 className="m-0 mb-1 text-[15px] font-semibold">Your watchlist</h2>
-        <p className="m-0 mb-3 text-sm text-mut">
-          Star players you’d like to trade for. In a Sleeper league you’ll see who owns them and can start a trade in one tap.
-          The list is saved in this browser.
-        </p>
-        <div className="relative mb-2">
-          <input
-            type="text"
-            className="w-full"
-            placeholder="Search players to add…"
-            aria-label="Search players to add to the watchlist"
-            autoComplete="off"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-          />
-          {hits.length > 0 && (
-            <ul className="absolute inset-x-0 top-full z-10 mt-0.5 max-h-[300px] list-none overflow-auto rounded-lg border border-bd bg-card p-1 shadow-xl">
-              {hits.map((p) => (
-                <li key={p.id}>
-                  <button
-                    type="button"
-                    className="!flex !w-full items-center gap-2 !border-0 !bg-transparent !p-2 text-left hover:!bg-chip"
-                    onClick={() => {
-                      toggle(p.id)
-                      setQ('')
-                    }}
-                  >
-                    <PosTag pos={p.pos} />
-                    {p.name}
-                    <small className="ml-auto text-mut">{p.team}</small>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-        {watched.length === 0 ? (
-          <p className="m-0 py-3 text-mut">No players yet. Search above, or star a player from the movers below.</p>
-        ) : (
-          <ul className="m-0 list-none p-0">
-            {watched.map((p) =>
-              playerRow(
-                p,
-                trends?.byId.get(p.id),
-                <>
-                  {ownerOf.get(p.id) && mine && ownerOf.get(p.id)!.rosterId !== mine.rosterId && (
-                    <button type="button" className="!px-3 !py-1 text-sm" onClick={() => target(p)}>
-                      Trade for
-                    </button>
-                  )}
-                  {star(p, true)}
-                </>,
-              ),
-            )}
-          </ul>
-        )}
-      </section>
-
       <section className="card p-4" aria-label="Risers and fallers">
         <h2 className="m-0 mb-1 text-[15px] font-semibold">Risers and fallers</h2>
         {status === 'loading' && <p className="m-0 text-mut">Loading…</p>}
@@ -221,7 +140,7 @@ export function Watchlist({ ctx, onOpenTrade }: Props) {
                   {list.length === 0 ? (
                     <p className="m-0 py-2 text-sm text-mut">No big moves.</p>
                   ) : (
-                    <ul className="m-0 list-none p-0">{list.map(({ player, trend }) => playerRow(player, trend, star(player, ids.includes(player.id))))}</ul>
+                    <ul className="m-0 list-none p-0">{list.map(({ player, trend }) => playerRow(player, trend))}</ul>
                   )}
                 </div>
               ))}
